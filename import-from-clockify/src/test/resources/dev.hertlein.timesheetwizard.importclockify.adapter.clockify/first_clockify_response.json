@@ -1,0 +1,38 @@
+{
+  "totals": [
+    null
+  ],
+  "timeentries": [
+    {
+      "_id": "62dd36d3e4797e2d7a998c19",
+      "description": "Implement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-31T08:00:00+01:00",
+        "end": "2022-01-31T17:00:00+01:00",
+        "duration": 32400
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e96dda16317569dd3cb",
+      "approvalRequestId": null,
+      "taskName": "Implement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 99000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    }
+  ]
+}

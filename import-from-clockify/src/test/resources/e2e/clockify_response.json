@@ -1,0 +1,1743 @@
+{
+  "totals": [
+    null
+  ],
+  "timeentries": [
+    {
+      "_id": "62dd36d3e4797e2d7a998c19",
+      "description": "Implement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-31T08:00:00+01:00",
+        "end": "2022-01-31T17:00:00+01:00",
+        "duration": 32400
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e96dda16317569dd3cb",
+      "approvalRequestId": null,
+      "taskName": "Implement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 99000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c50719dddbf014307a3c2",
+      "description": "Test",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-28T17:00:00+01:00",
+        "end": "2022-01-28T18:45:00+01:00",
+        "duration": 6300
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e985caee453fb7d5935",
+      "approvalRequestId": null,
+      "taskName": "Test",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 19250.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c506fdda16317569dda6b",
+      "description": "Implement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-28T16:00:00+01:00",
+        "end": "2022-01-28T17:00:00+01:00",
+        "duration": 3600
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e96dda16317569dd3cb",
+      "approvalRequestId": null,
+      "taskName": "Implement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 11000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd36bc29ba9a7bfb106cae",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-28T08:00:00+01:00",
+        "end": "2022-01-28T16:00:00+01:00",
+        "duration": 28800
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e9128f91844c812dcd5",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 88000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c506ddda16317569dda63",
+      "description": "Test",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-27T16:15:00+01:00",
+        "end": "2022-01-27T16:30:00+01:00",
+        "duration": 900
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e985caee453fb7d5935",
+      "approvalRequestId": null,
+      "taskName": "Test",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 2750.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c506a28f91844c812e42f",
+      "description": "Implement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-27T15:30:00+01:00",
+        "end": "2022-01-27T16:15:00+01:00",
+        "duration": 2700
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e96dda16317569dd3cb",
+      "approvalRequestId": null,
+      "taskName": "Implement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 8250.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd36ba29ba9a7bfb106ca5",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-27T08:00:00+01:00",
+        "end": "2022-01-27T15:30:00+01:00",
+        "duration": 27000
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e9128f91844c812dcd5",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 82500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c50675caee453fb7d6009",
+      "description": "Test",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-26T17:00:00+01:00",
+        "end": "2022-01-26T17:15:00+01:00",
+        "duration": 900
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e985caee453fb7d5935",
+      "approvalRequestId": null,
+      "taskName": "Test",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 2750.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c5063c8883f2265ce31aa",
+      "description": "Implement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-26T16:30:00+01:00",
+        "end": "2022-01-26T17:00:00+01:00",
+        "duration": 1800
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e96dda16317569dd3cb",
+      "approvalRequestId": null,
+      "taskName": "Implement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 5500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd36b829ba9a7bfb106c9f",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-26T08:00:00+01:00",
+        "end": "2022-01-26T16:30:00+01:00",
+        "duration": 30600
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e9128f91844c812dcd5",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 93500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c505e28f91844c812e3f1",
+      "description": "Test",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-25T18:30:00+01:00",
+        "end": "2022-01-25T19:30:00+01:00",
+        "duration": 3600
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e985caee453fb7d5935",
+      "approvalRequestId": null,
+      "taskName": "Test",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 11000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c505c9dddbf014307a373",
+      "description": "Implement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-25T17:30:00+01:00",
+        "end": "2022-01-25T18:30:00+01:00",
+        "duration": 3600
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e96dda16317569dd3cb",
+      "approvalRequestId": null,
+      "taskName": "Implement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 11000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd36b6a5dba414c1ed2188",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-25T08:00:00+01:00",
+        "end": "2022-01-25T17:30:00+01:00",
+        "duration": 34200
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e9128f91844c812dcd5",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 104500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c5059dda16317569dda20",
+      "description": "Test",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-24T14:00:00+01:00",
+        "end": "2022-01-24T16:00:00+01:00",
+        "duration": 7200
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e985caee453fb7d5935",
+      "approvalRequestId": null,
+      "taskName": "Test",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 22000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c50575caee453fb7d5fca",
+      "description": "Implement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-24T11:00:00+01:00",
+        "end": "2022-01-24T14:00:00+01:00",
+        "duration": 10800
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e96dda16317569dd3cb",
+      "approvalRequestId": null,
+      "taskName": "Implement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 33000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd36b4d65d4310c208e236",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-24T08:00:00+01:00",
+        "end": "2022-01-24T11:00:00+01:00",
+        "duration": 10800
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e9128f91844c812dcd5",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 33000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c50329dddbf014307a2d4",
+      "description": "Test",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-21T15:30:00+01:00",
+        "end": "2022-01-21T17:30:00+01:00",
+        "duration": 7200
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eae9dddbf0143079d92",
+      "approvalRequestId": null,
+      "taskName": "Test",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 22000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c5030c8883f2265ce30b8",
+      "description": "Implement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-21T13:30:00+01:00",
+        "end": "2022-01-21T15:30:00+01:00",
+        "duration": 7200
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eac28f91844c812dd6f",
+      "approvalRequestId": null,
+      "taskName": "Implement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 22000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd36a02849d633796f58e4",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-21T08:00:00+01:00",
+        "end": "2022-01-21T13:30:00+01:00",
+        "duration": 19800
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eaa9dddbf0143079d8a",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 60500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c502edda16317569dd98b",
+      "description": "Test",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-20T18:30:00+01:00",
+        "end": "2022-01-20T19:30:00+01:00",
+        "duration": 3600
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eae9dddbf0143079d92",
+      "approvalRequestId": null,
+      "taskName": "Test",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 11000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c502ac8883f2265ce309c",
+      "description": "Implement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-20T17:30:00+01:00",
+        "end": "2022-01-20T18:30:00+01:00",
+        "duration": 3600
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eac28f91844c812dd6f",
+      "approvalRequestId": null,
+      "taskName": "Implement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 11000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd369d2849d633796f58da",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-20T08:00:00+01:00",
+        "end": "2022-01-20T17:30:00+01:00",
+        "duration": 34200
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eaa9dddbf0143079d8a",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 104500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c50279dddbf014307a2b1",
+      "description": "Test",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-19T18:00:00+01:00",
+        "end": "2022-01-19T19:00:00+01:00",
+        "duration": 3600
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eae9dddbf0143079d92",
+      "approvalRequestId": null,
+      "taskName": "Test",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 11000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c5023c8883f2265ce3080",
+      "description": "Implement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-19T17:00:00+01:00",
+        "end": "2022-01-19T18:00:00+01:00",
+        "duration": 3600
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eac28f91844c812dd6f",
+      "approvalRequestId": null,
+      "taskName": "Implement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 11000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd369aa5dba414c1ed211c",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-19T08:00:00+01:00",
+        "end": "2022-01-19T17:00:00+01:00",
+        "duration": 32400
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eaa9dddbf0143079d8a",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 99000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c5021c8883f2265ce3072",
+      "description": "Test",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-18T14:00:00+01:00",
+        "end": "2022-01-18T17:00:00+01:00",
+        "duration": 10800
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eae9dddbf0143079d92",
+      "approvalRequestId": null,
+      "taskName": "Test",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 33000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c501e9dddbf014307a294",
+      "description": "Implement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-18T11:00:00+01:00",
+        "end": "2022-01-18T14:00:00+01:00",
+        "duration": 10800
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eac28f91844c812dd6f",
+      "approvalRequestId": null,
+      "taskName": "Implement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 33000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd3699d65d4310c208e1ed",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-18T08:00:00+01:00",
+        "end": "2022-01-18T11:00:00+01:00",
+        "duration": 10800
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eaa9dddbf0143079d8a",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 33000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c5016c8883f2265ce304d",
+      "description": "Test",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-17T12:00:00+01:00",
+        "end": "2022-01-17T15:00:00+01:00",
+        "duration": 10800
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eae9dddbf0143079d92",
+      "approvalRequestId": null,
+      "taskName": "Test",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 33000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c501228f91844c812e2b7",
+      "description": "Implement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-17T10:00:00+01:00",
+        "end": "2022-01-17T12:00:00+01:00",
+        "duration": 7200
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eac28f91844c812dd6f",
+      "approvalRequestId": null,
+      "taskName": "Implement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 22000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd36922849d633796f58b2",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-17T08:00:00+01:00",
+        "end": "2022-01-17T10:00:00+01:00",
+        "duration": 7200
+      },
+      "billable": true,
+      "projectId": "62dd358bd65d4310c208dede",
+      "taskId": "631c4eaa9dddbf0143079d8a",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 22000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Algorithm",
+      "projectColor": "#FFC107",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd367c2849d633796f5866",
+      "description": "Sprint Planning",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-14T12:30:00+01:00",
+        "end": "2022-01-14T20:00:00+01:00",
+        "duration": 27000
+      },
+      "billable": true,
+      "projectId": "62dd35c629ba9a7bfb10698a",
+      "taskId": "631c4ecd28f91844c812de0a",
+      "approvalRequestId": null,
+      "taskName": "Sprint Planning",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 82500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Pipernet",
+      "projectColor": "#3F51B5",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd366829ba9a7bfb106b78",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-14T08:00:00+01:00",
+        "end": "2022-01-14T12:30:00+01:00",
+        "duration": 16200
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e9128f91844c812dcd5",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 49500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd367929ba9a7bfb106ba9",
+      "description": "Sprint Planning",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-13T12:30:00+01:00",
+        "end": "2022-01-13T19:00:00+01:00",
+        "duration": 23400
+      },
+      "billable": true,
+      "projectId": "62dd35c629ba9a7bfb10698a",
+      "taskId": "631c4ecd28f91844c812de0a",
+      "approvalRequestId": null,
+      "taskName": "Sprint Planning",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 71500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Pipernet",
+      "projectColor": "#3F51B5",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd3666e4797e2d7a998abe",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-13T08:00:00+01:00",
+        "end": "2022-01-13T12:30:00+01:00",
+        "duration": 16200
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e9128f91844c812dcd5",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 49500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd3676e4797e2d7a998aea",
+      "description": "Sprint Planning",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-12T12:30:00+01:00",
+        "end": "2022-01-12T18:00:00+01:00",
+        "duration": 19800
+      },
+      "billable": true,
+      "projectId": "62dd35c629ba9a7bfb10698a",
+      "taskId": "631c4ecd28f91844c812de0a",
+      "approvalRequestId": null,
+      "taskName": "Sprint Planning",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 60500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Pipernet",
+      "projectColor": "#3F51B5",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd3664a5dba414c1ed2080",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-12T08:00:00+01:00",
+        "end": "2022-01-12T12:30:00+01:00",
+        "duration": 16200
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e9128f91844c812dcd5",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 49500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd367529ba9a7bfb106ba3",
+      "description": "Sprint Planning",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-11T12:30:00+01:00",
+        "end": "2022-01-11T17:00:00+01:00",
+        "duration": 16200
+      },
+      "billable": true,
+      "projectId": "62dd35c629ba9a7bfb10698a",
+      "taskId": "631c4ecd28f91844c812de0a",
+      "approvalRequestId": null,
+      "taskName": "Sprint Planning",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 49500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Pipernet",
+      "projectColor": "#3F51B5",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd3663d65d4310c208e152",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-11T08:00:00+01:00",
+        "end": "2022-01-11T12:30:00+01:00",
+        "duration": 16200
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e9128f91844c812dcd5",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 49500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd367329ba9a7bfb106b95",
+      "description": "Sprint Planning",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-10T12:30:00+01:00",
+        "end": "2022-01-10T16:00:00+01:00",
+        "duration": 12600
+      },
+      "billable": true,
+      "projectId": "62dd35c629ba9a7bfb10698a",
+      "taskId": "631c4ecd28f91844c812de0a",
+      "approvalRequestId": null,
+      "taskName": "Sprint Planning",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 38500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Pipernet",
+      "projectColor": "#3F51B5",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd3661d65d4310c208e14c",
+      "description": "Design",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-10T08:00:00+01:00",
+        "end": "2022-01-10T12:30:00+01:00",
+        "duration": 16200
+      },
+      "billable": true,
+      "projectId": "62dd35a6e4797e2d7a9988c6",
+      "taskId": "631c4e9128f91844c812dcd5",
+      "approvalRequestId": null,
+      "taskName": "Design",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 49500.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "The Box",
+      "projectColor": "#FF9800",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c4fcd28f91844c812e1b7",
+      "description": "Backlog Refinement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-07T16:00:00+01:00",
+        "end": "2022-01-07T17:00:00+01:00",
+        "duration": 3600
+      },
+      "billable": true,
+      "projectId": "62dd35c629ba9a7bfb10698a",
+      "taskId": "631c4ed4dda16317569dd498",
+      "approvalRequestId": null,
+      "taskName": "Backlog Refinement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 11000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Pipernet",
+      "projectColor": "#3F51B5",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd365129ba9a7bfb106b33",
+      "description": "Kotlin Coding",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-07T12:00:00+01:00",
+        "end": "2022-01-07T16:00:00+01:00",
+        "duration": 14400
+      },
+      "billable": true,
+      "projectId": "62dd3598d65d4310c208df03",
+      "taskId": "631c4ee55caee453fb7d5a54",
+      "approvalRequestId": null,
+      "taskName": "Kotlin Coding",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 44000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Piper Chat",
+      "projectColor": "#607D8B",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd362a29ba9a7bfb106aa1",
+      "description": "Java Coding",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-07T08:00:00+01:00",
+        "end": "2022-01-07T12:00:00+01:00",
+        "duration": 14400
+      },
+      "billable": true,
+      "projectId": "62dd3598d65d4310c208df03",
+      "taskId": "631c4ee29dddbf0143079e43",
+      "approvalRequestId": null,
+      "taskName": "Java Coding",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 44000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Piper Chat",
+      "projectColor": "#607D8B",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c4fcb28f91844c812e1b1",
+      "description": "Backlog Refinement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-06T16:00:00+01:00",
+        "end": "2022-01-06T17:00:00+01:00",
+        "duration": 3600
+      },
+      "billable": true,
+      "projectId": "62dd35c629ba9a7bfb10698a",
+      "taskId": "631c4ed4dda16317569dd498",
+      "approvalRequestId": null,
+      "taskName": "Backlog Refinement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 11000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Pipernet",
+      "projectColor": "#3F51B5",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd364da5dba414c1ed203d",
+      "description": "Kotlin Coding",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-06T13:00:00+01:00",
+        "end": "2022-01-06T16:00:00+01:00",
+        "duration": 10800
+      },
+      "billable": true,
+      "projectId": "62dd3598d65d4310c208df03",
+      "taskId": "631c4ee55caee453fb7d5a54",
+      "approvalRequestId": null,
+      "taskName": "Kotlin Coding",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 33000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Piper Chat",
+      "projectColor": "#607D8B",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd3627d65d4310c208e084",
+      "description": "Java Coding",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-06T08:00:00+01:00",
+        "end": "2022-01-06T13:00:00+01:00",
+        "duration": 18000
+      },
+      "billable": true,
+      "projectId": "62dd3598d65d4310c208df03",
+      "taskId": "631c4ee29dddbf0143079e43",
+      "approvalRequestId": null,
+      "taskName": "Java Coding",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 55000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Piper Chat",
+      "projectColor": "#607D8B",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c4fcb9dddbf014307a153",
+      "description": "Backlog Refinement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-05T16:00:00+01:00",
+        "end": "2022-01-05T17:00:00+01:00",
+        "duration": 3600
+      },
+      "billable": true,
+      "projectId": "62dd35c629ba9a7bfb10698a",
+      "taskId": "631c4ed4dda16317569dd498",
+      "approvalRequestId": null,
+      "taskName": "Backlog Refinement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 11000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Pipernet",
+      "projectColor": "#3F51B5",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd364bd65d4310c208e0ff",
+      "description": "Kotlin Coding",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-05T14:00:00+01:00",
+        "end": "2022-01-05T16:00:00+01:00",
+        "duration": 7200
+      },
+      "billable": true,
+      "projectId": "62dd3598d65d4310c208df03",
+      "taskId": "631c4ee55caee453fb7d5a54",
+      "approvalRequestId": null,
+      "taskName": "Kotlin Coding",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 22000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Piper Chat",
+      "projectColor": "#607D8B",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd362529ba9a7bfb106a8d",
+      "description": "Java Coding",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-05T08:00:00+01:00",
+        "end": "2022-01-05T14:00:00+01:00",
+        "duration": 21600
+      },
+      "billable": true,
+      "projectId": "62dd3598d65d4310c208df03",
+      "taskId": "631c4ee29dddbf0143079e43",
+      "approvalRequestId": null,
+      "taskName": "Java Coding",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 66000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Piper Chat",
+      "projectColor": "#607D8B",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c4fca9dddbf014307a14f",
+      "description": "Backlog Refinement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-04T16:00:00+01:00",
+        "end": "2022-01-04T17:00:00+01:00",
+        "duration": 3600
+      },
+      "billable": true,
+      "projectId": "62dd35c629ba9a7bfb10698a",
+      "taskId": "631c4ed4dda16317569dd498",
+      "approvalRequestId": null,
+      "taskName": "Backlog Refinement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 11000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Pipernet",
+      "projectColor": "#3F51B5",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd3646a5dba414c1ed201b",
+      "description": "Kotlin Coding",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-04T15:00:00+01:00",
+        "end": "2022-01-04T16:00:00+01:00",
+        "duration": 3600
+      },
+      "billable": true,
+      "projectId": "62dd3598d65d4310c208df03",
+      "taskId": "631c4ee55caee453fb7d5a54",
+      "approvalRequestId": null,
+      "taskName": "Kotlin Coding",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 11000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Piper Chat",
+      "projectColor": "#607D8B",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd362429ba9a7bfb106a89",
+      "description": "Java Coding",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-04T08:00:00+01:00",
+        "end": "2022-01-04T15:00:00+01:00",
+        "duration": 25200
+      },
+      "billable": true,
+      "projectId": "62dd3598d65d4310c208df03",
+      "taskId": "631c4ee29dddbf0143079e43",
+      "approvalRequestId": null,
+      "taskName": "Java Coding",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 77000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Piper Chat",
+      "projectColor": "#607D8B",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c4fc3dda16317569dd7e7",
+      "description": "Backlog Refinement",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-03T12:04:00+01:00",
+        "end": "2022-01-03T13:04:00+01:00",
+        "duration": 3600
+      },
+      "billable": true,
+      "projectId": "62dd35c629ba9a7bfb10698a",
+      "taskId": "631c4ed4dda16317569dd498",
+      "approvalRequestId": null,
+      "taskName": "Backlog Refinement",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 11000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Pipernet",
+      "projectColor": "#3F51B5",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "631c4f9c5caee453fb7d5d1e",
+      "description": "Kotlin Coding",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-03T08:04:00+01:00",
+        "end": "2022-01-03T12:04:00+01:00",
+        "duration": 14400
+      },
+      "billable": true,
+      "projectId": "62dd3598d65d4310c208df03",
+      "taskId": "631c4ee55caee453fb7d5a54",
+      "approvalRequestId": null,
+      "taskName": "Kotlin Coding",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 44000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Piper Chat",
+      "projectColor": "#607D8B",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    },
+    {
+      "_id": "62dd3623e4797e2d7a9989f9",
+      "description": "Java Coding",
+      "userId": "62a07d32a6a7fd5dab8bccfe",
+      "timeInterval": {
+        "start": "2022-01-03T08:00:00+01:00",
+        "end": "2022-01-03T12:00:00+01:00",
+        "duration": 14400
+      },
+      "billable": true,
+      "projectId": "62dd3598d65d4310c208df03",
+      "taskId": "631c4ee29dddbf0143079e43",
+      "approvalRequestId": null,
+      "taskName": "Java Coding",
+      "tags": [
+        {
+          "name": "Remote",
+          "_id": "6343c91a26227a584ba82fae"
+        }
+      ],
+      "isLocked": false,
+      "customFields": null,
+      "amount": 44000.0,
+      "rate": 11000.0,
+      "userName": "a-user",
+      "userEmail": "user@example.org",
+      "projectName": "Piper Chat",
+      "projectColor": "#607D8B",
+      "clientName": "Pied Piper",
+      "clientId": "62dd35202849d633796f5459"
+    }
+  ]
+}

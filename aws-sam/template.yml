@@ -1,0 +1,171 @@
+Parameters:
+  Architecture:
+    Type: String
+    Default: x86_64
+    AllowedValues:
+      - x86_64
+      - arm64
+  MonitoringRecipient:
+    Type: String
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS stack to import timesheet reports from Clockify and export them to various targets in various formats
+
+Resources:
+  ImportFromClockifyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: timesheetwizard-import-from-clockify
+      Architectures:
+        - !Ref Architecture
+      CodeUri: ../import-from-clockify
+      Handler: not.used.in.provided.runtime
+      Runtime: provided.al2
+      Environment:
+        Variables:
+          MICRONAUT_ENVIRONMENTS: aws
+      Description: An AWS Lambda function to import timesheets from Clockify
+      MemorySize: 256
+      PackageType: Zip
+      Timeout: 60
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AmazonS3FullAccess
+      Tracing: Active
+    Metadata:
+      BuildMethod: makefile
+
+  GenerateExcelFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: timesheetwizard-generate-excel
+      Architectures:
+        - !Ref Architecture
+      Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
+      Runtime: java11
+      CodeUri: ../generate-excel/build/function.zip
+      PackageType: Zip
+      Environment:
+        Variables:
+         DISABLE_SIGNAL_HANDLERS: true
+         QUARKUS_PROFILE: aws
+      Description: An AWS Lambda function to generate excel-timesheets
+      MemorySize: 512
+      Timeout: 60
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AmazonS3FullAccess
+      Tracing: Active
+      Events:
+        JSONFileUpload:
+          Type: S3
+          Properties:
+            Bucket: !Ref TimesheetwizardDataBucket
+            Events: s3:ObjectCreated:Put
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: prefix
+                    Value: json
+
+  ImportFromClockifyLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn:
+      - ImportFromClockifyFunction
+    Properties:
+      LogGroupName: !Join [ "", [ "/aws/lambda/", !Ref ImportFromClockifyFunction ] ]
+      RetentionInDays: 30
+
+  GenerateExcelLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn:
+      - GenerateExcelFunction
+    Properties:
+      LogGroupName: !Join [ "", [ "/aws/lambda/", !Ref GenerateExcelFunction ] ]
+      RetentionInDays: 30
+
+  ImportFromClockifyEvent:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: timesheetwizard-import-from-clockify-daily
+      ScheduleExpression: cron(30 22 ? * MON,TUE,WED,THU,FRI *)
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt ImportFromClockifyFunction.Arn
+          Id: timesheetwizard-import-from-clockify
+          Input: '{"body": "{\"customerIds\": [], \"dateRangeType\": \"THIS_MONTH\"}"}'
+
+  PermissionForImportFromClockifyEvent:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Ref: ImportFromClockifyFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt ImportFromClockifyEvent.Arn
+
+  TimesheetwizardDataBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: timesheetwizard-data
+      AccessControl: Private
+      VersioningConfiguration:
+        Status: Suspended
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  TimesheetwizardErrorTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint: !Ref MonitoringRecipient
+          Protocol: email
+      TopicName: timesheetwizard-error-topic
+
+  ImportFromClockifyAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: import-from-clockify-alarm
+      ActionsEnabled: true
+      OKActions: [ ]
+      AlarmActions:
+        - Ref: TimesheetwizardErrorTopic
+      InsufficientDataActions: [ ]
+      MetricName: Errors
+      Namespace: AWS/Lambda
+      Statistic: Maximum
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref ImportFromClockifyFunction
+      Period: 300
+      EvaluationPeriods: 1
+      DatapointsToAlarm: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: missing
+
+  GenerateExcelAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: generate-excel-alarm
+      ActionsEnabled: true
+      OKActions: [ ]
+      AlarmActions:
+        - Ref: TimesheetwizardErrorTopic
+      InsufficientDataActions: [ ]
+      MetricName: Errors
+      Namespace: AWS/Lambda
+      Statistic: Maximum
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref GenerateExcelFunction
+      Period: 300
+      EvaluationPeriods: 1
+      DatapointsToAlarm: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: missing
