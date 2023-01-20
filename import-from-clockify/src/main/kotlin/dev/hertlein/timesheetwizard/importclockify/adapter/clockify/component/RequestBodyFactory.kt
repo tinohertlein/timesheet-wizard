@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter
 class RequestBodyFactory {
 
     fun create(customer: Customer, dateRange: ClosedRange<LocalDate>): RequestBody {
-        val clientsFilter = RequestBody.ClientsFilter(customer.clockifyId)
+        val clientsFilter = RequestBody.ClientsFilter(customer.clockifyId.value)
         val dates = dateRange
             .let { toDateTimeRange(it) }
             .let { toStringRange(it) }

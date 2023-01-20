@@ -58,14 +58,14 @@ internal class ResponseBodyMapperTest {
     )
 
     private fun expected(): List<TimesheetEntry> = listOf(
-        TimesheetEntry(aProject, aTask, someTagsAsStrings, dateLowerAsDate, 10.toDuration(HOURS)),
-        TimesheetEntry(aProject, aTask, someTagsAsStrings, dateUpperAsDate, 1.toDuration(HOURS)),
-        TimesheetEntry(aProject, anotherTask, someTagsAsStrings, dateLowerAsDate, 10.toDuration(HOURS)),
-        TimesheetEntry(aProject, anotherTask, someTagsAsStrings, dateUpperAsDate, 1.toDuration(HOURS)),
-        TimesheetEntry(anotherProject, aTask, someTagsAsStrings, dateLowerAsDate, 10.toDuration(HOURS)),
-        TimesheetEntry(anotherProject, aTask, someTagsAsStrings, dateUpperAsDate, 1.toDuration(HOURS)),
-        TimesheetEntry(anotherProject, anotherTask, someTagsAsStrings, dateLowerAsDate, 10.toDuration(HOURS)),
-        TimesheetEntry(anotherProject, anotherTask, someTagsAsStrings, dateUpperAsDate, 1.toDuration(HOURS))
+        TimesheetEntry.of(aProject, aTask, someTagsAsStrings, dateLowerAsDate, 10.toDuration(HOURS)),
+        TimesheetEntry.of(aProject, aTask, someTagsAsStrings, dateUpperAsDate, 1.toDuration(HOURS)),
+        TimesheetEntry.of(aProject, anotherTask, someTagsAsStrings, dateLowerAsDate, 10.toDuration(HOURS)),
+        TimesheetEntry.of(aProject, anotherTask, someTagsAsStrings, dateUpperAsDate, 1.toDuration(HOURS)),
+        TimesheetEntry.of(anotherProject, aTask, someTagsAsStrings, dateLowerAsDate, 10.toDuration(HOURS)),
+        TimesheetEntry.of(anotherProject, aTask, someTagsAsStrings, dateUpperAsDate, 1.toDuration(HOURS)),
+        TimesheetEntry.of(anotherProject, anotherTask, someTagsAsStrings, dateLowerAsDate, 10.toDuration(HOURS)),
+        TimesheetEntry.of(anotherProject, anotherTask, someTagsAsStrings, dateUpperAsDate, 1.toDuration(HOURS))
     )
 
     private fun toSeconds(hours: Int) = (hours * DateTimeConstants.SECONDS_PER_HOUR).toLong()

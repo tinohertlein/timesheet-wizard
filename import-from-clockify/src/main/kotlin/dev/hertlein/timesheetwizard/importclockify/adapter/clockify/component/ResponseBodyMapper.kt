@@ -16,7 +16,7 @@ class ResponseBodyMapper {
         responseBody
             .timeentries
             .map {
-                TimesheetEntry(
+                TimesheetEntry.of(
                     it.projectName,
                     it.description,
                     it.tags.map { tag -> TimeEntry.Tag(tag.name).name },

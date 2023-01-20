@@ -24,7 +24,12 @@ data class TimesheetEntry(
     val duration: Duration
 )
 
-data class Task(val name: String)
-data class Tag(val name: String)
-data class Project(val name: String)
+@JvmInline
+value class Task(val name: String)
+
+@JvmInline
+value class Tag(val name: String)
+
+@JvmInline
+value class Project(val name: String)
 

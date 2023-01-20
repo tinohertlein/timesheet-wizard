@@ -51,19 +51,32 @@ data class TimesheetEntry(
     val date: LocalDate,
     val duration: Duration
 ) {
-    constructor(
-        project: String,
-        task: String,
-        tags: List<String>,
-        date: LocalDate,
-        duration: Duration
-    ) : this(Project(project), Task(task), tags.map { Tag(it) }, date, duration)
+    companion object {
+
+        fun of(
+            project: String,
+            task: String,
+            tags: List<String>,
+            date: LocalDate,
+            duration: Duration
+        ) = TimesheetEntry(
+            Project(project),
+            Task(task),
+            tags.map { Tag(it) },
+            date,
+            duration
+        )
+    }
 }
 
 @Introspected
-data class Task(val name: String)
-@Introspected
-data class Tag(val name: String)
-@Introspected
-data class Project(val name: String)
+@JvmInline
+value class Task(val name: String)
 
+@Introspected
+@JvmInline
+value class Tag(val name: String)
+
+@Introspected
+@JvmInline
+value class Project(val name: String)
