@@ -5,9 +5,10 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.7.20"
-    id("org.jetbrains.kotlin.kapt") version "1.7.20"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.7.20"
+    val kotlin = "1.8.0"
+    id("org.jetbrains.kotlin.jvm") version kotlin
+    id("org.jetbrains.kotlin.kapt") version kotlin
+    id("org.jetbrains.kotlin.plugin.allopen") version kotlin
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("io.micronaut.application") version "3.6.3"
     id("io.gitlab.arturbosch.detekt").version("1.22.0")
@@ -87,6 +88,12 @@ tasks {
         }
     }
 }
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+    kotlinOptions.javaParameters = true
+}
+
 micronaut {
     runtime("lambda_provided")
     testRuntime("junit5")

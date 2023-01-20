@@ -5,8 +5,8 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    kotlin("jvm") version "1.7.21"
-    kotlin("plugin.allopen") version "1.7.21"
+    kotlin("jvm") version "1.8.0"
+    kotlin("plugin.allopen") version "1.8.0"
     id("io.quarkus")
     id("io.gitlab.arturbosch.detekt").version("1.22.0")
 }
@@ -43,8 +43,8 @@ dependencies {
     runtimeOnly("software.amazon.awssdk:url-connection-client")
 }
 
-group = "dev.hertlein.timesheetwizard"
-version = "1.0.0-SNAPSHOT"
+version = "0.1"
+group = "dev.hertlein.timesheetwizard.generateexcel"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
