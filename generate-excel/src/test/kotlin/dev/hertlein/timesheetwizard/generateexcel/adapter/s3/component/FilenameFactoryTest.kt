@@ -24,7 +24,7 @@ internal class FilenameFactoryTest {
 
             val filename = filenameFactory.create("XLSX", excel)
 
-            assertThat(filename).isEqualTo("XLSX/timesheet_the-customer_2022-01-01_2022-01-31.xlsx")
+            assertThat(filename).isEqualTo("XLSX/timesheet_the-customer_20220101-20220131.xlsx")
         }
     }
 }
