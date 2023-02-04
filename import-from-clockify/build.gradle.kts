@@ -49,7 +49,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.1")
     testImplementation("org.assertj:assertj-core:3.23.1")
-    testImplementation("io.mockk:mockk:1.13.2")
+    testImplementation("io.mockk:mockk:1.13.4")
     testImplementation("org.mock-server:mockserver-netty:5.14.0")
     testImplementation("org.mock-server:mockserver-client-java:5.14.0")
     testImplementation("org.testcontainers:mockserver")
