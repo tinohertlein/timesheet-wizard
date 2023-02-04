@@ -5,12 +5,12 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    val kotlin = "1.8.0"
+    val kotlin = "1.8.10"
     id("org.jetbrains.kotlin.jvm") version kotlin
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.application") version "3.6.3"
+    id("io.micronaut.application") version "3.7.0"
     id("io.gitlab.arturbosch.detekt").version("1.22.0")
 }
 
@@ -43,14 +43,14 @@ dependencies {
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.reactor:micronaut-reactor")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
-    implementation(platform("software.amazon.awssdk:bom:2.19.6"))
+    implementation(platform("software.amazon.awssdk:bom:2.19.31"))
     implementation("software.amazon.awssdk:s3")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.2")
     testImplementation("org.assertj:assertj-core:3.23.1")
-    testImplementation("io.mockk:mockk:1.13.2")
-    testImplementation("org.mock-server:mockserver-netty:5.14.0")
+    testImplementation("io.mockk:mockk:1.13.4")
+    testImplementation("org.mock-server:mockserver-netty:5.15.0")
     testImplementation("org.mock-server:mockserver-client-java:5.15.0")
     testImplementation("org.testcontainers:mockserver")
     testImplementation("org.testcontainers:testcontainers:1.17.6")
