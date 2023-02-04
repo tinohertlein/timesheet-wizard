@@ -51,7 +51,7 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.23.1")
     testImplementation("io.mockk:mockk:1.13.2")
     testImplementation("org.mock-server:mockserver-netty:5.14.0")
-    testImplementation("org.mock-server:mockserver-client-java:5.14.0")
+    testImplementation("org.mock-server:mockserver-client-java:5.15.0")
     testImplementation("org.testcontainers:mockserver")
     testImplementation("org.testcontainers:testcontainers:1.17.6")
     testImplementation("org.testcontainers:junit-jupiter:1.17.6")
