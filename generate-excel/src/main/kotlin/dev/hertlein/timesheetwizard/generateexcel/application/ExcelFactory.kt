@@ -2,6 +2,7 @@ package dev.hertlein.timesheetwizard.generateexcel.application
 
 import dev.hertlein.timesheetwizard.generateexcel.application.config.Contact
 import dev.hertlein.timesheetwizard.generateexcel.model.Excel
+import dev.hertlein.timesheetwizard.generateexcel.model.Tag
 import dev.hertlein.timesheetwizard.generateexcel.model.Timesheet
 import dev.hertlein.timesheetwizard.generateexcel.model.TimesheetEntry
 import org.apache.poi.xssf.usermodel.XSSFSheet
@@ -11,6 +12,8 @@ import java.time.LocalDate
 import javax.inject.Singleton
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
+
+private fun List<Tag>.format() = this.joinToString(" ") { it.name }
 
 @Suppress("MagicNumber")
 @Singleton
@@ -71,15 +74,22 @@ class ExcelFactory(
         val columnOffset = 0
 
         entries
-            .sortedWith(compareBy({ it.date }, { it.project.name }))
+            .sortedWith(entryComparator())
             .forEachIndexed { index, entry ->
                 sheet.getRow(index + rowOffset).run {
                     getCell(columnOffset + 0).setCellValue(entry.date)
                     getCell(columnOffset + 1).setCellValue(entry.project.name)
-                    getCell(columnOffset + 2).setCellValue(entry.tags.joinToString(" ") { it.name })
+                    getCell(columnOffset + 2).setCellValue(entry.tags.format())
                     getCell(columnOffset + 3).setCellValue(entry.task.name)
                     getCell(columnOffset + 4).setCellValue(entry.duration.toDouble(DurationUnit.HOURS))
                 }
             }
     }
+
+    private fun entryComparator(): Comparator<TimesheetEntry> =
+        compareBy(
+            { it.date },
+            { it.project.name },
+            { it.tags.format() },
+            { it.duration })
 }
