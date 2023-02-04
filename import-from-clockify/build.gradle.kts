@@ -46,7 +46,7 @@ dependencies {
     implementation(platform("software.amazon.awssdk:bom:2.19.6"))
     implementation("software.amazon.awssdk:s3")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.1")
     testImplementation("org.assertj:assertj-core:3.23.1")
     testImplementation("io.mockk:mockk:1.13.2")
