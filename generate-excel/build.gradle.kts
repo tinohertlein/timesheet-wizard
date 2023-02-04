@@ -5,8 +5,9 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    kotlin("jvm") version "1.8.0"
-    kotlin("plugin.allopen") version "1.8.0"
+    val kotlin = "1.8.10"
+    kotlin("jvm") version kotlin
+    kotlin("plugin.allopen") version kotlin
     id("io.quarkus")
     id("io.gitlab.arturbosch.detekt").version("1.22.0")
 }
@@ -21,6 +22,10 @@ val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
 
 dependencies {
+    val guavaVersion = "31.1-jre"
+    val kotlinLoggingVersion = "3.0.5"
+    val poiVersion = "5.2.3"
+
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
     implementation("io.quarkiverse.amazonservices:quarkus-amazon-s3")
@@ -30,13 +35,16 @@ dependencies {
     implementation("io.quarkus:quarkus-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.quarkus:quarkus-arc")
-    implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
-    implementation("com.google.guava:guava:31.1-jre")
-    implementation("org.apache.poi:poi:5.2.3")
-    implementation("org.apache.poi:poi-ooxml:5.2.3")
+    implementation("io.github.microutils:kotlin-logging-jvm:$kotlinLoggingVersion")
+    implementation("com.google.guava:guava:$guavaVersion")
+    implementation("org.apache.poi:poi:$poiVersion")
+    implementation("org.apache.poi:poi-ooxml:$poiVersion")
 
-    testImplementation("org.assertj:assertj-core:3.23.1")
-    testImplementation("io.mockk:mockk:1.13.2")
+    val assertJVersion = "3.23.1"
+    val mockkVersion = "1.13.4"
+
+    testImplementation("org.assertj:assertj-core:$assertJVersion")
+    testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
 
