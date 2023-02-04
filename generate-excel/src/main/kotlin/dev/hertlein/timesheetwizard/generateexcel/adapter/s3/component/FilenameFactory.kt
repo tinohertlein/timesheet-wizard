@@ -16,6 +16,6 @@ class FilenameFactory {
         val endDate = formatLocalDate(excel.dateRange.endInclusive)
         val suffix = "xlsx"
 
-        return "$prefix/${customerName}_${startDate}_${endDate}.${suffix}"
+        return "$prefix/timesheet_${customerName}_${startDate}_${endDate}.${suffix}"
     }
 }

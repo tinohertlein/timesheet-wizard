@@ -38,7 +38,7 @@ internal class ApplicationE2ET {
         createBucket()
         val jsonFilename = "PiedPiper_2022-01-01_2022-12-31_e47dc4a0-2899-41a7-a390-a5c6152f2e42.json"
         val jsonFileContent = readResource(jsonFilename)
-        val excelFilename = "PiedPiper_2022-01-01_2022-12-31.xlsx"
+        val excelFilename = "timesheet_PiedPiper_2022-01-01_2022-12-31.xlsx"
         upload(jsonFilename, jsonFileContent)
         val s3Event = createS3Event(jsonFilename)
 
