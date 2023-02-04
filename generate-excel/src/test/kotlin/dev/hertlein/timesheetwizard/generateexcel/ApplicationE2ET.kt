@@ -54,6 +54,7 @@ internal class ApplicationE2ET {
 
         val generatedExcel = download("xlsx/$excelFilename")
         val expectedExcel = readResource(excelFilename)
+
         ExcelVerification.assertEquals(generatedExcel, expectedExcel)
     }
 
@@ -88,11 +89,13 @@ internal class ApplicationE2ET {
             val actualSheet = sheetFrom(actual)
             val expectedSheet = sheetFrom(expected)
             val cellFormatter = DataFormatter()
-            val maxRow = 80
-            val maxColumn = 4
+            val maxRowIndex = expectedSheet.lastRowNum
+            val maxColumnIndex = 4
 
-            (0..maxRow).forEach { rowIndex: Int ->
-                (0..maxColumn).forEach { columnIndex: Int ->
+            assertThat(actualSheet.lastRowNum).isEqualTo(expectedSheet.lastRowNum)
+
+            (0..maxRowIndex).forEach { rowIndex: Int ->
+                (0..maxColumnIndex).forEach { columnIndex: Int ->
                     val actualCell = cellValue(cellFormatter, actualSheet, rowIndex, columnIndex)
                     val expectedCell = cellValue(cellFormatter, expectedSheet, rowIndex, columnIndex)
 

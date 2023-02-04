@@ -34,6 +34,7 @@ class ExcelFactory(
                     fillInDateRange(sheet, timesheet.dateRange)
                     fillInTotalWorkedHours(sheet, timesheet.totalDuration())
                     fillInEntries(sheet, timesheet.entries)
+                    removeEmptyRows(sheet)
 
                     workbook.write(outputStream)
                 }
@@ -92,4 +93,22 @@ class ExcelFactory(
             { it.project.name },
             { it.tags.format() },
             { it.duration })
+
+    private fun removeEmptyRows(sheet: XSSFSheet) {
+
+        for (rowIndex in findFirstEmptyRowIndex(sheet)..sheet.lastRowNum) {
+            sheet.removeRow(sheet.getRow(rowIndex))
+        }
+    }
+
+    private fun findFirstEmptyRowIndex(sheet: XSSFSheet): Int {
+        repeat(sheet.lastRowNum) { rowIndex ->
+            val row = sheet.getRow(rowIndex)
+
+            if (row.getCell(0).rawValue.isNullOrBlank()) {
+                return rowIndex
+            }
+        }
+        return sheet.lastRowNum
+    }
 }
