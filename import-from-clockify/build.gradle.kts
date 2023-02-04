@@ -17,48 +17,63 @@ plugins {
 version = "0.1"
 group = "dev.hertlein.timesheetwizard.importclockify"
 
-val kotlinVersion = project.properties["kotlinVersion"]
+val kotlinVersion = "1.8.10"
+val javaVersion = JavaVersion.VERSION_11.toString()
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+
+    val micronautKotlinVersion = "3.2.2"
+    val guavaVersion = "31.1-jre"
+    val kotlinLoggingVersion = "3.0.5"
+    val jacksonVersion = "2.14.1"
+    val logbackVersion = "1.4.5"
+    val awsSdkVersion = "2.19.31"
+    val awsLambdaVersion = "3.11.0"
+
     kapt("io.micronaut:micronaut-http-validation")
-    implementation("com.amazonaws:aws-lambda-java-events:3.11.0")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut.aws:micronaut-function-aws")
     implementation("io.micronaut.aws:micronaut-function-aws-custom-runtime")
-    implementation("io.micronaut.kotlin:micronaut-kotlin-runtime:3.2.2")
+    implementation("io.micronaut.kotlin:micronaut-kotlin-runtime:$micronautKotlinVersion")
     implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
-    implementation("com.google.guava:guava:31.1-jre")
-    implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.1")
-    implementation("ch.qos.logback:logback-core:1.4.5")
+    implementation("com.google.guava:guava:$guavaVersion")
+    implementation("io.github.microutils:kotlin-logging-jvm:$kotlinLoggingVersion")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+    implementation("ch.qos.logback:logback-core:$logbackVersion")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.reactor:micronaut-reactor")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
-    implementation(platform("software.amazon.awssdk:bom:2.19.31"))
+    implementation(platform("software.amazon.awssdk:bom:$awsSdkVersion"))
+    implementation("com.amazonaws:aws-lambda-java-events:$awsLambdaVersion")
     implementation("software.amazon.awssdk:s3")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.2")
-    testImplementation("org.assertj:assertj-core:3.23.1")
-    testImplementation("io.mockk:mockk:1.13.4")
-    testImplementation("org.mock-server:mockserver-netty:5.15.0")
-    testImplementation("org.mock-server:mockserver-client-java:5.15.0")
+    val junitVersion = "5.9.2"
+    val mockServerVersion = "5.15.0"
+    val testContainersVersion = "1.17.6"
+    val assertJVersion = "3.23.1"
+    val mockkVersion = "1.13.4"
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
+    testImplementation("org.mock-server:mockserver-netty:$mockServerVersion")
+    testImplementation("org.mock-server:mockserver-client-java:$mockServerVersion")
     testImplementation("org.testcontainers:mockserver")
-    testImplementation("org.testcontainers:testcontainers:1.17.6")
-    testImplementation("org.testcontainers:junit-jupiter:1.17.6")
+    testImplementation("org.testcontainers:testcontainers:$testContainersVersion")
+    testImplementation("org.testcontainers:junit-jupiter:$testContainersVersion")
+    testImplementation("org.assertj:assertj-core:$assertJVersion")
+    testImplementation("io.mockk:mockk:$mockkVersion")
 
-    runtimeOnly("ch.qos.logback:logback-classic:1.4.5")
+    runtimeOnly("ch.qos.logback:logback-classic:$logbackVersion")
     compileOnly("org.graalvm.nativeimage:svm")
-
 }
 
 buildscript {
@@ -76,21 +91,22 @@ java {
     sourceCompatibility = JavaVersion.toVersion("11")
 }
 
+
 tasks {
     compileKotlin {
         kotlinOptions {
-            jvmTarget = "11"
+            jvmTarget = javaVersion
         }
     }
     compileTestKotlin {
         kotlinOptions {
-            jvmTarget = "11"
+            jvmTarget = javaVersion
         }
     }
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+    kotlinOptions.jvmTarget = javaVersion
     kotlinOptions.javaParameters = true
 }
 
