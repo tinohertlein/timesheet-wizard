@@ -4,3 +4,7 @@ updates:
     directory: "/import-from-clockify"
     schedule:
       interval: "daily"
+  - package-ecosystem: "gradle"
+    directory: "/generate-excel"
+    schedule:
+      interval: "daily"
