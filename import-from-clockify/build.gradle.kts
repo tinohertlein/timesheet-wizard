@@ -47,7 +47,7 @@ dependencies {
     implementation("software.amazon.awssdk:s3")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.2")
     testImplementation("org.assertj:assertj-core:3.23.1")
     testImplementation("io.mockk:mockk:1.13.2")
     testImplementation("org.mock-server:mockserver-netty:5.14.0")
