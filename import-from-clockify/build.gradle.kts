@@ -43,7 +43,7 @@ dependencies {
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.reactor:micronaut-reactor")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
-    implementation(platform("software.amazon.awssdk:bom:2.19.6"))
+    implementation(platform("software.amazon.awssdk:bom:2.19.31"))
     implementation("software.amazon.awssdk:s3")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
