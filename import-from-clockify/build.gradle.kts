@@ -9,8 +9,8 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version kotlin
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.application") version "3.7.0"
+    id("com.github.johnrengelman.shadow") version "8.1.0"
+    id("io.micronaut.application") version "3.7.4"
     id("io.gitlab.arturbosch.detekt").version("1.22.0")
 }
 
@@ -31,7 +31,7 @@ dependencies {
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.14.2"
     val logbackVersion = "1.4.5"
-    val awsSdkVersion = "2.19.31"
+    val awsSdkVersion = "2.20.16"
     val awsLambdaVersion = "3.11.0"
 
     kapt("io.micronaut:micronaut-http-validation")
@@ -78,7 +78,7 @@ dependencies {
 
 buildscript {
     dependencies {
-        classpath("com.github.docker-java:docker-java-transport-httpclient5:3.2.14") {
+        classpath("com.github.docker-java:docker-java-transport-httpclient5:3.3.0") {
             because("M1 macs need a later version of JNA")
         }
     }
