@@ -35,7 +35,7 @@ class ExcelFactory(
                     fillInTotalWorkedHours(sheet, timesheet.totalDuration())
                     fillInEntries(sheet, timesheet.entries)
                     removeEmptyRows(sheet)
-
+                    autoSizeColumnWidths(sheet)
                     workbook.write(outputStream)
                 }
             }
@@ -95,7 +95,6 @@ class ExcelFactory(
             { it.duration })
 
     private fun removeEmptyRows(sheet: XSSFSheet) {
-
         for (rowIndex in findFirstEmptyRowIndex(sheet)..sheet.lastRowNum) {
             sheet.removeRow(sheet.getRow(rowIndex))
         }
@@ -110,5 +109,11 @@ class ExcelFactory(
             }
         }
         return sheet.lastRowNum
+    }
+
+    private fun autoSizeColumnWidths(sheet: XSSFSheet) {
+        for (columnIndex in 0..4) {
+            sheet.autoSizeColumn(columnIndex)
+        }
     }
 }
