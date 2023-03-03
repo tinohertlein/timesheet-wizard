@@ -89,7 +89,7 @@ Resources:
     Type: AWS::Events::Rule
     Properties:
       Name: timesheetwizard-import-from-clockify-daily
-      ScheduleExpression: cron(30 22 ? * MON,TUE,WED,THU,FRI *)
+      ScheduleExpression: cron(30 17 ? * MON,TUE,WED,THU,FRI *)
       State: ENABLED
       Targets:
         - Arn: !GetAtt ImportFromClockifyFunction.Arn
