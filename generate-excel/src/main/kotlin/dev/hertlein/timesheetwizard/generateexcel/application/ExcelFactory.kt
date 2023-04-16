@@ -5,6 +5,8 @@ import dev.hertlein.timesheetwizard.generateexcel.model.Excel
 import dev.hertlein.timesheetwizard.generateexcel.model.Tag
 import dev.hertlein.timesheetwizard.generateexcel.model.Timesheet
 import dev.hertlein.timesheetwizard.generateexcel.model.TimesheetEntry
+import org.apache.poi.ss.usermodel.CellCopyPolicy
+import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.ByteArrayOutputStream
@@ -14,6 +16,7 @@ import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
 private fun List<Tag>.format() = this.joinToString(" ") { it.name }
+private val cellCopyPolicy = CellCopyPolicy.Builder().cellValue(false).build()
 
 @Suppress("MagicNumber")
 @Singleton
@@ -34,7 +37,6 @@ class ExcelFactory(
                     fillInDateRange(sheet, timesheet.dateRange)
                     fillInTotalWorkedHours(sheet, timesheet.totalDuration())
                     fillInEntries(sheet, timesheet.entries)
-                    removeEmptyRows(sheet)
                     autoSizeColumnWidths(sheet)
                     workbook.write(outputStream)
                 }
@@ -73,19 +75,30 @@ class ExcelFactory(
     private fun fillInEntries(sheet: XSSFSheet, entries: List<TimesheetEntry>) {
         val rowOffset = 6
         val columnOffset = 0
+        val referenceRow = sheet.getRow(rowOffset)
 
         entries
             .sortedWith(entryComparator())
             .forEachIndexed { index, entry ->
-                sheet.getRow(index + rowOffset).run {
-                    getCell(columnOffset + 0).setCellValue(entry.date)
-                    getCell(columnOffset + 1).setCellValue(entry.project.name)
-                    getCell(columnOffset + 2).setCellValue(entry.tags.format())
-                    getCell(columnOffset + 3).setCellValue(entry.task.name)
-                    getCell(columnOffset + 4).setCellValue(entry.duration.toDouble(DurationUnit.HOURS))
-                }
+                (if (index == 0) referenceRow else createEntryRow(sheet, index + rowOffset, referenceRow))
+                    .run {
+                        getCell(columnOffset + 0).setCellValue(entry.date)
+                        getCell(columnOffset + 1).setCellValue(entry.project.name)
+                        getCell(columnOffset + 2).setCellValue(entry.tags.format())
+                        getCell(columnOffset + 3).setCellValue(entry.task.name)
+                        getCell(columnOffset + 4).setCellValue(entry.duration.toDouble(DurationUnit.HOURS))
+                    }
             }
     }
+
+    private fun createEntryRow(
+        sheet: XSSFSheet,
+        rowNumber: Int,
+        referenceRow: XSSFRow
+    ): XSSFRow =
+        sheet
+            .createRow(rowNumber)
+            .also { it.copyRowFrom(referenceRow, cellCopyPolicy) }
 
     private fun entryComparator(): Comparator<TimesheetEntry> =
         compareBy(
@@ -93,23 +106,6 @@ class ExcelFactory(
             { it.project.name },
             { it.tags.format() },
             { it.duration })
-
-    private fun removeEmptyRows(sheet: XSSFSheet) {
-        for (rowIndex in findFirstEmptyRowIndex(sheet)..sheet.lastRowNum) {
-            sheet.removeRow(sheet.getRow(rowIndex))
-        }
-    }
-
-    private fun findFirstEmptyRowIndex(sheet: XSSFSheet): Int {
-        repeat(sheet.lastRowNum) { rowIndex ->
-            val row = sheet.getRow(rowIndex)
-
-            if (row.getCell(0).rawValue.isNullOrBlank()) {
-                return rowIndex
-            }
-        }
-        return sheet.lastRowNum
-    }
 
     private fun autoSizeColumnWidths(sheet: XSSFSheet) {
         for (columnIndex in 0..4) {
