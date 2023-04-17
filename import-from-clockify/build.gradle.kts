@@ -10,7 +10,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
     id("com.github.johnrengelman.shadow") version "8.1.0"
-    id("io.micronaut.application") version "3.7.5"
+    id("io.micronaut.application") version "3.7.6"
     id("io.gitlab.arturbosch.detekt").version("1.22.0")
 }
 
