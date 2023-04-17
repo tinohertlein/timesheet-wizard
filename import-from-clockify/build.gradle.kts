@@ -5,19 +5,19 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    val kotlin = "1.8.10"
+    val kotlin = "1.8.20"
     id("org.jetbrains.kotlin.jvm") version kotlin
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
-    id("com.github.johnrengelman.shadow") version "8.1.0"
-    id("io.micronaut.application") version "3.7.6"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("io.micronaut.application") version "3.7.8"
     id("io.gitlab.arturbosch.detekt").version("1.22.0")
 }
 
 version = "0.1"
 group = "dev.hertlein.timesheetwizard.importclockify"
 
-val kotlinVersion = "1.8.10"
+val kotlinVersion = "1.8.20"
 val javaVersion = JavaVersion.VERSION_11.toString()
 
 repositories {
@@ -30,9 +30,9 @@ dependencies {
     val guavaVersion = "31.1-jre"
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.14.2"
-    val logbackVersion = "1.4.5"
-    val awsSdkVersion = "2.20.16"
-    val awsLambdaVersion = "3.11.0"
+    val logbackVersion = "1.4.6"
+    val awsSdkVersion = "2.20.47"
+    val awsLambdaVersion = "3.11.1"
 
     kapt("io.micronaut:micronaut-http-validation")
     implementation("io.micronaut:micronaut-http-client")
@@ -60,7 +60,7 @@ dependencies {
     val mockServerVersion = "5.15.0"
     val testContainersVersion = "1.17.6"
     val assertJVersion = "3.24.2"
-    val mockkVersion = "1.13.4"
+    val mockkVersion = "1.13.5"
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
