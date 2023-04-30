@@ -5,19 +5,19 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    val kotlin = "1.8.20"
+    val kotlin = "1.8.21"
     id("org.jetbrains.kotlin.jvm") version kotlin
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "3.7.8"
-    id("io.gitlab.arturbosch.detekt").version("1.22.0")
+    id("io.gitlab.arturbosch.detekt") version "1.22.0"
 }
 
 version = "0.1"
 group = "dev.hertlein.timesheetwizard.importclockify"
 
-val kotlinVersion = "1.8.20"
+val kotlinVersion = "1.8.21"
 val javaVersion = JavaVersion.VERSION_11.toString()
 
 repositories {
@@ -29,9 +29,9 @@ dependencies {
     val micronautKotlinVersion = "3.2.2"
     val guavaVersion = "31.1-jre"
     val kotlinLoggingVersion = "3.0.5"
-    val jacksonVersion = "2.14.2"
-    val logbackVersion = "1.4.6"
-    val awsSdkVersion = "2.20.47"
+    val jacksonVersion = "2.15.0"
+    val logbackVersion = "1.4.7"
+    val awsSdkVersion = "2.20.55"
     val awsLambdaVersion = "3.11.1"
 
     kapt("io.micronaut:micronaut-http-validation")
@@ -58,7 +58,7 @@ dependencies {
 
     val junitVersion = "5.9.2"
     val mockServerVersion = "5.15.0"
-    val testContainersVersion = "1.17.6"
+    val testContainersVersion = "1.18.0"
     val assertJVersion = "3.24.2"
     val mockkVersion = "1.13.5"
 
