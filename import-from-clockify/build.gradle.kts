@@ -18,7 +18,7 @@ version = "0.1"
 group = "dev.hertlein.timesheetwizard.importclockify"
 
 val kotlinVersion = "1.8.21"
-val javaVersion = JavaVersion.VERSION_11.toString()
+val javaVersion = JavaVersion.VERSION_17.toString()
 
 repositories {
     mavenCentral()
@@ -88,7 +88,7 @@ application {
     mainClass.set("dev.hertlein.timesheetwizard.importclockify.adapter.lambda.LambdaAdapter")
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("11")
+    sourceCompatibility = JavaVersion.toVersion("17")
 }
 
 
