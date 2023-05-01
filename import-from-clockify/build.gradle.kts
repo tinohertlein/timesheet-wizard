@@ -10,7 +10,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "3.7.8"
+    id("io.micronaut.application") version "3.7.9"
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
 }
 
@@ -56,7 +56,7 @@ dependencies {
     implementation("com.amazonaws:aws-lambda-java-events:$awsLambdaVersion")
     implementation("software.amazon.awssdk:s3")
 
-    val junitVersion = "5.9.2"
+    val junitVersion = "5.9.3"
     val mockServerVersion = "5.15.0"
     val testContainersVersion = "1.18.0"
     val assertJVersion = "3.24.2"
