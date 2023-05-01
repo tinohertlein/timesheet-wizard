@@ -29,6 +29,7 @@ Resources:
       MemorySize: 256
       PackageType: Zip
       Timeout: 60
+      AutoPublishAlias: Live
       Policies:
         - AWSLambdaBasicExecutionRole
         - AmazonS3FullAccess
@@ -53,10 +54,13 @@ Resources:
       Description: An AWS Lambda function to generate excel-timesheets
       MemorySize: 512
       Timeout: 60
+      AutoPublishAlias: Live
+      SnapStart:
+        ApplyOn: PublishedVersions
       Policies:
         - AWSLambdaBasicExecutionRole
         - AmazonS3FullAccess
-      Tracing: Active
+      Tracing: PassThrough
       Events:
         JSONFileUpload:
           Type: S3
