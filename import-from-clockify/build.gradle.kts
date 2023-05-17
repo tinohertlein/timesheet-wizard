@@ -29,7 +29,7 @@ dependencies {
     val micronautKotlinVersion = "3.2.2"
     val guavaVersion = "31.1-jre"
     val kotlinLoggingVersion = "3.0.5"
-    val jacksonVersion = "2.15.0"
+    val jacksonVersion = "2.15.1"
     val logbackVersion = "1.4.7"
     val awsSdkVersion = "2.20.56"
     val awsLambdaVersion = "3.11.1"
