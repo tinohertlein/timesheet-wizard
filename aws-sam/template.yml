@@ -7,6 +7,10 @@ Parameters:
       - arm64
   MonitoringRecipient:
     Type: String
+  ContactName:
+    Type: String
+  ContactEmail:
+    Type: String
 
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
@@ -51,6 +55,8 @@ Resources:
         Variables:
          DISABLE_SIGNAL_HANDLERS: true
          QUARKUS_PROFILE: aws
+         CONTACT_NAME: !Ref ContactName
+         CONTACT_EMAIL: !Ref ContactEmail
       Description: An AWS Lambda function to generate excel-timesheets
       MemorySize: 512
       Timeout: 60

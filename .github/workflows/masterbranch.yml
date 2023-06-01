@@ -60,7 +60,7 @@ jobs:
         run: sam build --template-file aws-sam/template.yml
 
       - name: SAM deploy AWS stack
-        run: sam deploy --config-file aws-sam/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }}
+        run: sam deploy --config-file aws-sam/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }} ContactName=${{ secrets.CONTACT_NAME }} ContactEmail=${{ secrets.CONTACT_EMAIL }}
 
       - name: Invoke AWS Lambda
         run: >
