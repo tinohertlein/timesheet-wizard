@@ -27,7 +27,7 @@ repositories {
 dependencies {
 
     val micronautKotlinVersion = "3.2.2"
-    val guavaVersion = "31.1-jre"
+    val guavaVersion = "32.0.0-jre"
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.15.2"
     val logbackVersion = "1.4.7"
