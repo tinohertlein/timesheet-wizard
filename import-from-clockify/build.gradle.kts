@@ -31,7 +31,7 @@ dependencies {
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.15.2"
     val logbackVersion = "1.4.7"
-    val awsSdkVersion = "2.20.76"
+    val awsSdkVersion = "2.20.79"
     val awsLambdaVersion = "3.11.2"
 
     kapt("io.micronaut:micronaut-http-validation")
