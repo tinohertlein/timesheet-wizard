@@ -22,7 +22,7 @@ val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
 
 dependencies {
-    val guavaVersion = "32.0.0-jre"
+    val guavaVersion = "32.0.1-jre"
     val kotlinLoggingVersion = "3.0.5"
     val poiVersion = "5.2.3"
 
