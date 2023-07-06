@@ -5,19 +5,19 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    val kotlin = "1.8.21"
+    val kotlin = "1.8.22"
     id("org.jetbrains.kotlin.jvm") version kotlin
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "3.7.9"
+    id("io.micronaut.application") version "3.7.10"
     id("io.gitlab.arturbosch.detekt") version "1.23.0"
 }
 
 version = "0.1"
 group = "dev.hertlein.timesheetwizard.importclockify"
 
-val kotlinVersion = "1.8.21"
+val kotlinVersion = "1.8.22"
 val javaVersion = JavaVersion.VERSION_17.toString()
 
 repositories {
@@ -27,11 +27,11 @@ repositories {
 dependencies {
 
     val micronautKotlinVersion = "3.2.2"
-    val guavaVersion = "32.0.0-jre"
+    val guavaVersion = "32.1.1-jre"
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.15.2"
     val logbackVersion = "1.4.7"
-    val awsSdkVersion = "2.20.76"
+    val awsSdkVersion = "2.20.99"
     val awsLambdaVersion = "3.11.2"
 
     kapt("io.micronaut:micronaut-http-validation")
@@ -58,7 +58,7 @@ dependencies {
 
     val junitVersion = "5.9.3"
     val mockServerVersion = "5.15.0"
-    val testContainersVersion = "1.18.1"
+    val testContainersVersion = "1.18.3"
     val assertJVersion = "3.24.2"
     val mockkVersion = "1.13.5"
 
@@ -78,7 +78,7 @@ dependencies {
 
 buildscript {
     dependencies {
-        classpath("com.github.docker-java:docker-java-transport-httpclient5:3.3.0") {
+        classpath("com.github.docker-java:docker-java-transport-httpclient5:3.3.1") {
             because("M1 macs need a later version of JNA")
         }
     }

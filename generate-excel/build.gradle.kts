@@ -5,7 +5,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    val kotlin = "1.8.21"
+    val kotlin = "1.8.22"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
     id("io.quarkus")
@@ -22,7 +22,7 @@ val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
 
 dependencies {
-    val guavaVersion = "32.0.0-jre"
+    val guavaVersion = "32.1.1-jre"
     val kotlinLoggingVersion = "3.0.5"
     val poiVersion = "5.2.3"
 
