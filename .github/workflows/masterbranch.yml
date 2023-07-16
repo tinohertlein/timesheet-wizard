@@ -56,6 +56,9 @@ jobs:
           path: generate-excel/build/test-results/test/*.xml
           reporter: java-junit
 
+      - name: SAM print version
+        run: sam --version
+
       - name: SAM build AWS stack
         run: sam build --template-file aws-sam/template.yml
 
