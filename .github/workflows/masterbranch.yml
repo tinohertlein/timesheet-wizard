@@ -65,8 +65,7 @@ jobs:
       - name: SAM deploy AWS stack
         run: sam deploy --config-file aws-sam/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }} ContactName=${{ secrets.CONTACT_NAME }} ContactEmail=${{ secrets.CONTACT_EMAIL }}
 
-      - name: Invoke AWS Lambda
+      - name: SAM invoke ImportFromClockify
         run: >
-          aws lambda invoke --function-name timesheetwizard-import-from-clockify --cli-binary-format raw-in-base64-out 
-          --payload '{"body": "{\"customerIds\": [\"1000\"], \"dateRangeType\": \"CUSTOM_YEAR\", \"dateRange\": \"2022\"}"}' response.json
+          sam remote invoke --stack-name timesheetwizard ImportFromClockifyFunction -e '{"body": "{\"customerIds\": [\"1000\"], \"dateRangeType\": \"CUSTOM_YEAR\", \"dateRange\": \"2022\"}"}'
 
