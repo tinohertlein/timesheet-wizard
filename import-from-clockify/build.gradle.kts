@@ -30,8 +30,8 @@ dependencies {
     val guavaVersion = "32.1.1-jre"
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.15.2"
-    val logbackVersion = "1.4.7"
-    val awsSdkVersion = "2.20.99"
+    val logbackVersion = "1.4.8"
+    val awsSdkVersion = "2.20.103"
     val awsLambdaVersion = "3.11.2"
 
     kapt("io.micronaut:micronaut-http-validation")
@@ -78,7 +78,7 @@ dependencies {
 
 buildscript {
     dependencies {
-        classpath("com.github.docker-java:docker-java-transport-httpclient5:3.3.1") {
+        classpath("com.github.docker-java:docker-java-transport-httpclient5:3.3.2") {
             because("M1 macs need a later version of JNA")
         }
     }
