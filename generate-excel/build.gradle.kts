@@ -9,7 +9,7 @@ plugins {
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
     id("io.quarkus")
-    id("io.gitlab.arturbosch.detekt") version "1.23.0"
+    id("io.gitlab.arturbosch.detekt") version "1.23.1"
 }
 
 repositories {
@@ -22,7 +22,7 @@ val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
 
 dependencies {
-    val guavaVersion = "32.1.1-jre"
+    val guavaVersion = "32.1.2-jre"
     val kotlinLoggingVersion = "3.0.5"
     val poiVersion = "5.2.3"
 

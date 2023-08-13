@@ -11,7 +11,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "3.7.10"
-    id("io.gitlab.arturbosch.detekt") version "1.23.0"
+    id("io.gitlab.arturbosch.detekt") version "1.23.1"
 }
 
 version = "0.1"
@@ -27,11 +27,11 @@ repositories {
 dependencies {
 
     val micronautKotlinVersion = "3.2.2"
-    val guavaVersion = "32.1.1-jre"
+    val guavaVersion = "32.1.2-jre"
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.15.2"
     val logbackVersion = "1.4.8"
-    val awsSdkVersion = "2.20.103"
+    val awsSdkVersion = "2.20.124"
     val awsLambdaVersion = "3.11.2"
 
     kapt("io.micronaut:micronaut-http-validation")
@@ -56,7 +56,7 @@ dependencies {
     implementation("com.amazonaws:aws-lambda-java-events:$awsLambdaVersion")
     implementation("software.amazon.awssdk:s3")
 
-    val junitVersion = "5.9.3"
+    val junitVersion = "5.10.0"
     val mockServerVersion = "5.15.0"
     val testContainersVersion = "1.18.3"
     val assertJVersion = "3.24.2"
