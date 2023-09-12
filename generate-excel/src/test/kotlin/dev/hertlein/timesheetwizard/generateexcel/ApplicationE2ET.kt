@@ -21,7 +21,7 @@ import software.amazon.awssdk.services.s3.model.CreateBucketRequest
 import software.amazon.awssdk.services.s3.model.GetObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectResponse
-import javax.inject.Inject
+import jakarta.inject.Inject
 
 @QuarkusTest
 @DisplayName("Application")

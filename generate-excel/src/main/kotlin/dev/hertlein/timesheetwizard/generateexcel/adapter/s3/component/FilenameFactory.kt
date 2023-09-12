@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatterBuilder
 import java.time.format.SignStyle
 import java.time.temporal.ChronoField
 import java.util.Locale
-import javax.inject.Singleton
+import jakarta.inject.Singleton
 
 @Singleton
 class FilenameFactory {

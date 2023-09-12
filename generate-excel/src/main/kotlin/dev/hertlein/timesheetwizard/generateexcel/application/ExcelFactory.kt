@@ -11,7 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.ByteArrayOutputStream
 import java.time.LocalDate
-import javax.inject.Singleton
+import jakarta.inject.Singleton
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 

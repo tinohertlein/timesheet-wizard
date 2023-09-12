@@ -11,7 +11,7 @@ import dev.hertlein.timesheetwizard.generateexcel.model.Timesheet
 import dev.hertlein.timesheetwizard.generateexcel.model.TimesheetEntry
 import io.quarkus.runtime.annotations.RegisterForReflection
 import java.time.LocalDate
-import javax.enterprise.context.ApplicationScoped
+import jakarta.enterprise.context.ApplicationScoped
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 

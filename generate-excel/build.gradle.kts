@@ -5,7 +5,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    val kotlin = "1.8.22"
+    val kotlin = "1.9.10"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
     id("io.quarkus")
@@ -63,8 +63,8 @@ tasks.withType<Test> {
     systemProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager")
 }
 allOpen {
-    annotation("javax.ws.rs.Path")
-    annotation("javax.enterprise.context.ApplicationScoped")
+    annotation("jakarta.ws.rs.Path")
+    annotation("jakarta.enterprise.context.ApplicationScoped")
     annotation("io.quarkus.test.junit.QuarkusTest")
 }
 

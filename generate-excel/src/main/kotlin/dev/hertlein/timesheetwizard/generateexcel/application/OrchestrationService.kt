@@ -3,7 +3,7 @@ package dev.hertlein.timesheetwizard.generateexcel.application
 import dev.hertlein.timesheetwizard.generateexcel.application.port.PersistencePort
 import dev.hertlein.timesheetwizard.generateexcel.application.port.PersistenceResult
 import mu.KotlinLogging
-import javax.enterprise.context.ApplicationScoped
+import jakarta.enterprise.context.ApplicationScoped
 
 private val logger = KotlinLogging.logger {}
 
