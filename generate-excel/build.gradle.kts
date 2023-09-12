@@ -41,7 +41,7 @@ dependencies {
     implementation("org.apache.poi:poi-ooxml:$poiVersion")
 
     val assertJVersion = "3.24.2"
-    val mockkVersion = "1.13.5"
+    val mockkVersion = "1.13.7"
 
     testImplementation("org.assertj:assertj-core:$assertJVersion")
     testImplementation("io.mockk:mockk:$mockkVersion")
