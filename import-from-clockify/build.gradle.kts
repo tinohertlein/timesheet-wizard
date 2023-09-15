@@ -32,7 +32,7 @@ dependencies {
     val jacksonVersion = "2.15.2"
     val logbackVersion = "1.4.8"
     val awsSdkVersion = "2.20.145"
-    val awsLambdaVersion = "3.11.2"
+    val awsLambdaVersion = "3.11.3"
 
     kapt("io.micronaut:micronaut-http-validation")
     implementation("io.micronaut:micronaut-http-client")
