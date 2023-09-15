@@ -50,7 +50,7 @@ The Timesheet-Wizard consists of two independent submodules with the following r
 **import-from-clockify** is a [Micronaut application](https://micronaut.io/) written in Kotlin, built with Gradle and deployed to AWS Lambda as a GraalVM native
 image with a custom runtime.
 
-**generate-excel** is a [Quarkus application](https://quarkus.io/) written in Kotlin, built with Gradle and deployed to AWS Lambda on a Java 11 runtime - due to
+**generate-excel** is a [Quarkus application](https://quarkus.io/) written in Kotlin, built with Gradle and deployed to AWS Lambda on a Java 17 runtime - due to
 incompatibility of Apache POI not as a GraalVM native image with a custom runtime.
 
 ![Technical context](doc/assets/context-technical.drawio.png "Technical context")
