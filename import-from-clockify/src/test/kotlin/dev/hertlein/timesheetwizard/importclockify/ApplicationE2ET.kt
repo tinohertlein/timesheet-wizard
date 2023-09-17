@@ -1,6 +1,5 @@
 package dev.hertlein.timesheetwizard.importclockify
 
-import com.amazonaws.serverless.proxy.internal.testutils.MockLambdaContext
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -12,6 +11,7 @@ import dev.hertlein.timesheetwizard.importclockify.util.ResourcesReader
 import dev.hertlein.timesheetwizard.importclockify.util.TestEnvironments
 import io.micronaut.context.annotation.Property
 import io.micronaut.context.annotation.Value
+import io.micronaut.function.aws.proxy.MockLambdaContext
 import io.micronaut.http.HttpHeaders
 import io.micronaut.http.HttpMethod
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest

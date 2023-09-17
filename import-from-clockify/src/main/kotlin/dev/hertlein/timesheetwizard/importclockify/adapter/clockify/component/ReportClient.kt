@@ -8,7 +8,6 @@ import io.micronaut.http.HttpRequest
 import io.micronaut.http.client.HttpClient
 import io.micronaut.http.uri.UriBuilder
 import jakarta.inject.Singleton
-import org.apache.http.entity.ContentType
 import reactor.core.publisher.Mono
 
 @Singleton
@@ -28,7 +27,7 @@ class ReportClient(
     fun fetchReport(requestBody: RequestBody): ResponseBody =
         HttpRequest
             .POST(uri, requestBody)
-            .header(ACCEPT, ContentType.APPLICATION_JSON.mimeType)
+            .header(ACCEPT, "application/json")
             .header("X-Api-Key", clockifyConfig.apiKey)
             .let { Mono.from(httpClient.retrieve(it, ResponseBody::class.java)) }
             .block()!!

@@ -10,7 +10,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "3.7.10"
+    id("io.micronaut.application") version "4.0.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.1"
 }
 
@@ -26,7 +26,6 @@ repositories {
 
 dependencies {
 
-    val micronautKotlinVersion = "3.2.2"
     val guavaVersion = "32.1.2-jre"
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.15.2"
@@ -34,14 +33,18 @@ dependencies {
     val awsSdkVersion = "2.20.145"
     val awsLambdaVersion = "3.11.3"
 
+    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
     kapt("io.micronaut:micronaut-http-validation")
+
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
-    implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
-    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.aws:micronaut-function-aws")
     implementation("io.micronaut.aws:micronaut-function-aws-custom-runtime")
-    implementation("io.micronaut.kotlin:micronaut-kotlin-runtime:$micronautKotlinVersion")
+    implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
+    implementation("io.micronaut.reactor:micronaut-reactor")
+    implementation("io.micronaut.reactor:micronaut-reactor-http-client")
+    implementation("io.micronaut.validation:micronaut-validation")
     implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
@@ -49,9 +52,6 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$kotlinLoggingVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
     implementation("ch.qos.logback:logback-core:$logbackVersion")
-    implementation("io.micronaut:micronaut-http-client")
-    implementation("io.micronaut.reactor:micronaut-reactor")
-    implementation("io.micronaut.reactor:micronaut-reactor-http-client")
     implementation(platform("software.amazon.awssdk:bom:$awsSdkVersion"))
     implementation("com.amazonaws:aws-lambda-java-events:$awsLambdaVersion")
     implementation("software.amazon.awssdk:s3")
@@ -73,6 +73,7 @@ dependencies {
     testImplementation("io.mockk:mockk:$mockkVersion")
 
     runtimeOnly("ch.qos.logback:logback-classic:$logbackVersion")
+    runtimeOnly("org.yaml:snakeyaml")
     compileOnly("org.graalvm.nativeimage:svm")
 }
 
@@ -89,6 +90,7 @@ application {
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
 }
 
 
