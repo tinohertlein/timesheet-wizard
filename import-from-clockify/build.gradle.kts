@@ -17,7 +17,7 @@ plugins {
 version = "0.1"
 group = "dev.hertlein.timesheetwizard.importclockify"
 
-val kotlinVersion = "1.8.22"
+val kotlinVersion = "1.9.10"
 val javaVersion = JavaVersion.VERSION_17.toString()
 
 repositories {
