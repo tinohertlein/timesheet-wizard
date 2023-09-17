@@ -17,9 +17,9 @@ repositories {
     mavenLocal()
 }
 
-val quarkusPlatformGroupId: String by project
-val quarkusPlatformArtifactId: String by project
-val quarkusPlatformVersion: String by project
+val quarkusPlatformGroupId = "io.quarkus.platform"
+val quarkusPlatformArtifactId = "quarkus-bom"
+val quarkusPlatformVersion = "3.3.3"
 
 dependencies {
     val guavaVersion = "32.1.2-jre"
