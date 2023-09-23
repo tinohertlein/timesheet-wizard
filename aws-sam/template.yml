@@ -41,15 +41,15 @@ Resources:
     Metadata:
       BuildMethod: makefile
 
-  GenerateExcelFunction:
+  GenerateExportsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: timesheetwizard-generate-excel
+      FunctionName: timesheetwizard-generate-exports
       Architectures:
         - !Ref Architecture
       Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
       Runtime: java17
-      CodeUri: ../generate-excel/build/function.zip
+      CodeUri: ../generate-exports/build/function.zip
       PackageType: Zip
       Environment:
         Variables:
@@ -57,7 +57,7 @@ Resources:
          QUARKUS_PROFILE: aws
          CONTACT_NAME: !Ref ContactName
          CONTACT_EMAIL: !Ref ContactEmail
-      Description: An AWS Lambda function to generate excel-timesheets
+      Description: An AWS Lambda function to generate exports-timesheets
       MemorySize: 512
       Timeout: 60
       AutoPublishAlias: Live
@@ -87,12 +87,12 @@ Resources:
       LogGroupName: !Join [ "", [ "/aws/lambda/", !Ref ImportFromClockifyFunction ] ]
       RetentionInDays: 30
 
-  GenerateExcelLogGroup:
+  GenerateExportsLogGroup:
     Type: AWS::Logs::LogGroup
     DependsOn:
-      - GenerateExcelFunction
+      - GenerateExportsFunction
     Properties:
-      LogGroupName: !Join [ "", [ "/aws/lambda/", !Ref GenerateExcelFunction ] ]
+      LogGroupName: !Join [ "", [ "/aws/lambda/", !Ref GenerateExportsFunction ] ]
       RetentionInDays: 30
 
   ImportFromClockifyEvent:
@@ -158,10 +158,10 @@ Resources:
       ComparisonOperator: GreaterThanOrEqualToThreshold
       TreatMissingData: missing
 
-  GenerateExcelAlarm:
+  GenerateExportsAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      AlarmName: generate-excel-alarm
+      AlarmName: generate-exports-alarm
       ActionsEnabled: true
       OKActions: [ ]
       AlarmActions:
@@ -172,7 +172,7 @@ Resources:
       Statistic: Maximum
       Dimensions:
         - Name: FunctionName
-          Value: !Ref GenerateExcelFunction
+          Value: !Ref GenerateExportsFunction
       Period: 300
       EvaluationPeriods: 1
       DatapointsToAlarm: 1
