@@ -41,7 +41,7 @@ The Timesheet-Wizard consists of two independent submodules with the following r
 - transforming them into the domain model
 - storing the json-representation of the timesheets in S3
 
-**generate-excel**
+**generate-exports**
 
 - downloading the json-representation of the timesheets from S3
 - generating Excel files from that
@@ -50,7 +50,7 @@ The Timesheet-Wizard consists of two independent submodules with the following r
 **import-from-clockify** is a [Micronaut application](https://micronaut.io/) written in Kotlin, built with Gradle and deployed to AWS Lambda as a GraalVM native
 image with a custom runtime.
 
-**generate-excel** is a [Quarkus application](https://quarkus.io/) written in Kotlin, built with Gradle and deployed to AWS Lambda on a Java 17 runtime - due to
+**generate-exports** is a [Quarkus application](https://quarkus.io/) written in Kotlin, built with Gradle and deployed to AWS Lambda on a Java 17 runtime - due to
 incompatibility of Apache POI not as a GraalVM native image with a custom runtime.
 
 ![Technical context](doc/assets/context-technical.drawio.png "Technical context")
@@ -82,4 +82,4 @@ But if you really want to try: feel free - but I won't provide any support nor d
 - Every module has its own E2E test, that can be executed without any AWS- or Clockify account information. Simply start
   them and have Docker running for the TestContainers:
     - `import-from-clockify/src/test/kotlin/dev/hertlein/timesheetwizard/importclockify/ApplicationE2ET.kt`
-    - `generate-excel/src/test/kotlin/dev/hertlein/timesheetwizard/generateexcel/ApplicationE2ET.kt` 
+    - `generate-exports/src/test/kotlin/dev/hertlein/timesheetwizard/generateexports/ApplicationE2ET.kt` 

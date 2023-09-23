@@ -5,12 +5,12 @@ achieve this, events emitted by AWS systems, AWS S3 as shared storage and differ
 used for communication. Currently, there are two separate tasks, each of them being implemented as a Lambda function:
 
 - import-from-clockify
-- generate-excel
+- generate-exports
 
 To support my personal learning, I decided to implement each Lambda function with a different framework, I have not yet
 been
 working with. 'import-from-clockify' will be realized as [Micronaut application](https://micronaut.io/), '
-generate-excel' as [Quarkus application](https://quarkus.io/). As both frameworks support the generation
+generate-exports' as [Quarkus application](https://quarkus.io/). As both frameworks support the generation
 of [GraalVM](https://www.graalvm.org/) native images, this will be tried out as well (**-> Quality goal #QG4**).
 
 Both Lambda functions neither will have dependencies on each other, nor will they share code in a common library or the
