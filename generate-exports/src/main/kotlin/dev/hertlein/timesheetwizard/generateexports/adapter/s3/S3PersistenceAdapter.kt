@@ -1,12 +1,14 @@
 package dev.hertlein.timesheetwizard.generateexports.adapter.s3
 
-import dev.hertlein.timesheetwizard.generateexports.adapter.s3.component.JsonMapper
+import dev.hertlein.timesheetwizard.generateexports.adapter.s3.component.DocumentMetaData
 import dev.hertlein.timesheetwizard.generateexports.adapter.s3.component.FilenameFactory
+import dev.hertlein.timesheetwizard.generateexports.adapter.s3.component.JsonMapper
 import dev.hertlein.timesheetwizard.generateexports.application.port.PersistencePort
 import dev.hertlein.timesheetwizard.generateexports.application.port.PersistenceResult
 import dev.hertlein.timesheetwizard.generateexports.application.port.PersistenceTarget
-import dev.hertlein.timesheetwizard.generateexports.model.Excel
 import dev.hertlein.timesheetwizard.generateexports.model.Timesheet
+import dev.hertlein.timesheetwizard.generateexports.model.TimesheetDocument
+import jakarta.enterprise.context.ApplicationScoped
 import mu.KotlinLogging
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import software.amazon.awssdk.core.sync.RequestBody
@@ -14,11 +16,8 @@ import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.GetObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectResponse
-import jakarta.enterprise.context.ApplicationScoped
 
 private val logger = KotlinLogging.logger {}
-
-private const val EXCEL_PREFIX = "xlsx"
 
 @ApplicationScoped
 class S3PersistenceAdapter(
@@ -34,15 +33,16 @@ class S3PersistenceAdapter(
         return jsonMapper.toTimesheetEntity(json)
     }
 
-    override fun save(excel: Excel): PersistenceResult {
-        logger.debug { "Persisting Excel..." }
+    override fun save(timesheetDocument: TimesheetDocument): PersistenceResult {
+        logger.debug { "Persisting Document of type ${timesheetDocument.type}..." }
 
-        val filename = filenameFactory.create(EXCEL_PREFIX, excel)
+        val metaData = DocumentMetaData.of(timesheetDocument.type)
+        val filename = filenameFactory.create(metaData, timesheetDocument)
 
-        upload(filename, excel.content)
+        upload(filename, timesheetDocument.content)
 
         return PersistenceResult(PersistenceTarget.S3, filename)
-            .also { logger.debug { "Persisted Excel as '$it'" } }
+            .also { logger.debug { "Persisted Document as '$it'" } }
     }
 
     private fun download(key: String): String {

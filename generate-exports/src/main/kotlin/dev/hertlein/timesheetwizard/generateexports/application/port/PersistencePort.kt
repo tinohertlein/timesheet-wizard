@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.generateexports.application.port
 
-import dev.hertlein.timesheetwizard.generateexports.model.Excel
+import dev.hertlein.timesheetwizard.generateexports.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.generateexports.model.Timesheet
 
 enum class PersistenceTarget {
@@ -13,5 +13,5 @@ interface PersistencePort {
 
     fun findTimesheetByURI(uri: String): Timesheet
 
-    fun save(excel: Excel): PersistenceResult
+    fun save(timesheetDocument: TimesheetDocument): PersistenceResult
 }

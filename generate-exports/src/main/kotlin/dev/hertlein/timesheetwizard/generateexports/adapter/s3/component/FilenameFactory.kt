@@ -1,15 +1,23 @@
 package dev.hertlein.timesheetwizard.generateexports.adapter.s3.component
 
-import dev.hertlein.timesheetwizard.generateexports.model.Excel
+import dev.hertlein.timesheetwizard.generateexports.model.TimesheetDocument
+import jakarta.inject.Singleton
 import java.time.LocalDate
 import java.time.format.DateTimeFormatterBuilder
 import java.time.format.SignStyle
 import java.time.temporal.ChronoField
 import java.util.Locale
-import jakarta.inject.Singleton
 
 @Singleton
 class FilenameFactory {
+
+    fun create(metaData: DocumentMetaData, timesheetDocument: TimesheetDocument): String {
+        val customerName = timesheetDocument.customer.customerName.value
+        val startDate = formatLocalDate(timesheetDocument.dateRange.start)
+        val endDate = formatLocalDate(timesheetDocument.dateRange.endInclusive)
+
+        return "${metaData.prefix}/timesheet_${customerName}_${startDate}-${endDate}.${metaData.suffix}"
+    }
 
     @Suppress("MagicNumber")
     private val dateFormatter = DateTimeFormatterBuilder()
@@ -19,14 +27,4 @@ class FilenameFactory {
         .toFormatter(Locale.GERMANY)
 
     private fun formatLocalDate(localDate: LocalDate): String = dateFormatter.format(localDate)
-
-    fun create(prefix: String, excel: Excel): String {
-
-        val customerName = excel.customer.customerName.value
-        val startDate = formatLocalDate(excel.dateRange.start)
-        val endDate = formatLocalDate(excel.dateRange.endInclusive)
-        val suffix = "xlsx"
-
-        return "$prefix/timesheet_${customerName}_${startDate}-${endDate}.${suffix}"
-    }
 }

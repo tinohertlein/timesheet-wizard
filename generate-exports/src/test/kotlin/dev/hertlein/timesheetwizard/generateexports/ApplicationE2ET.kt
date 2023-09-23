@@ -50,7 +50,7 @@ internal class ApplicationE2ET {
             .post()
             .then()
             .statusCode(200)
-            .body("persistenceResult.uri", CoreMatchers.equalTo("xlsx/$excelFilename"))
+            .body("persistenceResults[0].uri", CoreMatchers.equalTo("xlsx/$excelFilename"))
 
         val generatedExcel = download("xlsx/$excelFilename")
         val expectedExcel = readResource(excelFilename)

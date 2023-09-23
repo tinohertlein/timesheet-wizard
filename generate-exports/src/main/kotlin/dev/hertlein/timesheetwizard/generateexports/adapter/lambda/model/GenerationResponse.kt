@@ -5,6 +5,6 @@ import io.quarkus.runtime.annotations.RegisterForReflection
 
 @RegisterForReflection
 data class GenerationResponse(
-    val persistenceResult: PersistenceResult,
+    val persistenceResults: List<PersistenceResult>,
     val durationInSeconds: Long
 )

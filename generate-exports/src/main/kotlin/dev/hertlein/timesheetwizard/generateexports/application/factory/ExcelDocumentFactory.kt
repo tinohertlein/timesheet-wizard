@@ -1,30 +1,31 @@
-package dev.hertlein.timesheetwizard.generateexports.application
+package dev.hertlein.timesheetwizard.generateexports.application.factory
 
 import dev.hertlein.timesheetwizard.generateexports.application.config.Contact
-import dev.hertlein.timesheetwizard.generateexports.model.Excel
 import dev.hertlein.timesheetwizard.generateexports.model.Tag
 import dev.hertlein.timesheetwizard.generateexports.model.Timesheet
+import dev.hertlein.timesheetwizard.generateexports.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.generateexports.model.TimesheetEntry
+import jakarta.inject.Singleton
 import org.apache.poi.ss.usermodel.CellCopyPolicy
 import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.ByteArrayOutputStream
 import java.time.LocalDate
-import jakarta.inject.Singleton
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
 private fun List<Tag>.format() = this.joinToString(" ") { it.name }
 private val cellCopyPolicy = CellCopyPolicy.Builder().cellValue(false).build()
 
+
 @Suppress("MagicNumber")
 @Singleton
-class ExcelFactory(
+class ExcelDocumentFactory(
     private val contact: Contact
-) {
+) : TimesheetDocumentFactory {
 
-    fun create(timesheet: Timesheet): Excel {
+    override fun apply(timesheet: Timesheet): TimesheetDocument {
         val template = Thread.currentThread().contextClassLoader.getResourceAsStream("timesheet_template.xlsx")
 
         val byteArrayOutputStream = ByteArrayOutputStream()
@@ -43,7 +44,12 @@ class ExcelFactory(
             }
         }
 
-        return Excel(timesheet.customer, timesheet.dateRange, byteArrayOutputStream.toByteArray())
+        return TimesheetDocument(
+            TimesheetDocument.Type.EXCEL,
+            timesheet.customer,
+            timesheet.dateRange,
+            byteArrayOutputStream.toByteArray()
+        )
     }
 
     private fun fillInContact(sheet: XSSFSheet, contact: Contact) {
