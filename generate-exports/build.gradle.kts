@@ -25,6 +25,8 @@ dependencies {
     val guavaVersion = "32.1.2-jre"
     val kotlinLoggingVersion = "3.0.5"
     val poiVersion = "5.2.3"
+    val jasperVersion = "6.20.6"
+    val openPdfVersion = "1.3.30"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
@@ -39,6 +41,9 @@ dependencies {
     implementation("com.google.guava:guava:$guavaVersion")
     implementation("org.apache.poi:poi:$poiVersion")
     implementation("org.apache.poi:poi-ooxml:$poiVersion")
+    implementation("net.sf.jasperreports:jasperreports:$jasperVersion")
+    implementation("com.github.librepdf:openpdf:$openPdfVersion")
+
 
     val assertJVersion = "3.24.2"
     val mockkVersion = "1.13.8"

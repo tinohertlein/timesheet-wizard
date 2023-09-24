@@ -8,10 +8,9 @@ data class DocumentMetaData(val prefix: String, val suffix: String) {
 
         val EXCEL = of(TimesheetDocument.Type.EXCEL)
 
-        fun of(type: TimesheetDocument.Type): DocumentMetaData {
-            return when (type) {
-                TimesheetDocument.Type.EXCEL -> DocumentMetaData("xlsx", "xlsx")
-            }
+        fun of(type: TimesheetDocument.Type): DocumentMetaData = when (type) {
+            TimesheetDocument.Type.EXCEL -> DocumentMetaData("xlsx", "xlsx")
+            TimesheetDocument.Type.PDF -> DocumentMetaData("pdf", "pdf")
         }
     }
 }

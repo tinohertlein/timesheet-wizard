@@ -7,12 +7,13 @@ import dev.hertlein.timesheetwizard.generateexports.adapter.lambda.model.S3Objec
 import dev.hertlein.timesheetwizard.generateexports.util.ResourcesReader
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured
+import jakarta.inject.Inject
 import org.apache.poi.ss.usermodel.DataFormatter
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.assertj.core.api.Assertions.assertThat
 import org.eclipse.microprofile.config.inject.ConfigProperty
-import org.hamcrest.CoreMatchers
+import org.hamcrest.CoreMatchers.equalTo
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import software.amazon.awssdk.core.sync.RequestBody
@@ -21,7 +22,6 @@ import software.amazon.awssdk.services.s3.model.CreateBucketRequest
 import software.amazon.awssdk.services.s3.model.GetObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectResponse
-import jakarta.inject.Inject
 
 @QuarkusTest
 @DisplayName("Application")
@@ -39,6 +39,7 @@ internal class ApplicationE2ET {
         val jsonFilename = "PiedPiper_2022-01-01_2022-12-31_e47dc4a0-2899-41a7-a390-a5c6152f2e42.json"
         val jsonFileContent = readResource(jsonFilename)
         val excelFilename = "timesheet_PiedPiper_20220101-20221231.xlsx"
+        val pdfFilename = "timesheet_PiedPiper_20220101-20221231.pdf"
         upload(jsonFilename, jsonFileContent)
         val s3Event = createS3Event(jsonFilename)
 
@@ -50,12 +51,14 @@ internal class ApplicationE2ET {
             .post()
             .then()
             .statusCode(200)
-            .body("persistenceResults[0].uri", CoreMatchers.equalTo("xlsx/$excelFilename"))
+            .body("persistenceResults.size()", equalTo(2))
 
         val generatedExcel = download("xlsx/$excelFilename")
+        val generatedPdf = download("pdf/$pdfFilename")
         val expectedExcel = readResource(excelFilename)
 
         ExcelVerification.assertEquals(generatedExcel, expectedExcel)
+        assertThat(generatedPdf.size).isGreaterThan(0)
     }
 
     private fun readResource(filename: String): ByteArray = ResourcesReader.bytesFromResourceFile("e2e/$filename")

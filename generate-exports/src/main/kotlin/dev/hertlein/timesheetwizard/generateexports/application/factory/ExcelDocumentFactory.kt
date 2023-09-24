@@ -1,7 +1,9 @@
 package dev.hertlein.timesheetwizard.generateexports.application.factory
 
 import dev.hertlein.timesheetwizard.generateexports.application.config.Contact
+import dev.hertlein.timesheetwizard.generateexports.model.Project
 import dev.hertlein.timesheetwizard.generateexports.model.Tag
+import dev.hertlein.timesheetwizard.generateexports.model.Task
 import dev.hertlein.timesheetwizard.generateexports.model.Timesheet
 import dev.hertlein.timesheetwizard.generateexports.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.generateexports.model.TimesheetEntry
@@ -15,9 +17,12 @@ import java.time.LocalDate
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
-private fun List<Tag>.format() = this.joinToString(" ") { it.name }
+
 private val cellCopyPolicy = CellCopyPolicy.Builder().cellValue(false).build()
 
+private fun Project.format() = this.name
+private fun Task.format() = this.name
+private fun List<Tag>.format() = this.joinToString(" ") { it.name }
 
 @Suppress("MagicNumber")
 @Singleton
@@ -89,9 +94,9 @@ class ExcelDocumentFactory(
                 (if (index == 0) referenceRow else createEntryRow(sheet, index + rowOffset, referenceRow))
                     .run {
                         getCell(columnOffset + 0).setCellValue(entry.date)
-                        getCell(columnOffset + 1).setCellValue(entry.project.name)
+                        getCell(columnOffset + 1).setCellValue(entry.project.format())
                         getCell(columnOffset + 2).setCellValue(entry.tags.format())
-                        getCell(columnOffset + 3).setCellValue(entry.task.name)
+                        getCell(columnOffset + 3).setCellValue(entry.task.format())
                         getCell(columnOffset + 4).setCellValue(entry.duration.toDouble(DurationUnit.HOURS))
                     }
             }
