@@ -6,12 +6,12 @@ The Timesheet-Wizard is a personal project to fetch timesheets from [Clockify](h
 to various formats
 and export them again into other tools.
 
-As of now, the only target format that is supported is Excel, resulting in the
+As of now, the only target formats that are supported are Excel and PDF, resulting in the
 following main features of Timesheet-Wizard:
 
 - Fetch timesheets from Clockify
-- Generate Excel files from these timesheets
-- Store the Excel files
+- Generate & stores Excel files from these timesheets
+- Generate & stores PDF files from these timesheets
 
 ## Motivation
 

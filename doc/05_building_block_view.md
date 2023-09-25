@@ -10,7 +10,7 @@ The Timesheet-Wizard consists of two modules.
   generic way and does not fit my use-cases. Therefor, this module is responsible to fetch the json from Clockify,
   transform it to the domain model of the Timesheet-Wizard and store it - again in json format - on S3.
 - **generate-exports**: this module is responsible for downloading the json created by 'import-from-clockify' and generating an
-  Excel file from that data. The Excel file then is again stored on S3, where it is available for a manual download.
+  Excel and PDF file from that data. The Excel and PDF file then is again stored on S3, where it is available for a manual download.
 
 ## Level 2
 
@@ -33,7 +33,6 @@ invert dependencies.
 E.g. there is an interface 'PersistencePort'
 implemented by class 'S3PersistenceAdapter' to provide persisting capabilities via AWS S3.
 - 'Incoming'-adapters like the adapters to AWS Lambda are realized directly without a port-interface, since there is no
-need for dependency
-inversion here.
+need for dependency inversion here.
 
 ![Static-level-3](assets/static-level-3.drawio.png "Static-level-3")

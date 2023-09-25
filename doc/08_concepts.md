@@ -3,7 +3,7 @@
 ## Security
 
 The Timesheet-Wizard is not available outside AWS. The whole workflow is initiated and processed within AWS. The only
-exception is the manual download of generated Excel-files. This has to be done with a manual login into the AWS console.
+exception is the manual download of generated Excel and PDF files. This has to be done with a manual login into the AWS console.
 
 ## Logging
 
@@ -12,5 +12,5 @@ recognized, an email is sent to Tino's email-address. No further error-handling 
 
 ## Persistence
 
-AWS S3 is used to store data objects - being it 'final' Excel files or 'intermediate' data objects like
+AWS S3 is used to store data objects - being it 'final' Excel and PDF files or 'intermediate' data objects like
 json-representations of the imported timesheets.

@@ -3,20 +3,19 @@
 The Timesheet-Wizard is a personal project to fetch timesheets from [Clockify](https://clockify.me/de/), transform them to various formats
 and export them again into other tools.
 
-As of now, the only target format that is supported is Excel, resulting in the
+As of now, the only target formats that are supported are Excel and PDF, resulting in the
 following main features of Timesheet-Wizard:
 
 - Fetch timesheets from Clockify
-- Generate Excel files from these timesheets
-- Store the Excel files
+- Generate & stores Excel files from these timesheets
+- Generate & stores PDF files from these timesheets
 
 ## Motivation
 
 As a freelance Software-Engineer & -Architect doing mostly time & material contracting, tracking my working hours is
 quite essential. To ease this, I'm using [Clockify](https://clockify.me/). It's an awesome tool with a nice UI that
 allows me to track and also categorize my working hours. Besides supporting some Excel-reports out of the box, it also
-provides
-an API to export reports in json-format as well.
+provides an API to export reports in json-format as well.
 
 In order to have the freedom to customize the reports as much as I like and to transfer these reports automatically to
 other tools, I decided to create my own little application
@@ -44,8 +43,8 @@ The Timesheet-Wizard consists of two independent submodules with the following r
 **generate-exports**
 
 - downloading the json-representation of the timesheets from S3
-- generating Excel files from that
-- storing the Excel files again on S3
+- generating Excel and PDF files from that
+- storing the Excel and PDF files again on S3
 
 **import-from-clockify** is a [Micronaut application](https://micronaut.io/) written in Kotlin, built with Gradle and deployed to AWS Lambda as a GraalVM native
 image with a custom runtime.
