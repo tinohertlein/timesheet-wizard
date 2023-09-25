@@ -61,7 +61,7 @@ class ExcelDocumentFactory(
         val rowOffset = 1
         val columnOffset = 1
         sheet.getRow(rowOffset).run {
-            getCell(columnOffset).setCellValue(contact.name())
+            getCell(columnOffset).setCellValue(contact.name().replace('_', ' '))
         }
         sheet.getRow(rowOffset + 1).run {
             getCell(columnOffset).setCellValue(contact.email())
