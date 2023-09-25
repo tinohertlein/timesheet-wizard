@@ -31,20 +31,18 @@ class ExcelDocumentFactory(
 ) : TimesheetDocumentFactory {
 
     override fun apply(timesheet: Timesheet): TimesheetDocument {
-        val template = Thread.currentThread().contextClassLoader.getResourceAsStream("timesheet_template.xlsx")
+        val outputStream = ByteArrayOutputStream()
 
-        val byteArrayOutputStream = ByteArrayOutputStream()
-
-        template.use { inputStream ->
-            XSSFWorkbook(inputStream).use { workbook ->
-                byteArrayOutputStream.use { outputStream ->
+        template("timesheet_template.xlsx").use { template ->
+            XSSFWorkbook(template).use { workbook ->
+                outputStream.use { out ->
                     val sheet = workbook.getSheetAt(0)
                     fillInContact(sheet, contact)
                     fillInDateRange(sheet, timesheet.dateRange)
                     fillInTotalWorkedHours(sheet, timesheet.totalDuration())
                     fillInEntries(sheet, timesheet.entries)
                     autoSizeColumnWidths(sheet)
-                    workbook.write(outputStream)
+                    workbook.write(out)
                 }
             }
         }
@@ -53,7 +51,7 @@ class ExcelDocumentFactory(
             TimesheetDocument.Type.EXCEL,
             timesheet.customer,
             timesheet.dateRange,
-            byteArrayOutputStream.toByteArray()
+            outputStream.toByteArray()
         )
     }
 

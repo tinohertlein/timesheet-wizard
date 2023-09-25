@@ -1,5 +1,6 @@
 package dev.hertlein.timesheetwizard.generateexports.util
 
+import dev.hertlein.timesheetwizard.generateexports.application.factory.PDFDocumentFactory
 import dev.hertlein.timesheetwizard.generateexports.model.Customer
 import dev.hertlein.timesheetwizard.generateexports.model.CustomerId
 import dev.hertlein.timesheetwizard.generateexports.model.CustomerName
@@ -15,16 +16,13 @@ import kotlin.time.toDuration
 object TestMother {
 
     val aProject = Project("a project")
-    val anotherProject = Project("another project")
 
     val aTask = Task("a task")
-    val anotherTask = Task("another task")
 
     val someTags = listOf("onsite").map { Tag(it) }
-    val someOtherTags = listOf("remote").map { Tag(it) }
 
-    val aDate = LocalDate.of(2022, 1, 1)
-    val anotherDate = LocalDate.of(2022, 12, 31)
+    val aDate: LocalDate = LocalDate.of(2022, 1, 1)
+    val anotherDate: LocalDate = LocalDate.of(2022, 12, 31)
 
     val emptyTimesheetJson = """{
       "customer": {
@@ -77,6 +75,15 @@ object TestMother {
     """.trimIndent()
 
     fun aTimesheetEntry() = TimesheetEntry(aProject, aTask, someTags, aDate, 2.toDuration(DurationUnit.HOURS))
+
+    fun aPDFTimesheetEntry() =
+        PDFDocumentFactory.PDFTimesheetEntry(
+            "2022-01-01",
+            "a project",
+            "onsite",
+            "a task",
+            "2,00"
+        )
 
     fun anEmptyTimesheet() = Timesheet(aCustomer(), aDateRange(), emptyList())
 

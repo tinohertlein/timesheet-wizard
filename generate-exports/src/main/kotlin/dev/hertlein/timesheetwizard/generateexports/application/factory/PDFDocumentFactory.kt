@@ -55,23 +55,14 @@ class PDFDocumentFactory(
     }
 
     override fun apply(timesheet: Timesheet): TimesheetDocument {
-        val params = mapOf(
-            "name" to contact.name(),
-            "email" to contact.email(),
-            "period_start" to timesheet.dateRange.start.format(),
-            "period_end" to timesheet.dateRange.endInclusive.format(),
-            "total_working_hours" to timesheet.totalDuration().toDouble(DurationUnit.HOURS).format(),
-            "timesheet_entries" to JRBeanCollectionDataSource(toDataSource(timesheet))
-        )
-
-        val template = Thread.currentThread().contextClassLoader.getResourceAsStream("timesheet_template.jrxml")
+        val values = createValuesForLayoutParams(timesheet)
         val outputStream = ByteArrayOutputStream()
 
-        template.use {
-            outputStream.use {
+        template("timesheet_template.jrxml").use { template ->
+            outputStream.use { out ->
                 val report = JasperCompileManager.compileReport(template)
-                val print = JasperFillManager.fillReport(report, params, JREmptyDataSource())
-                JasperExportManager.exportReportToPdfStream(print, outputStream)
+                val print = JasperFillManager.fillReport(report, values, JREmptyDataSource())
+                JasperExportManager.exportReportToPdfStream(print, out)
             }
         }
 
@@ -82,6 +73,15 @@ class PDFDocumentFactory(
             outputStream.toByteArray()
         )
     }
+
+    private fun createValuesForLayoutParams(timesheet: Timesheet) = mapOf(
+        "name" to contact.name(),
+        "email" to contact.email(),
+        "period_start" to timesheet.dateRange.start.format(),
+        "period_end" to timesheet.dateRange.endInclusive.format(),
+        "total_working_hours" to timesheet.totalDuration().toDouble(DurationUnit.HOURS).format(),
+        "timesheet_entries" to JRBeanCollectionDataSource(toDataSource(timesheet))
+    )
 
     private fun toDataSource(timesheet: Timesheet) =
         timesheet.entries.sortedWith(entryComparator()).map { PDFTimesheetEntry.of(it) }
