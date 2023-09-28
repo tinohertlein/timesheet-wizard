@@ -95,7 +95,7 @@ Resources:
       LogGroupName: !Join [ "", [ "/aws/lambda/", !Ref GenerateExportsFunction ] ]
       RetentionInDays: 30
 
-  ImportFromClockifyEvent:
+  ImportFromClockifyDailyEvent:
     Type: AWS::Events::Rule
     Properties:
       Name: timesheetwizard-import-from-clockify-daily
@@ -103,17 +103,37 @@ Resources:
       State: ENABLED
       Targets:
         - Arn: !GetAtt ImportFromClockifyFunction.Arn
-          Id: timesheetwizard-import-from-clockify
+          Id: timesheetwizard-import-from-clockify-daily
           Input: '{"body": "{\"customerIds\": [], \"dateRangeType\": \"THIS_MONTH\"}"}'
 
-  PermissionForImportFromClockifyEvent:
+  ImportFromClockifyMonthlyEvent:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: timesheetwizard-import-from-clockify-monthly
+      ScheduleExpression: cron(0 5 1 * ? *)
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt ImportFromClockifyFunction.Arn
+          Id: timesheetwizard-import-from-clockify-monthly
+          Input: '{"body": "{\"customerIds\": [], \"dateRangeType\": \"LAST_MONTH\"}"}'
+
+  PermissionForImportFromClockifyDailyEvent:
     Type: AWS::Lambda::Permission
     Properties:
       FunctionName:
         Ref: ImportFromClockifyFunction
       Action: lambda:InvokeFunction
       Principal: events.amazonaws.com
-      SourceArn: !GetAtt ImportFromClockifyEvent.Arn
+      SourceArn: !GetAtt ImportFromClockifyDailyEvent.Arn
+
+  PermissionForImportFromClockifyMonthlyEvent:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Ref: ImportFromClockifyFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt ImportFromClockifyMonthlyEvent.Arn
 
   TimesheetwizardDataBucket:
     Type: AWS::S3::Bucket
