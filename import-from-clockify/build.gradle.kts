@@ -58,7 +58,7 @@ dependencies {
 
     val junitVersion = "5.10.0"
     val mockServerVersion = "5.15.0"
-    val testContainersVersion = "1.19.0"
+    val testContainersVersion = "1.19.1"
     val assertJVersion = "3.24.2"
     val mockkVersion = "1.13.8"
 
