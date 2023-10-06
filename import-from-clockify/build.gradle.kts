@@ -30,7 +30,7 @@ dependencies {
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.15.2"
     val logbackVersion = "1.4.8"
-    val awsSdkVersion = "2.20.157"
+    val awsSdkVersion = "2.20.161"
     val awsLambdaVersion = "3.11.3"
 
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
@@ -58,7 +58,7 @@ dependencies {
 
     val junitVersion = "5.10.0"
     val mockServerVersion = "5.15.0"
-    val testContainersVersion = "1.19.0"
+    val testContainersVersion = "1.19.1"
     val assertJVersion = "3.24.2"
     val mockkVersion = "1.13.8"
 
