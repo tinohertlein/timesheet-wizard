@@ -22,7 +22,7 @@ val quarkusPlatformArtifactId = "quarkus-bom"
 val quarkusPlatformVersion = "3.4.2"
 
 dependencies {
-    val guavaVersion = "32.1.2-jre"
+    val guavaVersion = "32.1.3-jre"
     val kotlinLoggingVersion = "3.0.5"
     val poiVersion = "5.2.4"
     val jasperVersion = "6.20.6"
