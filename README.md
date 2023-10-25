@@ -1,6 +1,9 @@
 # What is the Timesheet-Wizard?
 
-The Timesheet-Wizard is a personal project to fetch timesheets from [Clockify](https://clockify.me/de/), transform them to various formats
+![Build & Deploy](https://github.com/tinohertlein/timesheet-wizard/actions/workflows/masterbranch.yml/badge.svg?event=push)
+
+The Timesheet-Wizard is a personal project to fetch timesheets from [Clockify](https://clockify.me/de/), transform them
+to various formats
 and export them again into other tools.
 
 As of now, the only target formats that are supported are Excel and PDF, resulting in the
@@ -46,10 +49,12 @@ The Timesheet-Wizard consists of two independent submodules with the following r
 - generating Excel and PDF files from that
 - storing the Excel and PDF files again on S3
 
-**import-from-clockify** is a [Micronaut application](https://micronaut.io/) written in Kotlin, built with Gradle and deployed to AWS Lambda as a GraalVM native
+**import-from-clockify** is a [Micronaut application](https://micronaut.io/) written in Kotlin, built with Gradle and
+deployed to AWS Lambda as a GraalVM native
 image with a custom runtime.
 
-**generate-exports** is a [Quarkus application](https://quarkus.io/) written in Kotlin, built with Gradle and deployed to AWS Lambda on a Java 17 runtime - due to
+**generate-exports** is a [Quarkus application](https://quarkus.io/) written in Kotlin, built with Gradle and deployed
+to AWS Lambda on a Java 17 runtime - due to
 incompatibility of Apache POI not as a GraalVM native image with a custom runtime.
 
 ![Technical context](doc/assets/context-technical.drawio.png "Technical context")
@@ -60,18 +65,23 @@ Both submodules
 - do not share code in a common library or the like
 - are realized following a [Ports & Adapters](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software))
   architecture
-- are built & deployed continuously using [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) and GitHub Actions
-- follow the infrastructure-as-code-approach with provisioning via [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc1=h_ls) 
+- are built & deployed continuously
+  using [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) and
+  GitHub Actions
+- follow the infrastructure-as-code-approach with provisioning
+  via [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc1=h_ls)
 
 ## Getting started
 
-As there is a bit of a setup needed to get this running locally on your machine or in AWS, I suggest you stick with the E2E tests.
+As there is a bit of a setup needed to get this running locally on your machine or in AWS, I suggest you stick with the
+E2E tests.
 
-But if you really want to try: feel free - but I won't provide any support nor detailed instructions how to do that. Just some hints:
+But if you really want to try: feel free - but I won't provide any support nor detailed instructions how to do that.
+Just some hints:
 
 - create a Clockify account (including an API-key)
 - create an AWS account
-- install AWS SAM for local build & testing 
+- install AWS SAM for local build & testing
 - create an AWS S3 bucket to upload the CloudFormation stack and configure samconfig.toml appropriately
 - set env variables for Clockify- & AWS-access and to configure customers
 - have a look at the code - especially the E2E tests - how this all is working together
