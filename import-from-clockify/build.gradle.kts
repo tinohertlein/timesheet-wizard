@@ -79,7 +79,7 @@ dependencies {
 
 buildscript {
     dependencies {
-        classpath("com.github.docker-java:docker-java-transport-httpclient5:3.3.3") {
+        classpath("com.github.docker-java:docker-java-transport-httpclient5:3.3.4") {
             because("M1 macs need a later version of JNA")
         }
     }
