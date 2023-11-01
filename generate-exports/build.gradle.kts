@@ -9,7 +9,7 @@ plugins {
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
     id("io.quarkus")
-    id("io.gitlab.arturbosch.detekt") version "1.23.1"
+    id("io.gitlab.arturbosch.detekt") version "1.23.3"
 }
 
 repositories {
