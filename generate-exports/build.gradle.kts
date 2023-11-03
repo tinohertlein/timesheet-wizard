@@ -26,7 +26,7 @@ dependencies {
     val kotlinLoggingVersion = "3.0.5"
     val poiVersion = "5.2.4"
     val jasperVersion = "6.20.6"
-    val openPdfVersion = "1.3.30"
+    val openPdfVersion = "1.3.32"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
