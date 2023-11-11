@@ -5,11 +5,11 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    val kotlin = "1.9.10"
+    val kotlin = "1.9.20"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
     id("io.quarkus")
-    id("io.gitlab.arturbosch.detekt") version "1.23.1"
+    id("io.gitlab.arturbosch.detekt") version "1.23.3"
 }
 
 repositories {
@@ -19,14 +19,14 @@ repositories {
 
 val quarkusPlatformGroupId = "io.quarkus.platform"
 val quarkusPlatformArtifactId = "quarkus-bom"
-val quarkusPlatformVersion = "3.5.0"
+val quarkusPlatformVersion = "3.5.1"
 
 dependencies {
     val guavaVersion = "32.1.3-jre"
     val kotlinLoggingVersion = "3.0.5"
     val poiVersion = "5.2.4"
     val jasperVersion = "6.20.6"
-    val openPdfVersion = "1.3.30"
+    val openPdfVersion = "1.3.32"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
