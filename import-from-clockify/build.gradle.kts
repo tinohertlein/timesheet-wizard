@@ -5,7 +5,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    val kotlin = "1.8.22"
+    val kotlin = "1.9.20"
     id("org.jetbrains.kotlin.jvm") version kotlin
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
@@ -17,7 +17,7 @@ plugins {
 version = "0.1"
 group = "dev.hertlein.timesheetwizard.importclockify"
 
-val kotlinVersion = "1.8.22"
+val kotlinVersion = "1.9.20"
 val javaVersion = JavaVersion.VERSION_17.toString()
 
 repositories {
