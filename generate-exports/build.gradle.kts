@@ -19,14 +19,14 @@ repositories {
 
 val quarkusPlatformGroupId = "io.quarkus.platform"
 val quarkusPlatformArtifactId = "quarkus-bom"
-val quarkusPlatformVersion = "3.5.1"
+val quarkusPlatformVersion = "3.5.2"
 
 dependencies {
     val guavaVersion = "32.1.3-jre"
     val kotlinLoggingVersion = "3.0.5"
     val poiVersion = "5.2.4"
     val jasperVersion = "6.20.6"
-    val openPdfVersion = "1.3.32"
+    val openPdfVersion = "1.3.33"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
