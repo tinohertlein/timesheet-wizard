@@ -14,7 +14,6 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.23.3"
 }
 
-version = "0.1"
 group = "dev.hertlein.timesheetwizard.importclockify"
 
 val kotlinVersion = "1.9.20"

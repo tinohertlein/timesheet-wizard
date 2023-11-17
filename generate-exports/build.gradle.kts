@@ -8,12 +8,15 @@ plugins {
     val kotlin = "1.9.20"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
-    id("io.quarkus")
+    id("io.quarkus") version "3.3.3"
     id("io.gitlab.arturbosch.detekt") version "1.23.3"
 }
 
+group = "dev.hertlein.timesheetwizard.generateexports"
+
 repositories {
     mavenCentral()
+    gradlePluginPortal()
     mavenLocal()
 }
 
@@ -55,9 +58,6 @@ dependencies {
 
     runtimeOnly("software.amazon.awssdk:url-connection-client")
 }
-
-version = "0.1"
-group = "dev.hertlein.timesheetwizard.generateexports"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
