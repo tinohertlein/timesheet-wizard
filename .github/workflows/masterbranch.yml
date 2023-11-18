@@ -58,6 +58,29 @@ jobs:
           path: generate-exports/build/test-results/test/*.xml
           reporter: java-junit
 
+      - name: Retrieve current version number
+        run: ./gradlew printVersion
+
+      - name: Update release
+        run: |
+          ./gradlew releaseVersion
+
+      - name: Push the release tag
+        run: |
+          git push --all
+          git push --tags
+
+      - name: Retrieve updated version number
+        run: ./gradlew printVersion
+
+      - name: Create GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag=$(git describe --tags --abbrev=0)
+          version=$(./gradlew -q printVersion)
+          ./gradlew -q printChangeLog | gh release create $tag -t "$version" -F -
+
       - name: SAM print version
         run: sam --version
 
@@ -66,16 +89,6 @@ jobs:
 
       - name: SAM deploy AWS stack
         run: sam deploy --config-file aws-sam/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }} ContactName=${{ secrets.CONTACT_NAME }} ContactEmail=${{ secrets.CONTACT_EMAIL }}
-
-      - name: Create GitHub release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          ./gradlew releaseVersion
-          git push --tags
-          tag=$(git describe --tags --abbrev=0)
-          version=$(./gradlew -q printVersion)
-          ./gradlew -q printChangeLog | gh release create $tag -d -t "$version" -F -
 
       - name: SAM invoke ImportFromClockify
         run: >
