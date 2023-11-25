@@ -6,10 +6,10 @@ The Timesheet-Wizard consists of two modules.
 
 ![Static-level-1](assets/static-level-1.drawio.png "Static-level-1")
 
-- **import-from-clockify**: the timesheet, that can be fetched via the Clockify-API in json-format, is modelled in a very
+- **importer**: the timesheet, that can be fetched via the Clockify-API in json-format, is modelled in a very
   generic way and does not fit my use-cases. Therefor, this module is responsible to fetch the json from Clockify,
   transform it to the domain model of the Timesheet-Wizard and store it - again in json format - on S3.
-- **generate-exports**: this module is responsible for downloading the json created by 'import-from-clockify' and generating an
+- **generate-exports**: this module is responsible for downloading the json created by 'importer' and generating an
   Excel and PDF file from that data. The Excel and PDF file then is again stored on S3, where it is available for a manual download.
 
 ## Level 2

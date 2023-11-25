@@ -4,11 +4,11 @@ The individual parts of importing timesheets and transforming them to other form
 achieve this, events emitted by AWS systems, AWS S3 as shared storage and different Lambda functions for the tasks, are
 used for communication. Currently, there are two separate tasks, each of them being implemented as a Lambda function:
 
-- import-from-clockify
+- importer
 - generate-exports
 
 To support my personal learning, I decided to implement each Lambda function with a different framework, I have not yet
-been working with. 'import-from-clockify' will be realized as [Micronaut application](https://micronaut.io/), '
+been working with. 'importer' will be realized as [Micronaut application](https://micronaut.io/), '
 generate-exports' as [Quarkus application](https://quarkus.io/). As both frameworks support the generation
 of [GraalVM](https://www.graalvm.org/) native images, this will be tried out as well (**-> Quality goal #QG4**).
 

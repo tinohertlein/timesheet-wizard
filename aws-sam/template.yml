@@ -20,10 +20,10 @@ Resources:
   ImportFromClockifyFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: timesheetwizard-import-from-clockify
+      FunctionName: timesheetwizard-importer
       Architectures:
         - !Ref Architecture
-      CodeUri: ../import-from-clockify
+      CodeUri: ../importer
       Handler: not.used.in.provided.runtime
       Runtime: provided.al2
       Environment:
@@ -98,23 +98,23 @@ Resources:
   ImportFromClockifyDailyEvent:
     Type: AWS::Events::Rule
     Properties:
-      Name: timesheetwizard-import-from-clockify-daily
+      Name: timesheetwizard-importer-daily
       ScheduleExpression: cron(30 17 ? * MON,TUE,WED,THU,FRI *)
       State: ENABLED
       Targets:
         - Arn: !GetAtt ImportFromClockifyFunction.Arn
-          Id: timesheetwizard-import-from-clockify-daily
+          Id: timesheetwizard-importer-daily
           Input: '{"body": "{\"customerIds\": [], \"dateRangeType\": \"THIS_MONTH\"}"}'
 
   ImportFromClockifyMonthlyEvent:
     Type: AWS::Events::Rule
     Properties:
-      Name: timesheetwizard-import-from-clockify-monthly
+      Name: timesheetwizard-importer-monthly
       ScheduleExpression: cron(0 5 1 * ? *)
       State: ENABLED
       Targets:
         - Arn: !GetAtt ImportFromClockifyFunction.Arn
-          Id: timesheetwizard-import-from-clockify-monthly
+          Id: timesheetwizard-importer-monthly
           Input: '{"body": "{\"customerIds\": [], \"dateRangeType\": \"LAST_MONTH\"}"}'
 
   PermissionForImportFromClockifyDailyEvent:
@@ -159,7 +159,7 @@ Resources:
   ImportFromClockifyAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      AlarmName: import-from-clockify-alarm
+      AlarmName: importer-alarm
       ActionsEnabled: true
       OKActions: [ ]
       AlarmActions:

@@ -1,3 +1,3 @@
 rootProject.name="timesheet-wizard"
-include("import-from-clockify")
+include("importer")
 include("generate-exports")

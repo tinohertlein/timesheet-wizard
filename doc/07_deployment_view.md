@@ -2,7 +2,7 @@
 
 The Timesheet-Wizard consists of two decoupled modules:
 
-- import-from-clockify
+- importer
 - generate-exports
 
 ![Deployment](assets/deployment.drawio.png "Deployment")
@@ -14,6 +14,6 @@ Excel-files. Unfortunately this library does not work being packaged into a Graa
 deployed as Quarkus application on a
 a ['normal' Java 17 AWS lambda runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-java.html). (--> Risk #R1)
 
-'import-from-clockify', on the contrary, functions very well as a GraalVM native image and is therefor deployed as a native
+'importer', on the contrary, functions very well as a GraalVM native image and is therefor deployed as a native
 Micronaut application with
 a [custom AWS Lambda runtime](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-custom.html). 
