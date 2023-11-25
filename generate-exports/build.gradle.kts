@@ -5,10 +5,10 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    val kotlin = "1.9.20"
+    val kotlin = "1.9.21"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
-    id("io.quarkus") version "3.3.3"
+    id("io.quarkus") version "3.6.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.3"
 }
 
@@ -22,7 +22,7 @@ repositories {
 
 val quarkusPlatformGroupId = "io.quarkus.platform"
 val quarkusPlatformArtifactId = "quarkus-bom"
-val quarkusPlatformVersion = "3.5.2"
+val quarkusPlatformVersion = "3.5.3"
 
 dependencies {
     val guavaVersion = "32.1.3-jre"
