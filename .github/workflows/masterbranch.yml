@@ -34,29 +34,42 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: 'gradle'
 
-      - name: Build & test 'import-from-clockify' with Gradle
-        working-directory: import-from-clockify
+      - name: Build & test 'importer' with Gradle
+        working-directory: importer
         run: ./gradlew test
 
-      - name: Generate test report for 'import-from-clockify'
+      - name: Generate test report for 'importer'
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
-          name: Test Report 'import-from-clockify'
-          path: import-from-clockify/build/test-results/test/*.xml
+          name: Test Report 'importer'
+          path: importer/build/test-results/test/*.xml
           reporter: java-junit
 
-      - name: Build & test 'generate-exports' with Gradle
-        working-directory: generate-exports
+      - name: Build & test 'documents-generator' with Gradle
+        working-directory: documents-generator
         run: ./gradlew build
 
-      - name: Generate test report for 'generate-exports'
+      - name: Generate test report for 'documents-generator'
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
-          name: Test Report 'generate-exports'
-          path: generate-exports/build/test-results/test/*.xml
+          name: Test Report 'documents-generator'
+          path: documents-generator/build/test-results/test/*.xml
           reporter: java-junit
+
+      - name: SAM print version
+        run: sam --version
+
+      - name: SAM build AWS stack
+        run: sam build --template-file aws-sam/template.yml
+
+      - name: SAM deploy AWS stack
+        run: sam deploy --config-file aws-sam/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }} ContactName=${{ secrets.CONTACT_NAME }} ContactEmail=${{ secrets.CONTACT_EMAIL }}
+
+      - name: SAM invoke ImportFunction
+        run: >
+          sam remote invoke --stack-name timesheetwizard ImportFunction -e '{"body": "{\"customerIds\": [\"1000\"], \"dateRangeType\": \"CUSTOM_YEAR\", \"dateRange\": \"2022\"}"}'
 
       - name: Retrieve current version number
         run: ./gradlew printVersion
@@ -80,17 +93,4 @@ jobs:
           tag=$(git describe --tags --abbrev=0)
           version=$(./gradlew -q printVersion)
           ./gradlew -q printChangeLog | gh release create $tag -t "$version" -F -
-
-      - name: SAM print version
-        run: sam --version
-
-      - name: SAM build AWS stack
-        run: sam build --template-file aws-sam/template.yml
-
-      - name: SAM deploy AWS stack
-        run: sam deploy --config-file aws-sam/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }} ContactName=${{ secrets.CONTACT_NAME }} ContactEmail=${{ secrets.CONTACT_EMAIL }}
-
-      - name: SAM invoke ImportFromClockify
-        run: >
-          sam remote invoke --stack-name timesheetwizard ImportFromClockifyFunction -e '{"body": "{\"customerIds\": [\"1000\"], \"dateRangeType\": \"CUSTOM_YEAR\", \"dateRange\": \"2022\"}"}'
 

@@ -10,8 +10,8 @@ As of now, the only target formats that are supported are Excel and PDF, resulti
 following main features of Timesheet-Wizard:
 
 - Fetch timesheets from Clockify
-- Generate & stores Excel files from these timesheets
-- Generate & stores PDF files from these timesheets
+- Generate & store Excel files from these timesheets
+- Generate & store PDF files from these timesheets
 
 ## Motivation
 
@@ -37,23 +37,23 @@ the [doc-folder](doc/README.md).
 
 The Timesheet-Wizard consists of two independent submodules with the following responsibilities:
 
-**import-from-clockify**
+**importer**
 
 - importing timesheets from Clockify
 - transforming them into the domain model
 - storing the json-representation of the timesheets in S3
 
-**generate-exports**
+**documents-generator**
 
 - downloading the json-representation of the timesheets from S3
 - generating Excel and PDF files from that
 - storing the Excel and PDF files again on S3
 
-**import-from-clockify** is a [Micronaut application](https://micronaut.io/) written in Kotlin, built with Gradle and
+**importer** is a [Micronaut application](https://micronaut.io/) written in Kotlin, built with Gradle and
 deployed to AWS Lambda as a GraalVM native
 image with a custom runtime.
 
-**generate-exports** is a [Quarkus application](https://quarkus.io/) written in Kotlin, built with Gradle and deployed
+**documents-generator** is a [Quarkus application](https://quarkus.io/) written in Kotlin, built with Gradle and deployed
 to AWS Lambda on a Java 17 runtime - due to
 incompatibility of Apache POI not as a GraalVM native image with a custom runtime.
 
@@ -90,5 +90,5 @@ Just some hints:
 
 - Every module has its own E2E test, that can be executed without any AWS- or Clockify account information. Simply start
   them and have Docker running for the TestContainers:
-    - `import-from-clockify/src/test/kotlin/dev/hertlein/timesheetwizard/importclockify/ApplicationE2ET.kt`
-    - `generate-exports/src/test/kotlin/dev/hertlein/timesheetwizard/generateexports/ApplicationE2ET.kt` 
+    - `importer/src/test/kotlin/dev/hertlein/timesheetwizard/importer/ApplicationE2ET.kt`
+    - `documents-generator/src/test/kotlin/dev/hertlein/timesheetwizard/documentsgenerator/ApplicationE2ET.kt` 

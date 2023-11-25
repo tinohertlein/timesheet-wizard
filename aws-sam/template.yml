@@ -17,13 +17,13 @@ Transform: 'AWS::Serverless-2016-10-31'
 Description: An AWS stack to import timesheet reports from Clockify and export them to various targets in various formats
 
 Resources:
-  ImportFromClockifyFunction:
+  ImportFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: timesheetwizard-import-from-clockify
+      FunctionName: timesheetwizard-importer
       Architectures:
         - !Ref Architecture
-      CodeUri: ../import-from-clockify
+      CodeUri: ../importer
       Handler: not.used.in.provided.runtime
       Runtime: provided.al2
       Environment:
@@ -41,15 +41,15 @@ Resources:
     Metadata:
       BuildMethod: makefile
 
-  GenerateExportsFunction:
+  DocumentsGenerateFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: timesheetwizard-generate-exports
+      FunctionName: timesheetwizard-documents-generator
       Architectures:
         - !Ref Architecture
       Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
       Runtime: java17
-      CodeUri: ../generate-exports/build/function.zip
+      CodeUri: ../documents-generator/build/function.zip
       PackageType: Zip
       Environment:
         Variables:
@@ -79,61 +79,61 @@ Resources:
                   - Name: prefix
                     Value: json
 
-  ImportFromClockifyLogGroup:
+  ImportLogGroup:
     Type: AWS::Logs::LogGroup
     DependsOn:
-      - ImportFromClockifyFunction
+      - ImportFunction
     Properties:
-      LogGroupName: !Join [ "", [ "/aws/lambda/", !Ref ImportFromClockifyFunction ] ]
+      LogGroupName: !Join [ "", [ "/aws/lambda/", !Ref ImportFunction ] ]
       RetentionInDays: 30
 
-  GenerateExportsLogGroup:
+  DocumentsGenerateLogGroup:
     Type: AWS::Logs::LogGroup
     DependsOn:
-      - GenerateExportsFunction
+      - DocumentsGenerateFunction
     Properties:
-      LogGroupName: !Join [ "", [ "/aws/lambda/", !Ref GenerateExportsFunction ] ]
+      LogGroupName: !Join [ "", [ "/aws/lambda/", !Ref DocumentsGenerateFunction ] ]
       RetentionInDays: 30
 
-  ImportFromClockifyDailyEvent:
+  ImportDailyEvent:
     Type: AWS::Events::Rule
     Properties:
-      Name: timesheetwizard-import-from-clockify-daily
+      Name: timesheetwizard-importer-daily
       ScheduleExpression: cron(30 17 ? * MON,TUE,WED,THU,FRI *)
       State: ENABLED
       Targets:
-        - Arn: !GetAtt ImportFromClockifyFunction.Arn
-          Id: timesheetwizard-import-from-clockify-daily
+        - Arn: !GetAtt ImportFunction.Arn
+          Id: timesheetwizard-importer-daily
           Input: '{"body": "{\"customerIds\": [], \"dateRangeType\": \"THIS_MONTH\"}"}'
 
-  ImportFromClockifyMonthlyEvent:
+  ImportMonthlyEvent:
     Type: AWS::Events::Rule
     Properties:
-      Name: timesheetwizard-import-from-clockify-monthly
+      Name: timesheetwizard-importer-monthly
       ScheduleExpression: cron(0 5 1 * ? *)
       State: ENABLED
       Targets:
-        - Arn: !GetAtt ImportFromClockifyFunction.Arn
-          Id: timesheetwizard-import-from-clockify-monthly
+        - Arn: !GetAtt ImportFunction.Arn
+          Id: timesheetwizard-importer-monthly
           Input: '{"body": "{\"customerIds\": [], \"dateRangeType\": \"LAST_MONTH\"}"}'
 
-  PermissionForImportFromClockifyDailyEvent:
+  PermissionForImportDailyEvent:
     Type: AWS::Lambda::Permission
     Properties:
       FunctionName:
-        Ref: ImportFromClockifyFunction
+        Ref: ImportFunction
       Action: lambda:InvokeFunction
       Principal: events.amazonaws.com
-      SourceArn: !GetAtt ImportFromClockifyDailyEvent.Arn
+      SourceArn: !GetAtt ImportDailyEvent.Arn
 
-  PermissionForImportFromClockifyMonthlyEvent:
+  PermissionForImportMonthlyEvent:
     Type: AWS::Lambda::Permission
     Properties:
       FunctionName:
-        Ref: ImportFromClockifyFunction
+        Ref: ImportFunction
       Action: lambda:InvokeFunction
       Principal: events.amazonaws.com
-      SourceArn: !GetAtt ImportFromClockifyMonthlyEvent.Arn
+      SourceArn: !GetAtt ImportMonthlyEvent.Arn
 
   TimesheetwizardDataBucket:
     Type: AWS::S3::Bucket
@@ -156,10 +156,10 @@ Resources:
           Protocol: email
       TopicName: timesheetwizard-error-topic
 
-  ImportFromClockifyAlarm:
+  ImportAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      AlarmName: import-from-clockify-alarm
+      AlarmName: importer-alarm
       ActionsEnabled: true
       OKActions: [ ]
       AlarmActions:
@@ -170,7 +170,7 @@ Resources:
       Statistic: Maximum
       Dimensions:
         - Name: FunctionName
-          Value: !Ref ImportFromClockifyFunction
+          Value: !Ref ImportFunction
       Period: 300
       EvaluationPeriods: 1
       DatapointsToAlarm: 1
@@ -178,10 +178,10 @@ Resources:
       ComparisonOperator: GreaterThanOrEqualToThreshold
       TreatMissingData: missing
 
-  GenerateExportsAlarm:
+  DocumentGenerateAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      AlarmName: generate-exports-alarm
+      AlarmName: documents-generator-alarm
       ActionsEnabled: true
       OKActions: [ ]
       AlarmActions:
@@ -192,7 +192,7 @@ Resources:
       Statistic: Maximum
       Dimensions:
         - Name: FunctionName
-          Value: !Ref GenerateExportsFunction
+          Value: !Ref DocumentsGenerateFunction
       Period: 300
       EvaluationPeriods: 1
       DatapointsToAlarm: 1
