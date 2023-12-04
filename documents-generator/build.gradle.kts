@@ -28,7 +28,7 @@ dependencies {
     val guavaVersion = "32.1.3-jre"
     val kotlinLoggingVersion = "3.0.5"
     val poiVersion = "5.2.4"
-    val jasperVersion = "6.20.6"
+    val jasperVersion = "6.21.0"
     val openPdfVersion = "1.3.33"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
