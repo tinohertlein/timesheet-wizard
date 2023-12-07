@@ -10,7 +10,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "4.2.0"
+    id("io.micronaut.application") version "4.2.1"
     id("io.gitlab.arturbosch.detekt") version "1.23.4"
 }
 
@@ -29,8 +29,8 @@ dependencies {
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.16.0"
     val logbackVersion = "1.4.13"
-    val awsSdkVersion = "2.21.36"
-    val awsLambdaVersion = "3.11.3"
+    val awsSdkVersion = "2.21.40"
+    val awsLambdaVersion = "3.11.4"
 
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
     kapt("io.micronaut:micronaut-http-validation")

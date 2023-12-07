@@ -8,7 +8,7 @@ plugins {
     val kotlin = "1.9.21"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
-    id("io.quarkus") version "3.6.0"
+    id("io.quarkus") version "3.6.1"
     id("io.gitlab.arturbosch.detekt") version "1.23.4"
 }
 
@@ -22,13 +22,13 @@ repositories {
 
 val quarkusPlatformGroupId = "io.quarkus.platform"
 val quarkusPlatformArtifactId = "quarkus-bom"
-val quarkusPlatformVersion = "3.6.0"
+val quarkusPlatformVersion = "3.6.1"
 
 dependencies {
     val guavaVersion = "32.1.3-jre"
     val kotlinLoggingVersion = "3.0.5"
     val poiVersion = "5.2.4"
-    val jasperVersion = "6.20.6"
+    val jasperVersion = "6.21.0"
     val openPdfVersion = "1.3.33"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
