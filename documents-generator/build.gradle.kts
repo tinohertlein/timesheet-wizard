@@ -22,7 +22,7 @@ repositories {
 
 val quarkusPlatformGroupId = "io.quarkus.platform"
 val quarkusPlatformArtifactId = "quarkus-bom"
-val quarkusPlatformVersion = "3.6.1"
+val quarkusPlatformVersion = "3.6.2"
 
 dependencies {
     val guavaVersion = "32.1.3-jre"
