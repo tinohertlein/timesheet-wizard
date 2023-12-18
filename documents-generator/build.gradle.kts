@@ -8,7 +8,7 @@ plugins {
     val kotlin = "1.9.21"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
-    id("io.quarkus") version "3.6.1"
+    id("io.quarkus") version "3.6.3"
     id("io.gitlab.arturbosch.detekt") version "1.23.4"
 }
 
@@ -22,7 +22,7 @@ repositories {
 
 val quarkusPlatformGroupId = "io.quarkus.platform"
 val quarkusPlatformArtifactId = "quarkus-bom"
-val quarkusPlatformVersion = "3.6.1"
+val quarkusPlatformVersion = "3.6.3"
 
 dependencies {
     val guavaVersion = "32.1.3-jre"
@@ -30,7 +30,7 @@ dependencies {
     // poi 5.2.5 uses org.apache.commons:commons.compress 1.25.0 which is incompatible to 1.24.0 used by Quarkus
     val poiVersion = "5.2.4"
     val jasperVersion = "6.21.0"
-    val openPdfVersion = "1.3.33"
+    val openPdfVersion = "1.3.34"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
