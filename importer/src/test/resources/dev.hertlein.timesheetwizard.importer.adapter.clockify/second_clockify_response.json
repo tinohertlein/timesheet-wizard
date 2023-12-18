@@ -17,12 +17,6 @@
       "taskId": "631c4e96dda16317569dd3cb",
       "approvalRequestId": null,
       "taskName": "Implement",
-      "tags": [
-        {
-          "name": "Remote",
-          "_id": "6343c91a26227a584ba82fae"
-        }
-      ],
       "isLocked": false,
       "customFields": null,
       "amount": 99000.0,

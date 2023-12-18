@@ -1,5 +1,6 @@
 package dev.hertlein.timesheetwizard.importer.adapter.clockify
 
+import dev.hertlein.timesheetwizard.importer.model.Tag
 import dev.hertlein.timesheetwizard.importer.util.ResourcesReader
 import dev.hertlein.timesheetwizard.importer.util.TestMother
 import io.micronaut.context.annotation.Property
@@ -7,7 +8,7 @@ import io.micronaut.http.HttpHeaders
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
 import org.apache.http.entity.ContentType
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -57,23 +58,25 @@ internal class ClockifyImportAdapterIT {
         val aCustomer = TestMother.aCustomer()
         val startDate = LocalDate.of(2022, 1, 1)
         val endDate = LocalDate.of(2022, 12, 31)
-
         prepareClockifyServer(
             "first_clockify_response.json",
             "second_clockify_response.json",
             "third_clockify_response.json"
         )
 
-        val timesheet =
-            clockifyImportAdapter.import(
-                aCustomer, startDate..endDate
-            )
+        val timesheet = clockifyImportAdapter.import(aCustomer, startDate..endDate)
 
         mockServer.verify(HttpRequest.request(), VerificationTimes.exactly(3))
-        assertThat(timesheet.customer).isEqualTo(aCustomer)
-        assertThat(timesheet.dateRange.start).isEqualTo(startDate)
-        assertThat(timesheet.dateRange.endInclusive).isEqualTo(endDate)
-        assertThat(timesheet.entries[0].duration).isEqualTo(18.toDuration(HOURS))
+        SoftAssertions().run {
+            assertThat(timesheet.customer).isEqualTo(aCustomer)
+            assertThat(timesheet.dateRange.start).isEqualTo(startDate)
+            assertThat(timesheet.dateRange.endInclusive).isEqualTo(endDate)
+            assertThat(timesheet.entries[0].duration).isEqualTo(9.toDuration(HOURS))
+            assertThat(timesheet.entries[0].tags).containsExactly(Tag("Remote"))
+            assertThat(timesheet.entries[1].duration).isEqualTo(9.toDuration(HOURS))
+            assertThat(timesheet.entries[1].tags).isEmpty()
+            assertAll()
+        }
     }
 
     private fun prepareClockifyServer(vararg responseFiles: String) {

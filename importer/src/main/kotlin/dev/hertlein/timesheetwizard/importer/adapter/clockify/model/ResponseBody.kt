@@ -16,7 +16,7 @@ data class ResponseBody(
     data class TimeEntry(
         val projectName: String,
         val description: String,
-        val tags: List<Tag>,
+        val tags: List<Tag>?,
         val timeInterval: TimeInterval
     )  {
 

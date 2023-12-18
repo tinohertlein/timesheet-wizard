@@ -19,7 +19,7 @@ class ResponseBodyMapper {
                 TimesheetEntry.of(
                     it.projectName,
                     it.description,
-                    it.tags.map { tag -> TimeEntry.Tag(tag.name).name },
+                    it.tags?.map { tag -> TimeEntry.Tag(tag.name).name } ?: emptyList(),
                     toLocalDate(it.timeInterval.start, DateTimeFormatter.ISO_OFFSET_DATE_TIME),
                     it.timeInterval.duration.toDuration(DurationUnit.SECONDS)
                 )
