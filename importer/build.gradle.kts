@@ -16,7 +16,7 @@ plugins {
 
 group = "dev.hertlein.timesheetwizard.importer"
 
-val kotlinVersion = "1.9.21"
+val kotlinVersion = "1.9.22"
 val javaVersion = JavaVersion.VERSION_17.toString()
 
 repositories {
