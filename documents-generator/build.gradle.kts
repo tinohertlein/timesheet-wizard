@@ -5,10 +5,10 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    val kotlin = "1.9.21"
+    val kotlin = "1.9.22"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
-    id("io.quarkus") version "3.6.3"
+    id("io.quarkus") version "3.6.4"
     id("io.gitlab.arturbosch.detekt") version "1.23.4"
 }
 
@@ -22,10 +22,10 @@ repositories {
 
 val quarkusPlatformGroupId = "io.quarkus.platform"
 val quarkusPlatformArtifactId = "quarkus-bom"
-val quarkusPlatformVersion = "3.6.3"
+val quarkusPlatformVersion = "3.6.4"
 
 dependencies {
-    val guavaVersion = "32.1.3-jre"
+    val guavaVersion = "33.0.0-jre"
     val kotlinLoggingVersion = "3.0.5"
     // poi 5.2.5 uses org.apache.commons:commons.compress 1.25.0 which is incompatible to 1.24.0 used by Quarkus
     val poiVersion = "5.2.4"

@@ -5,7 +5,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
-    val kotlin = "1.9.21"
+    val kotlin = "1.9.22"
     id("org.jetbrains.kotlin.jvm") version kotlin
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
@@ -16,7 +16,7 @@ plugins {
 
 group = "dev.hertlein.timesheetwizard.importer"
 
-val kotlinVersion = "1.9.21"
+val kotlinVersion = "1.9.22"
 val javaVersion = JavaVersion.VERSION_17.toString()
 
 repositories {
@@ -25,11 +25,11 @@ repositories {
 
 dependencies {
 
-    val guavaVersion = "32.1.3-jre"
+    val guavaVersion = "33.0.0-jre"
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.16.0"
     val logbackVersion = "1.4.13"
-    val awsSdkVersion = "2.22.0"
+    val awsSdkVersion = "2.22.4"
     val awsLambdaVersion = "3.11.4"
 
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
