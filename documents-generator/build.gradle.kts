@@ -27,8 +27,7 @@ val quarkusPlatformVersion = "3.6.4"
 dependencies {
     val guavaVersion = "33.0.0-jre"
     val kotlinLoggingVersion = "3.0.5"
-    // poi 5.2.5 uses org.apache.commons:commons.compress 1.25.0 which is incompatible to 1.24.0 used by Quarkus
-    val poiVersion = "5.2.4"
+    val poiVersion = "5.2.5"
     val jasperVersion = "6.21.0"
     val openPdfVersion = "1.3.34"
 
