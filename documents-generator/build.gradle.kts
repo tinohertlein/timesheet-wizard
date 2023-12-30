@@ -29,7 +29,7 @@ dependencies {
     val kotlinLoggingVersion = "3.0.5"
     val poiVersion = "5.2.5"
     val jasperVersion = "6.21.0"
-    val openPdfVersion = "1.3.34"
+    val openPdfVersion = "1.3.35"
     val openCsvVersion = "5.9"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
