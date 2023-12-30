@@ -12,6 +12,7 @@ data class DocumentMetaData(val prefix: String, val suffix: String) {
         fun of(type: TimesheetDocument.Type): DocumentMetaData = when (type) {
             TimesheetDocument.Type.EXCEL -> DocumentMetaData("xlsx")
             TimesheetDocument.Type.PDF -> DocumentMetaData("pdf")
+            TimesheetDocument.Type.CSV -> DocumentMetaData("csv")
         }
     }
 }

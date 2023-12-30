@@ -34,12 +34,13 @@ internal class ApplicationE2ET {
     lateinit var bucket: String
 
     @Test
-    fun `should generate an Excel file from json`() {
+    fun `should generate an Excel file, a pdf file and a csv file from json`() {
         createBucket()
         val jsonFilename = "PiedPiper_2022-01-01_2022-12-31_e47dc4a0-2899-41a7-a390-a5c6152f2e42.json"
         val jsonFileContent = readResource(jsonFilename)
         val excelFilename = "timesheet_PiedPiper_20220101-20221231.xlsx"
         val pdfFilename = "timesheet_PiedPiper_20220101-20221231.pdf"
+        val csvFilename = "timesheet_PiedPiper_20220101-20221231.csv"
         upload(jsonFilename, jsonFileContent)
         val s3Event = createS3Event(jsonFilename)
 
@@ -51,13 +52,16 @@ internal class ApplicationE2ET {
             .post()
             .then()
             .statusCode(200)
-            .body("persistenceResults.size()", equalTo(2))
+            .body("persistenceResults.size()", equalTo(3))
 
         val generatedExcel = download("xlsx/$excelFilename")
+        val generatedCsv = download("csv/$csvFilename")
         val generatedPdf = download("pdf/$pdfFilename")
         val expectedExcel = readResource(excelFilename)
+        val expectedCsv = readResource(csvFilename)
 
         ExcelVerification.assertEquals(generatedExcel, expectedExcel)
+        CsvVerification.assertEquals(generatedCsv, expectedCsv)
         assertThat(generatedPdf.size).isGreaterThan(0)
     }
 
@@ -119,5 +123,12 @@ internal class ApplicationE2ET {
 
         private fun cellValue(formatter: DataFormatter, sheet: XSSFSheet, rowIndex: Int, columnIndex: Int): String =
             formatter.formatCellValue(sheet.getRow(rowIndex).getCell(columnIndex))
+    }
+
+    object CsvVerification {
+
+        fun assertEquals(actual: ByteArray, expected: ByteArray) {
+            assertThat(String(actual)).isEqualTo(String(expected))
+        }
     }
 }
