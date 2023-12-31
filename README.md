@@ -1,17 +1,18 @@
 # What is the Timesheet-Wizard?
 
-![Build & Deploy](https://github.com/tinohertlein/timesheet-wizard/actions/workflows/masterbranch.yml/badge.svg?event=push)
+![Build & Deploy Apps](https://github.com/tinohertlein/timesheet-wizard/actions/workflows/apps.yml/badge.svg?event=push)
 
 The Timesheet-Wizard is a personal project to fetch timesheets from [Clockify](https://clockify.me/de/), transform them
 to various formats
 and export them again into other tools.
 
-As of now, the only target formats that are supported are Excel and PDF, resulting in the
+As of now, the only target formats that are supported are Excel, PDF and CSV, resulting in the
 following main features of Timesheet-Wizard:
 
 - Fetch timesheets from Clockify
 - Generate & store Excel files from these timesheets
 - Generate & store PDF files from these timesheets
+- Generate & store CSV files from these timesheets
 
 ## Motivation
 
@@ -46,8 +47,8 @@ The Timesheet-Wizard consists of two independent submodules with the following r
 **documents-generator**
 
 - downloading the json-representation of the timesheets from S3
-- generating Excel and PDF files from that
-- storing the Excel and PDF files again on S3
+- generating Excel, PDF & CSV files from that
+- storing the Excel, PDF & CSV files again on S3
 
 **importer** is a [Micronaut application](https://micronaut.io/) written in Kotlin, built with Gradle and
 deployed to AWS Lambda as a GraalVM native

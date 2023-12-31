@@ -12,5 +12,5 @@ recognized, an email is sent to Tino's email-address. No further error-handling 
 
 ## Persistence
 
-AWS S3 is used to store data objects - being it 'final' Excel and PDF files or 'intermediate' data objects like
+AWS S3 is used to store data objects - being it 'final' Excel, PDF or CSV files or 'intermediate' data objects like
 json-representations of the imported timesheets.
