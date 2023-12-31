@@ -28,8 +28,8 @@ dependencies {
     val guavaVersion = "33.0.0-jre"
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.16.1"
-    val logbackVersion = "1.4.13"
-    val awsSdkVersion = "2.22.8"
+    val logbackVersion = "1.4.14"
+    val awsSdkVersion = "2.22.9"
     val awsLambdaVersion = "3.11.4"
 
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
