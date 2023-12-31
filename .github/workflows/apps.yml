@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'apps/**'
 
 env:
   JAVA_VERSION: '17'
