@@ -12,7 +12,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.23.4"
 }
 
-group = "dev.hertlein.timesheetwizard.documentsgenerator"
+group = "dev.hertlein.timesheetwizard"
 
 repositories {
     mavenCentral()

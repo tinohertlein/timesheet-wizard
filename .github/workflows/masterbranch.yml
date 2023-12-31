@@ -33,7 +33,7 @@ jobs:
           cache: 'gradle'
 
       - name: Build & test 'importer' with Gradle
-        working-directory: importer
+        working-directory: apps/importer
         run: ./gradlew test
 
       - name: Generate test report for 'importer'
@@ -41,11 +41,11 @@ jobs:
         if: success() || failure()
         with:
           name: Test Report 'importer'
-          path: importer/build/test-results/test/*.xml
+          path: apps/importer/build/test-results/test/*.xml
           reporter: java-junit
 
       - name: Build & test 'documents-generator' with Gradle
-        working-directory: documents-generator
+        working-directory: apps/documents-generator
         run: ./gradlew build
 
       - name: Generate test report for 'documents-generator'
@@ -53,17 +53,17 @@ jobs:
         if: success() || failure()
         with:
           name: Test Report 'documents-generator'
-          path: documents-generator/build/test-results/test/*.xml
+          path: apps/documents-generator/build/test-results/test/*.xml
           reporter: java-junit
 
       - name: SAM print version
         run: sam --version
 
       - name: SAM build AWS stack
-        run: sam build --template-file aws-sam/template.yml
+        run: sam build --template-file apps/aws-sam/template.yml
 
       - name: SAM deploy AWS stack
-        run: sam deploy --config-file aws-sam/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }} ContactName=${{ secrets.CONTACT_NAME }} ContactEmail=${{ secrets.CONTACT_EMAIL }}
+        run: sam deploy --config-file apps/aws-sam/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }} ContactName=${{ secrets.CONTACT_NAME }} ContactEmail=${{ secrets.CONTACT_EMAIL }}
 
       - name: SAM invoke ImportFunction
         run: >
@@ -86,21 +86,26 @@ jobs:
           cache: 'gradle'
 
       - name: Retrieve current version number
+        working-directory: apps
         run: ./gradlew printVersion
 
       - name: Update release
+        working-directory: apps
         run: |
           ./gradlew releaseVersion
 
       - name: Push the release tag
+        working-directory: apps
         run: |
           git push --all
           git push --tags
 
       - name: Retrieve updated version number
+        working-directory: apps
         run: ./gradlew printVersion
 
       - name: Create GitHub release
+        working-directory: apps
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

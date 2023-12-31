@@ -1,10 +1,10 @@
 version: 2
 updates:
   - package-ecosystem: "gradle"
-    directory: "/importer"
+    directory: "/apps/importer"
     schedule:
       interval: "daily"
   - package-ecosystem: "gradle"
-    directory: "/documents-generator"
+    directory: "/apps/documents-generator"
     schedule:
       interval: "daily"

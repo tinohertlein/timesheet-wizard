@@ -1,3 +1,3 @@
-rootProject.name="timesheet-wizard"
+rootProject.name="timesheet-wizard-apps"
 include("importer")
 include("documents-generator")

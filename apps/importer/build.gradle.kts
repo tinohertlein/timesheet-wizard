@@ -14,7 +14,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.23.4"
 }
 
-group = "dev.hertlein.timesheetwizard.importer"
+group = "dev.hertlein.timesheetwizard"
 
 val kotlinVersion = "1.9.22"
 val javaVersion = JavaVersion.VERSION_17.toString()
