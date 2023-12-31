@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.adapter.s3.component
 
-import dev.hertlein.timesheetwizard.documentsgenerator.model.TimesheetDocument
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetDocument
 import jakarta.inject.Singleton
 import java.time.LocalDate
 import java.time.format.DateTimeFormatterBuilder

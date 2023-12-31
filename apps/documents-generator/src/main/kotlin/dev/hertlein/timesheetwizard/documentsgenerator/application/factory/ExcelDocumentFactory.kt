@@ -1,12 +1,14 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.application.factory
 
 import dev.hertlein.timesheetwizard.documentsgenerator.application.config.Contact
-import dev.hertlein.timesheetwizard.documentsgenerator.model.Project
-import dev.hertlein.timesheetwizard.documentsgenerator.model.Tag
-import dev.hertlein.timesheetwizard.documentsgenerator.model.Task
-import dev.hertlein.timesheetwizard.documentsgenerator.model.Timesheet
-import dev.hertlein.timesheetwizard.documentsgenerator.model.TimesheetDocument
-import dev.hertlein.timesheetwizard.documentsgenerator.model.TimesheetEntry
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.TimesheetDocumentFactory
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Customer
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Project
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Tag
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Task
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Timesheet
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetDocument
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetEntry
 import jakarta.inject.Singleton
 import org.apache.poi.ss.usermodel.CellCopyPolicy
 import org.apache.poi.xssf.usermodel.XSSFRow
@@ -30,7 +32,9 @@ class ExcelDocumentFactory(
     private val contact: Contact
 ) : TimesheetDocumentFactory {
 
-    override fun apply(timesheet: Timesheet): TimesheetDocument {
+    override fun canHandle(customer: Customer) = true
+
+    override fun create(timesheet: Timesheet): TimesheetDocument {
         val outputStream = ByteArrayOutputStream()
 
         template("timesheet_template.xlsx").use { template ->

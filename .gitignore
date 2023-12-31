@@ -1,4 +1,5 @@
 /**/.idea/
 /**/.aws-sam/
-/**/local/
 /**/.gradle/
+/**/build/
+/**/local/

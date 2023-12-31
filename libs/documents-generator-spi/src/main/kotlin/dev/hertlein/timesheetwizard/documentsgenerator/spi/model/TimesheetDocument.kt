@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.documentsgenerator.model
+package dev.hertlein.timesheetwizard.documentsgenerator.spi.model
 
 import java.time.LocalDate
 

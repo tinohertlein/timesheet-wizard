@@ -1,6 +1,5 @@
-package dev.hertlein.timesheetwizard.documentsgenerator.util
+package dev.hertlein.timesheetwizard.documentsgenerator.spi.util
 
-import dev.hertlein.timesheetwizard.documentsgenerator.application.factory.PDFDocumentFactory
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Customer
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.CustomerId
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.CustomerName
@@ -24,66 +23,8 @@ object TestMother {
     val aDate: LocalDate = LocalDate.of(2022, 1, 1)
     val anotherDate: LocalDate = LocalDate.of(2022, 12, 31)
 
-    val emptyTimesheetJson = """{
-      "customer": {
-        "customerId": "a-customer-id",
-        "customerName": "a-customer-name"
-      },
-      "startDate": [
-        2022,
-        1,
-        1
-      ],
-      "endDate": [
-        2022,
-        12,
-        31
-      ]
-    }""".trimIndent()
-
-    val timesheetJson = """{
-      "customer": {
-        "customerId": "a-customer-id",
-        "customerName": "a-customer-name"
-      },
-      "startDate": [
-        2022,
-        1,
-        1
-      ],
-      "endDate": [
-        2022,
-        12,
-        31
-      ],
-      "entries": [
-        {
-          "project": "a project",
-          "task": "a task",
-          "tags": [
-            "onsite"
-          ],
-          "date": [
-            2022,
-            1,
-            1
-          ],
-          "durationInMinutes": 120
-        }
-      ]
-    }
-    """.trimIndent()
 
     fun aTimesheetEntry() = TimesheetEntry(aProject, aTask, someTags, aDate, 2.toDuration(DurationUnit.HOURS))
-
-    fun aPDFTimesheetEntry() =
-        PDFDocumentFactory.PDFTimesheetEntry(
-            "2022-01-01",
-            "a project",
-            "onsite",
-            "a task",
-            "2,00"
-        )
 
     fun anEmptyTimesheet() = Timesheet(aCustomer(), aDateRange(), emptyList())
 

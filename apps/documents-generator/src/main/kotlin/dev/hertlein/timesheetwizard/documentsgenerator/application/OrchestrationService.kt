@@ -1,8 +1,8 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.application
 
-import dev.hertlein.timesheetwizard.documentsgenerator.application.factory.TimesheetDocumentFactory
 import dev.hertlein.timesheetwizard.documentsgenerator.application.port.PersistencePort
 import dev.hertlein.timesheetwizard.documentsgenerator.application.port.PersistenceResult
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.TimesheetDocumentFactory
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.enterprise.inject.Instance
 import mu.KotlinLogging
@@ -21,7 +21,7 @@ class OrchestrationService(
         val timesheet = persistencePort.findTimesheetByURI(timesheetLocation)
 
         val persistenceResults = documentFactories.map {
-            val document = it.apply(timesheet)
+            val document = it.create(timesheet)
             persistencePort.save(document)
         }
 

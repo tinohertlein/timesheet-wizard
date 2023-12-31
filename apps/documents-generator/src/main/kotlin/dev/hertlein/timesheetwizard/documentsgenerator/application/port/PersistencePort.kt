@@ -1,7 +1,7 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.application.port
 
-import dev.hertlein.timesheetwizard.documentsgenerator.model.TimesheetDocument
-import dev.hertlein.timesheetwizard.documentsgenerator.model.Timesheet
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetDocument
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Timesheet
 
 enum class PersistenceTarget {
     S3

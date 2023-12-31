@@ -6,8 +6,8 @@ import dev.hertlein.timesheetwizard.documentsgenerator.adapter.s3.component.Json
 import dev.hertlein.timesheetwizard.documentsgenerator.application.port.PersistencePort
 import dev.hertlein.timesheetwizard.documentsgenerator.application.port.PersistenceResult
 import dev.hertlein.timesheetwizard.documentsgenerator.application.port.PersistenceTarget
-import dev.hertlein.timesheetwizard.documentsgenerator.model.Timesheet
-import dev.hertlein.timesheetwizard.documentsgenerator.model.TimesheetDocument
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Timesheet
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetDocument
 import jakarta.enterprise.context.ApplicationScoped
 import mu.KotlinLogging
 import org.eclipse.microprofile.config.inject.ConfigProperty

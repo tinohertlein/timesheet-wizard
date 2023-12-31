@@ -1,9 +1,9 @@
-package dev.hertlein.timesheetwizard.documentsgenerator.model
+package dev.hertlein.timesheetwizard.documentsgenerator.spi.model
 
-import dev.hertlein.timesheetwizard.documentsgenerator.util.TestMother
-import dev.hertlein.timesheetwizard.documentsgenerator.util.TestMother.aCustomer
-import dev.hertlein.timesheetwizard.documentsgenerator.util.TestMother.aDateRange
-import dev.hertlein.timesheetwizard.documentsgenerator.util.TestMother.anEmptyTimesheet
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.util.TestMother
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.util.TestMother.aCustomer
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.util.TestMother.aDateRange
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.util.TestMother.anEmptyTimesheet
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested

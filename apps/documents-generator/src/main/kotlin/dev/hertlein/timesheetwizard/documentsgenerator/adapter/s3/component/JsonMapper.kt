@@ -1,14 +1,14 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.adapter.s3.component
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import dev.hertlein.timesheetwizard.documentsgenerator.model.Customer
-import dev.hertlein.timesheetwizard.documentsgenerator.model.CustomerId
-import dev.hertlein.timesheetwizard.documentsgenerator.model.CustomerName
-import dev.hertlein.timesheetwizard.documentsgenerator.model.Project
-import dev.hertlein.timesheetwizard.documentsgenerator.model.Tag
-import dev.hertlein.timesheetwizard.documentsgenerator.model.Task
-import dev.hertlein.timesheetwizard.documentsgenerator.model.Timesheet
-import dev.hertlein.timesheetwizard.documentsgenerator.model.TimesheetEntry
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Customer
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.CustomerId
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.CustomerName
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Project
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Tag
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Task
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Timesheet
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetEntry
 import io.quarkus.runtime.annotations.RegisterForReflection
 import java.time.LocalDate
 import jakarta.enterprise.context.ApplicationScoped

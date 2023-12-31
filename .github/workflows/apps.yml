@@ -48,6 +48,8 @@ jobs:
 
       - name: Build & test 'documents-generator' with Gradle
         working-directory: apps/documents-generator
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew build
 
       - name: Generate test report for 'documents-generator'

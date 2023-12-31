@@ -18,6 +18,14 @@ repositories {
     mavenCentral()
     gradlePluginPortal()
     mavenLocal()
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/tinohertlein/timesheet-wizard")
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
 }
 
 val quarkusPlatformGroupId = "io.quarkus.platform"
@@ -31,6 +39,7 @@ dependencies {
     val jasperVersion = "6.21.0"
     val openPdfVersion = "1.3.35"
     val openCsvVersion = "5.9"
+    val twSpiVersion = "0.0.1"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
@@ -48,8 +57,8 @@ dependencies {
     implementation("net.sf.jasperreports:jasperreports:$jasperVersion")
     implementation("com.github.librepdf:openpdf:$openPdfVersion")
     implementation("com.opencsv:opencsv:$openCsvVersion")
-
-
+    implementation("com.opencsv:opencsv:$openCsvVersion")
+    implementation("dev.hertlein.timesheetwizard:documents-generator-spi:$twSpiVersion")
 
     val assertJVersion = "3.24.2"
     val mockkVersion = "1.13.8"
