@@ -20,6 +20,12 @@ The Timesheet-Wizard is not accessible outside of AWS (**-> Quality goal #QG1**)
 timesheets are visible from the outside nor the initiation of the workflow can be triggered without proper AWS
 credentials and user access rights.
 
+Though most code of the Timesheet-Wizard is publicly exposed via the public GitHub-repository, any confidential customer related code resides in a private GitHub-repository. The dependencies are visualized in the following diagram:
+
+![Solution](assets/solution.drawio.png "Solution")
+
+'documents-generator-spi' serves as a service-provider-interface that is used as a compile-time-dependency in the other modules. At runtime, the libraries 'documents-generator-customers-public' (for non-confidential/test customers) & 'documents-generator-customers-private' (for confidential customers) are used by the 'documents-generator', so that all customer-specific-code for the documents generation is executed. 
+
 As the Timesheet-Wizard should be easily extensible, testable and maintainable, each function will follow
 a [Ports & Adapters](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)) architecture, to separate domain
 logic and connecting to surrounding systems (**-> Quality goals QG3 & QG5**).

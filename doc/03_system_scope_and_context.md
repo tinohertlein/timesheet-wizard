@@ -15,7 +15,7 @@ The external system that is providing an API to fetch the timesheets for a given
 
 ### Storage (external system)
 
-The place where the generated Excel and PDF files are stored
+The place where the generated XLSX, PDF and CSV files are stored
 
 ### Tino (actor)
 
@@ -36,4 +36,4 @@ The external system that is providing an API to fetch the timesheets for a given
 
 ### AWS S3 (external system)
 
-The place where the generated Excel and PDF files as well as any intermediate files are stored
+The place where the generated XLSX, PDF and CSV files as well as any intermediate files are stored

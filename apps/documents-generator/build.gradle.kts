@@ -36,7 +36,6 @@ dependencies {
     val guavaVersion = "33.0.0-jre"
     val kotlinLoggingVersion = "3.0.5"
     val twSpiVersion = "1.0.0"
-    val twCustomersPublicVersion = "1.0.1"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
@@ -50,7 +49,7 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:$kotlinLoggingVersion")
     implementation("com.google.guava:guava:$guavaVersion")
     implementation("dev.hertlein.timesheetwizard:documents-generator-spi:$twSpiVersion")
-    implementation("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")
+
 
     val assertJVersion = "3.25.0"
     val mockkVersion = "1.13.8"
@@ -60,7 +59,11 @@ dependencies {
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
 
+
+    val twCustomersPublicVersion = "1.0.1"
+
     runtimeOnly("software.amazon.awssdk:url-connection-client")
+    runtimeOnly("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")
 }
 
 java {

@@ -2,15 +2,15 @@
 
 ![Build & Deploy Apps](https://github.com/tinohertlein/timesheet-wizard/actions/workflows/apps.yml/badge.svg?event=push)
 
-The Timesheet-Wizard is a personal project to fetch timesheets from [Clockify](https://clockify.me/de/), transform them
+The Timesheet-Wizard is a personal pet project to fetch timesheets from [Clockify](https://clockify.me/de/), transform them
 to various formats
 and export them again into other tools.
 
-As of now, the only target formats that are supported are Excel, PDF and CSV, resulting in the
+As of now, the only target formats that are supported are XLSX, PDF and CSV, resulting in the
 following main features of Timesheet-Wizard:
 
 - Fetch timesheets from Clockify
-- Generate & store Excel files from these timesheets
+- Generate & store XLSX files from these timesheets
 - Generate & store PDF files from these timesheets
 - Generate & store CSV files from these timesheets
 
@@ -36,7 +36,7 @@ the [doc-folder](doc/README.md).
 
 ### TL;DR
 
-The Timesheet-Wizard consists of two independent submodules with the following responsibilities:
+The Timesheet-Wizard consists of two independent apps with the following responsibilities:
 
 **importer**
 
@@ -47,8 +47,8 @@ The Timesheet-Wizard consists of two independent submodules with the following r
 **documents-generator**
 
 - downloading the json-representation of the timesheets from S3
-- generating Excel, PDF & CSV files from that
-- storing the Excel, PDF & CSV files again on S3
+- generating XLSX, PDF & CSV files from that
+- storing the XLSX, PDF & CSV files again on S3
 
 **importer** is a [Micronaut application](https://micronaut.io/) written in Kotlin, built with Gradle and
 deployed to AWS Lambda as a GraalVM native
@@ -60,7 +60,7 @@ incompatibility of Apache POI not as a GraalVM native image with a custom runtim
 
 ![Technical context](doc/assets/context-technical.drawio.png "Technical context")
 
-Both submodules
+Both apps
 
 - do not have any dependencies on each other
 - do not share code in a common library or the like

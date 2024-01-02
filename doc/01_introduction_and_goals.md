@@ -2,15 +2,13 @@
 
 ## What is the Timesheet-Wizard?
 
-The Timesheet-Wizard is a personal project to fetch timesheets from [Clockify](https://clockify.me/de/), transform them
-to various formats
-and export them again into other tools.
+The Timesheet-Wizard is a personal pet project to fetch timesheets from [Clockify](https://clockify.me/de/), transform them to various formats and export them again into other tools.
 
-As of now, the only target formats that are supported are Excel, PDF and CSV, resulting in the
+As of now, the only target formats that are supported are XLSX, PDF and CSV, resulting in the
 following main features of Timesheet-Wizard:
 
 - Fetch timesheets from Clockify
-- Generate & stores Excel files from these timesheets
+- Generate & stores XLSX files from these timesheets
 - Generate & stores PDF files from these timesheets
 - Generate & stores CSV files from these timesheets
 
@@ -19,12 +17,10 @@ following main features of Timesheet-Wizard:
 As a freelance Software-Engineer & -Architect doing mostly time & material contracting, tracking my working hours is
 quite essential. To ease this, I'm using [Clockify](https://clockify.me/). It's an awesome tool with a nice UI that
 allows me to track and also categorize my working hours. Besides supporting some Excel-reports out of the box, it also
-provides
-an API to export reports in json-format as well.
+provides an API to export reports in json-format as well.
 
 In order to have the freedom to customize the reports as much as I like and to transfer these reports automatically to
-other tools, I decided to create my own little application
-allowing me to do that: the Timesheet-Wizard.
+other tools, I decided to create my own little application allowing me to do that: the Timesheet-Wizard.
 
 In addition to the business motivation mentioned above, this is also a perfect opportunity to play around with
 technology in the [function-as-a-service](https://en.wikipedia.org/wiki/Function_as_a_service) territory.

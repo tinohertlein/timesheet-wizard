@@ -10,7 +10,7 @@ The Timesheet-Wizard consists of two modules.
   generic way and does not fit my use-cases. Therefor, this module is responsible to fetch the json from Clockify,
   transform it to the domain model of the Timesheet-Wizard and store it - again in json format - on S3.
 - **documents-generator**: this module is responsible for downloading the json created by 'importer' and generating an
-  Excel and PDF file from that data. The Excel and PDF file then is again stored on S3, where it is available for a manual download.
+  XLSX, PDF or CSV file from that data. The XLSX, PDF and CSV files then are again stored on S3, where it is available for a manual download.
 
 ## Level 2
 
