@@ -1,14 +1,9 @@
-package dev.hertlein.timesheetwizard.documentsgenerator.application.factory
+package dev.hertlein.timesheetwizard.customers.piedpiper
 
-import dev.hertlein.timesheetwizard.documentsgenerator.application.config.Contact
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.TimesheetDocumentFactory
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Customer
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Project
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Tag
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Task
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Timesheet
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetDocument
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetEntry
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.contact.ContactDetails
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.TimesheetDocument
 import jakarta.inject.Singleton
 import org.apache.poi.ss.usermodel.CellCopyPolicy
 import org.apache.poi.xssf.usermodel.XSSFRow
@@ -19,25 +14,16 @@ import java.time.LocalDate
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
-
 private val cellCopyPolicy = CellCopyPolicy.Builder().cellValue(false).build()
-
-private fun Project.format() = this.name
-private fun Task.format() = this.name
-private fun List<Tag>.format() = this.joinToString(" ") { it.name }
 
 @Suppress("MagicNumber")
 @Singleton
-class ExcelDocumentFactory(
-    private val contact: Contact
-) : TimesheetDocumentFactory {
+class XlsxDocumentFactory : TimesheetDocumentFactory, PiedPiperConfig() {
 
-    override fun canHandle(customer: Customer) = true
-
-    override fun create(timesheet: Timesheet): TimesheetDocument {
+    override fun create(contact: ContactDetails, timesheet: Timesheet): TimesheetDocument {
         val outputStream = ByteArrayOutputStream()
 
-        template("timesheet_template.xlsx").use { template ->
+        template("piedpiper/timesheet_template.xlsx").use { template ->
             XSSFWorkbook(template).use { workbook ->
                 outputStream.use { out ->
                     val sheet = workbook.getSheetAt(0)
@@ -59,14 +45,14 @@ class ExcelDocumentFactory(
         )
     }
 
-    private fun fillInContact(sheet: XSSFSheet, contact: Contact) {
+    private fun fillInContact(sheet: XSSFSheet, contact: ContactDetails) {
         val rowOffset = 1
         val columnOffset = 1
         sheet.getRow(rowOffset).run {
-            getCell(columnOffset).setCellValue(contact.name().replace('_', ' '))
+            getCell(columnOffset).setCellValue(contact.name.value.replace('_', ' '))
         }
         sheet.getRow(rowOffset + 1).run {
-            getCell(columnOffset).setCellValue(contact.email())
+            getCell(columnOffset).setCellValue(contact.email.value)
         }
     }
 
@@ -85,7 +71,7 @@ class ExcelDocumentFactory(
         sheet.getRow(rowOffset).getCell(columnOffset).setCellValue(totalDuration.toDouble(DurationUnit.HOURS))
     }
 
-    private fun fillInEntries(sheet: XSSFSheet, entries: List<TimesheetEntry>) {
+    private fun fillInEntries(sheet: XSSFSheet, entries: List<Timesheet.Entry>) {
         val rowOffset = 6
         val columnOffset = 0
         val referenceRow = sheet.getRow(rowOffset)
@@ -96,9 +82,9 @@ class ExcelDocumentFactory(
                 (if (index == 0) referenceRow else createEntryRow(sheet, index + rowOffset, referenceRow))
                     .run {
                         getCell(columnOffset + 0).setCellValue(entry.date)
-                        getCell(columnOffset + 1).setCellValue(entry.project.format())
-                        getCell(columnOffset + 2).setCellValue(entry.tags.format())
-                        getCell(columnOffset + 3).setCellValue(entry.task.format())
+                        getCell(columnOffset + 1).setCellValue(format(entry.project))
+                        getCell(columnOffset + 2).setCellValue(format(entry.tags))
+                        getCell(columnOffset + 3).setCellValue(format(entry.task))
                         getCell(columnOffset + 4).setCellValue(entry.duration.toDouble(DurationUnit.HOURS))
                     }
             }
@@ -113,11 +99,11 @@ class ExcelDocumentFactory(
             .createRow(rowNumber)
             .also { it.copyRowFrom(referenceRow, cellCopyPolicy) }
 
-    private fun entryComparator(): Comparator<TimesheetEntry> =
+    private fun entryComparator(): Comparator<Timesheet.Entry> =
         compareBy(
             { it.date },
             { it.project.name },
-            { it.tags.format() },
+            { format(it.tags) },
             { it.duration })
 
     private fun autoSizeColumnWidths(sheet: XSSFSheet) {
