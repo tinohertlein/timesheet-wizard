@@ -16,7 +16,7 @@ abstract class PiedPiperConfig {
 
     companion object {
 
-        private val piedPiper = Customer(Id("1000"), Name("Pied Piper"))
+        private val piedPiper = Customer(Id("1000"), Name("PiedPiper"))
 
         fun format(project: Project) = project.name
         fun format(task: Task) = task.name
