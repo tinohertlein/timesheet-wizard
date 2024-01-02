@@ -60,16 +60,16 @@ jobs:
           path: apps/documents-generator/build/test-results/test/*.xml
           reporter: java-junit
 
-      - name: SAM print version
+      - name: Print SAM version
         run: sam --version
 
-      - name: SAM build AWS stack
+      - name: Build AWS stack with SAM
         run: sam build --template-file apps/aws-sam/template.yml
 
-      - name: SAM deploy AWS stack
+      - name: Deploy AWS stack with SAM
         run: sam deploy --config-file apps/aws-sam/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }} ContactName=${{ secrets.CONTACT_NAME }} ContactEmail=${{ secrets.CONTACT_EMAIL }}
 
-      - name: SAM invoke ImportFunction
+      - name: Invoke ImportFunction with SAM
         run: >
           sam remote invoke --stack-name timesheetwizard ImportFunction -e '{"body": "{\"customerIds\": [\"1000\"], \"dateRangeType\": \"CUSTOM_YEAR\", \"dateRange\": \"2022\"}"}'
 
@@ -98,7 +98,7 @@ jobs:
         run: |
           ./gradlew releaseVersion
 
-      - name: Push the release tag
+      - name: Push release tag
         working-directory: apps
         run: |
           git push --all
