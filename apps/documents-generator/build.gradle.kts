@@ -52,7 +52,7 @@ dependencies {
     implementation("dev.hertlein.timesheetwizard:documents-generator-spi:$twSpiVersion")
     implementation("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")
 
-    val assertJVersion = "3.24.2"
+    val assertJVersion = "3.25.0"
     val mockkVersion = "1.13.8"
 
     testImplementation("org.assertj:assertj-core:$assertJVersion")
