@@ -1,40 +1,30 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.spi.util
 
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Customer
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.CustomerId
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.CustomerName
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Project
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Tag
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Task
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Timesheet
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetEntry
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer.Id
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer.Name
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet
 import java.time.LocalDate
-import kotlin.time.DurationUnit
-import kotlin.time.toDuration
 
 object TestMother {
 
-    val aProject = Project("a project")
+    val aProject = Timesheet.Entry.Project("a project")
 
-    val aTask = Task("a task")
+    val aTask = Timesheet.Entry.Task("a task")
 
-    val someTags = listOf("onsite").map { Tag(it) }
+    val someTags = listOf("onsite").map { Timesheet.Entry.Tag(it) }
 
     val aDate: LocalDate = LocalDate.of(2022, 1, 1)
+
     val anotherDate: LocalDate = LocalDate.of(2022, 12, 31)
 
-
-    fun aTimesheetEntry() = TimesheetEntry(aProject, aTask, someTags, aDate, 2.toDuration(DurationUnit.HOURS))
+    fun aDateRange() = aDate..anotherDate
 
     fun anEmptyTimesheet() = Timesheet(aCustomer(), aDateRange(), emptyList())
-
-    fun aTimesheet() = Timesheet(aCustomer(), aDateRange(), listOf(aTimesheetEntry()))
-
-    fun aDateRange() = aDate..anotherDate
 
     fun aCustomer(
         id: String = "a-customer-id",
         name: String = "a-customer-name",
-    ) = Customer(CustomerId(id), CustomerName(name))
+    ) = Customer(Id(id), Name(name))
 
 }

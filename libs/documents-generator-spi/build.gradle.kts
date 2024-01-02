@@ -4,19 +4,19 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
-
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.9.22"
-
     `java-library`
     `maven-publish`
+    kotlin("jvm") version "1.9.22"
+    id("io.gitlab.arturbosch.detekt") version "1.23.4"
 }
 
 group = "dev.hertlein.timesheetwizard"
-version = "0.0.1"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 publishing {
@@ -38,15 +38,10 @@ publishing {
 }
 
 dependencies {
-    val junitVersion = "5.9.3"
     val assertJVersion = "3.24.2"
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
     testImplementation("org.assertj:assertj-core:$assertJVersion")
-
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
 }
 
 java {
@@ -54,7 +49,7 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+tasks.compileKotlin {
     kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
     kotlinOptions.javaParameters = true
 }

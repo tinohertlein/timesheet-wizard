@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.documentsgenerator.spi.model
+package dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet
 
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.util.TestMother
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.util.TestMother.aCustomer
@@ -20,7 +20,7 @@ internal class TimesheetTest {
         @Test
         fun `should sum up duration of all entries`() {
             val entries = (1..10).toList().map {
-                TimesheetEntry(
+                Timesheet.Entry(
                     TestMother.aProject,
                     TestMother.aTask,
                     TestMother.someTags,
