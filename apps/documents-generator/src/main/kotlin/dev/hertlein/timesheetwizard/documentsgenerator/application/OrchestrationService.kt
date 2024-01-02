@@ -22,8 +22,15 @@ class OrchestrationService(
 
         val timesheet = persistencePort.findTimesheetByURI(timesheetLocation)
 
-        val persistenceResults = documentFactories
-            .filter { it.canHandle(timesheet.customer) }
+        val factoriesForCustomer = documentFactories.filter { it.canHandle(timesheet.customer) }
+
+        check(factoriesForCustomer.isNotEmpty()) {
+            throw IllegalStateException(
+                "Could not find factories to generate documents for customer ${timesheet.customer}"
+            )
+        }
+
+        val persistenceResults = factoriesForCustomer
             .map {
                 val document = it.create(contact.toContactDetails(), timesheet)
                 persistencePort.save(document)
