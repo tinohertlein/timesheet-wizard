@@ -8,3 +8,11 @@ updates:
     directory: "/apps/documents-generator"
     schedule:
       interval: "daily"
+  - package-ecosystem: "gradle"
+    directory: "/libs/documents-generator-spi"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "gradle"
+    directory: "/libs/documents-generator-customers-public"
+    schedule:
+      interval: "daily"
