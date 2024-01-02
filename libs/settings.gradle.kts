@@ -5,3 +5,4 @@ plugins {
 
 rootProject.name = "timesheet-wizard-libs"
 include("documents-generator-spi")
+include("documents-generator-customers-public")
