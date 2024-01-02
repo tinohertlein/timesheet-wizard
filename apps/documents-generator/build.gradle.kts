@@ -19,11 +19,19 @@ repositories {
     gradlePluginPortal()
     mavenLocal()
     maven {
-        name = "GitHubPackages"
+        name = "timesheet-wizard"
         url = uri("https://maven.pkg.github.com/tinohertlein/timesheet-wizard")
         credentials {
-            username = System.getenv("GITHUB_ACTOR")
-            password = System.getenv("GITHUB_TOKEN")
+            username = ""
+            password = System.getenv("GH_PACKAGE_TOKEN")
+        }
+    }
+    maven {
+        name = "timesheet-wizard-private"
+        url = uri("https://maven.pkg.github.com/tinohertlein/timesheet-wizard-private")
+        credentials {
+            username = ""
+            password = System.getenv("GH_PACKAGE_TOKEN")
         }
     }
 }
@@ -61,9 +69,11 @@ dependencies {
 
 
     val twCustomersPublicVersion = "1.0.1"
+    val twCustomersPrivateVersion = "0.2.0"
 
     runtimeOnly("software.amazon.awssdk:url-connection-client")
     runtimeOnly("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")
+    runtimeOnly("dev.hertlein.timesheetwizard:documents-generator-customers-private:$twCustomersPrivateVersion")
 }
 
 java {

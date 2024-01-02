@@ -49,7 +49,7 @@ jobs:
       - name: Build & test 'documents-generator' with Gradle
         working-directory: apps/documents-generator
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PACKAGE_TOKEN: ${{ secrets.GH_PACKAGE_TOKEN }}
         run: ./gradlew build
 
       - name: Generate test report for 'documents-generator'
@@ -111,7 +111,7 @@ jobs:
       - name: Create GitHub release
         working-directory: apps
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PACKAGE_TOKEN: ${{ secrets.GH_PACKAGE_TOKEN }}
         run: |
           tag=$(git describe --tags --abbrev=0)
           version=$(./gradlew -q printVersion)

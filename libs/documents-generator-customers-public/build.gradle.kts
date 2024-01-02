@@ -1,8 +1,4 @@
-import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
-import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
-import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
-import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
-import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
+import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
     `java-library`
@@ -22,8 +18,8 @@ repositories {
         name = "GitHubPackages"
         url = uri("https://maven.pkg.github.com/tinohertlein/timesheet-wizard")
         credentials {
-            username = System.getenv("GITHUB_ACTOR")
-            password = System.getenv("GITHUB_TOKEN")
+            username = ""
+            password = System.getenv("GH_PACKAGE_TOKEN")
         }
     }
 }
@@ -34,8 +30,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/tinohertlein/timesheet-wizard")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = ""
+                password = System.getenv("GH_PACKAGE_TOKEN")
             }
         }
     }
