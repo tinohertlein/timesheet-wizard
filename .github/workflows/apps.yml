@@ -111,7 +111,7 @@ jobs:
       - name: Create GitHub release
         working-directory: apps
         env:
-          GH_PACKAGE_TOKEN: ${{ secrets.GH_PACKAGE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           tag=$(git describe --tags --abbrev=0)
           version=$(./gradlew -q printVersion)
