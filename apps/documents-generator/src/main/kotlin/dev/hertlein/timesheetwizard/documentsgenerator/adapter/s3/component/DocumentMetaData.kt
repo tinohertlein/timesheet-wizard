@@ -1,6 +1,7 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.adapter.s3.component
 
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetDocument
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.TimesheetDocument
+
 
 data class DocumentMetaData(val prefix: String, val suffix: String) {
     constructor(prefixAndSuffix: String) : this(prefixAndSuffix, prefixAndSuffix)

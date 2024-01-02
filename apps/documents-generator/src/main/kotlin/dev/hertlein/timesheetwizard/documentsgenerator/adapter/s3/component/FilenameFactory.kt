@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.adapter.s3.component
 
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetDocument
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.TimesheetDocument
 import jakarta.inject.Singleton
 import java.time.LocalDate
 import java.time.format.DateTimeFormatterBuilder
@@ -12,7 +12,7 @@ import java.util.Locale
 class FilenameFactory {
 
     fun create(metaData: DocumentMetaData, timesheetDocument: TimesheetDocument): String {
-        val customerName = timesheetDocument.customer.customerName.value
+        val customerName = timesheetDocument.customer.name.value
         val startDate = formatLocalDate(timesheetDocument.dateRange.start)
         val endDate = formatLocalDate(timesheetDocument.dateRange.endInclusive)
 

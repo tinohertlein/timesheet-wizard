@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.adapter.s3.component
 
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetDocument
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.TimesheetDocument
 import dev.hertlein.timesheetwizard.documentsgenerator.util.TestMother.aCustomer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName

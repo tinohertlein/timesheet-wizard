@@ -35,11 +35,8 @@ val quarkusPlatformVersion = "3.6.4"
 dependencies {
     val guavaVersion = "33.0.0-jre"
     val kotlinLoggingVersion = "3.0.5"
-    val poiVersion = "5.2.5"
-    val jasperVersion = "6.21.0"
-    val openPdfVersion = "1.3.35"
-    val openCsvVersion = "5.9"
-    val twSpiVersion = "0.0.1"
+    val twSpiVersion = "1.0.0"
+    val twCustomersPublicVersion = "1.0.1"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
@@ -52,13 +49,8 @@ dependencies {
     implementation("io.quarkus:quarkus-arc")
     implementation("io.github.microutils:kotlin-logging-jvm:$kotlinLoggingVersion")
     implementation("com.google.guava:guava:$guavaVersion")
-    implementation("org.apache.poi:poi:$poiVersion")
-    implementation("org.apache.poi:poi-ooxml:$poiVersion")
-    implementation("net.sf.jasperreports:jasperreports:$jasperVersion")
-    implementation("com.github.librepdf:openpdf:$openPdfVersion")
-    implementation("com.opencsv:opencsv:$openCsvVersion")
-    implementation("com.opencsv:opencsv:$openCsvVersion")
     implementation("dev.hertlein.timesheetwizard:documents-generator-spi:$twSpiVersion")
+    implementation("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")
 
     val assertJVersion = "3.24.2"
     val mockkVersion = "1.13.8"

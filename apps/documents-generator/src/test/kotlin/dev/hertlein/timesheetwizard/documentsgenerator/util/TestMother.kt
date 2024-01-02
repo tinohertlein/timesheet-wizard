@@ -1,14 +1,13 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.util
 
-import dev.hertlein.timesheetwizard.documentsgenerator.application.factory.PDFDocumentFactory
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Customer
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.CustomerId
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.CustomerName
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Project
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Tag
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Task
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Timesheet
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetEntry
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer.Id
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer.Name
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet.Entry
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet.Entry.Project
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet.Entry.Tag
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet.Entry.Task
 import java.time.LocalDate
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
@@ -22,6 +21,7 @@ object TestMother {
     val someTags = listOf("onsite").map { Tag(it) }
 
     val aDate: LocalDate = LocalDate.of(2022, 1, 1)
+
     val anotherDate: LocalDate = LocalDate.of(2022, 12, 31)
 
     val emptyTimesheetJson = """{
@@ -74,18 +74,7 @@ object TestMother {
     }
     """.trimIndent()
 
-    fun aTimesheetEntry() = TimesheetEntry(aProject, aTask, someTags, aDate, 2.toDuration(DurationUnit.HOURS))
-
-    fun aPDFTimesheetEntry() =
-        PDFDocumentFactory.PDFTimesheetEntry(
-            "2022-01-01",
-            "a project",
-            "onsite",
-            "a task",
-            "2,00"
-        )
-
-    fun anEmptyTimesheet() = Timesheet(aCustomer(), aDateRange(), emptyList())
+    fun aTimesheetEntry() = Entry(aProject, aTask, someTags, aDate, 2.toDuration(DurationUnit.HOURS))
 
     fun aTimesheet() = Timesheet(aCustomer(), aDateRange(), listOf(aTimesheetEntry()))
 
@@ -94,6 +83,6 @@ object TestMother {
     fun aCustomer(
         id: String = "a-customer-id",
         name: String = "a-customer-name",
-    ) = Customer(CustomerId(id), CustomerName(name))
+    ) = Customer(Id(id), Name(name))
 
 }

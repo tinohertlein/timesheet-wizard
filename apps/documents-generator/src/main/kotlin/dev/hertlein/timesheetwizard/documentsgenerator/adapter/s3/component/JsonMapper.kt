@@ -1,17 +1,13 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.adapter.s3.component
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Customer
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.CustomerId
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.CustomerName
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Project
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Tag
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Task
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.Timesheet
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.TimesheetEntry
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer.Id
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer.Name
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet
 import io.quarkus.runtime.annotations.RegisterForReflection
-import java.time.LocalDate
 import jakarta.enterprise.context.ApplicationScoped
+import java.time.LocalDate
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
@@ -44,10 +40,10 @@ class JsonMapper(
         val date: LocalDate? = null,
         val durationInMinutes: Long? = null
     ) {
-        fun toEntity() = TimesheetEntry(
-            Project(project!!),
-            Task(task!!),
-            tags!!.map { Tag(it) },
+        fun toEntity() = Timesheet.Entry(
+            Timesheet.Entry.Project(project!!),
+            Timesheet.Entry.Task(task!!),
+            tags!!.map { Timesheet.Entry.Tag(it) },
             date!!,
             durationInMinutes!!.toDuration(DurationUnit.MINUTES)
         )
@@ -58,6 +54,6 @@ class JsonMapper(
         val customerId: String? = null,
         val customerName: String? = null
     ) {
-        fun toEntity() = Customer(CustomerId(customerId!!), CustomerName(customerName!!))
+        fun toEntity() = Customer(Id(customerId!!), Name(customerName!!))
     }
 }
