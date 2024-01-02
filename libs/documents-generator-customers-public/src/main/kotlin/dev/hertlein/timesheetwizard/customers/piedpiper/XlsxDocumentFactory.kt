@@ -38,7 +38,7 @@ class XlsxDocumentFactory : TimesheetDocumentFactory, PiedPiperConfig() {
         }
 
         return TimesheetDocument(
-            TimesheetDocument.Type.EXCEL,
+            TimesheetDocument.Type.XLSX,
             timesheet.customer,
             timesheet.dateRange,
             outputStream.toByteArray()

@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "dev.hertlein.timesheetwizard"
-version = "1.0.1"
+version = "1.0.2"
 
 repositories {
     mavenCentral()
@@ -43,7 +43,7 @@ publishing {
 }
 
 dependencies {
-    val twSpiVersion = "1.0.0"
+    val twSpiVersion = "1.0.1"
     val jakartaApiVersion = "2.0.1"
     val openCsvVersion = "5.9"
     val poiVersion = "5.2.5"

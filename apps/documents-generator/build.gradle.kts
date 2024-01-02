@@ -43,7 +43,7 @@ val quarkusPlatformVersion = "3.6.4"
 dependencies {
     val guavaVersion = "33.0.0-jre"
     val kotlinLoggingVersion = "3.0.5"
-    val twSpiVersion = "1.0.0"
+    val twSpiVersion = "1.0.1"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
@@ -68,8 +68,8 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured")
 
 
-    val twCustomersPublicVersion = "1.0.1"
-    val twCustomersPrivateVersion = "0.4.0"
+    val twCustomersPublicVersion = "1.0.2"
+    val twCustomersPrivateVersion = "0.5.0"
 
     runtimeOnly("software.amazon.awssdk:url-connection-client")
     runtimeOnly("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")

@@ -1,6 +1,7 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.adapter.s3.component
 
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.TimesheetDocument
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.TimesheetDocument.Type
 import dev.hertlein.timesheetwizard.documentsgenerator.util.TestMother.aCustomer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -21,15 +22,15 @@ internal class FilenameFactoryTest {
             val start = LocalDate.of(2022, 1, 1)
             val end = LocalDate.of(2022, 1, 31)
             val timesheetDocument = TimesheetDocument(
-                TimesheetDocument.Type.EXCEL,
+                Type.XLSX,
                 aCustomer(name = "the-customer"),
                 start..end,
                 ByteArray(0)
             )
 
-            val filename = filenameFactory.create(DocumentMetaData.EXCEL, timesheetDocument)
+            val filename = filenameFactory.create(DocumentMetaData.of(Type.XLSX), timesheetDocument)
 
-            assertThat(filename).isEqualTo("xlsx/timesheet_the-customer_20220101-20220131.xlsx")
+            assertThat(filename).isEqualTo("the-customer/timesheet_20220101-20220131.xlsx")
         }
     }
 }

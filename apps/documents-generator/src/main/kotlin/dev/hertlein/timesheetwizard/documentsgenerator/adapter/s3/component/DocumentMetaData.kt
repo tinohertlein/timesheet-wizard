@@ -3,15 +3,12 @@ package dev.hertlein.timesheetwizard.documentsgenerator.adapter.s3.component
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.TimesheetDocument
 
 
-data class DocumentMetaData(val prefix: String, val suffix: String) {
-    constructor(prefixAndSuffix: String) : this(prefixAndSuffix, prefixAndSuffix)
+data class DocumentMetaData(val suffix: String) {
 
     companion object {
 
-        val EXCEL = of(TimesheetDocument.Type.EXCEL)
-
         fun of(type: TimesheetDocument.Type): DocumentMetaData = when (type) {
-            TimesheetDocument.Type.EXCEL -> DocumentMetaData("xlsx")
+            TimesheetDocument.Type.XLSX -> DocumentMetaData("xlsx")
             TimesheetDocument.Type.PDF -> DocumentMetaData("pdf")
             TimesheetDocument.Type.CSV -> DocumentMetaData("csv")
         }

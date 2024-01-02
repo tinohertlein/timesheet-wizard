@@ -10,6 +10,6 @@ data class TimesheetDocument(
 ) {
 
     enum class Type {
-        EXCEL, PDF, CSV
+        XLSX, PDF, CSV
     }
 }

@@ -36,9 +36,9 @@ internal class ApplicationE2ET {
         val jsonFilename = "PiedPiper_2022-01-01_2022-12-31_e47dc4a0-2899-41a7-a390-a5c6152f2e42.json"
         val jsonFileContent = readResource(jsonFilename)
         val expectedFilenames = listOf(
-            "timesheet_PiedPiper_20220101-20221231.xlsx",
-            "timesheet_PiedPiper_20220101-20221231.pdf",
-            "timesheet_PiedPiper_20220101-20221231.csv"
+            "timesheet_20220101-20221231.xlsx",
+            "timesheet_20220101-20221231.pdf",
+            "timesheet_20220101-20221231.csv"
         )
         upload(jsonFilename, jsonFileContent)
         val s3Event = createS3Event(jsonFilename)
@@ -54,7 +54,7 @@ internal class ApplicationE2ET {
             .body("persistenceResults.size()", equalTo(3))
 
         expectedFilenames.forEach {
-            val file = download("${it.substringAfter(".")}/$it")
+            val file = download("PiedPiper/$it")
             assertThat(file.size).isGreaterThan(0)
 
         }
