@@ -76,8 +76,8 @@ Resources:
             Filter:
               S3Key:
                 Rules:
-                  - Name: prefix
-                    Value: json
+                  - Name: suffix
+                    Value: .json
 
   ImportLogGroup:
     Type: AWS::Logs::LogGroup

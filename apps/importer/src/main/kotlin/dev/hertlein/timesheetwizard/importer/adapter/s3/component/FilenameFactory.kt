@@ -11,7 +11,7 @@ class FilenameFactory(
     private val uuidFactory: UUIDFactory
 ) {
 
-    fun create(prefix: String, timesheet: Timesheet): String {
+    fun create(timesheet: Timesheet): String {
         fun formatLocalDate(localDate: LocalDate): String = DateTimeFormatter.ISO_DATE.format(localDate)
 
         val customerName = timesheet.customer.customerName.value
@@ -20,6 +20,6 @@ class FilenameFactory(
         val uuid = uuidFactory.create()
         val suffix = "json"
 
-        return "$prefix/${customerName}_${startDate}_${endDate}_${uuid}.${suffix}"
+        return "$customerName/${startDate}_${endDate}_${uuid}.${suffix}"
     }
 }

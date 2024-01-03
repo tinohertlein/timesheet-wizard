@@ -16,8 +16,6 @@ import software.amazon.awssdk.services.s3.model.PutObjectResponse
 
 private val logger = KotlinLogging.logger {}
 
-private const val PREFIX = "json"
-
 @Singleton
 class S3PersistenceAdapter(
     @Value("\${aws.s3.bucket}") private val bucket: String,
@@ -29,7 +27,7 @@ class S3PersistenceAdapter(
     override fun save(timesheet: Timesheet): PersistenceResult {
         logger.debug { "Persisting timesheet..." }
 
-        val filename = filenameFactory.create(PREFIX, timesheet)
+        val filename = filenameFactory.create(timesheet)
         val content = jsonFactory.create(timesheet).toByteArray(Charsets.UTF_8)
 
         upload(filename, content)

@@ -29,11 +29,11 @@ internal class FilenameFactoryTest {
             val end = LocalDate.of(2022, 1, 31)
             val timesheet = Timesheet(TestMother.aCustomer(name = "the-customer"), start..end)
 
-            val filename = filenameFactory.create("JSON", timesheet)
+            val filename = filenameFactory.create(timesheet)
 
             assertThat(filename).isEqualTo(
-                "JSON/" +
-                        "the-customer_2022-01-01_2022-01-31_00000000-0000-0000-0000-000000000001.json"
+                "the-customer/" +
+                        "2022-01-01_2022-01-31_00000000-0000-0000-0000-000000000001.json"
             )
 
         }
