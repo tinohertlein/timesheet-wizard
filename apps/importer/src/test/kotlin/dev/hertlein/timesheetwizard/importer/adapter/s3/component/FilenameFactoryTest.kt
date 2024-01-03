@@ -33,7 +33,7 @@ internal class FilenameFactoryTest {
 
             assertThat(filename).isEqualTo(
                 "the-customer/" +
-                        "2022-01-01_2022-01-31_00000000-0000-0000-0000-000000000001.json"
+                        "timesheet_20220101-20220131_00000000-0000-0000-0000-000000000001.json"
             )
 
         }
