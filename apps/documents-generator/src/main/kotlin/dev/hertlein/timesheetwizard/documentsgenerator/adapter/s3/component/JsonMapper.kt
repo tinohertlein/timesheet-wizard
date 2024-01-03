@@ -42,7 +42,7 @@ class JsonMapper(
     ) {
         fun toEntity() = Timesheet.Entry(
             Timesheet.Entry.Project(project!!),
-            Timesheet.Entry.Task(task!!),
+            Timesheet.Entry.Task(task ?: ""),
             tags!!.map { Timesheet.Entry.Tag(it) },
             date!!,
             durationInMinutes!!.toDuration(DurationUnit.MINUTES)
