@@ -59,7 +59,7 @@ dependencies {
     implementation("com.github.librepdf:openpdf:$openPdfVersion")
 
     val guavaVersion = "33.0.0-jre"
-    val assertJVersion = "3.25.0"
+    val assertJVersion = "3.25.1"
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.assertj:assertj-core:$assertJVersion")
