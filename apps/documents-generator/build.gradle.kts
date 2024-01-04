@@ -73,6 +73,8 @@ dependencies {
 
     runtimeOnly("software.amazon.awssdk:url-connection-client")
     runtimeOnly("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")
+
+    // remove this line to build the module, as this is package is not public
     runtimeOnly("dev.hertlein.timesheetwizard:documents-generator-customers-private:$twCustomersPrivateVersion")
 }
 
