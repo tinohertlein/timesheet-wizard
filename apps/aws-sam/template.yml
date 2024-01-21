@@ -147,6 +147,9 @@ Resources:
         BlockPublicPolicy: true
         IgnorePublicAcls: true
         RestrictPublicBuckets: true
+      NotificationConfiguration:
+        EventBridgeConfiguration:
+          EventBridgeEnabled: true
 
   TimesheetwizardErrorTopic:
     Type: AWS::SNS::Topic
@@ -155,6 +158,14 @@ Resources:
         - Endpoint: !Ref MonitoringRecipient
           Protocol: email
       TopicName: timesheetwizard-error-topic
+
+  UploadTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint: !Ref MonitoringRecipient
+          Protocol: email
+      TopicName: timesheetwizard-upload-topic
 
   ImportAlarm:
     Type: AWS::CloudWatch::Alarm
