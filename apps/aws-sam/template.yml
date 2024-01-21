@@ -147,6 +147,28 @@ Resources:
         BlockPublicPolicy: true
         IgnorePublicAcls: true
         RestrictPublicBuckets: true
+      NotificationConfiguration:
+        TopicConfigurations:
+          - Event: s3:ObjectCreated:*
+            Topic: !Ref UploadTopic
+
+  UploadTopicPolicy:
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: 's3.amazonaws.com'
+            Action: sns:Publish
+            Resource: !Ref UploadTopic
+            Condition:
+              ArnEquals:
+                aws:SourceArn: !Join ["",['arn:aws:s3:::',!Ref TimesheetwizardDataBucket]]
+              StringEquals:
+                aws:SourceAccount: !Ref 'AWS::AccountId'
+      Topics:
+        - !Ref UploadTopic
 
   TimesheetwizardErrorTopic:
     Type: AWS::SNS::Topic
@@ -155,6 +177,14 @@ Resources:
         - Endpoint: !Ref MonitoringRecipient
           Protocol: email
       TopicName: timesheetwizard-error-topic
+
+  UploadTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint: !Ref MonitoringRecipient
+          Protocol: email
+      TopicName: timesheetwizard-upload-topic
 
   ImportAlarm:
     Type: AWS::CloudWatch::Alarm
