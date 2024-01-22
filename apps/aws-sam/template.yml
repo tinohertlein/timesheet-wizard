@@ -167,6 +167,25 @@ Resources:
           Protocol: email
       TopicName: timesheetwizard-upload-topic
 
+  UploadEvent:
+    Type: AWS::Events::Rule
+    Properties:
+      EventBusName: default
+      EventPattern:
+        source:
+          - aws.s3
+        detail-type:
+          - Object Created
+        detail:
+          bucket:
+            name:
+              - !Ref TimesheetwizardDataBucket
+      Name: timesheetwizard-upload-event
+      State: ENABLED
+      Targets:
+        - Id: timesheetwizard-upload-topic
+          Arn: !Ref UploadTopic
+
   ImportAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
