@@ -38,7 +38,7 @@ publishing {
 }
 
 dependencies {
-    val assertJVersion = "3.25.1"
+    val assertJVersion = "3.25.2"
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.assertj:assertj-core:$assertJVersion")

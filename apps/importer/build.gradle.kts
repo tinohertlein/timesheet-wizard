@@ -29,7 +29,7 @@ dependencies {
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.16.1"
     val logbackVersion = "1.4.14"
-    val awsSdkVersion = "2.23.7"
+    val awsSdkVersion = "2.23.11"
     val awsLambdaVersion = "3.11.4"
 
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
@@ -57,8 +57,8 @@ dependencies {
 
     val junitVersion = "5.10.1"
     val mockServerVersion = "5.15.0"
-    val testContainersVersion = "1.19.3"
-    val assertJVersion = "3.25.1"
+    val testContainersVersion = "1.19.4"
+    val assertJVersion = "3.25.2"
     val mockkVersion = "1.13.9"
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")

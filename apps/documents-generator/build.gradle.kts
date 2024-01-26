@@ -59,7 +59,7 @@ dependencies {
     implementation("dev.hertlein.timesheetwizard:documents-generator-spi:$twSpiVersion")
 
 
-    val assertJVersion = "3.25.1"
+    val assertJVersion = "3.25.2"
     val mockkVersion = "1.13.9"
 
     testImplementation("org.assertj:assertj-core:$assertJVersion")
@@ -69,7 +69,7 @@ dependencies {
 
 
     val twCustomersPublicVersion = "1.0.2"
-    val twCustomersPrivateVersion = "0.8.2"
+    val twCustomersPrivateVersion = "0.8.3"
 
     runtimeOnly("software.amazon.awssdk:url-connection-client")
     runtimeOnly("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")
