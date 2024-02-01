@@ -24,7 +24,7 @@ class PdfDocumentFactory : TimesheetDocumentFactory, PiedPiperConfig() {
         companion object {
             fun of(entry: Timesheet.Entry): PdfTimesheetEntry {
                 return PdfTimesheetEntry(
-                    format(entry.date),
+                    format(entry.start),
                     format(entry.project),
                     format(entry.tags),
                     format(entry.task),
@@ -64,5 +64,5 @@ class PdfDocumentFactory : TimesheetDocumentFactory, PiedPiperConfig() {
         timesheet.entries.sortedWith(entryComparator()).map { PdfTimesheetEntry.of(it) }
 
     private fun entryComparator(): Comparator<Timesheet.Entry> =
-        compareBy({ it.date }, { it.project.name }, { format(it.tags) }, { it.duration })
+        compareBy({ it.start }, { it.project.name }, { format(it.tags) }, { it.duration })
 }

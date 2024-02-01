@@ -1,6 +1,7 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
@@ -20,7 +21,8 @@ data class Timesheet(
         val project: Project,
         val task: Task,
         val tags: List<Tag>,
-        val date: LocalDate,
+        val start: LocalDateTime,
+        val end: LocalDateTime,
         val duration: Duration
     ) {
 

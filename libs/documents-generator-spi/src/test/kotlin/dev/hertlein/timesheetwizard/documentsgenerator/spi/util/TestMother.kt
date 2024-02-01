@@ -5,6 +5,7 @@ import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Custo
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer.Name
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 object TestMother {
 
@@ -14,13 +15,13 @@ object TestMother {
 
     val someTags = listOf("onsite").map { Timesheet.Entry.Tag(it) }
 
-    val aDate: LocalDate = LocalDate.of(2022, 1, 1)
+    val aStart: LocalDateTime = LocalDateTime.of(2022, 1, 1, 8, 0, 0)
 
-    val anotherDate: LocalDate = LocalDate.of(2022, 12, 31)
+    val anEnd: LocalDateTime = LocalDateTime.of(2022, 1, 1, 10, 0, 0)
 
-    fun aDateRange() = aDate..anotherDate
+    val aDateRange = LocalDate.of(2022, 1, 1)..LocalDate.of(2022, 12, 31)
 
-    fun anEmptyTimesheet() = Timesheet(aCustomer(), aDateRange(), emptyList())
+    val anEmptyTimesheet = Timesheet(aCustomer(), aDateRange, emptyList())
 
     fun aCustomer(
         id: String = "a-customer-id",

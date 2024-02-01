@@ -1,12 +1,14 @@
 package dev.hertlein.timesheetwizard.importer.util
 
-import dev.hertlein.timesheetwizard.importer.model.Customer
 import dev.hertlein.timesheetwizard.importer.model.Project
-import dev.hertlein.timesheetwizard.importer.model.Tag
 import dev.hertlein.timesheetwizard.importer.model.Task
+import dev.hertlein.timesheetwizard.importer.model.Tag
+import dev.hertlein.timesheetwizard.importer.model.Customer
 import dev.hertlein.timesheetwizard.importer.model.Timesheet
 import dev.hertlein.timesheetwizard.importer.model.TimesheetEntry
+import dev.hertlein.timesheetwizard.importer.model.DateTimeRange
 import java.time.LocalDate
+import java.time.LocalDateTime
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
@@ -23,6 +25,11 @@ object TestMother {
 
     val aDate = LocalDate.of(2022, 1, 1)
     val anotherDate = LocalDate.of(2022, 12, 31)
+
+    val aDateTimeStart = LocalDateTime.of(2022, 1, 1, 8, 0, 0)
+    val aDateTimeEnd = LocalDateTime.of(2022, 1, 1, 9, 0, 0)
+    val anotherDateTimeStart = LocalDateTime.of(2022, 12, 31, 10, 0, 0)
+    val anotherDateTimeEnd = LocalDateTime.of(2022, 12, 31, 11, 0, 0)
 
     val timesheetJson = """{
       "customer": {
@@ -46,18 +53,34 @@ object TestMother {
           "tags": [
             "onsite"
           ],
-          "date": [
+          "start": [
             2022,
             1,
-            1
+            1,
+            8,
+            0
           ],
-          "durationInMinutes": 120
+          "end": [
+            2022,
+            1,
+            1,
+            9,
+            0
+          ],
+          "durationInMinutes": 60
         }
       ]
     }
     """.trimIndent()
 
-    fun aTimesheetEntry() = TimesheetEntry(aProject, aTask, someTags, aDate, 2.toDuration(DurationUnit.HOURS))
+    fun aTimesheetEntry() =
+        TimesheetEntry(
+            aProject,
+            aTask,
+            someTags,
+            DateTimeRange(aDateTimeStart, aDateTimeEnd),
+            1.toDuration(DurationUnit.HOURS)
+        )
 
     fun aTimesheet() = Timesheet(aCustomer(), aDateRange()).add(aTimesheetEntry())
 

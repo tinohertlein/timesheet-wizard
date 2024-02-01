@@ -4,10 +4,12 @@ import dev.hertlein.timesheetwizard.importer.adapter.clockify.model.ResponseBody
 import dev.hertlein.timesheetwizard.importer.adapter.clockify.model.ResponseBody.TimeEntry
 import dev.hertlein.timesheetwizard.importer.model.TimesheetEntry
 import jakarta.inject.Singleton
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
-import java.time.LocalDate.parse as toLocalDate
+
+private val FORMAT = DateTimeFormatter.ISO_OFFSET_DATE_TIME
 
 @Singleton
 class ResponseBodyMapper {
@@ -20,7 +22,8 @@ class ResponseBodyMapper {
                     it.projectName,
                     it.description,
                     it.tags?.map { tag -> TimeEntry.Tag(tag.name).name } ?: emptyList(),
-                    toLocalDate(it.timeInterval.start, DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+                    LocalDateTime.parse(it.timeInterval.start, FORMAT),
+                    LocalDateTime.parse(it.timeInterval.end, FORMAT),
                     it.timeInterval.duration.toDuration(DurationUnit.SECONDS)
                 )
             }

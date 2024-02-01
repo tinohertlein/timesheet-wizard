@@ -29,7 +29,7 @@ class CsvDocumentFactory : TimesheetDocumentFactory, PiedPiperConfig() {
 
     private fun toCsv(timesheet: Timesheet): List<Array<String>> = timesheet.entries.sortedWith(entryComparator()).map {
             arrayOf(
-                format(it.date),
+                format(it.start),
                 format(it.project),
                 format(it.tags),
                 format(it.task),
@@ -38,5 +38,5 @@ class CsvDocumentFactory : TimesheetDocumentFactory, PiedPiperConfig() {
         }
 
     private fun entryComparator(): Comparator<Entry> =
-        compareBy({ it.date }, { it.project.name }, { format(it.tags) }, { it.duration })
+        compareBy({ it.start }, { it.project.name }, { format(it.tags) }, { it.duration })
 }

@@ -10,6 +10,7 @@ import java.io.InputStream
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.Locale
 
 abstract class PiedPiperConfig {
@@ -22,6 +23,7 @@ abstract class PiedPiperConfig {
         fun format(task: Task) = task.name
         fun format(tags: List<Tag>) = tags.joinToString(" ") { it.name }
         fun format(date: LocalDate): String = date.format(java.time.format.DateTimeFormatter.ISO_DATE)
+        fun format(dateTime: LocalDateTime): String = format(dateTime.toLocalDate())
         fun format(double: Double): String = DecimalFormat("0.00", DecimalFormatSymbols(Locale.GERMANY)).format(double)
 
         fun template(file: String): InputStream? = Thread.currentThread().contextClassLoader.getResourceAsStream(file)

@@ -11,6 +11,7 @@ import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Times
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet.Entry.Tag
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet.Entry.Task
 import java.time.LocalDate
+import java.time.LocalDateTime
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
@@ -22,11 +23,10 @@ object TestMother {
 
     val someTags = listOf("onsite").map { Tag(it) }
 
-    val aDate: LocalDate = LocalDate.of(2022, 1, 1)
+    val aStart = LocalDateTime.of(2022, 1, 1, 8, 0, 0)
+    val anEnd = LocalDateTime.of(2022, 1, 1, 10, 0, 0)
 
-    val anotherDate: LocalDate = LocalDate.of(2022, 12, 31)
-
-    fun aTimesheetEntry() = Entry(aProject, aTask, someTags, aDate, 2.toDuration(DurationUnit.HOURS))
+    fun aTimesheetEntry() = Entry(aProject, aTask, someTags, aStart, anEnd, 2.toDuration(DurationUnit.HOURS))
 
     fun aPdfTimesheetEntry() =
         PdfDocumentFactory.PdfTimesheetEntry(
@@ -41,7 +41,7 @@ object TestMother {
 
     fun aTimesheet() = Timesheet(aCustomer(), aDateRange(), listOf(aTimesheetEntry()))
 
-    fun aDateRange() = aDate..anotherDate
+    fun aDateRange() = LocalDate.of(2022, 1, 1)..LocalDate.of(2022, 12, 31)
 
     fun aCustomer(
         id: String = "a-customer-id",

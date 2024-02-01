@@ -24,11 +24,12 @@ internal class TimesheetTest {
                     TestMother.aProject,
                     TestMother.aTask,
                     TestMother.someTags,
-                    TestMother.aDate,
+                    TestMother.aStart,
+                    TestMother.anEnd,
                     (it.toDuration(DurationUnit.HOURS))
                 )
             }
-            val timesheet = Timesheet(aCustomer(), aDateRange(), entries)
+            val timesheet = Timesheet(aCustomer(), aDateRange, entries)
 
             val totalDuration = timesheet.totalDuration()
 
@@ -37,7 +38,7 @@ internal class TimesheetTest {
 
         @Test
         fun `should sum up duration if no entries present`() {
-            val totalDuration = anEmptyTimesheet().totalDuration()
+            val totalDuration = anEmptyTimesheet.totalDuration()
 
             assertThat(totalDuration).isEqualTo((0.toDuration(DurationUnit.HOURS)))
         }

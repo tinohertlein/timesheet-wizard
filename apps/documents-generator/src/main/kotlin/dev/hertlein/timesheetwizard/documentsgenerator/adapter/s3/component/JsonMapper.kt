@@ -8,6 +8,7 @@ import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Times
 import io.quarkus.runtime.annotations.RegisterForReflection
 import jakarta.enterprise.context.ApplicationScoped
 import java.time.LocalDate
+import java.time.LocalDateTime
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
@@ -37,14 +38,16 @@ class JsonMapper(
         val project: String? = null,
         val task: String? = null,
         val tags: List<String>? = listOf(),
-        val date: LocalDate? = null,
+        val start: LocalDateTime? = null,
+        val end: LocalDateTime? = null,
         val durationInMinutes: Long? = null
     ) {
         fun toEntity() = Timesheet.Entry(
             Timesheet.Entry.Project(project!!),
             Timesheet.Entry.Task(task ?: ""),
             tags!!.map { Timesheet.Entry.Tag(it) },
-            date!!,
+            start!!,
+            end!!,
             durationInMinutes!!.toDuration(DurationUnit.MINUTES)
         )
     }
