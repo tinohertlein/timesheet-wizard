@@ -8,7 +8,7 @@ plugins {
     `java-library`
     `maven-publish`
     kotlin("jvm") version "1.9.22"
-    id("io.gitlab.arturbosch.detekt") version "1.23.4"
+    id("io.gitlab.arturbosch.detekt") version "1.23.5"
 }
 
 group = "dev.hertlein.timesheetwizard"
