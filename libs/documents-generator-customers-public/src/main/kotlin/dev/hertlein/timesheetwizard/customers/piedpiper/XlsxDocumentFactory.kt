@@ -81,7 +81,7 @@ class XlsxDocumentFactory : TimesheetDocumentFactory, PiedPiperConfig() {
             .forEachIndexed { index, entry ->
                 (if (index == 0) referenceRow else createEntryRow(sheet, index + rowOffset, referenceRow))
                     .run {
-                        getCell(columnOffset + 0).setCellValue(entry.start)
+                        getCell(columnOffset + 0).setCellValue(entry.start.toLocalDate())
                         getCell(columnOffset + 1).setCellValue(format(entry.project))
                         getCell(columnOffset + 2).setCellValue(format(entry.tags))
                         getCell(columnOffset + 3).setCellValue(format(entry.task))

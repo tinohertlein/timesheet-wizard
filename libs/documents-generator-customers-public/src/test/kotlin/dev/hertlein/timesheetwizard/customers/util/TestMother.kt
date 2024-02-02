@@ -11,11 +11,13 @@ import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Times
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet.Entry.Tag
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet.Entry.Task
 import java.time.LocalDate
-import java.time.LocalDateTime
-import kotlin.time.DurationUnit
-import kotlin.time.toDuration
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
+import kotlin.time.Duration.Companion.hours
 
 object TestMother {
+
+    private val zoneOffset = ZoneOffset.ofHours(1)
 
     val aProject = Project("a project")
 
@@ -23,10 +25,10 @@ object TestMother {
 
     val someTags = listOf("onsite").map { Tag(it) }
 
-    val aStart = LocalDateTime.of(2022, 1, 1, 8, 0, 0)
-    val anEnd = LocalDateTime.of(2022, 1, 1, 10, 0, 0)
+    val aStart = OffsetDateTime.of(2022, 1, 1, 8, 0, 0, 0, zoneOffset)
+    val anEnd = OffsetDateTime.of(2022, 1, 1, 10, 0, 0, 0, zoneOffset)
 
-    fun aTimesheetEntry() = Entry(aProject, aTask, someTags, aStart, anEnd, 2.toDuration(DurationUnit.HOURS))
+    fun aTimesheetEntry() = Entry(aProject, aTask, someTags, aStart, anEnd, 2.hours)
 
     fun aPdfTimesheetEntry() =
         PdfDocumentFactory.PdfTimesheetEntry(

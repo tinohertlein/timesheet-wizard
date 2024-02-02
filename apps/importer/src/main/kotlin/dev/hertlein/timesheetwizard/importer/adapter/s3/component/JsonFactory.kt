@@ -6,8 +6,9 @@ import dev.hertlein.timesheetwizard.importer.model.Timesheet
 import dev.hertlein.timesheetwizard.importer.model.TimesheetEntry
 import io.micronaut.core.annotation.Introspected
 import jakarta.inject.Singleton
+import java.time.Instant
 import java.time.LocalDate
-import java.time.LocalDateTime
+import java.time.OffsetDateTime
 
 @Singleton
 class JsonFactory(
@@ -38,8 +39,8 @@ class JsonFactory(
         val project: String,
         val task: String,
         val tags: List<String>,
-        val start: LocalDateTime,
-        val end: LocalDateTime,
+        val start: OffsetDateTime,
+        val end: OffsetDateTime,
         val durationInMinutes: Long
     ) {
         companion object {

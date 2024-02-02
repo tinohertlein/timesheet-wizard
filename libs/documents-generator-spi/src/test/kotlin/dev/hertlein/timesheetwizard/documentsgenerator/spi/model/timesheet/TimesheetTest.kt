@@ -8,8 +8,8 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import kotlin.time.Duration.Companion.hours
 import kotlin.time.DurationUnit
-import kotlin.time.toDuration
 
 @DisplayName("Timesheet")
 internal class TimesheetTest {
@@ -26,21 +26,21 @@ internal class TimesheetTest {
                     TestMother.someTags,
                     TestMother.aStart,
                     TestMother.anEnd,
-                    (it.toDuration(DurationUnit.HOURS))
+                    (it.hours)
                 )
             }
             val timesheet = Timesheet(aCustomer(), aDateRange, entries)
 
             val totalDuration = timesheet.totalDuration()
 
-            assertThat(totalDuration).isEqualTo((55.toDuration(DurationUnit.HOURS)))
+            assertThat(totalDuration).isEqualTo((55.hours))
         }
 
         @Test
         fun `should sum up duration if no entries present`() {
             val totalDuration = anEmptyTimesheet.totalDuration()
 
-            assertThat(totalDuration).isEqualTo((0.toDuration(DurationUnit.HOURS)))
+            assertThat(totalDuration).isEqualTo((0.hours))
         }
     }
 }

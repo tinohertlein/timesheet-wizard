@@ -2,6 +2,10 @@ micronaut:
   application:
     name: importer
 
+jackson:
+  serialization:
+    writeDatesAsTimestamps: false
+
 aws:
   s3:
     bucket: timesheetwizard-data

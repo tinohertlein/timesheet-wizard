@@ -22,8 +22,8 @@ import org.mockserver.model.HttpResponse
 import org.mockserver.verify.VerificationTimes
 import java.time.LocalDate
 import java.util.concurrent.TimeUnit
+import kotlin.time.Duration.Companion.hours
 import kotlin.time.DurationUnit.HOURS
-import kotlin.time.toDuration
 
 
 private const val MOCK_SERVER_HOST = "http://localhost"
@@ -71,9 +71,9 @@ internal class ClockifyImportAdapterIT {
             assertThat(timesheet.customer).isEqualTo(aCustomer)
             assertThat(timesheet.dateRange.start).isEqualTo(startDate)
             assertThat(timesheet.dateRange.endInclusive).isEqualTo(endDate)
-            assertThat(timesheet.entries[0].duration).isEqualTo(9.toDuration(HOURS))
+            assertThat(timesheet.entries[0].duration).isEqualTo(9.hours)
             assertThat(timesheet.entries[0].tags).containsExactly(Tag("Remote"))
-            assertThat(timesheet.entries[1].duration).isEqualTo(9.toDuration(HOURS))
+            assertThat(timesheet.entries[1].duration).isEqualTo(9.hours)
             assertThat(timesheet.entries[1].tags).isEmpty()
             assertAll()
         }

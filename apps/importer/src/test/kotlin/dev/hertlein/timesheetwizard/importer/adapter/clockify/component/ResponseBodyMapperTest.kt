@@ -9,12 +9,14 @@ import org.joda.time.DateTimeConstants
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import java.time.LocalDateTime
-import kotlin.time.DurationUnit.HOURS
-import kotlin.time.toDuration
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
+import kotlin.time.Duration.Companion.hours
 
 @DisplayName("ResponseBodyMapper")
 internal class ResponseBodyMapperTest {
+
+    private val zoneOffset = ZoneOffset.ofHours(1)
 
     private val aProject = "a project"
     private val anotherProject = "another project"
@@ -25,14 +27,14 @@ internal class ResponseBodyMapperTest {
     private val someTagsAsStrings = listOf("onsite")
     private val someTagsAsTags = someTagsAsStrings.map { TimeEntry.Tag(it) }
 
-    private val aDateLowerAsDateTime = LocalDateTime.of(2022, 8, 1, 8, 0)
+    private val aDateLowerAsDateTime = OffsetDateTime.of(2022, 8, 1, 8, 0, 0, 0, zoneOffset)
     private val aDateLowerAsString = "2022-08-01T08:00:00+01:00"
-    private val aDateUpperAsDateTime = LocalDateTime.of(2022, 8, 1, 10, 0, 0)
+    private val aDateUpperAsDateTime = OffsetDateTime.of(2022, 8, 1, 10, 0, 0, 0, zoneOffset)
     private val aDateUpperAsString = "2022-08-01T10:00:00+01:00"
 
-    private val anotherDateLowerAsDateTime = LocalDateTime.of(2022, 9, 30, 12, 0)
+    private val anotherDateLowerAsDateTime = OffsetDateTime.of(2022, 9, 30, 12, 0, 0, 0, zoneOffset)
     private val anotherDateLowerAsString = "2022-09-30T12:00:00+01:00"
-    private val anotherDateUpperAsDateTime = LocalDateTime.of(2022, 9, 30, 15, 0, 0)
+    private val anotherDateUpperAsDateTime = OffsetDateTime.of(2022, 9, 30, 15, 0, 0, 0, zoneOffset)
     private val anotherDateUpperAsString = "2022-09-30T15:00:00+01:00"
 
     @Nested
@@ -90,7 +92,7 @@ internal class ResponseBodyMapperTest {
             someTagsAsStrings,
             aDateLowerAsDateTime,
             aDateUpperAsDateTime,
-            2.toDuration(HOURS)
+            2.hours
         ),
         TimesheetEntry.of(
             aProject,
@@ -98,7 +100,7 @@ internal class ResponseBodyMapperTest {
             someTagsAsStrings,
             anotherDateLowerAsDateTime,
             anotherDateUpperAsDateTime,
-            3.toDuration(HOURS)
+            3.hours
         ),
         TimesheetEntry.of(
             aProject,
@@ -106,7 +108,7 @@ internal class ResponseBodyMapperTest {
             someTagsAsStrings,
             aDateLowerAsDateTime,
             aDateUpperAsDateTime,
-            2.toDuration(HOURS)
+            2.hours
         ),
         TimesheetEntry.of(
             anotherProject,
@@ -114,7 +116,7 @@ internal class ResponseBodyMapperTest {
             someTagsAsStrings,
             aDateLowerAsDateTime,
             aDateUpperAsDateTime,
-            2.toDuration(HOURS)
+            2.hours
         ),
         TimesheetEntry.of(
             anotherProject,
@@ -122,7 +124,7 @@ internal class ResponseBodyMapperTest {
             someTagsAsStrings,
             aDateLowerAsDateTime,
             aDateUpperAsDateTime,
-            2.toDuration(HOURS)
+            2.hours
         )
     )
 

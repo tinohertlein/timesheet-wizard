@@ -9,11 +9,12 @@ import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Times
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet.Entry.Tag
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet.Entry.Task
 import java.time.LocalDate
-import java.time.LocalDateTime
-import kotlin.time.DurationUnit
-import kotlin.time.toDuration
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
+import kotlin.time.Duration.Companion.hours
 
 object TestMother {
+    private val zoneOffset = ZoneOffset.ofHours(1)
 
     val aProject = Project("a project")
 
@@ -21,24 +22,16 @@ object TestMother {
 
     val someTags = listOf("onsite").map { Tag(it) }
 
-    val aStart = LocalDateTime.of(2022, 1, 1, 8, 0, 0)
-    val anEnd = LocalDateTime.of(2022, 1, 1, 10, 0, 0)
+    val aStart = OffsetDateTime.of(2022, 1, 1, 8, 0, 0, 0, zoneOffset)
+    val anEnd = OffsetDateTime.of(2022, 1, 1, 10, 0, 0, 0, zoneOffset)
 
     val emptyTimesheetJson = """{
       "customer": {
         "customerId": "a-customer-id",
         "customerName": "a-customer-name"
       },
-      "startDate": [
-        2022,
-        1,
-        1
-      ],
-      "endDate": [
-        2022,
-        12,
-        31
-      ]
+       "startDate": "2022-01-01",
+       "endDate": "2022-12-31"
     }""".trimIndent()
 
     val timesheetJson = """{
@@ -46,16 +39,8 @@ object TestMother {
         "customerId": "a-customer-id",
         "customerName": "a-customer-name"
       },
-      "startDate": [
-        2022,
-        1,
-        1
-      ],
-      "endDate": [
-        2022,
-        12,
-        31
-      ],
+      "startDate": "2022-01-01",
+      "endDate": "2022-12-31",
       "entries": [
         {
           "project": "a project",
@@ -63,29 +48,15 @@ object TestMother {
           "tags": [
             "onsite"
           ],
-          "start": [
-            2022,
-            1,
-            1,
-            8,
-            0,
-            0
-          ],
-           "end": [
-            2022,
-            1,
-            1,
-            10,
-            0,
-            0
-          ],
+          "start": "2022-01-01T08:00:00+01:00",
+          "end": "2022-01-01T10:00:00+01:00",
           "durationInMinutes": 120
         }
       ]
     }
     """.trimIndent()
 
-    fun aTimesheetEntry() = Entry(aProject, aTask, someTags, aStart, anEnd, 2.toDuration(DurationUnit.HOURS))
+    fun aTimesheetEntry() = Entry(aProject, aTask, someTags, aStart, anEnd, 2.hours)
 
     fun aTimesheet() = Timesheet(aCustomer(), aDateRange(), listOf(aTimesheetEntry()))
 

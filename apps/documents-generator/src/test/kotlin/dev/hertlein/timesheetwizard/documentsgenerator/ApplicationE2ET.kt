@@ -33,12 +33,12 @@ internal class ApplicationE2ET {
     @Test
     fun `should generate an xlsx file, a pdf file and a csv file from json`() {
         createBucket()
-        val jsonFilename = "PiedPiper_2022-01-01_2022-12-31_e47dc4a0-2899-41a7-a390-a5c6152f2e42.json"
+        val jsonFilename = "PiedPiper_2022-01-01_2022-01-31_e47dc4a0-2899-41a7-a390-a5c6152f2e42.json"
         val jsonFileContent = readResource(jsonFilename)
         val expectedFilenames = listOf(
-            "timesheet_20220101-20221231.xlsx",
-            "timesheet_20220101-20221231.pdf",
-            "timesheet_20220101-20221231.csv"
+            "timesheet_20220101-20220131.xlsx",
+            "timesheet_20220101-20220131.pdf",
+            "timesheet_20220101-20220131.csv"
         )
         upload(jsonFilename, jsonFileContent)
         val s3Event = createS3Event(jsonFilename)

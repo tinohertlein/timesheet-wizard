@@ -7,12 +7,14 @@ import dev.hertlein.timesheetwizard.importer.model.Customer
 import dev.hertlein.timesheetwizard.importer.model.Timesheet
 import dev.hertlein.timesheetwizard.importer.model.TimesheetEntry
 import dev.hertlein.timesheetwizard.importer.model.DateTimeRange
+import java.time.ZoneOffset
+import java.time.OffsetDateTime
 import java.time.LocalDate
-import java.time.LocalDateTime
+import kotlin.time.Duration.Companion.hours
 import kotlin.time.DurationUnit
-import kotlin.time.toDuration
 
 object TestMother {
+    private val zoneOffset = ZoneOffset.ofHours(1)
 
     val aProject = Project("a project")
     val anotherProject = Project("another project")
@@ -26,26 +28,16 @@ object TestMother {
     val aDate = LocalDate.of(2022, 1, 1)
     val anotherDate = LocalDate.of(2022, 12, 31)
 
-    val aDateTimeStart = LocalDateTime.of(2022, 1, 1, 8, 0, 0)
-    val aDateTimeEnd = LocalDateTime.of(2022, 1, 1, 9, 0, 0)
-    val anotherDateTimeStart = LocalDateTime.of(2022, 12, 31, 10, 0, 0)
-    val anotherDateTimeEnd = LocalDateTime.of(2022, 12, 31, 11, 0, 0)
+    val aDateTimeStart = OffsetDateTime.of(2022, 1, 1, 8, 0, 0, 0, zoneOffset)
+    val aDateTimeEnd = OffsetDateTime.of(2022, 1, 1, 9, 0, 0,0, zoneOffset)
 
     val timesheetJson = """{
       "customer": {
         "customerId": "a-customer-id",
         "customerName": "a-customer-name"
       },
-      "startDate": [
-        2022,
-        1,
-        1
-      ],
-      "endDate": [
-        2022,
-        12,
-        31
-      ],
+      "startDate": "2022-01-01",
+      "endDate": "2022-12-31",
       "entries": [
         {
           "project": "a project",
@@ -53,20 +45,8 @@ object TestMother {
           "tags": [
             "onsite"
           ],
-          "start": [
-            2022,
-            1,
-            1,
-            8,
-            0
-          ],
-          "end": [
-            2022,
-            1,
-            1,
-            9,
-            0
-          ],
+          "start": "2022-01-01T08:00:00+01:00",
+          "end": "2022-01-01T09:00:00+01:00",
           "durationInMinutes": 60
         }
       ]
@@ -79,7 +59,7 @@ object TestMother {
             aTask,
             someTags,
             DateTimeRange(aDateTimeStart, aDateTimeEnd),
-            1.toDuration(DurationUnit.HOURS)
+            1.hours
         )
 
     fun aTimesheet() = Timesheet(aCustomer(), aDateRange()).add(aTimesheetEntry())

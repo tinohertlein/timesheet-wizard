@@ -9,25 +9,25 @@ import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Times
 import java.io.InputStream
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
+import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.OffsetDateTime
 import java.util.Locale
 
 abstract class PiedPiperConfig {
 
     companion object {
 
-        private val piedPiper = Customer(Id("1000"), Name("PiedPiper"))
-
         fun format(project: Project) = project.name
         fun format(task: Task) = task.name
         fun format(tags: List<Tag>) = tags.joinToString(" ") { it.name }
         fun format(date: LocalDate): String = date.format(java.time.format.DateTimeFormatter.ISO_DATE)
-        fun format(dateTime: LocalDateTime): String = format(dateTime.toLocalDate())
+        fun format(dateTime: OffsetDateTime): String = format(dateTime.toLocalDate())
         fun format(double: Double): String = DecimalFormat("0.00", DecimalFormatSymbols(Locale.GERMANY)).format(double)
 
         fun template(file: String): InputStream? = Thread.currentThread().contextClassLoader.getResourceAsStream(file)
     }
 
-    fun canHandle(customer: Customer) = customer == piedPiper
+    fun canHandle(customer: Customer) = customer == Customer(Id("1000"), Name("PiedPiper"))
 }

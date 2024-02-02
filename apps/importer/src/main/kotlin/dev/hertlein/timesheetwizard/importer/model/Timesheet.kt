@@ -1,8 +1,11 @@
 package dev.hertlein.timesheetwizard.importer.model
 
 import io.micronaut.core.annotation.Introspected
+import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.ZonedDateTime
 import kotlin.time.Duration
 
 @Introspected
@@ -30,8 +33,8 @@ data class TimesheetEntry(
             project: String,
             task: String,
             tags: List<String>,
-            start: LocalDateTime,
-            end: LocalDateTime,
+            start: OffsetDateTime,
+            end: OffsetDateTime,
             duration: Duration
         ) = TimesheetEntry(
             Project(project),
@@ -56,4 +59,4 @@ value class Tag(val name: String)
 value class Project(val name: String)
 
 @Introspected
-data class DateTimeRange(val start: LocalDateTime, val end: LocalDateTime)
+data class DateTimeRange(val start: OffsetDateTime, val end: OffsetDateTime)

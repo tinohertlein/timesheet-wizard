@@ -1,5 +1,6 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.adapter.s3.component
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.databind.ObjectMapper
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer.Id
@@ -8,9 +9,8 @@ import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Times
 import io.quarkus.runtime.annotations.RegisterForReflection
 import jakarta.enterprise.context.ApplicationScoped
 import java.time.LocalDate
-import java.time.LocalDateTime
-import kotlin.time.DurationUnit
-import kotlin.time.toDuration
+import java.time.OffsetDateTime
+import kotlin.time.Duration.Companion.minutes
 
 @ApplicationScoped
 class JsonMapper(
@@ -38,8 +38,8 @@ class JsonMapper(
         val project: String? = null,
         val task: String? = null,
         val tags: List<String>? = listOf(),
-        val start: LocalDateTime? = null,
-        val end: LocalDateTime? = null,
+        val start: OffsetDateTime? = null,
+        val end: OffsetDateTime? = null,
         val durationInMinutes: Long? = null
     ) {
         fun toEntity() = Timesheet.Entry(
@@ -48,7 +48,7 @@ class JsonMapper(
             tags!!.map { Timesheet.Entry.Tag(it) },
             start!!,
             end!!,
-            durationInMinutes!!.toDuration(DurationUnit.MINUTES)
+            durationInMinutes!!.minutes
         )
     }
 
