@@ -69,7 +69,7 @@ dependencies {
 
 
     val twCustomersPublicVersion = "2.0.0"
-    val twCustomersPrivateVersion = "1.0.2"
+    val twCustomersPrivateVersion = "1.0.3"
 
     runtimeOnly("software.amazon.awssdk:url-connection-client")
     runtimeOnly("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")
