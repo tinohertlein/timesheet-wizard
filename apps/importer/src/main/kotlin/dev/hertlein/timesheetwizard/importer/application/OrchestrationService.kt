@@ -28,6 +28,7 @@ class OrchestrationService(
                 logger.debug { "Importing timesheet for customer $customer and date range $dateRange..." }
 
                 val timesheet = importPort.import(customer, dateRange)
+                logger.debug { "Fetched $timesheet" }
                 val persistenceResult = persistencePort.save(timesheet)
 
                 logger.debug {

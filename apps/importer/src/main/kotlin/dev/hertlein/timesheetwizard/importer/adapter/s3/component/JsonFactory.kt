@@ -1,16 +1,13 @@
 package dev.hertlein.timesheetwizard.importer.adapter.s3.component
 
-import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.databind.ObjectMapper
 import dev.hertlein.timesheetwizard.importer.model.Customer
 import dev.hertlein.timesheetwizard.importer.model.Timesheet
 import dev.hertlein.timesheetwizard.importer.model.TimesheetEntry
 import io.micronaut.core.annotation.Introspected
 import jakarta.inject.Singleton
-import java.time.Instant
 import java.time.LocalDate
 import java.time.OffsetDateTime
-import java.time.format.DateTimeFormatter
 
 @Singleton
 class JsonFactory(
@@ -41,9 +38,7 @@ class JsonFactory(
         val project: String,
         val task: String,
         val tags: List<String>,
-        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssxxx")
         val start: OffsetDateTime,
-        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssxxx")
         val end: OffsetDateTime,
         val durationInMinutes: Long
     ) {

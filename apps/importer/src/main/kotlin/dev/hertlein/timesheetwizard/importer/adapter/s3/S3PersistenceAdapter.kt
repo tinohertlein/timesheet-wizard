@@ -28,7 +28,9 @@ class S3PersistenceAdapter(
         logger.debug { "Persisting timesheet..." }
 
         val filename = filenameFactory.create(timesheet)
-        val content = jsonFactory.create(timesheet).toByteArray(Charsets.UTF_8)
+        val json = jsonFactory.create(timesheet)
+        logger.debug { "Persisting json: $json" }
+        val content = json.toByteArray(Charsets.UTF_8)
 
         upload(filename, content)
 
