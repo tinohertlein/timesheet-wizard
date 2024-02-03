@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter
 
 
 @Singleton
-class RegisterCustomModuleCustomizer : ObjectMapperCustomizer {
+class RegisterOffsetDateTimeSerializer : ObjectMapperCustomizer {
 
     override fun customize(mapper: ObjectMapper) {
         mapper.registerModule(JavaTimeModule())

@@ -8,8 +8,8 @@ plugins {
     val kotlin = "1.9.22"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
-    id("io.quarkus") version "3.7.0"
-    id("io.gitlab.arturbosch.detekt") version "1.23.4"
+    id("io.quarkus") version "3.7.1"
+    id("io.gitlab.arturbosch.detekt") version "1.23.5"
 }
 
 group = "dev.hertlein.timesheetwizard"
@@ -38,7 +38,7 @@ repositories {
 
 val quarkusPlatformGroupId = "io.quarkus.platform"
 val quarkusPlatformArtifactId = "quarkus-bom"
-val quarkusPlatformVersion = "3.6.7"
+val quarkusPlatformVersion = "3.7.1"
 
 dependencies {
     val guavaVersion = "33.0.0-jre"
