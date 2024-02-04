@@ -4,11 +4,11 @@ import dev.hertlein.timesheetwizard.documentsgenerator.util.TestMother.aTimeshee
 import dev.hertlein.timesheetwizard.documentsgenerator.util.TestMother.emptyTimesheetJson
 import dev.hertlein.timesheetwizard.documentsgenerator.util.TestMother.timesheetJson
 import io.quarkus.test.junit.QuarkusTest
+import jakarta.inject.Inject
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import jakarta.inject.Inject
 
 @QuarkusTest
 @DisplayName("JsonMapper")

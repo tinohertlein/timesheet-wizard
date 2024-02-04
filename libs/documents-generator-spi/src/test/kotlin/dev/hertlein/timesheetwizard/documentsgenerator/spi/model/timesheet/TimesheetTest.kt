@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.time.Duration.Companion.hours
-import kotlin.time.DurationUnit
 
 @DisplayName("Timesheet")
 internal class TimesheetTest {

@@ -9,9 +9,7 @@ import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Times
 import java.io.InputStream
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
-import java.time.Instant
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.util.Locale
 

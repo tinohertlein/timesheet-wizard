@@ -4,7 +4,6 @@ import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Custo
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer.Id
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer.Name
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet
-import java.time.Instant
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.ZoneOffset

@@ -3,8 +3,8 @@ package dev.hertlein.timesheetwizard.customers.piedpiper
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.TimesheetDocumentFactory
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.contact.ContactDetails
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet
-import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.TimesheetDocument
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet.Entry
+import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.TimesheetDocument
 import jakarta.inject.Singleton
 import java.io.ByteArrayOutputStream
 import java.io.OutputStreamWriter

@@ -4,11 +4,10 @@ import dev.hertlein.timesheetwizard.importer.application.factory.UUIDFactory
 import dev.hertlein.timesheetwizard.importer.model.Timesheet
 import jakarta.inject.Singleton
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatterBuilder
 import java.time.format.SignStyle
 import java.time.temporal.ChronoField
-import java.util.*
+import java.util.Locale
 
 @Singleton
 class FilenameFactory(

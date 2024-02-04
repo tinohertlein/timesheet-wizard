@@ -1,6 +1,5 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.adapter.s3.component
 
-import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.databind.ObjectMapper
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Customer.Id

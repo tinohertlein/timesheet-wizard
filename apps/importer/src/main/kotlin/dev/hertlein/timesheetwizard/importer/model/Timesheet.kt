@@ -1,11 +1,8 @@
 package dev.hertlein.timesheetwizard.importer.model
 
 import io.micronaut.core.annotation.Introspected
-import java.time.Instant
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.OffsetDateTime
-import java.time.ZonedDateTime
 import kotlin.time.Duration
 
 @Introspected

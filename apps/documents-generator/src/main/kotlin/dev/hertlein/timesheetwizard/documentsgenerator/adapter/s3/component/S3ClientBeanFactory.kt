@@ -2,6 +2,7 @@ package dev.hertlein.timesheetwizard.documentsgenerator.adapter.s3.component
 
 import dev.hertlein.timesheetwizard.documentsgenerator.application.config.Environments
 import io.quarkus.arc.profile.IfBuildProfile
+import jakarta.enterprise.context.ApplicationScoped
 import mu.KotlinLogging
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials
@@ -19,7 +20,6 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectResponse
 import software.amazon.awssdk.services.s3.model.S3Object
 import java.io.ByteArrayInputStream
-import jakarta.enterprise.context.ApplicationScoped
 
 private val logger = KotlinLogging.logger {}
 

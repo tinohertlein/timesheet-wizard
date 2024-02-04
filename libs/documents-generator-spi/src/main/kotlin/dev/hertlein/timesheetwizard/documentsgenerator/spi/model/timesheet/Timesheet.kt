@@ -1,6 +1,5 @@
 package dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet
 
-import java.time.Instant
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import kotlin.time.Duration
