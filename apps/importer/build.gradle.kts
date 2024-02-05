@@ -55,7 +55,7 @@ dependencies {
     implementation("com.amazonaws:aws-lambda-java-events:$awsLambdaVersion")
     implementation("software.amazon.awssdk:s3")
 
-    val junitVersion = "5.10.1"
+    val junitVersion = "5.10.2"
     val mockServerVersion = "5.15.0"
     val testContainersVersion = "1.19.4"
     val assertJVersion = "3.25.2"
