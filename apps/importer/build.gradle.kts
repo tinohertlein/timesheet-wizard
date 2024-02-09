@@ -125,7 +125,8 @@ tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative"
     args(
         "-XX:MaximumHeapSizePercent=80",
         "-Dio.netty.allocator.numDirectArenas=0",
-        "-Dio.netty.noPreferDirect=true"
+        "-Dio.netty.noPreferDirect=true",
+        "-march=compatibility"
     )
 }
 
