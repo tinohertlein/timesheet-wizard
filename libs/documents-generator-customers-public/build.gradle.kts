@@ -52,7 +52,7 @@ dependencies {
     val openCsvVersion = "5.9"
     val poiVersion = "5.2.5"
     val jasperVersion = "6.21.0"
-    val openPdfVersion = "1.3.39"
+    val openPdfVersion = "1.3.40"
 
     implementation("dev.hertlein.timesheetwizard:documents-generator-spi:$twSpiVersion")
     implementation("jakarta.inject:jakarta.inject-api:$jakartaApiVersion")
