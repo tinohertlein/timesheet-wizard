@@ -1,8 +1,4 @@
-import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
-import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
-import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
-import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
-import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
+import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
     `java-library`
@@ -51,8 +47,8 @@ dependencies {
     val jakartaApiVersion = "2.0.1"
     val openCsvVersion = "5.9"
     val poiVersion = "5.2.5"
-    val jasperVersion = "6.21.0"
-    val openPdfVersion = "1.3.39"
+    val jasperVersion = "6.21.2"
+    val openPdfVersion = "1.3.40"
 
     implementation("dev.hertlein.timesheetwizard:documents-generator-spi:$twSpiVersion")
     implementation("jakarta.inject:jakarta.inject-api:$jakartaApiVersion")
