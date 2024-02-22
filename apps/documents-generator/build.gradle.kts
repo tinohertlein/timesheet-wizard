@@ -4,7 +4,7 @@ plugins {
     val kotlin = "1.9.22"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
-    id("io.quarkus") version "3.7.3"
+    id("io.quarkus") version "3.8.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.5"
 }
 
