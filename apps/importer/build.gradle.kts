@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "4.2.1"
+    id("io.micronaut.application") version "4.3.3"
     id("io.gitlab.arturbosch.detekt") version "1.23.5"
 }
 
@@ -118,6 +118,7 @@ micronaut {
 
 
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
+    baseImage.set("public.ecr.aws/amazonlinux/amazonlinux:2")
     args(
         "-XX:MaximumHeapSizePercent=80",
         "-Dio.netty.allocator.numDirectArenas=0",
