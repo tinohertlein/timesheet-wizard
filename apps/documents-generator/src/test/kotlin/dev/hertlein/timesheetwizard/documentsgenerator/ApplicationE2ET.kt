@@ -19,10 +19,14 @@ import software.amazon.awssdk.services.s3.model.CreateBucketRequest
 import software.amazon.awssdk.services.s3.model.GetObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectResponse
+import java.io.File
+
+private const val SAVE_TEST_FILES: Boolean = false
 
 @QuarkusTest
 @DisplayName("Application")
 internal class ApplicationE2ET {
+
 
     @Inject
     lateinit var s3Client: S3Client
@@ -54,9 +58,12 @@ internal class ApplicationE2ET {
             .body("persistenceResults.size()", equalTo(3))
 
         expectedFilenames.forEach {
-            val file = download("PiedPiper/$it")
-            assertThat(file.size).isGreaterThan(0)
+            val bytes = download("PiedPiper/$it")
+            assertThat(bytes.size).isGreaterThan(0)
 
+            if (SAVE_TEST_FILES) {
+                File(it).writeBytes(bytes)
+            }
         }
     }
 
