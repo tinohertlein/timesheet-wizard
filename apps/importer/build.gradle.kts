@@ -55,7 +55,7 @@ dependencies {
     val mockServerVersion = "5.15.0"
     val testContainersVersion = "1.19.6"
     val assertJVersion = "3.25.3"
-    val mockkVersion = "1.13.9"
+    val mockkVersion = "1.13.10"
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
