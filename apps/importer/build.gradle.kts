@@ -24,8 +24,8 @@ dependencies {
     val guavaVersion = "33.0.0-jre"
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.16.1"
-    val logbackVersion = "1.5.0"
-    val awsSdkVersion = "2.24.10"
+    val logbackVersion = "1.5.1"
+    val awsSdkVersion = "2.25.0"
     val awsLambdaVersion = "3.11.4"
 
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
@@ -55,7 +55,7 @@ dependencies {
     val mockServerVersion = "5.15.0"
     val testContainersVersion = "1.19.6"
     val assertJVersion = "3.25.3"
-    val mockkVersion = "1.13.9"
+    val mockkVersion = "1.13.10"
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
@@ -74,7 +74,7 @@ dependencies {
 
 buildscript {
     dependencies {
-        classpath("com.github.docker-java:docker-java-transport-httpclient5:3.3.5") {
+        classpath("com.github.docker-java:docker-java-transport-httpclient5:3.3.6") {
             because("M1 macs need a later version of JNA")
         }
     }
