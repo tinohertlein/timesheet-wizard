@@ -24,7 +24,7 @@ dependencies {
     val guavaVersion = "33.0.0-jre"
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.16.1"
-    val logbackVersion = "1.5.1"
+    val logbackVersion = "1.5.2"
     val awsSdkVersion = "2.25.1"
     val awsLambdaVersion = "3.11.4"
 
