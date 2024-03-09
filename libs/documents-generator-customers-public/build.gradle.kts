@@ -3,13 +3,13 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 plugins {
     `java-library`
     `maven-publish`
-    kotlin("jvm") version "1.9.22"
+    kotlin("jvm") version "1.9.23"
     id("io.gitlab.arturbosch.detekt") version "1.23.5"
     id("org.kordamp.gradle.jandex") version "1.1.0"
 }
 
 group = "dev.hertlein.timesheetwizard"
-version = "2.0.0"
+version = "2.0.1"
 
 repositories {
     mavenCentral()
@@ -43,12 +43,12 @@ publishing {
 }
 
 dependencies {
-    val twSpiVersion = "2.0.0"
+    val twSpiVersion = "2.0.1"
     val jakartaApiVersion = "2.0.1"
     val openCsvVersion = "5.9"
     val poiVersion = "5.2.5"
     val jasperVersion = "6.21.2"
-    val openPdfVersion = "2.0.0"
+    val openPdfVersion = "2.0.1"
 
     implementation("dev.hertlein.timesheetwizard:documents-generator-spi:$twSpiVersion")
     implementation("jakarta.inject:jakarta.inject-api:$jakartaApiVersion")

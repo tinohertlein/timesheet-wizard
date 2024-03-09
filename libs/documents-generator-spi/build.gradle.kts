@@ -1,18 +1,14 @@
-import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
-import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
-import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
-import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
-import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
+import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
     `java-library`
     `maven-publish`
-    kotlin("jvm") version "1.9.22"
+    kotlin("jvm") version "1.9.23"
     id("io.gitlab.arturbosch.detekt") version "1.23.5"
 }
 
 group = "dev.hertlein.timesheetwizard"
-version = "2.0.0"
+version = "2.0.1"
 
 repositories {
     mavenCentral()
