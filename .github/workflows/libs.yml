@@ -1,0 +1,48 @@
+name: Build Libs
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'libs/**'
+
+env:
+  JAVA_VERSION: '17'
+  AWS_REGION: 'eu-central-1'
+
+jobs:
+  build_it:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ format('{0}-{1}', github.workflow, github.job) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: 'gradle'
+
+      - name: Build & test 'libs' with Gradle
+        working-directory: libs
+        run: ./gradlew test
+
+      - name: Generate test report for 'documents-generator-spi'
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Test Report 'documents-generator-spi'
+          path: libs/documents-generator-spi/build/test-results/test/*.xml
+          reporter: java-junit
+
+      - name: Generate test report for 'documents-generator-customers-public'
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Test Report 'documents-generator-customers-public'
+          path: libs/documents-generator-customers-public/build/test-results/test/*.xml
+          reporter: java-junit
