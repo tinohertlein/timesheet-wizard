@@ -4,7 +4,7 @@ plugins {
     `java-library`
     `maven-publish`
     kotlin("jvm") version "1.9.23"
-    id("io.gitlab.arturbosch.detekt") version "1.23.5"
+    id("io.gitlab.arturbosch.detekt") version "1.23.6"
     id("org.kordamp.gradle.jandex") version "1.1.0"
 }
 
