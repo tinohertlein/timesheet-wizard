@@ -6,8 +6,8 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "4.3.4"
-    id("io.gitlab.arturbosch.detekt") version "1.23.5"
+    id("io.micronaut.application") version "4.3.5"
+    id("io.gitlab.arturbosch.detekt") version "1.23.6"
 }
 
 group = "dev.hertlein.timesheetwizard"
@@ -25,7 +25,7 @@ dependencies {
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.17.0"
     val logbackVersion = "1.5.3"
-    val awsSdkVersion = "2.25.9"
+    val awsSdkVersion = "2.25.21"
     val awsLambdaVersion = "3.11.4"
 
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
