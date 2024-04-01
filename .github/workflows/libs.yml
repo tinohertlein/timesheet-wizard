@@ -29,6 +29,8 @@ jobs:
 
       - name: Build & test 'libs' with Gradle
         working-directory: libs
+        env:
+          GH_PACKAGE_TOKEN: ${{ secrets.GH_PACKAGE_TOKEN }}
         run: ./gradlew test
 
       - name: Generate test report for 'documents-generator-spi'
