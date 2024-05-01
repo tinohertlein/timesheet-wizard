@@ -5,7 +5,7 @@ plugins {
     `maven-publish`
     kotlin("jvm") version "1.9.23"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
-    id("org.kordamp.gradle.jandex") version "1.1.0"
+    id("org.kordamp.gradle.jandex") version "2.0.0"
 }
 
 group = "dev.hertlein.timesheetwizard"
