@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
 
-    val guavaVersion = "33.1.0-jre"
+    val guavaVersion = "33.2.0-jre"
     val kotlinLoggingVersion = "3.0.5"
     val jacksonVersion = "2.17.0"
     val logbackVersion = "1.5.6"
