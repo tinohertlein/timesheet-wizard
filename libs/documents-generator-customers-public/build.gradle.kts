@@ -5,7 +5,7 @@ plugins {
     `maven-publish`
     kotlin("jvm") version "1.9.23"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
-    id("org.kordamp.gradle.jandex") version "1.1.0"
+    id("org.kordamp.gradle.jandex") version "2.0.0"
 }
 
 group = "dev.hertlein.timesheetwizard"
@@ -58,7 +58,7 @@ dependencies {
     implementation("net.sf.jasperreports:jasperreports:$jasperVersion")
     implementation("com.github.librepdf:openpdf:$openPdfVersion")
 
-    val guavaVersion = "33.1.0-jre"
+    val guavaVersion = "33.2.0-jre"
     val assertJVersion = "3.25.3"
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")

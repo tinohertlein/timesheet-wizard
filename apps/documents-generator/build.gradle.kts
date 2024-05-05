@@ -37,7 +37,7 @@ val quarkusPlatformArtifactId = "quarkus-bom"
 val quarkusPlatformVersion = "3.9.5"
 
 dependencies {
-    val guavaVersion = "33.1.0-jre"
+    val guavaVersion = "33.2.0-jre"
     val kotlinLoggingVersion = "3.0.5"
     val twSpiVersion = "2.0.3"
 
@@ -65,7 +65,7 @@ dependencies {
 
 
     val twCustomersPublicVersion = "2.0.3"
-    val twCustomersPrivateVersion = "1.1.9"
+    val twCustomersPrivateVersion = "1.1.10"
 
     runtimeOnly("software.amazon.awssdk:url-connection-client")
     runtimeOnly("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")
