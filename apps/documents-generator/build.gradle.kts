@@ -1,10 +1,10 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
-    val kotlin = "1.9.23"
+    val kotlin = "1.9.24"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
-    id("io.quarkus") version "3.9.5"
+    id("io.quarkus") version "3.10.1"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
 }
 
@@ -34,12 +34,12 @@ repositories {
 
 val quarkusPlatformGroupId = "io.quarkus.platform"
 val quarkusPlatformArtifactId = "quarkus-bom"
-val quarkusPlatformVersion = "3.9.5"
+val quarkusPlatformVersion = "3.10.1"
 
 dependencies {
     val guavaVersion = "33.2.0-jre"
     val kotlinLoggingVersion = "3.0.5"
-    val twSpiVersion = "2.0.3"
+    val twSpiVersion = "2.0.4"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
@@ -56,7 +56,7 @@ dependencies {
 
 
     val assertJVersion = "3.25.3"
-    val mockkVersion = "1.13.10"
+    val mockkVersion = "1.13.11"
 
     testImplementation("org.assertj:assertj-core:$assertJVersion")
     testImplementation("io.mockk:mockk:$mockkVersion")
@@ -64,8 +64,8 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured")
 
 
-    val twCustomersPublicVersion = "2.0.3"
-    val twCustomersPrivateVersion = "1.1.10"
+    val twCustomersPublicVersion = "2.0.6"
+    val twCustomersPrivateVersion = "1.1.13"
 
     runtimeOnly("software.amazon.awssdk:url-connection-client")
     runtimeOnly("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")

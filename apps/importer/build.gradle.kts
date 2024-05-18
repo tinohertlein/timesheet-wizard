@@ -1,7 +1,7 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
-    val kotlin = "1.9.23"
+    val kotlin = "1.9.24"
     id("org.jetbrains.kotlin.jvm") version kotlin
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
@@ -12,7 +12,7 @@ plugins {
 
 group = "dev.hertlein.timesheetwizard"
 
-val kotlinVersion = "1.9.23"
+val kotlinVersion = "1.9.24"
 val javaVersion = JavaVersion.VERSION_17.toString()
 
 repositories {
@@ -23,9 +23,9 @@ dependencies {
 
     val guavaVersion = "33.2.0-jre"
     val kotlinLoggingVersion = "3.0.5"
-    val jacksonVersion = "2.17.0"
+    val jacksonVersion = "2.17.1"
     val logbackVersion = "1.5.6"
-    val awsSdkVersion = "2.25.45"
+    val awsSdkVersion = "2.25.54"
     val awsLambdaVersion = "3.11.5"
 
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
@@ -53,9 +53,9 @@ dependencies {
 
     val junitVersion = "5.10.2"
     val mockServerVersion = "5.15.0"
-    val testContainersVersion = "1.19.7"
+    val testContainersVersion = "1.19.8"
     val assertJVersion = "3.25.3"
-    val mockkVersion = "1.13.10"
+    val mockkVersion = "1.13.11"
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
