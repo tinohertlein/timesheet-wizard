@@ -11,6 +11,8 @@ data class Timesheet(
     val entries: List<Entry> = emptyList()
 ) {
 
+    fun isEmpty() = entries.isEmpty()
+
     fun totalDuration(): Duration =
         entries
             .map { it.duration }

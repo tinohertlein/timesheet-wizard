@@ -21,6 +21,7 @@ class OrchestrationService(
         logger.debug { "Generating documents for timesheet at location '$timesheetLocation'..." }
 
         val timesheet = persistencePort.findTimesheetByURI(timesheetLocation)
+        if (timesheet.)
 
         val factoriesForCustomer = documentFactories.filter { it.canHandle(timesheet.customer) }
 
