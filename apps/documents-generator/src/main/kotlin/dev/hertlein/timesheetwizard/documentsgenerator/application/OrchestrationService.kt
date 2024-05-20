@@ -21,7 +21,10 @@ class OrchestrationService(
         logger.debug { "Generating documents for timesheet at location '$timesheetLocation'..." }
 
         val timesheet = persistencePort.findTimesheetByURI(timesheetLocation)
-        if (timesheet.)
+        if (timesheet.isEmpty()) {
+            logger.debug { "Nothing to do: timesheet is empty." }
+            return emptyList()
+        }
 
         val factoriesForCustomer = documentFactories.filter { it.canHandle(timesheet.customer) }
 
