@@ -1,7 +1,7 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
-    val kotlin = "1.9.24"
+    val kotlin = "2.0.0"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
     id("io.quarkus") version "3.10.1"
