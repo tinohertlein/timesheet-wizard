@@ -1,7 +1,7 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
-    val kotlin = "1.9.24"
+    val kotlin = "2.0.0"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
     id("io.quarkus") version "3.10.1"
@@ -39,7 +39,7 @@ val quarkusPlatformVersion = "3.10.1"
 dependencies {
     val guavaVersion = "33.2.0-jre"
     val kotlinLoggingVersion = "3.0.5"
-    val twSpiVersion = "2.0.6"
+    val twSpiVersion = "2.1.0"
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
@@ -64,8 +64,8 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured")
 
 
-    val twCustomersPublicVersion = "2.0.8"
-    val twCustomersPrivateVersion = "1.1.14"
+    val twCustomersPublicVersion = "2.1.0"
+    val twCustomersPrivateVersion = "1.2.0"
 
     runtimeOnly("software.amazon.awssdk:url-connection-client")
     runtimeOnly("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")
@@ -88,9 +88,11 @@ allOpen {
     annotation("io.quarkus.test.junit.QuarkusTest")
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
-    kotlinOptions.javaParameters = true
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        javaParameters.set(true)
+    }
 }
 
 tasks.test {

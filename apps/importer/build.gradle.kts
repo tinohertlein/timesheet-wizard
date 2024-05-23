@@ -1,7 +1,7 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
-    val kotlin = "1.9.24"
+    val kotlin = "2.0.0"
     id("org.jetbrains.kotlin.jvm") version kotlin
     id("org.jetbrains.kotlin.kapt") version kotlin
     id("org.jetbrains.kotlin.plugin.allopen") version kotlin
@@ -12,8 +12,7 @@ plugins {
 
 group = "dev.hertlein.timesheetwizard"
 
-val kotlinVersion = "1.9.24"
-val javaVersion = JavaVersion.VERSION_17.toString()
+val kotlinVersion = "2.0.0"
 
 repositories {
     mavenCentral()
@@ -89,22 +88,11 @@ java {
 }
 
 
-tasks {
-    compileKotlin {
-        kotlinOptions {
-            jvmTarget = javaVersion
-        }
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        javaParameters.set(true)
     }
-    compileTestKotlin {
-        kotlinOptions {
-            jvmTarget = javaVersion
-        }
-    }
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = javaVersion
-    kotlinOptions.javaParameters = true
 }
 
 micronaut {
