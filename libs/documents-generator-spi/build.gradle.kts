@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "dev.hertlein.timesheetwizard"
-version = "2.0.6"
+version = "2.1.0"
 
 repositories {
     mavenCentral()
@@ -45,9 +45,11 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-tasks.compileKotlin {
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
-    kotlinOptions.javaParameters = true
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        javaParameters.set(true)
+    }
 }
 
 tasks.test {
