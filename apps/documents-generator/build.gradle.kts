@@ -4,7 +4,7 @@ plugins {
     val kotlin = "2.0.0"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
-    id("io.quarkus") version "3.10.1"
+    id("io.quarkus") version "3.11.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
 }
 
@@ -34,7 +34,7 @@ repositories {
 
 val quarkusPlatformGroupId = "io.quarkus.platform"
 val quarkusPlatformArtifactId = "quarkus-bom"
-val quarkusPlatformVersion = "3.10.1"
+val quarkusPlatformVersion = "3.11.0"
 
 dependencies {
     val guavaVersion = "33.2.0-jre"
