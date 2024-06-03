@@ -58,7 +58,7 @@ dependencies {
     implementation("net.sf.jasperreports:jasperreports:$jasperVersion")
     implementation("com.github.librepdf:openpdf:$openPdfVersion")
 
-    val guavaVersion = "33.2.0-jre"
+    val guavaVersion = "33.2.1-jre"
     val assertJVersion = "3.26.0"
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
