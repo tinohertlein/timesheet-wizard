@@ -4,7 +4,7 @@ plugins {
     val kotlin = "2.0.0"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
-    id("io.quarkus") version "3.11.0"
+    id("io.quarkus") version "3.11.1"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
 }
 
@@ -34,10 +34,10 @@ repositories {
 
 val quarkusPlatformGroupId = "io.quarkus.platform"
 val quarkusPlatformArtifactId = "quarkus-bom"
-val quarkusPlatformVersion = "3.11.0"
+val quarkusPlatformVersion = "3.11.1"
 
 dependencies {
-    val guavaVersion = "33.2.0-jre"
+    val guavaVersion = "33.2.1-jre"
     val kotlinLoggingVersion = "3.0.5"
     val twSpiVersion = "2.1.0"
 
@@ -64,8 +64,8 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured")
 
 
-    val twCustomersPublicVersion = "2.1.0"
-    val twCustomersPrivateVersion = "1.2.0"
+    val twCustomersPublicVersion = "2.1.1"
+    val twCustomersPrivateVersion = "2.0.0"
 
     runtimeOnly("software.amazon.awssdk:url-connection-client")
     runtimeOnly("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")
