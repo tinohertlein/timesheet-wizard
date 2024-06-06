@@ -1,5 +1,6 @@
 # What is the Timesheet-Wizard?
 
+![Build Libs](https://github.com/tinohertlein/timesheet-wizard/actions/workflows/libs.yml/badge.svg)
 ![Build & Deploy Apps](https://github.com/tinohertlein/timesheet-wizard/actions/workflows/apps.yml/badge.svg?event=push)
 
 The Timesheet-Wizard is a personal pet project to fetch timesheets from [Clockify](https://clockify.me/de/), transform them
