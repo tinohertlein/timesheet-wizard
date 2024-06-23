@@ -64,8 +64,8 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured")
 
 
-    val twCustomersPublicVersion = "2.2.0"
-    val twCustomersPrivateVersion = "2.0.2"
+    val twCustomersPublicVersion = "2.1.1"
+    val twCustomersPrivateVersion = "2.0.0"
 
     runtimeOnly("software.amazon.awssdk:url-connection-client")
     runtimeOnly("dev.hertlein.timesheetwizard:documents-generator-customers-public:$twCustomersPublicVersion")
