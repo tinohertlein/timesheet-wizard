@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "dev.hertlein.timesheetwizard"
-version = "2.1.1"
+version = "2.2.0"
 
 repositories {
     mavenCentral()
@@ -47,7 +47,7 @@ dependencies {
     val jakartaApiVersion = "2.0.1"
     val openCsvVersion = "5.9"
     val poiVersion = "5.2.5"
-    val jasperVersion = "6.21.3"
+    val jasperVersion = "7.0.0"
     val openPdfVersion = "2.0.2"
 
     implementation("dev.hertlein.timesheetwizard:documents-generator-spi:$twSpiVersion")
@@ -56,6 +56,7 @@ dependencies {
     implementation("org.apache.poi:poi:$poiVersion")
     implementation("org.apache.poi:poi-ooxml:$poiVersion")
     implementation("net.sf.jasperreports:jasperreports:$jasperVersion")
+    implementation("net.sf.jasperreports:jasperreports-pdf:$jasperVersion")
     implementation("com.github.librepdf:openpdf:$openPdfVersion")
 
     val guavaVersion = "33.2.1-jre"
