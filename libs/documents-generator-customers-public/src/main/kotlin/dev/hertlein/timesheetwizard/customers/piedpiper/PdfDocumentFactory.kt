@@ -5,10 +5,7 @@ import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.contact.Contact
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.Timesheet
 import dev.hertlein.timesheetwizard.documentsgenerator.spi.model.timesheet.TimesheetDocument
 import jakarta.inject.Singleton
-import net.sf.jasperreports.engine.JREmptyDataSource
-import net.sf.jasperreports.engine.JasperCompileManager
-import net.sf.jasperreports.engine.JasperExportManager
-import net.sf.jasperreports.engine.JasperFillManager
+import net.sf.jasperreports.engine.*
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
 import java.io.ByteArrayOutputStream
 import kotlin.time.DurationUnit
@@ -32,6 +29,10 @@ class PdfDocumentFactory : TimesheetDocumentFactory, PiedPiperConfig() {
                 )
             }
         }
+    }
+
+    init {
+        DefaultJasperReportsContext.getInstance().setProperty("net.sf.jasperreports.compiler.temp.dir", "/tmp")
     }
 
     override fun create(contact: ContactDetails, timesheet: Timesheet): TimesheetDocument {
