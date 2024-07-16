@@ -56,7 +56,7 @@ dependencies {
 
 
     val assertJVersion = "3.26.3"
-    val mockkVersion = "1.13.11"
+    val mockkVersion = "1.13.12"
 
     testImplementation("org.assertj:assertj-core:$assertJVersion")
     testImplementation("io.mockk:mockk:$mockkVersion")
