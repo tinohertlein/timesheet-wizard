@@ -4,7 +4,7 @@ plugins {
     val kotlin = "2.0.0"
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
-    id("io.quarkus") version "3.12.2"
+    id("io.quarkus") version "3.12.3"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
 }
 
@@ -34,7 +34,7 @@ repositories {
 
 val quarkusPlatformGroupId = "io.quarkus.platform"
 val quarkusPlatformArtifactId = "quarkus-bom"
-val quarkusPlatformVersion = "3.12.2"
+val quarkusPlatformVersion = "3.12.3"
 
 dependencies {
     val guavaVersion = "33.2.1-jre"
@@ -56,7 +56,7 @@ dependencies {
 
 
     val assertJVersion = "3.26.3"
-    val mockkVersion = "1.13.11"
+    val mockkVersion = "1.13.12"
 
     testImplementation("org.assertj:assertj-core:$assertJVersion")
     testImplementation("io.mockk:mockk:$mockkVersion")
