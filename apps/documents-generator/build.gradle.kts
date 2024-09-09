@@ -5,7 +5,7 @@ plugins {
     kotlin("jvm") version kotlin
     kotlin("plugin.allopen") version kotlin
     id("io.quarkus") version "3.12.3"
-    id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    id("io.gitlab.arturbosch.detekt") version "1.23.7"
 }
 
 group = "dev.hertlein.timesheetwizard"
