@@ -66,7 +66,7 @@ dependencies {
 
     val openCsvVersion = "5.9"
     val poiVersion = "5.3.0"
-    val jasperVersion = "7.0.0"
+    val jasperVersion = "7.0.1"
     val openPdfVersion = "2.0.3"
 
     implementation("com.opencsv:opencsv:$openCsvVersion")
