@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: Timesheet-Wizard
+  main:
+    web-application-type: none
+  cloud:
+    aws:
+      region:
+        static: eu-central-1
+
+jackson:
+  serialization:
+    writeDatesAsTimestamps: false
+
+timesheet-wizard:
+  config:
+    aws:
+      s3:
+        bucket: tw-sheets
+
+  import:
+    clockify:
+      reports-url: "https://reports.api.clockify.me/"
+      api-key: your-api-key
+      workspace-id: your-workspace-id
+
+  export:
+    aws:
+      s3:
+        bucket: tw-sheets
+
+logging:
+  level:
+    dev.hertlein.timesheetwizard: DEBUG

@@ -1,0 +1,134 @@
+Parameters:
+  Architecture:
+    Type: String
+    Default: x86_64
+    AllowedValues:
+      - x86_64
+      - arm64
+  MonitoringRecipient:
+    Type: String
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS stack to import timesheet reports from Clockify and export them to various targets in various formats
+
+Resources:
+  TwFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: tw-app
+      Architectures:
+        - !Ref Architecture
+      Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
+      Runtime: java17
+      CodeUri: ../
+      PackageType: Zip
+      Environment:
+        Variables:
+         DISABLE_SIGNAL_HANDLERS: true
+         MAIN_CLASS: dev.hertlein.timesheetwizard.TwApplication
+         SPRING_PROFILES_ACTIVE: aws
+      Description: An AWS Lambda function to import timesheet reports from Clockify and export them to various targets in various formats
+      MemorySize: 512
+      Timeout: 60
+      AutoPublishAlias: Live
+      SnapStart:
+        ApplyOn: PublishedVersions
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AmazonS3FullAccess
+      Tracing: PassThrough
+
+  TwLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn:
+      - TwFunction
+    Properties:
+      LogGroupName: !Join [ "", [ "/aws/lambda/", !Ref TwFunction ] ]
+      RetentionInDays: 30
+
+  TwDailyEvent:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: tw-daily
+      ScheduleExpression: cron(30 17 ? * MON,TUE,WED,THU,FRI *)
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt TwFunction.Arn
+          Id: tw-daily
+          Input: '{"customerIds": [], "dateRangeType": "THIS_MONTH"}'
+
+  TwMonthlyEvent:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: tw-monthly
+      ScheduleExpression: cron(0 5 1 * ? *)
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt TwFunction.Arn
+          Id: tw-monthly
+          Input: '{"customerIds": [], "dateRangeType": "LAST_MONTH"}'
+
+  TwPermissionForDailyEvent:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Ref: TwFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt TwDailyEvent.Arn
+
+  TwPermissionForMonthlyEvent:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Ref: TwFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt TwMonthlyEvent.Arn
+
+  TwDataBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: tw-sheets
+      AccessControl: Private
+      VersioningConfiguration:
+        Status: Suspended
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      NotificationConfiguration:
+        EventBridgeConfiguration:
+          EventBridgeEnabled: true
+
+  TwErrorTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint: !Ref MonitoringRecipient
+          Protocol: email
+      TopicName: tw-error-topic
+
+  TwAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: tw-alarm
+      ActionsEnabled: true
+      OKActions: [ ]
+      AlarmActions:
+        - Ref: TwErrorTopic
+      InsufficientDataActions: [ ]
+      MetricName: Errors
+      Namespace: AWS/Lambda
+      Statistic: Maximum
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref TwFunction
+      Period: 300
+      EvaluationPeriods: 1
+      DatapointsToAlarm: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: missing

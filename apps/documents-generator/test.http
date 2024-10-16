@@ -1,7 +1,0 @@
-POST http://localhost:8080
-content-type: application/json
-accept: application/json
-
-{
-  "fileLocation": "json/PiedPiper_2022-01-01_2022-12-31_d34d222e-88d5-43be-b58a-242369e65205.json"
-}

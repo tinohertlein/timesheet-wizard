@@ -1,18 +1,15 @@
 version: 2
+
+registries:
+  gradle-artifactory:
+    type: maven-repository
+    url: https://maven.pkg.github.com/timesheet-wizard
+    username: ""
+    password: ${{ secrets.GH_PACKAGE_TOKEN }}
+
 updates:
   - package-ecosystem: "gradle"
-    directory: "/apps/importer"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "gradle"
-    directory: "/apps/documents-generator"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "gradle"
-    directory: "/libs/documents-generator-spi"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "gradle"
-    directory: "/libs/documents-generator-customers-public"
+    registries: "*"
+    directory: "/."
     schedule:
       interval: "daily"

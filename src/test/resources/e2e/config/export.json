@@ -1,0 +1,23 @@
+{
+  "strategiesByCustomerId": {
+    "1000": [
+      "CSV_V1",
+      "XLSX_V1",
+      "XLSX_V2",
+      "PDF_V1"
+    ]
+  },
+  "detailsByStrategy": {
+    "CSV_V1": {
+      "login": "rihe"
+    },
+    "XLSX_V1": {
+      "contact-name": "Richard Hendricks",
+      "contact-email": "Richard.Hendricks@example.org"
+    },
+    "PDF_V1": {
+      "contact-name": "Richard Hendricks",
+      "contact-email": "Richard.Hendricks@example.org"
+    }
+  }
+}

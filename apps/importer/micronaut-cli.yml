@@ -1,6 +1,0 @@
-applicationType: function
-defaultPackage: dev.hertlein.timesheetwizard.importclockify
-testFramework: junit
-sourceLanguage: kotlin
-buildTool: gradle_kotlin
-features: [annotation-api, app-name, aws-lambda, aws-lambda-custom-runtime, graalvm, gradle, http-client, jackson-databind, junit, kotlin, kotlin-build, logback, micronaut-build, readme, shade, yaml]
