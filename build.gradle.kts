@@ -79,7 +79,7 @@ dependencies {
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
-    val mockkVersion = "1.13.12"
+    val mockkVersion = "1.13.13"
     val mockServerVersion = "5.15.0"
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
