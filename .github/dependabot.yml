@@ -1,12 +1,5 @@
 version: 2
 
-registries:
-  gradle-artifactory:
-    type: maven-repository
-    url: https://maven.pkg.github.com/timesheet-wizard
-    username: ""
-    password: ${{ secrets.GH_PACKAGE_TOKEN }}
-
 updates:
   - package-ecosystem: "gradle"
     registries: "*"
