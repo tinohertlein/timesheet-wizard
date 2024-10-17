@@ -6,3 +6,8 @@ spring:
         secret-key: miniosecret
       s3:
         endpoint: http://127.0.0.1:9000
+
+timesheet-wizard:
+  import:
+    run-on-startup:
+      enabled: true

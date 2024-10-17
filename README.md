@@ -93,7 +93,7 @@ Timesheet-Wizard is
 
 - Start Minio as local S3 storage with `docker compose up`
 - Set import params
-  in [AppRunnerIfLocalOrRemote](src/main/kotlin/dev/hertlein/timesheetwizard/AppRunnerIfLocalOrRemote.kt)
+  in [ImportRunner](src/main/kotlin/dev/hertlein/timesheetwizard/ImportRunner.kt)
 - Execute the application with profile 'local': `./gradlew bootRun --args='--spring.profiles.active=local,confidential'`
 
 #### ... with connection to AWS S3
@@ -102,7 +102,7 @@ Timesheet-Wizard is
   the [authentication method](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-net-applications-security/iam-development.html)
   you want to use
 - Set import params
-  in [AppRunnerIfLocalOrRemote](src/main/kotlin/dev/hertlein/timesheetwizard/AppRunnerIfLocalOrRemote.kt)
+  in [ImportRunner](src/main/kotlin/dev/hertlein/timesheetwizard/ImportRunner.kt)
 - Execute the application with profile 'remote':
   `./gradlew bootRun --args='--spring.profiles.active=remote,confidential'`
 
@@ -110,4 +110,5 @@ Timesheet-Wizard is
 
 - Set import params in [requests/public/event.json](requests/public/event.json)
 - Build: ` ./requests/public/build.sh`
-- Invoke: `./requests/public/invoke.sh`
+- Invoke locally: `./requests/public/invoke-local.sh`
+- Invoke remotely in AWS: `./requests/public/invoke-remote.sh`

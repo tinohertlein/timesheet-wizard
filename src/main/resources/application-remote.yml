@@ -1,0 +1,4 @@
+timesheet-wizard:
+  import:
+    run-on-startup:
+      enabled: true

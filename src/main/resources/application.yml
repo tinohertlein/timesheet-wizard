@@ -19,6 +19,8 @@ timesheet-wizard:
         bucket: tw-sheets
 
   import:
+    run-on-startup:
+      enabled: false
     clockify:
       reports-url: "https://reports.api.clockify.me/"
       api-key: your-api-key
