@@ -29,6 +29,9 @@ class ExportService(
         } else if (applicableExportStrategiesForCustomer.isEmpty()) {
             logger.error { "No applicable export strategies found for customer id ${timesheet.customer.id.value}." }
 
+        } else if (timesheet.isEmpty()) {
+            logger.info { "Timesheet for customer '${timesheet.customer.id.value}' and date range ${timesheet.dateRange} is empty." }
+
         } else {
             applicableExportStrategiesForCustomer.forEach { strategy ->
                 val timesheetDocument = strategy.create(exportConfig, timesheet)
