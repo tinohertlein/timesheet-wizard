@@ -20,7 +20,7 @@ Resources:
       Architectures:
         - !Ref Architecture
       Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
-      Runtime: java17
+      Runtime: java21
       CodeUri: ../
       PackageType: Zip
       Environment:
