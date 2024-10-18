@@ -1,6 +1,5 @@
 package dev.hertlein.timesheetwizard.export.core.strategy
 
-import dev.hertlein.timesheetwizard.shared.model.ExportConfig
 import dev.hertlein.timesheetwizard.export.core.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.shared.model.Timesheet
 import org.apache.poi.ss.usermodel.CellCopyPolicy
@@ -60,7 +59,7 @@ class XlsxV2 : ExportStrategy {
         return TimesheetDocument.Type.XLSX_V2
     }
 
-    override fun create(exportConfig: ExportConfig, timesheet: Timesheet): TimesheetDocument {
+    override fun create(exportParams: Map<String, String>, timesheet: Timesheet): TimesheetDocument {
         val outputStream = ByteArrayOutputStream()
 
         template("${type()}/timesheet_template.xlsx")

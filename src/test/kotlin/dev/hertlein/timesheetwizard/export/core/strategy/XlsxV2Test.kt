@@ -1,6 +1,5 @@
 package dev.hertlein.timesheetwizard.export.core.strategy
 
-import dev.hertlein.timesheetwizard.shared.model.ExportConfig
 import dev.hertlein.timesheetwizard.shared.model.Timesheet.Entry.DateTimeRange
 import dev.hertlein.timesheetwizard.util.ResourcesReader
 import dev.hertlein.timesheetwizard.util.TestMother
@@ -33,7 +32,7 @@ class XlsxV2Test {
         val expected =
             ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/timesheet_v2_PiedPiper_20220101-20221231.xlsx")
 
-        val actual = XlsxV2().create(ExportConfig(), timesheet)
+        val actual = XlsxV2().create(emptyMap(), timesheet)
 
         ExcelVerification.assertEquals(
             actual.content,

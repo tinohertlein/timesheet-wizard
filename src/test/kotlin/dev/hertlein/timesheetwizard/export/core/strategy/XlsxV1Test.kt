@@ -1,6 +1,5 @@
 package dev.hertlein.timesheetwizard.export.core.strategy
 
-import dev.hertlein.timesheetwizard.shared.model.ExportConfig
 import dev.hertlein.timesheetwizard.shared.model.Timesheet.Entry.DateTimeRange
 import dev.hertlein.timesheetwizard.util.ResourcesReader
 import dev.hertlein.timesheetwizard.util.TestMother
@@ -29,12 +28,12 @@ class XlsxV1Test {
             duration = workDurationHours.toDuration(DurationUnit.HOURS),
             dateTimeRange = DateTimeRange(workStart, workEnd)
         )
-        val exportConfig =
-            ExportConfig(emptyMap(), mapOf("XLSX_V1" to mapOf("contact-name" to "a-contact-name", "contact-email" to "a-contact-email")))
         val timesheet = TestMother.anEmptyTimesheet.add(work)
-        val expected = ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/timesheet_v1_PiedPiper_20220101-20221231.xlsx")
+        val expected =
+            ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/timesheet_v1_PiedPiper_20220101-20221231.xlsx")
 
-        val actual = XlsxV1().create(exportConfig, timesheet)
+        val actual =
+            XlsxV1().create(mapOf("contact-name" to "a-contact-name", "contact-email" to "a-contact-email"), timesheet)
 
         ExcelVerification.assertEquals(actual.content, expected)
     }

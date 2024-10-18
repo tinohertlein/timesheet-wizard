@@ -72,9 +72,7 @@ class ApplicationE2ET {
     @Test
     fun `should import and export timesheets`() {
         createS3Bucket()
-        uploadToS3Bucket("config/customers.json", ResourcesReader.bytesFromResourceFile("e2e/config/customers.json"))
-        uploadToS3Bucket("config/clockify-ids.json", ResourcesReader.bytesFromResourceFile("e2e/config/clockify-ids.json"))
-        uploadToS3Bucket("config/export.json", ResourcesReader.bytesFromResourceFile("e2e/config/export.json"))
+        uploadToS3Bucket("config/configuration.json", ResourcesReader.bytesFromResourceFile("e2e/config/configuration.json"))
         prepareClockifyServer()
         val expectedFilenames = listOf(
             "customers/PiedPiper/csv/v1/" to "timesheet_20220101-20221231.csv",

@@ -1,16 +1,15 @@
 package dev.hertlein.timesheetwizard.shared.configloader
 
+import dev.hertlein.timesheetwizard.shared.model.ClockifyId
 import dev.hertlein.timesheetwizard.shared.model.Customer
+import dev.hertlein.timesheetwizard.shared.model.ExportStrategyConfig
 import dev.hertlein.timesheetwizard.util.ResourcesReader
 import dev.hertlein.timesheetwizard.util.S3Operations
 import dev.hertlein.timesheetwizard.util.SpringTestProfiles
 import dev.hertlein.timesheetwizard.util.TestcontainersConfiguration
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.*
-import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito
-import org.mockito.Mockito.times
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
@@ -18,7 +17,6 @@ import org.springframework.boot.test.mock.mockito.SpyBean
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
 import software.amazon.awssdk.services.s3.S3Client
-import software.amazon.awssdk.services.s3.model.GetObjectRequest
 
 @DisplayName("ConfigLoaderS3Adapter")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -36,88 +34,63 @@ internal class ConfigLoaderS3AdapterIT {
     @Autowired
     private lateinit var configLoader: ConfigLoaderS3Adapter
 
+    @BeforeEach
+    fun setup() {
+        S3Operations.createBucket(s3Client, bucket)
+        S3Operations.upload(
+            s3Client, bucket,
+            "config/configuration.json",
+            ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/configuration.json")
+        )
+        Mockito.reset(s3Client)
+    }
+
     @Nested
     inner class LoadCustomers {
 
-        @BeforeEach
-        fun setup() {
-            S3Operations.createBucket(s3Client, bucket)
-            S3Operations.upload(
-                s3Client, bucket,
-                "config/customers.json",
-                ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/customers.json")
-            )
-            Mockito.reset(s3Client)
-        }
-
         @Test
-        fun `should load customers from S3 only once`() {
-            configLoader.loadCustomers()
+        fun `should load customers`() {
             val customers = configLoader.loadCustomers()
 
             assertThat(customers).containsExactly(Customer.of("1000", "PiedPiper", true))
-            Mockito.verify(s3Client, times(1)).getObject(any<GetObjectRequest>())
         }
     }
 
     @Nested
     inner class LoadClockifyIds {
 
-        @BeforeEach
-        fun setup() {
-            S3Operations.createBucket(s3Client, bucket)
-            S3Operations.upload(
-                s3Client, bucket,
-                "config/clockify-ids.json",
-                ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/clockify-ids.json")
-            )
-            Mockito.reset(s3Client)
-        }
-
         @Test
-        fun `should load clockify ids from S3 only once`() {
-            configLoader.loadClockifyIds()
+        fun `should load clockify ids`() {
             val clockifyIds = configLoader.loadClockifyIds()
 
-            SoftAssertions().apply {
-                assertThat(clockifyIds).containsOnlyKeys("1000")
-                assertThat(clockifyIds).containsValue("62dd35202849d633796f5459")
-            }.assertAll()
-            Mockito.verify(s3Client, times(1)).getObject(any<GetObjectRequest>())
+            assertThat(clockifyIds).containsExactly(ClockifyId("1000", "62dd35202849d633796f5459"))
         }
     }
 
     @Nested
     inner class LoadExportConfig {
 
-        @BeforeEach
-        fun setup() {
-            S3Operations.createBucket(s3Client, bucket)
-            S3Operations.upload(
-                s3Client, bucket,
-                "config/export.json",
-                ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/export.json")
-            )
-            Mockito.reset(s3Client)
-        }
-
         @Test
-        fun `should load customers from S3 only once`() {
-            configLoader.loadExportConfig()
-            val exportConfig = configLoader.loadExportConfig()
+        fun `should load export config`() {
+            val customer = Customer.of("1000", "PiedPiper", true)
+            val exportConfig = configLoader.loadExportConfig(customer)
 
-            SoftAssertions().apply {
-                assertThat(exportConfig.strategiesByCustomerId).containsOnlyKeys("1000")
-                assertThat(exportConfig.strategiesByCustomerId).containsValue(
-                    listOf(
-                        "CSV_V1",
-                        "XLSX_V1",
-                        "XLSX_V2",
-                        "PDF_V1"
+            assertThat(exportConfig).containsExactly(
+                ExportStrategyConfig("CSV_V1", mapOf("login" to "rihe")),
+                ExportStrategyConfig(
+                    "XLSX_V1", mapOf(
+                        "contact-name" to "Richard Hendricks",
+                        "contact-email" to "Richard.Hendricks@example.org"
                     )
-                )
-            }.assertAll()
-            Mockito.verify(s3Client, times(1)).getObject(any<GetObjectRequest>())
+                ),
+                ExportStrategyConfig(
+                    "PDF_V1", mapOf(
+                        "contact-name" to "Richard Hendricks",
+                        "contact-email" to "Richard.Hendricks@example.org"
+                    )
+                ),
+                ExportStrategyConfig("XLSX_V2", emptyMap()),
+            )
         }
     }
 }

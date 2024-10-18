@@ -2,7 +2,6 @@ package dev.hertlein.timesheetwizard.export.core.strategy
 
 import com.opencsv.CSVWriter
 import com.opencsv.ICSVWriter
-import dev.hertlein.timesheetwizard.shared.model.ExportConfig
 import dev.hertlein.timesheetwizard.export.core.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.shared.model.Timesheet
 import dev.hertlein.timesheetwizard.shared.model.Timesheet.Entry
@@ -95,7 +94,7 @@ class CsvV1 : ExportStrategy {
         return TimesheetDocument.Type.CSV_V1
     }
 
-    override fun create(exportConfig: ExportConfig, timesheet: Timesheet): TimesheetDocument {
+    override fun create(exportParams: Map<String, String>, timesheet: Timesheet): TimesheetDocument {
         val outputStream = ByteArrayOutputStream()
         outputStream.use { bos ->
             OutputStreamWriter(bos, Charsets.UTF_8).use { osw ->
@@ -105,7 +104,7 @@ class CsvV1 : ExportStrategy {
                     ICSVWriter.DEFAULT_QUOTE_CHARACTER,
                     ICSVWriter.DEFAULT_ESCAPE_CHARACTER,
                     ICSVWriter.DEFAULT_LINE_END
-                ).use { csvw -> csvw.writeAll(toCsv(exportConfig, timesheet), false) }
+                ).use { csvw -> csvw.writeAll(toCsv(exportParams, timesheet), false) }
             }
         }
         return TimesheetDocument(
@@ -113,12 +112,12 @@ class CsvV1 : ExportStrategy {
         )
     }
 
-    private fun toCsv(exportConfig: ExportConfig, timesheet: Timesheet): List<Array<String>> =
-        listOf(headings) + toCsvRows(exportConfig, timesheet.entries)
+    private fun toCsv(exportParams: Map<String, String>, timesheet: Timesheet): List<Array<String>> =
+        listOf(headings) + toCsvRows(exportParams, timesheet.entries)
 
-    private fun toCsvRows(exportConfig: ExportConfig, entries: List<Entry>): List<Array<String>> {
+    private fun toCsvRows(exportParams: Map<String, String>, entries: List<Entry>): List<Array<String>> {
         return entries
-            .groupBy { CsvEntryKey.of(it.project, it.dateTimeRange.start, getLogin(exportConfig)) }
+            .groupBy { CsvEntryKey.of(it.project, it.dateTimeRange.start, getLogin(exportParams)) }
             .map { groupedEntry ->
                 val minStart = groupedEntry.value.minOf { it.dateTimeRange.start }
                 val maxEnd = groupedEntry.value.maxOf { it.dateTimeRange.end }
@@ -138,8 +137,8 @@ class CsvV1 : ExportStrategy {
             .map { toCsvRow(it) }
     }
 
-    private fun getLogin(exportConfig: ExportConfig): String {
-        return exportConfig.detailsByStrategy[type().name]?.get("login").orEmpty()
+    private fun getLogin(exportParams: Map<String, String>): String {
+        return exportParams["login"]!!
     }
 
     private fun toCsvRow(entry: CsvEntry): Array<String> {

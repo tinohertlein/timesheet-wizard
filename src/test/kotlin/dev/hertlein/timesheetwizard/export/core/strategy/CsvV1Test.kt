@@ -1,6 +1,5 @@
 package dev.hertlein.timesheetwizard.export.core.strategy
 
-import dev.hertlein.timesheetwizard.shared.model.ExportConfig
 import dev.hertlein.timesheetwizard.shared.model.Timesheet
 import dev.hertlein.timesheetwizard.shared.model.Timesheet.Entry.DateTimeRange
 import dev.hertlein.timesheetwizard.util.ResourcesReader
@@ -43,12 +42,11 @@ class CsvV1Test {
             dateTimeRange = DateTimeRange(afternoonWorkStart, afternoonWorkEnd)
         )
 
-        val exportConfig = ExportConfig(emptyMap(), mapOf("CSV_V1" to mapOf("login" to "rihe")))
         val timesheet = TestMother.anEmptyTimesheet.add(morningWork).add(lunchBreak).add(afternoonWork)
         val expected =
             ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/timesheet_PiedPiper_20220101-20221231.csv")
 
-        val actual = CsvV1().create(exportConfig, timesheet)
+        val actual = CsvV1().create(mapOf("login" to "rihe"), timesheet)
 
         assertThat(String(actual.content)).isEqualTo(String(expected))
     }

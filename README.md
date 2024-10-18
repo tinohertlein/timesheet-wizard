@@ -83,11 +83,7 @@ Timesheet-Wizard is
   override them in a 'confidential' profile not commited to version control.
     - timesheet-wizard.import.clockify.api-key
     - timesheet-wizard.import.clockify.workspace-id
-- Create & upload configuration files to cloud storage (Minio or S3). Example files can be found
-  in [requests/public/config](requests/public/config).
-    - clockify-ids.json
-    - customers.json
-    - export.json
+- Create & upload configuration file to cloud storage (Minio or S3). An example file is used in an [e2e test](src/test/resources/e2e/config/configuration.json).
 
 #### ... with local Minio as S3 storage (no connection to AWS)
 

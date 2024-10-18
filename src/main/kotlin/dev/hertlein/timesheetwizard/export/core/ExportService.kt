@@ -3,6 +3,7 @@ package dev.hertlein.timesheetwizard.export.core
 import dev.hertlein.timesheetwizard.export.core.port.PersistencePort
 import dev.hertlein.timesheetwizard.export.core.strategy.ExportStrategy
 import dev.hertlein.timesheetwizard.shared.configloader.ExportConfigLoader
+import dev.hertlein.timesheetwizard.shared.model.ExportStrategyConfig
 import dev.hertlein.timesheetwizard.shared.model.Timesheet
 import lombok.SneakyThrows
 import mu.KotlinLogging
@@ -19,11 +20,10 @@ class ExportService(
 
     @SneakyThrows
     fun export(timesheet: Timesheet) {
-        val exportConfig = exportConfigLoader.loadExportConfig()
-        val exportStrategyIdsForCustomer = exportConfig.findStrategiesFor(timesheet.customer)
-        val applicableExportStrategiesForCustomer = findApplicableStrategies(exportStrategyIdsForCustomer)
+        val exportStrategiesForCustomer = exportConfigLoader.loadExportConfig(timesheet.customer)
+        val applicableExportStrategiesForCustomer = findApplicableStrategies(exportStrategiesForCustomer)
 
-        if (exportStrategyIdsForCustomer.isEmpty()) {
+        if (exportStrategiesForCustomer.isEmpty()) {
             logger.error { "No export strategy ids found for customer id ${timesheet.customer.id.value}." }
 
         } else if (applicableExportStrategiesForCustomer.isEmpty()) {
@@ -34,13 +34,13 @@ class ExportService(
 
         } else {
             applicableExportStrategiesForCustomer.forEach { strategy ->
-                val timesheetDocument = strategy.create(exportConfig, timesheet)
+                val timesheetDocument = strategy.first.create(strategy.second.params, timesheet)
                 persistencePort.save(timesheetDocument)
             }
         }
     }
 
-    private fun findApplicableStrategies(strategyIds: List<String>): List<ExportStrategy> {
-        return availableExportStrategies.filter { it.type().name in strategyIds }
+    private fun findApplicableStrategies(configs: List<ExportStrategyConfig>): List<Pair<ExportStrategy, ExportStrategyConfig>> {
+        return configs.map { config -> Pair(availableExportStrategies.first { it.type().name == config.type }, config) }
     }
 }

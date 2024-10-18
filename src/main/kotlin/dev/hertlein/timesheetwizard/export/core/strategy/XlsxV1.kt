@@ -1,6 +1,5 @@
 package dev.hertlein.timesheetwizard.export.core.strategy
 
-import dev.hertlein.timesheetwizard.shared.model.ExportConfig
 import dev.hertlein.timesheetwizard.export.core.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.shared.model.Timesheet
 import org.apache.poi.ss.usermodel.CellCopyPolicy
@@ -29,7 +28,7 @@ class XlsxV1 : ExportStrategy {
         return TimesheetDocument.Type.XLSX_V1
     }
 
-    override fun create(exportConfig: ExportConfig, timesheet: Timesheet): TimesheetDocument {
+    override fun create(exportParams: Map<String, String>, timesheet: Timesheet): TimesheetDocument {
         val outputStream = ByteArrayOutputStream()
 
         template("${type()}/timesheet_template.xlsx")
@@ -37,7 +36,7 @@ class XlsxV1 : ExportStrategy {
                 XSSFWorkbook(template).use { workbook ->
                     outputStream.use { out ->
                         val sheet = workbook.getSheetAt(0)
-                        fillInContact(exportConfig, sheet)
+                        fillInContact(exportParams, sheet)
                         fillInDateRange(sheet, timesheet.dateRange)
                         fillInTotalWorkedHours(sheet, timesheet.totalDuration())
                         fillInEntries(sheet, timesheet.entries)
@@ -55,19 +54,19 @@ class XlsxV1 : ExportStrategy {
         )
     }
 
-    private fun fillInContact(exportConfig: ExportConfig, sheet: XSSFSheet) {
+    private fun fillInContact(exportParams: Map<String, String>, sheet: XSSFSheet) {
         val rowOffset = 1
         val columnOffset = 1
         sheet.getRow(rowOffset).run {
             getCell(columnOffset).setCellValue(
-                exportConfig.detailsByStrategy[type().name]!!["contact-name"]!!.replace(
+                exportParams?.get("contact-name")?.replace(
                     '_',
                     ' '
                 )
             )
         }
         sheet.getRow(rowOffset + 1).run {
-            getCell(columnOffset).setCellValue(exportConfig.detailsByStrategy[type().name]!!["contact-email"])
+            getCell(columnOffset).setCellValue(exportParams["contact-email"])
         }
     }
 

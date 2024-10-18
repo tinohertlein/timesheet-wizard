@@ -6,6 +6,7 @@ import dev.hertlein.timesheetwizard.import_.adapter.outgoing.clockify.component.
 import dev.hertlein.timesheetwizard.import_.adapter.outgoing.clockify.model.RequestBody
 import dev.hertlein.timesheetwizard.import_.core.port.TimesheetDataFetchPort
 import dev.hertlein.timesheetwizard.shared.configloader.ClockifyIdsLoader
+import dev.hertlein.timesheetwizard.shared.model.ClockifyId
 import dev.hertlein.timesheetwizard.shared.model.Customer
 import dev.hertlein.timesheetwizard.shared.model.Timesheet
 import mu.KotlinLogging
@@ -22,16 +23,16 @@ class ClockifyAdapter(
     private val entityMapper: ResponseBodyMapper
 ) : TimesheetDataFetchPort {
 
-    private val customerIdsToClockifyIds: Map<String, String> by lazy { clockifyIdsLoader.loadClockifyIds() }
+    private val clockifyIds: List<ClockifyId> by lazy { clockifyIdsLoader.loadClockifyIds() }
 
     override fun fetchTimesheet(customer: Customer, dateRange: ClosedRange<LocalDate>): Timesheet? {
-        val clockifyId = customerIdsToClockifyIds[customer.id.value]
+        val clockifyId = clockifyIds.firstOrNull { customer.id.value == it.customerId }
         if (clockifyId == null) {
-            logger.warn { "No Clockify customer found for Id ${customer.id.value}." }
+            logger.warn { "No Clockify id found for customer id ${customer.id.value}." }
             return null
         }
 
-        val requestBody = requestBodyFactory.requestBodyFrom(clockifyId, dateRange)
+        val requestBody = requestBodyFactory.requestBodyFrom(clockifyId.clockifyId, dateRange)
         val timesheet = Timesheet(customer, dateRange)
 
         return populateTimesheet(timesheet, requestBody)

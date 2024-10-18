@@ -1,6 +1,7 @@
 package dev.hertlein.timesheetwizard.import_.adapter.outgoing.clockify
 
 import dev.hertlein.timesheetwizard.shared.configloader.ConfigLoaderS3Adapter
+import dev.hertlein.timesheetwizard.shared.model.ClockifyId
 import dev.hertlein.timesheetwizard.shared.model.Customer
 import dev.hertlein.timesheetwizard.shared.model.Customer.Id
 import dev.hertlein.timesheetwizard.shared.model.Customer.Name
@@ -62,7 +63,7 @@ class ClockifyAdapterIT {
     @BeforeEach
     fun setup() {
         `when`(clockifyIdsLoader.loadClockifyIds())
-            .thenReturn(mapOf("1000" to "62dd35202849d633796f5459"))
+            .thenReturn(listOf(ClockifyId("1000", "62dd35202849d633796f5459")))
     }
 
     @Test

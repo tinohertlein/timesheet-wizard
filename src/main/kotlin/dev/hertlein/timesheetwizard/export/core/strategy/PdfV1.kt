@@ -1,6 +1,5 @@
 package dev.hertlein.timesheetwizard.export.core.strategy
 
-import dev.hertlein.timesheetwizard.shared.model.ExportConfig
 import dev.hertlein.timesheetwizard.export.core.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.shared.model.Timesheet
 import net.sf.jasperreports.engine.*
@@ -54,8 +53,8 @@ class PdfV1 : ExportStrategy {
         return TimesheetDocument.Type.PDF_V1
     }
 
-    override fun create(exportConfig: ExportConfig, timesheet: Timesheet): TimesheetDocument {
-        val values = createValuesForLayoutParams(exportConfig, timesheet)
+    override fun create(exportParams: Map<String, String>, timesheet: Timesheet): TimesheetDocument {
+        val values = createValuesForLayoutParams(exportParams, timesheet)
         val outputStream = ByteArrayOutputStream()
 
         template("${type()}/timesheet_template.jrxml").use { template ->
@@ -71,9 +70,9 @@ class PdfV1 : ExportStrategy {
         )
     }
 
-    private fun createValuesForLayoutParams(exportConfig: ExportConfig, timesheet: Timesheet) = mapOf(
-        "name" to exportConfig.detailsByStrategy[type().name]!!["contact-name"],
-        "email" to exportConfig.detailsByStrategy[type().name]!!["contact-email"],
+    private fun createValuesForLayoutParams(exportParams: Map<String, String>, timesheet: Timesheet) = mapOf(
+        "name" to exportParams["contact-name"],
+        "email" to exportParams["contact-email"],
         "period_start" to format(timesheet.dateRange.start),
         "period_end" to format(timesheet.dateRange.endInclusive),
         "total_working_hours" to format(timesheet.totalDuration().toDouble(DurationUnit.HOURS)),
