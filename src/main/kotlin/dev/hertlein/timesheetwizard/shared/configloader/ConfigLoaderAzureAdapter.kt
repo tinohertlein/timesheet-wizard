@@ -8,17 +8,20 @@ import dev.hertlein.timesheetwizard.shared.model.ExportStrategyConfig
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.cache.annotation.Cacheable
-import software.amazon.awssdk.services.s3.S3Client
-import software.amazon.awssdk.services.s3.model.GetObjectRequest
+import org.springframework.core.io.ResourceLoader
+import org.springframework.stereotype.Component
+import org.springframework.util.StreamUtils
+import java.nio.charset.Charset
+
 
 private val logger = KotlinLogging.logger {}
 
-// TODO Create conditionally if AWS
-//@Component
-class ConfigLoaderS3Adapter(
-    private val s3Client: S3Client,
-    @Value("\${timesheet-wizard.config.aws.s3.bucket}")
-    private val bucket: String,
+// TODO Create conditionally if AZURE
+@Component
+class ConfigLoaderAzureAdapter(
+    private val resourceLoader: ResourceLoader,
+    @Value("\${timesheet-wizard.config.azure.blob.container}")
+    private val container: String,
     private val objectMapper: ObjectMapper
 ) : CustomerConfigLoader, ClockifyIdsLoader, ExportConfigLoader {
 
@@ -52,12 +55,12 @@ class ConfigLoaderS3Adapter(
     }
 
     private fun download(key: String): String {
-        val request = GetObjectRequest
-            .builder()
-            .bucket(bucket)
-            .key(key)
-            .build()
-        return String(s3Client.getObject(request).readAllBytes())
+        val resource = resourceLoader.getResource("azure-blob://$container/$key");
+
+        return StreamUtils.copyToString(
+            resource.inputStream,
+            Charset.defaultCharset()
+        )
     }
 
     private data class ConfigDto(

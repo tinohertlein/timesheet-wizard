@@ -54,6 +54,9 @@ dependencies {
     implementation("io.awspring.cloud:spring-cloud-aws-starter")
     implementation("io.awspring.cloud:spring-cloud-aws-starter-s3")
 
+    val springCloudAzureVersion = "5.17.1"
+    implementation(platform("com.azure.spring:spring-cloud-azure-dependencies:$springCloudAzureVersion"))
+    implementation("com.azure.spring:spring-cloud-azure-starter-storage-blob")
 
     val guavaVersion = "33.3.1-jre"
     val kotlinLoggingVersion = "3.0.5"
