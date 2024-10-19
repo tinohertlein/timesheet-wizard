@@ -48,6 +48,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.cloud:spring-cloud-function-context")
     implementation("org.springframework.cloud:spring-cloud-function-adapter-aws")
+    implementation("org.springframework.cloud:spring-cloud-function-adapter-azure")
+
 
     val springCloudAwsVersion = "3.2.0"
     implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:${springCloudAwsVersion}"))
