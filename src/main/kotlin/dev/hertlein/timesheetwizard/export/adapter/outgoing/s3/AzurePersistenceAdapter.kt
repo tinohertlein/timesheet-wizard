@@ -6,19 +6,17 @@ import dev.hertlein.timesheetwizard.export.core.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.export.core.port.PersistencePort
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
-import software.amazon.awssdk.core.sync.RequestBody
-import software.amazon.awssdk.services.s3.S3Client
-import software.amazon.awssdk.services.s3.model.PutObjectRequest
-import software.amazon.awssdk.services.s3.model.PutObjectResponse
+import org.springframework.core.io.ResourceLoader
+import org.springframework.core.io.WritableResource
+import org.springframework.stereotype.Component
 
 private val logger = KotlinLogging.logger {}
 
-// TODO Create conditionally if AWS
-// @Component
-class S3PersistenceAdapter(
-    @Value("\${timesheet-wizard.export.aws.s3.bucket}")
-    private val bucket: String,
-    private val s3Client: S3Client,
+@Component
+class AzurePersistenceAdapter(
+    private val resourceLoader: ResourceLoader,
+    @Value("\${timesheet-wizard.export.azure.blob.container}")
+    private val container: String,
     private val filenameFactory: FilenameFactory
 ) : PersistencePort {
 
@@ -29,16 +27,13 @@ class S3PersistenceAdapter(
         val filename = filenameFactory.filenameFrom(metaData, timesheetDocument)
 
         upload(filename, timesheetDocument.content)
-            .also { logger.debug { "Persisted document to '$bucket/$filename'" } }
+            .also { logger.debug { "Persisted document to '$container/$filename'" } }
     }
 
-    private fun upload(key: String, content: ByteArray): PutObjectResponse {
-        return s3Client.putObject(
-            PutObjectRequest.builder()
-                .bucket(bucket)
-                .key(key)
-                .build(),
-            RequestBody.fromBytes(content)
-        )
+    private fun upload(key: String, content: ByteArray) {
+        val resource = resourceLoader.getResource("azure-blob://$container/$key") as WritableResource
+        resource.outputStream.use { os ->
+            os.write(content)
+        }
     }
 }

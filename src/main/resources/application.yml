@@ -33,6 +33,9 @@ timesheet-wizard:
     aws:
       s3:
         bucket: tw-sheets
+    azure:
+      blob:
+        container: tw-sheets
 
 logging:
   level:
