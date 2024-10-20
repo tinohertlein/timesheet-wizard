@@ -83,14 +83,27 @@ Timesheet-Wizard is
   override them in a 'confidential' profile not commited to version control.
     - timesheet-wizard.import.clockify.api-key
     - timesheet-wizard.import.clockify.workspace-id
-- Create & upload configuration file to cloud storage (Minio or S3). An example file is used in an [e2e test](src/test/resources/e2e/config/configuration.json).
+- Create & upload configuration file to cloud storage. An example file is
+  shown [here](src/test/resources/e2e/config/configuration.json).
+    - Use [Minio](http://localhost:9001/) for local AWS emulation
+    - Azureite via [Azure Storage Explorer](https://github.com/microsoft/AzureStorageExplorer) for local Azure emulation
+    - S3 for remote AWS calls
+
+#### ... with local Azureite as Azure Blob Storage (no connection to Azure)
+
+- Start Azureite as local Azure Blob Storage with `docker compose up`
+- Set import params
+  in [ImportRunner](src/main/kotlin/dev/hertlein/timesheetwizard/ImportRunner.kt)
+- Execute the application with profile 'local':
+  `./gradlew bootRun --args='--spring.profiles.active=local,confidential,azure'`
 
 #### ... with local Minio as S3 storage (no connection to AWS)
 
 - Start Minio as local S3 storage with `docker compose up`
 - Set import params
   in [ImportRunner](src/main/kotlin/dev/hertlein/timesheetwizard/ImportRunner.kt)
-- Execute the application with profile 'local': `./gradlew bootRun --args='--spring.profiles.active=local,confidential'`
+- Execute the application with profile 'local':
+  `./gradlew bootRun --args='--spring.profiles.active=local,confidential,aws'`
 
 #### ... with connection to AWS S3
 
@@ -100,7 +113,7 @@ Timesheet-Wizard is
 - Set import params
   in [ImportRunner](src/main/kotlin/dev/hertlein/timesheetwizard/ImportRunner.kt)
 - Execute the application with profile 'remote':
-  `./gradlew bootRun --args='--spring.profiles.active=remote,confidential'`
+  `./gradlew bootRun --args='--spring.profiles.active=remote,confidential,aws'`
 
 #### ... with AWS SAM CLI
 
