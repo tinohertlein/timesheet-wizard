@@ -7,7 +7,7 @@ import software.amazon.awssdk.services.s3.model.GetObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectResponse
 
-object S3Operations {
+object AwsS3Operations {
 
     fun createBucket(s3Client: S3Client, bucket: String) {
         s3Client.createBucket(

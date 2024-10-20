@@ -6,6 +6,8 @@ import dev.hertlein.timesheetwizard.export.core.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.export.core.port.PersistencePort
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
+import org.springframework.stereotype.Component
 import software.amazon.awssdk.core.sync.RequestBody
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
@@ -13,8 +15,8 @@ import software.amazon.awssdk.services.s3.model.PutObjectResponse
 
 private val logger = KotlinLogging.logger {}
 
-// TODO Create conditionally if AWS
-// @Component
+@Component
+@ConditionalOnProperty("timesheet-wizard.aws.enabled")
 class S3PersistenceAdapter(
     @Value("\${timesheet-wizard.export.aws.s3.bucket}")
     private val bucket: String,

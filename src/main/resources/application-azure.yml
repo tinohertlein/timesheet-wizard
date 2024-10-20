@@ -1,0 +1,14 @@
+timesheet-wizard:
+  aws:
+    enabled: false
+  azure:
+    enabled: true
+  config:
+    azure:
+      blob:
+        container: tw-sheets
+
+  export:
+    azure:
+      blob:
+        container: tw-sheets

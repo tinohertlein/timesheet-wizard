@@ -1,48 +1,41 @@
 package dev.hertlein.timesheetwizard.shared.configloader
 
+import com.azure.storage.blob.BlobContainerClient
 import dev.hertlein.timesheetwizard.shared.model.ClockifyId
 import dev.hertlein.timesheetwizard.shared.model.Customer
 import dev.hertlein.timesheetwizard.shared.model.ExportStrategyConfig
+import dev.hertlein.timesheetwizard.util.AzureBlobOperations
 import dev.hertlein.timesheetwizard.util.ResourcesReader
-import dev.hertlein.timesheetwizard.util.S3Operations
 import dev.hertlein.timesheetwizard.util.SpringTestProfiles
 import dev.hertlein.timesheetwizard.util.TestcontainersConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.*
-import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.SpyBean
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
-import software.amazon.awssdk.services.s3.S3Client
 
-@DisplayName("ConfigLoaderS3Adapter")
+@DisplayName("ConfigLoaderAzureAdapter")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@ActiveProfiles(SpringTestProfiles.TESTCONTAINERS)
+@ActiveProfiles(SpringTestProfiles.TESTCONTAINERS, "azure")
 @Import(TestcontainersConfiguration::class)
 @SpringBootTest
-internal class ConfigLoaderS3AdapterIT {
-
-    @Value("\${timesheet-wizard.config.aws.s3.bucket}")
-    private lateinit var bucket: String
+internal class ConfigLoaderAzureAdapterIT {
 
     @SpyBean
-    private lateinit var s3Client: S3Client
+    private lateinit var blobContainerClient: BlobContainerClient
 
     @Autowired
-    private lateinit var configLoader: ConfigLoaderS3Adapter
+    private lateinit var configLoader: ConfigLoaderAzureAdapter
 
     @BeforeEach
     fun setup() {
-        S3Operations.createBucket(s3Client, bucket)
-        S3Operations.upload(
-            s3Client, bucket,
+        AzureBlobOperations.upload(
+            blobContainerClient,
             "config/configuration.json",
             ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/configuration.json")
         )
-        Mockito.reset(s3Client)
     }
 
     @Nested

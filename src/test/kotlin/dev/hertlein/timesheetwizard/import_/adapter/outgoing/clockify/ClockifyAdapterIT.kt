@@ -1,5 +1,6 @@
 package dev.hertlein.timesheetwizard.import_.adapter.outgoing.clockify
 
+import dev.hertlein.timesheetwizard.export.core.port.PersistencePort
 import dev.hertlein.timesheetwizard.shared.configloader.ClockifyIdsLoader
 import dev.hertlein.timesheetwizard.shared.configloader.CustomerConfigLoader
 import dev.hertlein.timesheetwizard.shared.configloader.ExportConfigLoader
@@ -35,7 +36,7 @@ private const val A_WORKSPACE_ID = "a-workspace-id"
 
 @DisplayName("ClockifyAdapter")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@MockBean(classes = [CustomerConfigLoader::class, ClockifyIdsLoader::class, ExportConfigLoader::class])
+@MockBean(classes = [CustomerConfigLoader::class, ClockifyIdsLoader::class, ExportConfigLoader::class, PersistencePort::class])
 @SpringBootTest(
     properties = [
         "timesheet-wizard.import.clockify.reports-url=$MOCK_SERVER_HOST:$MOCK_SERVER_PORT",

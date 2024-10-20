@@ -7,15 +7,17 @@ import dev.hertlein.timesheetwizard.shared.model.Customer
 import dev.hertlein.timesheetwizard.shared.model.ExportStrategyConfig
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.cache.annotation.Cacheable
+import org.springframework.stereotype.Component
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.GetObjectRequest
 
 private val logger = KotlinLogging.logger {}
 
-// TODO Create conditionally if AWS
-//@Component
-class ConfigLoaderS3Adapter(
+@Component
+@ConditionalOnProperty("timesheet-wizard.aws.enabled")
+class ConfigLoaderAwsAdapter(
     private val s3Client: S3Client,
     @Value("\${timesheet-wizard.config.aws.s3.bucket}")
     private val bucket: String,

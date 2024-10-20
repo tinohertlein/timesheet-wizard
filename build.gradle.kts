@@ -82,8 +82,6 @@ dependencies {
     implementation("net.sf.jasperreports:jasperreports-jdt:$jasperVersion")
     implementation("com.github.librepdf:openpdf:$openPdfVersion")
 
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
-
     val mockkVersion = "1.13.13"
     val mockServerVersion = "5.15.0"
 

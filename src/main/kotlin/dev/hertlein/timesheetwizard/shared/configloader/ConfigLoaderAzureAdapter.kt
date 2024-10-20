@@ -1,5 +1,6 @@
 package dev.hertlein.timesheetwizard.shared.configloader
 
+import com.azure.storage.blob.BlobContainerClient
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import dev.hertlein.timesheetwizard.shared.model.ClockifyId
@@ -7,19 +8,17 @@ import dev.hertlein.timesheetwizard.shared.model.Customer
 import dev.hertlein.timesheetwizard.shared.model.ExportStrategyConfig
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.cache.annotation.Cacheable
-import org.springframework.core.io.ResourceLoader
 import org.springframework.stereotype.Component
-import org.springframework.util.StreamUtils
-import java.nio.charset.Charset
 
 
 private val logger = KotlinLogging.logger {}
 
-// TODO Create conditionally if AZURE
 @Component
+@ConditionalOnProperty("timesheet-wizard.azure.enabled")
 class ConfigLoaderAzureAdapter(
-    private val resourceLoader: ResourceLoader,
+    private val client: BlobContainerClient,
     @Value("\${timesheet-wizard.config.azure.blob.container}")
     private val container: String,
     private val objectMapper: ObjectMapper
@@ -55,12 +54,7 @@ class ConfigLoaderAzureAdapter(
     }
 
     private fun download(key: String): String {
-        val resource = resourceLoader.getResource("azure-blob://$container/$key");
-
-        return StreamUtils.copyToString(
-            resource.inputStream,
-            Charset.defaultCharset()
-        )
+        return client.getBlobClient(key).downloadContent().toString()
     }
 
     private data class ConfigDto(

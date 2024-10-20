@@ -1,20 +1,22 @@
 package dev.hertlein.timesheetwizard.export.adapter.outgoing.s3
 
+import com.azure.core.util.BinaryData
+import com.azure.storage.blob.BlobContainerClient
 import dev.hertlein.timesheetwizard.export.adapter.outgoing.s3.component.DocumentMetaData
 import dev.hertlein.timesheetwizard.export.adapter.outgoing.s3.component.FilenameFactory
 import dev.hertlein.timesheetwizard.export.core.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.export.core.port.PersistencePort
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.core.io.ResourceLoader
-import org.springframework.core.io.WritableResource
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.stereotype.Component
 
 private val logger = KotlinLogging.logger {}
 
 @Component
+@ConditionalOnProperty("timesheet-wizard.azure.enabled")
 class AzurePersistenceAdapter(
-    private val resourceLoader: ResourceLoader,
+    private val client: BlobContainerClient,
     @Value("\${timesheet-wizard.export.azure.blob.container}")
     private val container: String,
     private val filenameFactory: FilenameFactory
@@ -31,9 +33,6 @@ class AzurePersistenceAdapter(
     }
 
     private fun upload(key: String, content: ByteArray) {
-        val resource = resourceLoader.getResource("azure-blob://$container/$key") as WritableResource
-        resource.outputStream.use { os ->
-            os.write(content)
-        }
+        client.getBlobClient(key).upload(BinaryData.fromBytes(content))
     }
 }
