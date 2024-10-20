@@ -3,12 +3,10 @@ package dev.hertlein.timesheetwizard.shared.configloader
 import com.azure.storage.blob.BlobContainerClient
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
-import dev.hertlein.timesheetwizard.shared.cloud.CONFIG_QUALIFIER
 import dev.hertlein.timesheetwizard.shared.model.ClockifyId
 import dev.hertlein.timesheetwizard.shared.model.Customer
 import dev.hertlein.timesheetwizard.shared.model.ExportStrategyConfig
 import mu.KotlinLogging
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Component
@@ -19,7 +17,6 @@ private val logger = KotlinLogging.logger {}
 @Component
 @ConditionalOnProperty("timesheet-wizard.azure.enabled")
 class ConfigLoaderAzureAdapter(
-    @Qualifier(CONFIG_QUALIFIER)
     private val client: BlobContainerClient,
     private val objectMapper: ObjectMapper
 ) : CustomerConfigLoader, ClockifyIdsLoader, ExportConfigLoader {

@@ -25,7 +25,7 @@ import software.amazon.awssdk.services.s3.S3Client
 @SpringBootTest
 internal class ConfigLoaderAwsAdapterIT {
 
-    @Value("\${timesheet-wizard.config.aws.s3.bucket}")
+    @Value("\${timesheet-wizard.aws.s3.bucket}")
     private lateinit var bucket: String
 
     @SpyBean

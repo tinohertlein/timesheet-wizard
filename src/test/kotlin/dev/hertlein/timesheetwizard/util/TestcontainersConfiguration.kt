@@ -1,6 +1,8 @@
 package dev.hertlein.timesheetwizard.util
 
 import com.azure.storage.blob.BlobServiceClientBuilder
+import dev.hertlein.timesheetwizard.shared.SpringProfiles.AWS
+import dev.hertlein.timesheetwizard.shared.SpringProfiles.AZURE
 import dev.hertlein.timesheetwizard.util.SpringTestProfiles.TESTCONTAINERS
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.TestConfiguration
@@ -18,33 +20,13 @@ import software.amazon.awssdk.services.s3.S3Client
 class TestcontainersConfiguration {
 
     @Bean(initMethod = "start", destroyMethod = "stop")
-    @Profile(TESTCONTAINERS)
+    @Profile(TESTCONTAINERS, AWS)
     fun localStackContainer(): LocalStackContainer {
         return LocalStackContainer(DockerImageName.parse("localstack/localstack:3.4.0"))
     }
 
-    @Bean(initMethod = "start", destroyMethod = "stop")
-    @Profile(TESTCONTAINERS)
-    fun azureContainer(): GenericContainer<*> {
-        return GenericContainer(DockerImageName.parse("mcr.microsoft.com/azure-storage/azurite:3.32.0"))
-            .withCommand("azurite-blob", "--blobHost", "0.0.0.0")
-            .withExposedPorts(10000)
-    }
-
     @Bean
-    @Profile(TESTCONTAINERS)
-    fun blobServiceClientBuilder(
-        azureContainer: GenericContainer<*>,
-        @Value("\${timesheet-wizard.export.azure.blob.container}")
-        container: String
-    ): BlobServiceClientBuilder {
-        val blobPort = azureContainer.getMappedPort(10000)
-        return BlobServiceClientBuilder()
-            .connectionString("DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:$blobPort/devstoreaccount1;")
-    }
-
-    @Bean
-    @Profile(TESTCONTAINERS)
+    @Profile(TESTCONTAINERS, AWS)
     fun s3Client(localstackContainer: LocalStackContainer): S3Client {
         return S3Client.builder()
             .endpointOverride(localstackContainer.getEndpointOverride(LocalStackContainer.Service.S3))
@@ -54,5 +36,25 @@ class TestcontainersConfiguration {
                 )
             )
             .region(Region.of(localstackContainer.region)).build()
+    }
+
+    @Bean(initMethod = "start", destroyMethod = "stop")
+    @Profile(TESTCONTAINERS, AZURE)
+    fun azureContainer(): GenericContainer<*> {
+        return GenericContainer(DockerImageName.parse("mcr.microsoft.com/azure-storage/azurite:3.32.0"))
+            .withCommand("azurite-blob", "--blobHost", "0.0.0.0")
+            .withExposedPorts(10000)
+    }
+
+    @Bean
+    @Profile(TESTCONTAINERS, AZURE)
+    fun blobServiceClientBuilder(
+        azureContainer: GenericContainer<*>,
+        @Value("\${timesheet-wizard.azure.blob.container}")
+        container: String
+    ): BlobServiceClientBuilder {
+        val blobPort = azureContainer.getMappedPort(10000)
+        return BlobServiceClientBuilder()
+            .connectionString("DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:$blobPort/devstoreaccount1;")
     }
 }

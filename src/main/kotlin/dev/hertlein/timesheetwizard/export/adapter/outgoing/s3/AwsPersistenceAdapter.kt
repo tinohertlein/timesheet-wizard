@@ -17,8 +17,8 @@ private val logger = KotlinLogging.logger {}
 
 @Component
 @ConditionalOnProperty("timesheet-wizard.aws.enabled")
-class S3PersistenceAdapter(
-    @Value("\${timesheet-wizard.export.aws.s3.bucket}")
+class AwsPersistenceAdapter(
+    @Value("\${timesheet-wizard.aws.s3.bucket}")
     private val bucket: String,
     private val s3Client: S3Client,
     private val filenameFactory: FilenameFactory

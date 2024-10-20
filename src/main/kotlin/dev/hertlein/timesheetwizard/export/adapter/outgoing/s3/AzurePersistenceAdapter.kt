@@ -6,9 +6,7 @@ import dev.hertlein.timesheetwizard.export.adapter.outgoing.s3.component.Documen
 import dev.hertlein.timesheetwizard.export.adapter.outgoing.s3.component.FilenameFactory
 import dev.hertlein.timesheetwizard.export.core.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.export.core.port.PersistencePort
-import dev.hertlein.timesheetwizard.shared.cloud.EXPORT_QUALIFIER
 import mu.KotlinLogging
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.stereotype.Component
 
@@ -17,7 +15,6 @@ private val logger = KotlinLogging.logger {}
 @Component
 @ConditionalOnProperty("timesheet-wizard.azure.enabled")
 class AzurePersistenceAdapter(
-    @Qualifier(EXPORT_QUALIFIER)
     private val client: BlobContainerClient,
     private val filenameFactory: FilenameFactory
 ) : PersistencePort {

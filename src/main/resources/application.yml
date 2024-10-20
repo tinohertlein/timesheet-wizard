@@ -13,14 +13,14 @@ jackson:
     writeDatesAsTimestamps: false
 
 timesheet-wizard:
-  config:
-    aws:
-      s3:
-        bucket: tw-sheets
-    azure:
-      blob:
-        container: tw-sheets
-
+  aws:
+    enabled: false
+    s3:
+      bucket: tbd
+  azure:
+    enabled: false
+    blob:
+      container: tbd
   import:
     run-on-startup:
       enabled: false
@@ -28,14 +28,6 @@ timesheet-wizard:
       reports-url: "https://reports.api.clockify.me/"
       api-key: your-api-key
       workspace-id: your-workspace-id
-
-  export:
-    aws:
-      s3:
-        bucket: tw-sheets
-    azure:
-      blob:
-        container: tw-sheets
 
 logging:
   level:

@@ -8,11 +8,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
-
-const val CONFIG_QUALIFIER = "blobConfigContainerClient"
-const val EXPORT_QUALIFIER = "blobExportContainerClient"
-
 @Configuration
+@ConditionalOnProperty("timesheet-wizard.azure.enabled")
 class AzureBeansFactory {
 
     @Bean
@@ -20,23 +17,12 @@ class AzureBeansFactory {
         return blobServiceClientBuilder.buildClient()
     }
 
-    @Bean(name = [CONFIG_QUALIFIER])
-    @ConditionalOnProperty("timesheet-wizard.azure.enabled")
+    @Bean
     fun blobConfigContainerClient(
-        serviceClient: BlobServiceClient,
-        @Value("\${timesheet-wizard.config.azure.blob.container}")
+        blobServiceClient: BlobServiceClient,
+        @Value("\${timesheet-wizard.azure.blob.container}")
         container: String
     ): BlobContainerClient {
-        return serviceClient.createBlobContainerIfNotExists(container)
-    }
-
-    @Bean(name = [EXPORT_QUALIFIER])
-    @ConditionalOnProperty("timesheet-wizard.azure.enabled")
-    fun blobExportContainerClient(
-        serviceClient: BlobServiceClient,
-        @Value("\${timesheet-wizard.export.azure.blob.container}")
-        container: String
-    ): BlobContainerClient {
-        return serviceClient.createBlobContainerIfNotExists(container)
+        return blobServiceClient.createBlobContainerIfNotExists(container)
     }
 }

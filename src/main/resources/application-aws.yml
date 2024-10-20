@@ -7,14 +7,7 @@ spring:
 timesheet-wizard:
   aws:
     enabled: true
+    s3:
+      bucket: tw-sheets
   azure:
     enabled: false
-  config:
-    aws:
-      s3:
-        bucket: tw-sheets
-
-  export:
-    aws:
-      s3:
-        bucket: tw-sheets

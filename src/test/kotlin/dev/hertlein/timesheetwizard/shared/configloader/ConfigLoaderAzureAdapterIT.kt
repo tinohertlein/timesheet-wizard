@@ -26,7 +26,7 @@ internal class ConfigLoaderAzureAdapterIT {
     @Autowired
     private lateinit var blobServiceClient: BlobServiceClient
 
-    @Value("\${timesheet-wizard.config.azure.blob.container}")
+    @Value("\${timesheet-wizard.azure.blob.container}")
     private lateinit var container: String
 
     @Autowired

@@ -3,12 +3,5 @@ timesheet-wizard:
     enabled: false
   azure:
     enabled: true
-  config:
-    azure:
-      blob:
-        container: tw-sheets
-
-  export:
-    azure:
-      blob:
-        container: tw-sheets
+    blob:
+      container: tw-sheets

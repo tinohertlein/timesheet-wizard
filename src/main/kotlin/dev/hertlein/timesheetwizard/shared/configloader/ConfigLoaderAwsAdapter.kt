@@ -19,7 +19,7 @@ private val logger = KotlinLogging.logger {}
 @ConditionalOnProperty("timesheet-wizard.aws.enabled")
 class ConfigLoaderAwsAdapter(
     private val s3Client: S3Client,
-    @Value("\${timesheet-wizard.config.aws.s3.bucket}")
+    @Value("\${timesheet-wizard.aws.s3.bucket}")
     private val bucket: String,
     private val objectMapper: ObjectMapper
 ) : CustomerConfigLoader, ClockifyIdsLoader, ExportConfigLoader {

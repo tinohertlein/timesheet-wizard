@@ -1,7 +1,8 @@
 package dev.hertlein.timesheetwizard
 
+import dev.hertlein.timesheetwizard.shared.SpringProfiles.AWS
 import dev.hertlein.timesheetwizard.util.AwsS3Operations
-import dev.hertlein.timesheetwizard.util.SpringTestProfiles
+import dev.hertlein.timesheetwizard.util.SpringTestProfiles.TESTCONTAINERS
 import dev.hertlein.timesheetwizard.util.TestcontainersConfiguration
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -13,7 +14,7 @@ import org.springframework.test.context.ActiveProfiles
 import software.amazon.awssdk.services.s3.S3Client
 
 @DisplayName("AWS Application")
-@ActiveProfiles(SpringTestProfiles.TESTCONTAINERS, "aws")
+@ActiveProfiles(TESTCONTAINERS, AWS)
 @SpringBootTest
 @Import(TestcontainersConfiguration::class)
 class AwsApplicationE2ET : AbstractApplicationE2E() {
@@ -21,7 +22,7 @@ class AwsApplicationE2ET : AbstractApplicationE2E() {
     @Autowired
     private lateinit var s3Client: S3Client
 
-    @Value("\${timesheet-wizard.export.aws.s3.bucket}")
+    @Value("\${timesheet-wizard.aws.s3.bucket}")
     private lateinit var bucket: String
 
     @Test

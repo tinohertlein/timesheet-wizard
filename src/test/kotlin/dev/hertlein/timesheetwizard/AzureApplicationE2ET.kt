@@ -1,8 +1,9 @@
 package dev.hertlein.timesheetwizard
 
 import com.azure.storage.blob.BlobServiceClient
+import dev.hertlein.timesheetwizard.shared.SpringProfiles.AZURE
 import dev.hertlein.timesheetwizard.util.AzureBlobOperations
-import dev.hertlein.timesheetwizard.util.SpringTestProfiles
+import dev.hertlein.timesheetwizard.util.SpringTestProfiles.TESTCONTAINERS
 import dev.hertlein.timesheetwizard.util.TestcontainersConfiguration
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -14,7 +15,7 @@ import org.springframework.test.context.ActiveProfiles
 
 
 @DisplayName("Azure Application")
-@ActiveProfiles(SpringTestProfiles.TESTCONTAINERS, "azure")
+@ActiveProfiles(TESTCONTAINERS, AZURE)
 @SpringBootTest
 @Import(TestcontainersConfiguration::class)
 class AzureApplicationE2ET : AbstractApplicationE2E() {
@@ -22,7 +23,7 @@ class AzureApplicationE2ET : AbstractApplicationE2E() {
     @Autowired
     private lateinit var blobClient: BlobServiceClient
 
-    @Value("\${timesheet-wizard.export.azure.blob.container}")
+    @Value("\${timesheet-wizard.azure.blob.container}")
     private lateinit var container: String
 
     @Test
