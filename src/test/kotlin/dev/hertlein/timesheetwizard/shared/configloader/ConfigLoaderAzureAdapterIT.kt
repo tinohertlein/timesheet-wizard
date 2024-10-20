@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.shared.configloader
 
-import com.azure.storage.blob.BlobContainerClient
+import com.azure.storage.blob.BlobServiceClient
 import dev.hertlein.timesheetwizard.shared.model.ClockifyId
 import dev.hertlein.timesheetwizard.shared.model.Customer
 import dev.hertlein.timesheetwizard.shared.model.ExportStrategyConfig
@@ -11,8 +11,8 @@ import dev.hertlein.timesheetwizard.util.TestcontainersConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.*
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.SpyBean
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
 
@@ -23,8 +23,11 @@ import org.springframework.test.context.ActiveProfiles
 @SpringBootTest
 internal class ConfigLoaderAzureAdapterIT {
 
-    @SpyBean
-    private lateinit var blobContainerClient: BlobContainerClient
+    @Autowired
+    private lateinit var blobServiceClient: BlobServiceClient
+
+    @Value("\${timesheet-wizard.config.azure.blob.container}")
+    private lateinit var container: String
 
     @Autowired
     private lateinit var configLoader: ConfigLoaderAzureAdapter
@@ -32,7 +35,8 @@ internal class ConfigLoaderAzureAdapterIT {
     @BeforeEach
     fun setup() {
         AzureBlobOperations.upload(
-            blobContainerClient,
+            blobServiceClient,
+            container,
             "config/configuration.json",
             ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/configuration.json")
         )

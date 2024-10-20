@@ -1,7 +1,6 @@
 package dev.hertlein.timesheetwizard.util
 
-import com.azure.storage.blob.BlobContainerClient
-import com.azure.storage.blob.BlobContainerClientBuilder
+import com.azure.storage.blob.BlobServiceClientBuilder
 import dev.hertlein.timesheetwizard.util.SpringTestProfiles.TESTCONTAINERS
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.TestConfiguration
@@ -34,18 +33,14 @@ class TestcontainersConfiguration {
 
     @Bean
     @Profile(TESTCONTAINERS)
-    fun blobContainerClient(
+    fun blobServiceClientBuilder(
         azureContainer: GenericContainer<*>,
         @Value("\${timesheet-wizard.export.azure.blob.container}")
         container: String
-    ): BlobContainerClient {
-        val blobPort = azureContainer.getMappedPort(10000);
-        val client = BlobContainerClientBuilder()
+    ): BlobServiceClientBuilder {
+        val blobPort = azureContainer.getMappedPort(10000)
+        return BlobServiceClientBuilder()
             .connectionString("DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:$blobPort/devstoreaccount1;")
-            .containerName(container)
-            .buildClient()
-        client.create()
-        return client;
     }
 
     @Bean

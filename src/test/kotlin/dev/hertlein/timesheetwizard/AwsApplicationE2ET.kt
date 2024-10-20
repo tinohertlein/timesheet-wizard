@@ -24,7 +24,6 @@ class AwsApplicationE2ET : AbstractApplicationE2E() {
     @Value("\${timesheet-wizard.export.aws.s3.bucket}")
     private lateinit var bucket: String
 
-
     @Test
     fun `should import and export timesheets to AWS S3`() {
         executeTest(this::uploadToS3Bucket, this::downloadFromS3Bucket)

@@ -6,8 +6,9 @@ import dev.hertlein.timesheetwizard.export.adapter.outgoing.s3.component.Documen
 import dev.hertlein.timesheetwizard.export.adapter.outgoing.s3.component.FilenameFactory
 import dev.hertlein.timesheetwizard.export.core.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.export.core.port.PersistencePort
+import dev.hertlein.timesheetwizard.shared.cloud.EXPORT_QUALIFIER
 import mu.KotlinLogging
-import org.springframework.beans.factory.annotation.Value
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.stereotype.Component
 
@@ -16,9 +17,8 @@ private val logger = KotlinLogging.logger {}
 @Component
 @ConditionalOnProperty("timesheet-wizard.azure.enabled")
 class AzurePersistenceAdapter(
+    @Qualifier(EXPORT_QUALIFIER)
     private val client: BlobContainerClient,
-    @Value("\${timesheet-wizard.export.azure.blob.container}")
-    private val container: String,
     private val filenameFactory: FilenameFactory
 ) : PersistencePort {
 
@@ -29,10 +29,10 @@ class AzurePersistenceAdapter(
         val filename = filenameFactory.filenameFrom(metaData, timesheetDocument)
 
         upload(filename, timesheetDocument.content)
-            .also { logger.debug { "Persisted document to '$container/$filename'" } }
+            .also { logger.debug { "Persisted document to '${client.blobContainerName}/$filename'" } }
     }
 
     private fun upload(key: String, content: ByteArray) {
-        client.getBlobClient(key).upload(BinaryData.fromBytes(content))
+        client.getBlobClient(key).upload(BinaryData.fromBytes(content), true)
     }
 }
