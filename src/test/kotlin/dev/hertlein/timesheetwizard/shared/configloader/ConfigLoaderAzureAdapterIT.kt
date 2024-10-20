@@ -30,7 +30,7 @@ internal class ConfigLoaderAzureAdapterIT {
     private lateinit var container: String
 
     @Autowired
-    private lateinit var configLoader: ConfigLoaderAzureAdapter
+    private lateinit var configLoader: ConfigLoaderCloudAdapter
 
     @BeforeEach
     fun setup() {

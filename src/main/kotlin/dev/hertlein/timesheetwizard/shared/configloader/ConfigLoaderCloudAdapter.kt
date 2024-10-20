@@ -2,25 +2,19 @@ package dev.hertlein.timesheetwizard.shared.configloader
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
+import dev.hertlein.timesheetwizard.shared.cloud.CloudPersistence
 import dev.hertlein.timesheetwizard.shared.model.ClockifyId
 import dev.hertlein.timesheetwizard.shared.model.Customer
 import dev.hertlein.timesheetwizard.shared.model.ExportStrategyConfig
 import mu.KotlinLogging
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Component
-import software.amazon.awssdk.services.s3.S3Client
-import software.amazon.awssdk.services.s3.model.GetObjectRequest
 
 private val logger = KotlinLogging.logger {}
 
 @Component
-@ConditionalOnProperty("timesheet-wizard.aws.enabled")
-class ConfigLoaderAwsAdapter(
-    private val s3Client: S3Client,
-    @Value("\${timesheet-wizard.aws.s3.bucket}")
-    private val bucket: String,
+class ConfigLoaderCloudAdapter(
+    private val cloudPersistence: CloudPersistence,
     private val objectMapper: ObjectMapper
 ) : CustomerConfigLoader, ClockifyIdsLoader, ExportConfigLoader {
 
@@ -49,17 +43,8 @@ class ConfigLoaderAwsAdapter(
     }
 
     private fun loadConfiguration(): List<ConfigDto> {
-        val json = download("config/configuration.json")
+        val json = cloudPersistence.download("config/configuration.json")
         return objectMapper.readValue(json, object : TypeReference<List<ConfigDto>?>() {}) ?: emptyList()
-    }
-
-    private fun download(key: String): String {
-        val request = GetObjectRequest
-            .builder()
-            .bucket(bucket)
-            .key(key)
-            .build()
-        return String(s3Client.getObject(request).readAllBytes())
     }
 
     private data class ConfigDto(

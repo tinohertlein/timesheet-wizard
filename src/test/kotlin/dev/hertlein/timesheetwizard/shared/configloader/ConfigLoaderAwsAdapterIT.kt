@@ -32,7 +32,7 @@ internal class ConfigLoaderAwsAdapterIT {
     private lateinit var s3Client: S3Client
 
     @Autowired
-    private lateinit var configLoader: ConfigLoaderAwsAdapter
+    private lateinit var configLoader: ConfigLoaderCloudAdapter
 
     @BeforeEach
     fun setup() {
