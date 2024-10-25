@@ -10,7 +10,7 @@ plugins {
     id("com.github.jmongard.git-semver-plugin") version "0.12.11"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.spring.dependency-management") version "1.1.6"
-    id("org.springframework.boot") version "3.3.4"
+    id("org.springframework.boot") version "3.3.5"
     id("org.springframework.boot.experimental.thin-launcher") version "1.0.31.RELEASE"
 }
 
