@@ -57,7 +57,7 @@ dependencies {
 
     val guavaVersion = "33.3.1-jre"
     val kotlinLoggingVersion = "3.0.5"
-    val jacksonKotlinVersion = "2.17.2"
+    val jacksonKotlinVersion = "2.18.1"
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonKotlinVersion")
