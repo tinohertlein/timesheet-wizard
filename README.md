@@ -69,7 +69,9 @@ Timesheet-Wizard is
 - Java 21+
 - Gradle
 - Docker (for tests using testcontainers)
-- AWS SAM CLI (for building & invoking Lambda on local machine)
+- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) (for building & invoking as Lambda on local machine)
+- [Azure CLI](https://learn.microsoft.com/de-de/cli/azure/) (for building as Azure Function on local machine)
+- [Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local) (for invoking as Azure Function on local machine)
 
 ### Build & test
 
@@ -89,7 +91,7 @@ Timesheet-Wizard is
     - Azureite via [Azure Storage Explorer](https://github.com/microsoft/AzureStorageExplorer) for local Azure emulation
     - S3 for remote AWS calls
 
-#### ... with local Azureite as Azure Blob Storage (no connection to Azure)
+#### ... as Spring Boot Application with local Azureite as Azure Blob Storage (no connection to Azure)
 
 - Start Azureite as local Azure Blob Storage with `docker compose up`
 - Set import params
@@ -97,7 +99,14 @@ Timesheet-Wizard is
 - Execute the application with profile 'local':
   `./gradlew bootRun --args='--spring.profiles.active=local,confidential,azure'`
 
-#### ... with local Minio as S3 storage (no connection to AWS)
+#### ... as Azure Function with local Azureite as Azure Blob Storage (no connection to Azure)
+
+- Start Azureite as local Azure Blob Storage with `docker compose up`
+- `export SPRING_PROFILES_ACTIVE=local,confidential,azure`
+- `./gradlew azureFunctionsRun`
+
+
+#### ... as Spring Boot Application with local Minio as S3 storage (no connection to AWS)
 
 - Start Minio as local S3 storage with `docker compose up`
 - Set import params
@@ -105,7 +114,7 @@ Timesheet-Wizard is
 - Execute the application with profile 'local':
   `./gradlew bootRun --args='--spring.profiles.active=local,confidential,aws'`
 
-#### ... with connection to AWS S3
+#### ... as Spring Boot Application with connection to AWS S3
 
 - Set AWS credentials based on
   the [authentication method](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-net-applications-security/iam-development.html)
@@ -115,7 +124,7 @@ Timesheet-Wizard is
 - Execute the application with profile 'remote':
   `./gradlew bootRun --args='--spring.profiles.active=remote,confidential,aws'`
 
-#### ... with AWS SAM CLI
+#### ... as AWS Lambda with AWS SAM CLI
 
 - Set import params in [requests/public/event.json](requests/public/event.json)
 - Build: ` ./requests/public/build.sh`

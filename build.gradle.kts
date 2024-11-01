@@ -1,4 +1,6 @@
 import com.github.jengelman.gradle.plugins.shadow.transformers.PropertiesFileTransformer
+import com.microsoft.azure.gradle.auth.GradleAuthConfig
+import com.microsoft.azure.gradle.configuration.GradleRuntimeConfig
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
@@ -12,6 +14,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.6"
     id("org.springframework.boot") version "3.3.4"
     id("org.springframework.boot.experimental.thin-launcher") version "1.0.31.RELEASE"
+    id("com.microsoft.azure.azurefunctions") version "1.16.1"
 }
 
 group = "dev.hertlein.timesheet-wizard"
@@ -19,6 +22,10 @@ version = semver.version
 description = "The Timesheet Wizard"
 
 val springCloudVersion = "2023.0.3"
+
+apply {
+    plugin("com.microsoft.azure.azurefunctions")
+}
 
 tasks.assemble {
     dependsOn("thinJar", "shadowJar")
@@ -59,6 +66,9 @@ dependencies {
     val springCloudAzureVersion = "5.17.1"
     implementation(platform("com.azure.spring:spring-cloud-azure-dependencies:$springCloudAzureVersion"))
     implementation("com.azure.spring:spring-cloud-azure-starter-storage-blob")
+    val logstashEncoderVersion = 8.0
+    implementation("net.logstash.logback:logstash-logback-encoder:$logstashEncoderVersion")
+
 
     val guavaVersion = "33.3.1-jre"
     val kotlinLoggingVersion = "3.0.5"
@@ -125,6 +135,12 @@ tasks.test {
     )
 }
 
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "dev.hertlein.timesheetwizard.TwApplication"
+    }
+}
+
 tasks.shadowJar {
     mustRunAfter("thinJar")
     manifest.inheritFrom(project.tasks.thinJar.get().manifest)
@@ -140,4 +156,26 @@ tasks.shadowJar {
         mergeStrategy = "append"
     }
     archiveFileName.set("timesheet-wizard.jar")
+}
+
+azurefunctions {
+    appName = "timesheet-wizard-app"
+    resourceGroup = "timesheet-wizard"
+    region = "Germany West Central"
+    appServicePlanName = "VirtualDedicatedPlan"
+    pricingTier = "Y1"
+
+    runtime = GradleRuntimeConfig()
+    runtime.os("linux")
+    runtime.javaVersion("21")
+    auth = GradleAuthConfig()
+    auth.type = "azure_cli"
+
+    appSettings = mutableMapOf()
+    appSettings["SPRING_PROFILES_ACTIVE"] = "azure,confidential"
+    appSettings["applicationInsights.samplingSettings.isEnabled"] = "false"
+    appSettings["FUNCTIONS_EXTENSION_VERSION"] = "~4"
+
+    // Uncomment to enable local debug
+    // localDebug = "transport=dt_socket,server=y,suspend=n,address=5005"
 }

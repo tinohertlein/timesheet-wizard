@@ -2,10 +2,12 @@ package dev.hertlein.timesheetwizard.import_.adapter.incoming.azurefunction
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.microsoft.azure.functions.ExecutionContext
+import com.microsoft.azure.functions.HttpMethod
 import com.microsoft.azure.functions.HttpRequestMessage
 import com.microsoft.azure.functions.annotation.AuthorizationLevel
 import com.microsoft.azure.functions.annotation.FunctionName
 import com.microsoft.azure.functions.annotation.HttpTrigger
+import com.microsoft.azure.functions.annotation.TimerTrigger
 import dev.hertlein.timesheetwizard.import_.core.ImportService
 import dev.hertlein.timesheetwizard.import_.core.model.ImportParams
 import mu.KotlinLogging
@@ -21,13 +23,34 @@ class AzureFunctionAdapter(
     private val importService: ImportService
 ) {
 
-    @FunctionName("import")
-    fun import(
-        @HttpTrigger(name = "req", authLevel = AuthorizationLevel.ANONYMOUS)
+    @FunctionName("import-manually")
+    fun importManually(
+        @HttpTrigger(name = "req", methods = [HttpMethod.POST], authLevel = AuthorizationLevel.FUNCTION)
         request: HttpRequestMessage<Optional<String>>,
         context: ExecutionContext
     ) {
-        val body = request.body
+        import(request.body)
+    }
+
+    @FunctionName("import-daily")
+    fun importDaily(
+        @TimerTrigger(name = "import-daily", schedule = "0 30 17 \\* \\* 1-5")
+        timerInfo: String,
+        context: ExecutionContext
+    ) {
+        import(Optional.of("""{"customerIds": [], "dateRangeType": "THIS_MONTH"}"""))
+    }
+
+    @FunctionName("import-monthly")
+    fun importMonthly(
+        @TimerTrigger(name = "import-monthly", schedule = "0 0 5 1 \\* \\*")
+        timerInfo: String,
+        context: ExecutionContext
+    ) {
+        import(Optional.of("""{"customerIds": [], "dateRangeType": "LAST_MONTH"}"""))
+    }
+
+    private fun import(body: Optional<String>) {
         if (body.isPresent) {
             importService.import(toInputParams(body.get()))
         } else {

@@ -9,6 +9,7 @@ spring:
     azure:
       storage:
         account-name: devstoreaccount1
+        ## well known account key for azure storage emulation with azureite
         account-key: Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==
         endpoint: http://127.0.0.1:10000/devstoreaccount1
 
