@@ -22,6 +22,8 @@ version = semver.version
 description = "The Timesheet Wizard"
 
 val springCloudVersion = "2023.0.3"
+val springCloudAwsVersion = "3.2.0"
+val springCloudAzureVersion = "5.17.1"
 
 apply {
     plugin("com.microsoft.azure.azurefunctions")
@@ -45,6 +47,9 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+        mavenBom("io.awspring.cloud:spring-cloud-aws-dependencies:${springCloudAwsVersion}")
+        mavenBom("com.azure.spring:spring-cloud-azure-dependencies:$springCloudAzureVersion")
+
     }
 }
 
@@ -58,13 +63,9 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-function-adapter-azure")
 
 
-    val springCloudAwsVersion = "3.2.0"
-    implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:${springCloudAwsVersion}"))
     implementation("io.awspring.cloud:spring-cloud-aws-starter")
     implementation("io.awspring.cloud:spring-cloud-aws-starter-s3")
 
-    val springCloudAzureVersion = "5.17.1"
-    implementation(platform("com.azure.spring:spring-cloud-azure-dependencies:$springCloudAzureVersion"))
     implementation("com.azure.spring:spring-cloud-azure-starter-storage-blob")
     val logstashEncoderVersion = 8.0
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashEncoderVersion")
