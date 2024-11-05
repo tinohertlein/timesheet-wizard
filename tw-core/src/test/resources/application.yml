@@ -1,0 +1,6 @@
+timesheet-wizard:
+  import:
+    clockify:
+      reports-url: a-url
+      api-key: an-api-key
+      workspace-id: a-workspace-id

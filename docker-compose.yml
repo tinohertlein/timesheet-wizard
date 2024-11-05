@@ -24,6 +24,12 @@ services:
       /usr/bin/mc anonymous set public myminio/tw-sheets;
       exit 0;
       "
+  azureit:
+    image: mcr.microsoft.com/azure-storage/azurite
+    ports:
+      - '10000:10000'
+      - '10001:10001'
+      - '10002:10002'
 
 volumes:
   minio_data:
