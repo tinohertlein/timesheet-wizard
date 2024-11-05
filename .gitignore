@@ -39,3 +39,16 @@ nb-configuration.xml
 /.aws-sam/
 /.kotlin/
 /requests/confidential/
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+/.idea/
+/.kotlin/
+/build-logic/.kotlin/
+/tw-app-aws/src/main/resources/application-confidential.yml
+/tw-app-aws/requests/confidential/
+/tw-app-aws/.aws-sam/
+

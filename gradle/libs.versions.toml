@@ -1,0 +1,69 @@
+[versions]
+kotlin = "2.0.21"
+guava = "33.3.1-jre"
+kotlin-logging = "3.0.5"
+jackson-kotlin = "2.17.2"
+mockk = "1.13.13"
+mock-server = "5.15.0"
+opencsv = "5.9"
+poi = "5.3.0"
+jasper = "7.0.1"
+openpdf = "2.0.3"
+spring-boot = "3.3.4"
+spring-cloud = "2023.0.3"
+spring-cloud-aws = "3.2.0"
+spring-dependency-management = "1.1.6"
+spring-thin = "1.0.31.RELEASE"
+shadow = "8.1.1"
+semver = "0.12.10"
+
+[libraries]
+lombok = { module = "org.projectlombok:lombok" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+kotlin-logging = { module = "io.github.microutils:kotlin-logging-jvm", version.ref = "kotlin-logging" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+jackson-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson-kotlin" }
+opencsv = { module = "com.opencsv:opencsv", version.ref = "opencsv" }
+poi = { module = "org.apache.poi:poi", version.ref = "poi" }
+poi-ooxml = { module = "org.apache.poi:poi-ooxml", version.ref = "poi" }
+jasperreports = { module = "net.sf.jasperreports:jasperreports", version.ref = "jasper" }
+jasperreports-pdf = { module = "net.sf.jasperreports:jasperreports-pdf", version.ref = "jasper" }
+jasperreports-jdt = { module = "net.sf.jasperreports:jasperreports-jdt", version.ref = "jasper" }
+openpdf = { module = "com.github.librepdf:openpdf", version.ref = "openpdf" }
+spring-starter = { module = "org.springframework.boot:spring-boot-starter" }
+spring-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-cloud = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }
+spring-cloud-function-context = { module = "org.springframework.cloud:spring-cloud-function-context" }
+spring-cloud-function-adapter-aws = { module = "org.springframework.cloud:spring-cloud-function-adapter-aws" }
+spring-cloud-aws = { module = "io.awspring.cloud:spring-cloud-aws-dependencies", version.ref = "spring-cloud-aws" }
+spring-cloud-aws-starter = { module = "io.awspring.cloud:spring-cloud-aws-starter" }
+spring-cloud-aws-starter-s3 = { module = "io.awspring.cloud:spring-cloud-aws-starter-s3" }
+
+## testing
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+mockserver-netty = { module = "org.mock-server:mockserver-netty", version.ref = "mock-server" }
+mockserver-client = { module = "org.mock-server:mockserver-client-java", version.ref = "mock-server" }
+spring-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+kotlin-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
+rest-assured = { module = "io.rest-assured:rest-assured" }
+testcontainers-localstack = { module = "org.testcontainers:localstack" }
+testcontainers-mockserver = { module = "org.testcontainers:mockserver" }
+
+[bundles]
+export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt", "openpdf"]
+spring-web = ["spring-starter", "spring-starter-web"]
+spring-cloud = ["spring-cloud-function-context", "spring-cloud-function-adapter-aws"]
+spring-cloud-aws = ["spring-cloud-aws-starter", "spring-cloud-aws-starter-s3"]
+
+## testing
+testing = ["mockk", "mockserver-netty", "mockserver-client", "spring-starter-test", "kotlin-junit", "rest-assured", "testcontainers-localstack", "testcontainers-mockserver"]
+
+[plugins]
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+spring-thin = { id = "org.springframework.boot.experimental.thin-launcher", version.ref = "spring-thin" }
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+semver = { id = "com.github.jmongard.git-semver-plugin", version.ref = "semver" }
