@@ -1,7 +1,14 @@
 # Solution Strategy
 
+The business logic should be decoupled from the cloud infrastructure, so that a deployment to various hyperscalers
+doesn't have any impact on the core logic. To achieve this, the business logic is implemented in a separate Gradle
+subproject 'tw-core'. It is used by an application project that bundles the 'tw-core' project and any additional cloud
+dependencies. This app subprohect (e.g. tw-app-aws) is then deployed to AWS as a Lambda function.
+Any code that is cloud related is decoupled by a service-provider-interface Gradle subproject 'tw-spi-cloud'. See
+chapter 5 for a building block view.
 The individual parts of importing timesheets and transforming them to other formats should be decoupled, so that they
-can be updated or even replaced independently of each other. To achieve this, both modules are realized as separate
+can be updated or even replaced independently of each other. To achieve this, both modules are realized in the Gradle
+subproject 'tw-core' as separate
 Kotlin packages on the top level that are not allowed to have
 dependencies on each other. Shared code is placed in a package 'shared'. (**-> Quality goals QG3 & QG5**).
 
@@ -29,5 +36,8 @@ logic and connecting to surrounding systems (**-> Quality goals QG3 & QG5**).
 For monitoring, logging, error notification and other shared concepts, AWS systems
 like [AWS CloudWatch](https://aws.amazon.com/cloudwatch/?nc1=h_ls)
 , [AWS Simple Notification Service](https://aws.amazon.com/sns/?nc1=h_ls), ... are used. They are set up following an
-infrastructure-as-code approach using [AWS-SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) and [AWS CloudFormation](https://aws.amazon.com/cloudformation/?nc1=h_ls). 
-All of these are free of charge up to a certain limit - which won't be reached by a tiny application like the Timesheet-Wizard (**-> Quality goal #QG2**). 
+infrastructure-as-code approach
+using [AWS-SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html)
+and [AWS CloudFormation](https://aws.amazon.com/cloudformation/?nc1=h_ls).
+All of these are free of charge up to a certain limit - which won't be reached by a tiny application like the
+Timesheet-Wizard (**-> Quality goal #QG2**). 

@@ -34,7 +34,18 @@ the [doc-folder](docs/README.md).
 
 ### TL;DR
 
-The Timesheet-Wizard consists of two independent modules (realized as Kotlin packages) with the following
+The Timesheet-Wizard consists of three Gradle subprojects:
+
+- **tw-cloud-spi**: the service provider interface to be implemented for any cloud specific things. Like e.g. uploading
+  timesheets to some cloud storage.
+- **tw-core**: the code module that contains the business logic. This subproject is cloud-agnostic.
+- **tw-app-aws**: implements the interfaces defined in tw-cloud-spi with AWS specific code and also bundles the
+  cloud-agnostic
+  tw-core with AWS specific things to an AWS Lambda function.
+
+![Building blocks](docs/assets/static.drawio.png "Building blocks")
+
+The tw-core Gradle subproject consists of two independent modules (realized as Kotlin packages) with the following
 responsibilities:
 
 **import**
@@ -69,9 +80,11 @@ Timesheet-Wizard is
 - Java 21+
 - Gradle
 - Docker (for tests using testcontainers)
-- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) (for building & invoking as Lambda on local machine)
+- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) (
+  for building & invoking as Lambda on local machine)
 - [Azure CLI](https://learn.microsoft.com/de-de/cli/azure/) (for building as Azure Function on local machine)
-- [Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local) (for invoking as Azure Function on local machine)
+- [Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local) (for
+  invoking as Azure Function on local machine)
 
 ### Build & test
 
@@ -92,19 +105,6 @@ Timesheet-Wizard is
     - S3 for remote AWS calls
 
 #### ... as Spring Boot Application with local Azureite as Azure Blob Storage (no connection to Azure)
-
-- Start Azureite as local Azure Blob Storage with `docker compose up`
-- Set import params
-  in [ImportRunner](src/main/kotlin/dev/hertlein/timesheetwizard/ImportRunner.kt)
-- Execute the application with profile 'local':
-  `./gradlew bootRun --args='--spring.profiles.active=local,confidential,azure'`
-
-#### ... as Azure Function with local Azureite as Azure Blob Storage (no connection to Azure)
-
-- Start Azureite as local Azure Blob Storage with `docker compose up`
-- `export SPRING_PROFILES_ACTIVE=local,confidential,azure`
-- `./gradlew azureFunctionsRun`
-
 
 #### ... as Spring Boot Application with local Minio as S3 storage (no connection to AWS)
 
