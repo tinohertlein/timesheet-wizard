@@ -82,9 +82,6 @@ Timesheet-Wizard is
 - Docker (for tests using testcontainers)
 - [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) (
   for building & invoking as Lambda on local machine)
-- [Azure CLI](https://learn.microsoft.com/de-de/cli/azure/) (for building as Azure Function on local machine)
-- [Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local) (for
-  invoking as Azure Function on local machine)
 
 ### Build & test
 
@@ -101,10 +98,7 @@ Timesheet-Wizard is
 - Create & upload configuration file to cloud storage. An example file is
   shown [here](src/test/resources/e2e/config/configuration.json).
     - Use [Minio](http://localhost:9001/) for local AWS emulation
-    - Azureite via [Azure Storage Explorer](https://github.com/microsoft/AzureStorageExplorer) for local Azure emulation
     - S3 for remote AWS calls
-
-#### ... as Spring Boot Application with local Azureite as Azure Blob Storage (no connection to Azure)
 
 #### ... as Spring Boot Application with local Minio as S3 storage (no connection to AWS)
 
