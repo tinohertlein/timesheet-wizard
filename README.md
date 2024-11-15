@@ -43,7 +43,7 @@ The Timesheet-Wizard consists of three Gradle subprojects:
   cloud-agnostic
   tw-core with AWS specific things to an AWS Lambda function.
 
-![Building blocks](docs/assets/static.drawio.png "Building blocks")
+![Building blocks](docs/assets/readme-static.drawio.png "Building blocks")
 
 The tw-core Gradle subproject consists of two independent modules (realized as Kotlin packages) with the following
 responsibilities:
@@ -71,7 +71,7 @@ Timesheet-Wizard is
   via [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc1=h_ls)
 - triggered by AWS EventBridge
 
-![Technical context](docs/assets/context-technical.drawio.png "Technical context")
+![Technical context](docs/assets/readme-context-technical.drawio.png "Technical context")
 
 ## Getting started
 
@@ -85,42 +85,26 @@ Timesheet-Wizard is
 
 ### Build & test
 
-- Build & test the application with `gradle test`
+- Build with `gradle build`
+- Test with `gradle test`
 
-### Run from local machine - there are multiple options to do that
+### Run
 
 #### Preparation
 
-- Replace placeholders in [application.yml](src/main/resources/application.yml) with real Clockify credentials. Or
+- Replace placeholders in [application.yml](tw-app-aws/src/main/resources/application.yml) with real Clockify credentials. Or
   override them in a 'confidential' profile not commited to version control.
     - timesheet-wizard.import.clockify.api-key
     - timesheet-wizard.import.clockify.workspace-id
 - Create & upload configuration file to cloud storage. An example file is
-  shown [here](src/test/resources/e2e/config/configuration.json).
+  shown [here](tw-core/src/testFixtures/resources/e2e/config/configuration.json).
     - Use [Minio](http://localhost:9001/) for local AWS emulation
     - S3 for remote AWS calls
 
-#### ... as Spring Boot Application with local Minio as S3 storage (no connection to AWS)
 
-- Start Minio as local S3 storage with `docker compose up`
-- Set import params
-  in [ImportRunner](src/main/kotlin/dev/hertlein/timesheetwizard/ImportRunner.kt)
-- Execute the application with profile 'local':
-  `./gradlew bootRun --args='--spring.profiles.active=local,confidential,aws'`
+#### Run as AWS Lambda with AWS SAM CLI
 
-#### ... as Spring Boot Application with connection to AWS S3
-
-- Set AWS credentials based on
-  the [authentication method](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-net-applications-security/iam-development.html)
-  you want to use
-- Set import params
-  in [ImportRunner](src/main/kotlin/dev/hertlein/timesheetwizard/ImportRunner.kt)
-- Execute the application with profile 'remote':
-  `./gradlew bootRun --args='--spring.profiles.active=remote,confidential,aws'`
-
-#### ... as AWS Lambda with AWS SAM CLI
-
-- Set import params in [requests/public/event.json](requests/public/event.json)
-- Build: ` ./requests/public/build.sh`
-- Invoke locally: `./requests/public/invoke-local.sh`
-- Invoke remotely in AWS: `./requests/public/invoke-remote.sh`
+- Set import params in [tw-app-aws/requests/public/event.json](tw-app-aws/requests/public/event.json)
+- Build: `gradle build && ./tw-app-aws/requests/public/build.sh`
+- Invoke locally: `./tw-app-aws/requests/public/invoke-local.sh`
+- Invoke remotely in AWS: `./tw-app-aws/requests/public/invoke-remote.sh`
