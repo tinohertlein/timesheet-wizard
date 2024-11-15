@@ -45,7 +45,25 @@ jobs:
           path: ./tw-app-aws/build/test-results/test/*.xml
           reporter: java-junit
 
-  deploy-aws:
+  deploy-to-azure:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: 'gradle'
+
+      - name: Deploy Azure Function
+        run: ./gradlew tw-app-azure:build tw-app-azure:azureFunctionsDeploy
+
+  deploy-to-aws:
+    if: false # temporarily disable AWS deployment
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -81,7 +99,9 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: deploy-aws
+    needs:
+      - deploy-to-aws
+      - deploy-to-azure
     steps:
       - name: Checkout
         uses: actions/checkout@v4
