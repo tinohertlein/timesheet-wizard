@@ -33,7 +33,7 @@ class AzureFunctionAdapter(
 
     @FunctionName("import-daily")
     fun importDaily(
-        @TimerTrigger(name = "import-daily", schedule = "0 30 17 \\* \\* 1-5")
+        @TimerTrigger(name = "import-daily", schedule = "0 30 17 * * 1-5")
         timerInfo: String,
         context: ExecutionContext
     ) {
@@ -42,7 +42,7 @@ class AzureFunctionAdapter(
 
     @FunctionName("import-monthly")
     fun importMonthly(
-        @TimerTrigger(name = "import-monthly", schedule = "0 0 5 1 \\* \\*")
+        @TimerTrigger(name = "import-monthly", schedule = "0 0 5 1 * *")
         timerInfo: String,
         context: ExecutionContext
     ) {
