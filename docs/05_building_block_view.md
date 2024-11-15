@@ -1,6 +1,6 @@
 # Building Block View
 
-# Level 1
+## Level 1
 
 The Timesheet-Wizard consists of the following Gradle subprojects:
 
@@ -36,12 +36,12 @@ visible in the code immediately on the package level.
 
 ## Level 4
 
-- The package 'model' is in the
+- The package 'shared.model' is in the
   centre of the architecture without any dependencies to other parts of the system.
 - The entities in the domain-logic are
-  used by application services (e.g. ImportService & ExportService) that are e.g. responsible for orchestrating the
-  workflow.
-- In this package there are also `port`-interfaces, which are implemented in package `adapter` to
+  used by the application services ImportService & ExportService in packages import.core & export.core that are
+  responsible for orchestrating the workflow.
+- In package import.core & export.core there are also `port`-interfaces, which are implemented in package `adapter` to
   invert dependencies.
 - Only `outgoing`-ports are decoupled via an interface, having one corresponding adapter.
 
