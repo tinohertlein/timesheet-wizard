@@ -1,0 +1,4 @@
+## invoke local
+POST 127.0.0.1:7071/api/import-manually?code=_master-key
+
+{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}

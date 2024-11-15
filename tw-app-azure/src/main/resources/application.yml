@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: Timesheet-Wizard
+  main:
+    web-application-type: none
+
+jackson:
+  serialization:
+    writeDatesAsTimestamps: false
+
+timesheet-wizard:
+  azure:
+    blob:
+      container: tw-sheets
+  import:
+    clockify:
+      reports-url: "https://reports.api.clockify.me/"
+      api-key: your-api-key
+      workspace-id: your-workspace-id
+
+logging:
+  level:
+    dev.hertlein.timesheetwizard: DEBUG

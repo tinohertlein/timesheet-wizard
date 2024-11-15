@@ -10,12 +10,15 @@ poi = "5.3.0"
 jasper = "7.0.1"
 openpdf = "2.0.3"
 spring-boot = "3.3.4"
+azure = "1.16.1"
 spring-cloud = "2023.0.3"
 spring-cloud-aws = "3.2.0"
+spring-cloud-azure = "5.17.1"
 spring-dependency-management = "1.1.6"
 spring-thin = "1.0.31.RELEASE"
 shadow = "8.1.1"
 semver = "0.12.11"
+logstash-encoder = "8.0"
 
 [libraries]
 lombok = { module = "org.projectlombok:lombok" }
@@ -35,10 +38,18 @@ spring-starter = { module = "org.springframework.boot:spring-boot-starter" }
 spring-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 spring-cloud = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }
 spring-cloud-function-context = { module = "org.springframework.cloud:spring-cloud-function-context" }
-spring-cloud-function-adapter-aws = { module = "org.springframework.cloud:spring-cloud-function-adapter-aws" }
+
+## AWS
 spring-cloud-aws = { module = "io.awspring.cloud:spring-cloud-aws-dependencies", version.ref = "spring-cloud-aws" }
+spring-cloud-function-adapter-aws = { module = "org.springframework.cloud:spring-cloud-function-adapter-aws" }
 spring-cloud-aws-starter = { module = "io.awspring.cloud:spring-cloud-aws-starter" }
 spring-cloud-aws-starter-s3 = { module = "io.awspring.cloud:spring-cloud-aws-starter-s3" }
+
+## AZURE
+spring-cloud-azure = { module = "com.azure.spring:spring-cloud-azure-dependencies", version.ref = "spring-cloud-azure" }
+spring-cloud-function-adapter-azure = { module = "org.springframework.cloud:spring-cloud-function-adapter-azure" }
+spring-cloud-azure-starter-storage = { module = "com.azure.spring:spring-cloud-azure-starter-storage-blob" }
+logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-encoder" }
 
 ## testing
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
@@ -53,8 +64,9 @@ testcontainers-mockserver = { module = "org.testcontainers:mockserver" }
 [bundles]
 export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt", "openpdf"]
 spring-web = ["spring-starter", "spring-starter-web"]
-spring-cloud = ["spring-cloud-function-context", "spring-cloud-function-adapter-aws"]
-spring-cloud-aws = ["spring-cloud-aws-starter", "spring-cloud-aws-starter-s3"]
+spring-cloud = ["spring-cloud-function-context"]
+spring-cloud-aws = ["spring-cloud-function-adapter-aws", "spring-cloud-aws-starter", "spring-cloud-aws-starter-s3"]
+spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure-starter-storage", "logstash-encoder"]
 
 ## testing
 testing = ["mockk", "mockserver-netty", "mockserver-client", "spring-starter-test", "kotlin-junit", "rest-assured", "testcontainers-localstack", "testcontainers-mockserver"]
@@ -67,3 +79,4 @@ spring-dependency-management = { id = "io.spring.dependency-management", version
 spring-thin = { id = "org.springframework.boot.experimental.thin-launcher", version.ref = "spring-thin" }
 shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
 semver = { id = "com.github.jmongard.git-semver-plugin", version.ref = "semver" }
+azure = { id = "com.microsoft.azure.azurefunctions", version.ref = "azure" }
