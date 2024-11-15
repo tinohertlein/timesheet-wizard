@@ -2,8 +2,11 @@ name: Build, deploy, release master branch
 
 on:
   push:
-    branches:
-      - master
+    paths-ignore:
+      - 'docs'
+      - 'tampermonkey'
+      - 'README.md'
+      - 'docker-compose.yml'
 
 env:
   JAVA_VERSION: '21'
