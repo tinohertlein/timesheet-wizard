@@ -62,7 +62,9 @@ azurefunctions {
     auth.type = "azure_cli"
 
     appSettings = mutableMapOf()
-    appSettings["SPRING_PROFILES_ACTIVE"] = "confidential"
+    appSettings["TIMESHEET_WIZARD_IMPORT_CLOCKIFY_API_KEY"] = System.getenv("TW_IMPORT_CLOCKIFY_API_KEY")
+    appSettings["TIMESHEET_WIZARD_IMPORT_CLOCKIFY_WORKSPACE_ID"] = System.getenv("TW_IMPORT_CLOCKIFY_WORKSPACE_ID")
+    appSettings["SPRING_CLOUD_AZURE_STORAGE_CONNECTION_STRING"] = System.getenv("SPRING_CLOUD_AZURE_STORAGE_CONNECTION_STRING")
     appSettings["applicationInsights.samplingSettings.isEnabled"] = "false"
     appSettings["FUNCTIONS_EXTENSION_VERSION"] = "~4"
 
