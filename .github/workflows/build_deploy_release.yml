@@ -89,7 +89,6 @@ jobs:
           slot-name: 'Production'
 
   deploy-to-aws:
-    if: false # temporarily disable AWS deployment
     runs-on: ubuntu-latest
     needs: build
     steps:
