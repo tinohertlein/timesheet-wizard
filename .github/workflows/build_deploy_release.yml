@@ -51,6 +51,14 @@ jobs:
           path: ./tw-app-aws/build/test-results/test/*.xml
           reporter: java-junit
 
+      - name: Generate test report (tw-app-azure)
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Test Report (tw-app-azure)
+          path: ./tw-app-azure/build/test-results/test/*.xml
+          reporter: java-junit
+
   deploy-to-azure:
     runs-on: ubuntu-24.04
     needs: build
