@@ -39,7 +39,7 @@ jobs:
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
-          name: Test Report (tw-core)
+          name: test (tw-core)
           path: ./tw-core/build/test-results/test/*.xml
           reporter: java-junit
 
@@ -47,7 +47,7 @@ jobs:
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
-          name: Test Report (tw-app-aws)
+          name: test (tw-app-aws
           path: ./tw-app-aws/build/test-results/test/*.xml
           reporter: java-junit
 
@@ -55,7 +55,7 @@ jobs:
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
-          name: Test Report (tw-app-azure)
+          name: test (tw-app-azure)
           path: ./tw-app-azure/build/test-results/test/*.xml
           reporter: java-junit
 
