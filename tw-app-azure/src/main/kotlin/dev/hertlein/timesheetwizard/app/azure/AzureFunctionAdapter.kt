@@ -22,27 +22,27 @@ class AzureFunctionAdapter(
     private val importService: ImportService
 ) {
 
-    @FunctionName("import-manually")
-    fun importManually(
-        @HttpTrigger(name = "req", methods = [HttpMethod.POST], authLevel = AuthorizationLevel.FUNCTION)
+    @FunctionName("import")
+    fun import(
+        @HttpTrigger(name = "import", methods = [HttpMethod.POST], authLevel = AuthorizationLevel.FUNCTION)
         request: HttpRequestMessage<Optional<String>>,
         context: ExecutionContext
     ) {
         import(request.body)
     }
 
-    @FunctionName("import-daily")
+    @FunctionName("importDaily")
     fun importDaily(
-        @TimerTrigger(name = "import-daily", schedule = "0 30 17 * * 1-5")
+        @TimerTrigger(name = "importDailyTrigger", schedule = "0 30 17 * * 1-5")
         timerInfo: String,
         context: ExecutionContext
     ) {
         import(Optional.of("""{"customerIds": [], "dateRangeType": "THIS_MONTH"}"""))
     }
 
-    @FunctionName("import-monthly")
+    @FunctionName("importMonthly")
     fun importMonthly(
-        @TimerTrigger(name = "import-monthly", schedule = "0 0 5 1 * *")
+        @TimerTrigger(name = "importMonthlyTrigger", schedule = "0 0 5 1 * *")
         timerInfo: String,
         context: ExecutionContext
     ) {
