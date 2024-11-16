@@ -52,6 +52,4 @@ build
 /tw-app-aws/requests/confidential/
 /tw-app-aws/.aws-sam/
 
-/tw-app-azure/src/main/resources/application-confidential.yml
-/tw-app-azure/requests/invoke-remote.http
-/tw-app-azure/requests/deploy.sh
+/tw-app-azure/requests/confidential/

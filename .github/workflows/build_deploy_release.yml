@@ -13,9 +13,10 @@ env:
   AWS_REGION: 'eu-central-1'
   AZURE_FUNCTIONAPP_NAME: 'timesheet-wizard-app'
   AZURE_RESOURCE_GROUP: 'timesheet-wizard'
-  PACKAGE_DIRECTORY: './tw-app-azure/build/azure-functions/timesheet-wizard-app'
-  TW_IMPORT_CLOCKIFY_API_KEY: ${{ secrets.TW_IMPORT_CLOCKIFY_API_KEY}}
-  TW_IMPORT_CLOCKIFY_WORKSPACE_ID: ${{ secrets.TW_IMPORT_CLOCKIFY_WORKSPACE_ID}}
+  AZURE_PACKAGE_DIRECTORY: './tw-app-azure/build/azure-functions/timesheet-wizard-app'
+  AzureWebJobsStorage: ${{secrets.AZUREWEBJOBSSTORAGE}}
+  TIMESHEET_WIZARD_IMPORT_CLOCKIFY_API_KEY: ${{ secrets.TW_IMPORT_CLOCKIFY_API_KEY}}
+  TIMESHEET_WIZARD_IMPORT_CLOCKIFY_WORKSPACE_ID: ${{ secrets.TW_IMPORT_CLOCKIFY_WORKSPACE_ID}}
   SPRING_CLOUD_AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.SPRING_CLOUD_AZURE_STORAGE_CONNECTION_STRING}}
 
 jobs:
@@ -93,7 +94,7 @@ jobs:
         id: fa
         with:
           app-name: '${{ env.AZURE_FUNCTIONAPP_NAME }}'
-          package: '${{ env.PACKAGE_DIRECTORY }}'
+          package: '${{ env.AZURE_PACKAGE_DIRECTORY }}'
           slot-name: 'Production'
 
   deploy-to-aws:

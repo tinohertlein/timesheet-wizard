@@ -1,0 +1,10 @@
+### invoke remote
+POST https://timesheet-wizard-app.azurewebsites.net/api/import-manually?
+    code=[secret]
+
+{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}
+
+### invoke local
+POST 127.0.0.1:7071/api/import-manually
+
+{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}
