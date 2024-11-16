@@ -1,6 +1,7 @@
 package dev.hertlein.timesheetwizard.app.azure
 
 import com.azure.storage.blob.BlobServiceClient
+import com.microsoft.azure.functions.*
 import dev.hertlein.timesheetwizard.app.azure.util.AzureBlobOperations
 import dev.hertlein.timesheetwizard.app.azure.util.SpringTestProfiles.TESTCONTAINERS
 import dev.hertlein.timesheetwizard.app.azure.util.TestcontainersConfiguration
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
+import java.net.URI
 import java.util.*
 
 @DisplayName("Azure Application")
@@ -43,6 +45,36 @@ class AzureApplicationE2E : AbstractApplicationE2E() {
     }
 
     private fun run() {
-        azureFunctionAdapter.import(Optional.of("""{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}"""))
+        val input = Optional.of("""{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}""")
+        val message = object : HttpRequestMessage<Optional<String>> {
+            override fun getUri(): URI {
+                TODO("Not yet implemented")
+            }
+
+            override fun getHttpMethod(): HttpMethod {
+                TODO("Not yet implemented")
+            }
+
+            override fun getHeaders(): MutableMap<String, String> {
+                TODO("Not yet implemented")
+            }
+
+            override fun getQueryParameters(): MutableMap<String, String> {
+                TODO("Not yet implemented")
+            }
+
+            override fun getBody(): Optional<String> {
+                return input
+            }
+
+            override fun createResponseBuilder(p0: HttpStatus?): HttpResponseMessage.Builder {
+                TODO("Not yet implemented")
+            }
+
+            override fun createResponseBuilder(p0: HttpStatusType?): HttpResponseMessage.Builder {
+                TODO("Not yet implemented")
+            }
+        }
+        azureFunctionAdapter.import(message, null)
     }
 }

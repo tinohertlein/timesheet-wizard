@@ -26,9 +26,9 @@ class AzureFunctionAdapter(
     fun import(
         @HttpTrigger(name = "import", methods = [HttpMethod.POST], authLevel = AuthorizationLevel.FUNCTION)
         request: HttpRequestMessage<Optional<String>>,
-        context: ExecutionContext
+        context: ExecutionContext?
     ) {
-        import(request.body)
+        doImport(request.body)
     }
 
     @FunctionName("importDaily")
@@ -37,7 +37,7 @@ class AzureFunctionAdapter(
         timerInfo: String,
         context: ExecutionContext
     ) {
-        import(Optional.of("""{"customerIds": [], "dateRangeType": "THIS_MONTH"}"""))
+        doImport(Optional.of("""{"customerIds": [], "dateRangeType": "THIS_MONTH"}"""))
     }
 
     @FunctionName("importMonthly")
@@ -46,10 +46,10 @@ class AzureFunctionAdapter(
         timerInfo: String,
         context: ExecutionContext
     ) {
-        import(Optional.of("""{"customerIds": [], "dateRangeType": "LAST_MONTH"}"""))
+        doImport(Optional.of("""{"customerIds": [], "dateRangeType": "LAST_MONTH"}"""))
     }
 
-    fun import(body: Optional<String>) {
+    private fun doImport(body: Optional<String>) {
         if (body.isPresent) {
             importService.import(toInputParams(body.get()))
         } else {

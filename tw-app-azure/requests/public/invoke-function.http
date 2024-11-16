@@ -1,10 +1,10 @@
-### invoke remote
+### invoke function in Azure
 POST https://timesheet-wizard-app.azurewebsites.net/api/import?
     code=[secret]
 
 {"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}
 
-### invoke local
+### invoke local function
 POST 127.0.0.1:7071/api/import
 
 {"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}
