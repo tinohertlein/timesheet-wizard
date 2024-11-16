@@ -48,7 +48,7 @@ jobs:
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
-          name: test (tw-app-aws
+          name: test (tw-app-aws)
           path: ./tw-app-aws/build/test-results/test/*.xml
           reporter: java-junit
 
