@@ -24,8 +24,9 @@ In order to have the freedom to customize the reports as much as I like and to t
 other tools, I decided to create my own little application allowing me to do that: the Timesheet-Wizard.
 
 In addition to the business motivation mentioned above, this is also a perfect opportunity to play around with
-technology in the [function-as-a-service](https://en.wikipedia.org/wiki/Function_as_a_service) territory.
-And to be honest: this was the main reason for creating the Timesheet-Wizard.
+technology in the [function-as-a-service](https://en.wikipedia.org/wiki/Function_as_a_service) territory. That's the
+reason, why the Timesheet Wizard is bundled and deployed to multiple hyperscalers (at the moment: AWS Lambda & Azure
+Functions).
 
 ## Documentation
 
@@ -34,14 +35,15 @@ the [doc-folder](docs/README.md).
 
 ### TL;DR
 
-The Timesheet-Wizard consists of three Gradle subprojects:
+The Timesheet-Wizard consists of four Gradle subprojects:
 
 - **tw-cloud-spi**: the service provider interface to be implemented for any cloud specific things. Like e.g. uploading
   timesheets to some cloud storage.
 - **tw-core**: the code module that contains the business logic. This subproject is cloud-agnostic.
 - **tw-app-aws**: implements the interfaces defined in tw-cloud-spi with AWS specific code and also bundles the
-  cloud-agnostic
-  tw-core with AWS specific things to an AWS Lambda function.
+  cloud-agnostic tw-core with AWS specific things to an AWS Lambda function.
+- **tw-app-azure**: implements the interfaces defined in tw-cloud-spi with Azure specific code and also bundles the
+  cloud-agnostic tw-core with Azure specific things to an Azure Function.
 
 ![Building blocks](docs/assets/readme-static.drawio.png "Building blocks")
 
@@ -56,20 +58,18 @@ responsibilities:
 **export**
 
 - generating XLSX, PDF & CSV files from the domain model
-- storing the XLSX, PDF & CSV files on S3
+- storing the XLSX, PDF & CSV files on AWS S3 or Azure Blob Storage
 
 Timesheet-Wizard is
 
 - a Spring Boot application
 - written in Kotlin
 - built with Gradle
-- deployed continuously
-  using [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) and
-  GitHub Actions
-- running as AWS Lambda function
+- deployed continuously using GitHub Actions
+- running as **AWS Lambda** function and also as **Azure Function**
 - following the infrastructure-as-code-approach with provisioning
   via [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc1=h_ls)
-- triggered by AWS EventBridge
+- triggered by AWS EventBridge and Azure Function triggers
 
 ![Technical context](docs/assets/readme-context-technical.drawio.png "Technical context")
 
@@ -92,7 +92,8 @@ Timesheet-Wizard is
 
 #### Preparation
 
-- Replace placeholders in [application.yml](tw-app-aws/src/main/resources/application.yml) with real Clockify credentials. Or
+- Replace placeholders in [application.yml](tw-app-aws/src/main/resources/application.yml) with real Clockify
+  credentials. Or
   override them in a 'confidential' profile not commited to version control.
     - timesheet-wizard.import.clockify.api-key
     - timesheet-wizard.import.clockify.workspace-id
@@ -100,7 +101,6 @@ Timesheet-Wizard is
   shown [here](tw-core/src/testFixtures/resources/e2e/config/configuration.json).
     - Use [Minio](http://localhost:9001/) for local AWS emulation
     - S3 for remote AWS calls
-
 
 #### Run as AWS Lambda with AWS SAM CLI
 
