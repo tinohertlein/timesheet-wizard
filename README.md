@@ -108,3 +108,7 @@ Timesheet-Wizard is
 - Build: `gradle build && ./tw-app-aws/requests/public/build.sh`
 - Invoke locally: `./tw-app-aws/requests/public/invoke-local.sh`
 - Invoke remotely in AWS: `./tw-app-aws/requests/public/invoke-remote.sh`
+
+#### Run as Azure Function App
+
+- tbd
