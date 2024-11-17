@@ -1,4 +1,4 @@
-name: Build, deploy, release master branch
+name: CI
 
 on:
   push:
@@ -61,6 +61,7 @@ jobs:
           reporter: java-junit
 
   deploy-to-azure:
+    if: github.ref_name == 'master'
     runs-on: ubuntu-24.04
     needs: build
     steps:
@@ -98,6 +99,7 @@ jobs:
           slot-name: 'Production'
 
   deploy-to-aws:
+    if: github.ref_name == 'master'
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -132,6 +134,7 @@ jobs:
           sam remote invoke --stack-name tw TwFunction -e '{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}'
 
   release:
+    if: github.ref_name == 'master'
     runs-on: ubuntu-latest
     needs:
     - deploy-to-aws
