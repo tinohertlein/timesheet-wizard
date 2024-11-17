@@ -3,8 +3,8 @@ name: CI
 on:
   push:
     paths-ignore:
-      - 'docs'
-      - 'tampermonkey'
+      - 'docs/**'
+      - 'tampermonkey/**'
       - 'README.md'
       - 'docker-compose.yml'
 
