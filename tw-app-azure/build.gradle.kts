@@ -48,8 +48,9 @@ tasks.jar {
 }
 
 azurefunctions {
-    appName = System.getenv("AZURE_FUNCTIONAPP_NAME")
-    resourceGroup = System.getenv("AZURE_RESOURCE_GROUP")
+    resourceGroup = System.getenv("AZURE_RESOURCE_GROUP") ?: "timesheetwizardrg"
+    appName = System.getenv("AZURE_FUNCTIONAPP_NAME") ?: "timesheetwizardapp"
+    region = System.getenv("AZURE_LOCATION") ?: "germanywestcentral"
 
     runtime = GradleRuntimeConfig()
     runtime.javaVersion("21")
