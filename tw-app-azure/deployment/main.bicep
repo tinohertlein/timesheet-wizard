@@ -5,7 +5,7 @@ param functionAppName string
 param location string
 
 resource newRG 'Microsoft.Resources/resourceGroups@2024-08-01' = {
-  name: '${name}rg'
+  name: name
   location: location
 }
 
@@ -14,11 +14,11 @@ module resources 'resources.bicep' = {
   scope: newRG
   params: {
     storageLocation: location
-    storageName: '${name}sa'
-    appServicePlanName: '${name}asp'
+    storageName: name
+    appServicePlanName: name
     appServicePlanLocation: location
     appInsightsLocation: location
-    applicationInsightsName: '${name}ai'
+    applicationInsightsName: name
     functionAppLocation: location
     functionAppName: functionAppName
   }

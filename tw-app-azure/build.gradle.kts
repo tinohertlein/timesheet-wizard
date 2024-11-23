@@ -48,7 +48,7 @@ tasks.jar {
 }
 
 azurefunctions {
-    resourceGroup = System.getenv("AZURE_RESOURCE_GROUP") ?: "timesheetwizardrg"
+    resourceGroup = System.getenv("AZURE_RESOURCE_GROUP") ?: "timesheetwizard"
     appName = System.getenv("AZURE_FUNCTIONAPP_NAME") ?: "timesheetwizardapp"
     region = System.getenv("AZURE_LOCATION") ?: "germanywestcentral"
 
