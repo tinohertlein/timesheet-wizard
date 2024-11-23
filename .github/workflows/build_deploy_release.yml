@@ -103,8 +103,7 @@ jobs:
         run: ./gradlew tw-app-azure:build -x test :tw-app-azure:azureFunctionsDeploy
 
   deploy-to-aws:
-    #if: github.ref_name == 'master'
-    if: false
+    if: github.ref_name == 'master'
     runs-on: ubuntu-latest
     needs: build
     steps:
