@@ -47,27 +47,18 @@ tasks.jar {
     }
 }
 
-
 azurefunctions {
-    appName = "timesheet-wizard-app"
-    resourceGroup = "timesheet-wizard"
-    region = "Germany West Central"
-    appServicePlanName = "VirtualDedicatedPlan"
-    pricingTier = "Y1"
+    appName = "timesheetwizard2fa"
+    resourceGroup = "timesheetwizard2rg"
 
     runtime = GradleRuntimeConfig()
-    runtime.os("linux")
     runtime.javaVersion("21")
     auth = GradleAuthConfig()
     auth.type = "azure_cli"
 
     appSettings = mutableMapOf()
-    appSettings["AzureWebJobsStorage"] = System.getenv("AzureWebJobsStorage")
     appSettings["TIMESHEET_WIZARD_IMPORT_CLOCKIFY_API_KEY"] = System.getenv("TIMESHEET_WIZARD_IMPORT_CLOCKIFY_API_KEY")
     appSettings["TIMESHEET_WIZARD_IMPORT_CLOCKIFY_WORKSPACE_ID"] = System.getenv("TIMESHEET_WIZARD_IMPORT_CLOCKIFY_WORKSPACE_ID")
-    appSettings["SPRING_CLOUD_AZURE_STORAGE_CONNECTION_STRING"] = System.getenv("SPRING_CLOUD_AZURE_STORAGE_CONNECTION_STRING")
-    appSettings["applicationInsights.samplingSettings.isEnabled"] = "false"
-    appSettings["FUNCTIONS_EXTENSION_VERSION"] = "~4"
 
     // Uncomment to enable local debug
     // localDebug = "transport=dt_socket,server=y,suspend=n,address=5005"
