@@ -1,7 +1,8 @@
 targetScope='subscription'
 
-var name = 'timesheetwizard2'
-var location = 'northeurope'
+param name string
+param functionAppName string
+param location string
 
 resource newRG 'Microsoft.Resources/resourceGroups@2024-08-01' = {
   name: '${name}rg'
@@ -19,6 +20,6 @@ module resources 'resources.bicep' = {
     appInsightsLocation: location
     applicationInsightsName: '${name}ai'
     functionAppLocation: location
-    functionAppName: '${name}fa'
+    functionAppName: functionAppName
   }
 }

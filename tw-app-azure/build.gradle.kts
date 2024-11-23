@@ -48,8 +48,8 @@ tasks.jar {
 }
 
 azurefunctions {
-    appName = "timesheetwizard2fa"
-    resourceGroup = "timesheetwizard2rg"
+    appName = System.getenv("AZURE_FUNCTIONAPP_NAME")
+    resourceGroup = System.getenv("AZURE_RESOURCE_GROUP")
 
     runtime = GradleRuntimeConfig()
     runtime.javaVersion("21")
