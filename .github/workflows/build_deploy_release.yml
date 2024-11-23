@@ -99,7 +99,7 @@ jobs:
           scope: subscription
           location: ${{ env.AZURE_LOCATION }}
           template-file: ${{ env.AZURE_RESOURCES_FILE }}
-          parameters: '{"location":"${{ env.AZURE_LOCATION }}", "name":"${{ env.AZURE_RESOURCE_GROUP }}", "functionAppName":"${{ env.AZURE_FUNCTIONAPP_NAME }}"'
+          parameters: '{"location":"${{ env.AZURE_LOCATION }}", "name":"${{ env.AZURE_RESOURCE_GROUP }}", "functionAppName":"${{ env.AZURE_FUNCTIONAPP_NAME }}"}'
 
       - name: Deploy Azure Function
         uses: Azure/functions-action@v1
