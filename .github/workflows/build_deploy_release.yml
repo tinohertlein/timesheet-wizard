@@ -95,7 +95,7 @@ jobs:
         with:
           type: deployment
           operation: create
-          name: Production
+          name: ${{ env.AZURE_RESOURCE_GROUP }}
           scope: subscription
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
           location: ${{ env.AZURE_LOCATION }}
