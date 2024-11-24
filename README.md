@@ -25,8 +25,9 @@ other tools, I decided to create my own little application allowing me to do tha
 
 In addition to the business motivation mentioned above, this is also a perfect opportunity to play around with
 technology in the [function-as-a-service](https://en.wikipedia.org/wiki/Function_as_a_service) territory. That's the
-reason, why the Timesheet Wizard is bundled and deployed to multiple hyperscalers (at the moment: AWS Lambda & Azure
-Functions).
+reason, why the Timesheet Wizard is bundled and deployed to multiple hyperscalers - at the moment it's
+only [AWS Lambda](https://aws.amazon.com/de/lambda) & [Azure
+Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview?pivots=programming-language-java).
 
 ## Documentation
 
@@ -35,19 +36,33 @@ the [doc-folder](docs/README.md).
 
 ### TL;DR
 
-The Timesheet-Wizard consists of four Gradle subprojects:
+#### The Timesheet-Wizard is
+
+- a Spring Boot application
+- written in Kotlin
+- built with Gradle
+- deployed continuously to the cloud using [GitHub Actions](https://github.com/features/actions)
+- running as **AWS Lambda** function and also as **Azure Function**
+- following the infrastructure-as-code-approach with provisioning
+  via [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc1=h_ls)
+  and [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep)
+- triggered by AWS EventBridge and Azure Function triggers
+
+![Technical context](docs/assets/readme-context-technical.drawio.png "Technical context")
+
+#### The Timesheet-Wizard consists of four Gradle subprojects:
 
 - **tw-cloud-spi**: the service provider interface to be implemented for any cloud specific things. Like e.g. uploading
   timesheets to some cloud storage.
 - **tw-core**: the code module that contains the business logic. This subproject is cloud-agnostic.
-- **tw-app-aws**: implements the interfaces defined in tw-cloud-spi with AWS specific code and also bundles the
-  cloud-agnostic tw-core with AWS specific things to an AWS Lambda function.
-- **tw-app-azure**: implements the interfaces defined in tw-cloud-spi with Azure specific code and also bundles the
-  cloud-agnostic tw-core with Azure specific things to an Azure Function.
+- **tw-app-aws**: implements the interfaces defined in `tw-cloud-spi` with AWS specific code and also bundles the
+  cloud-agnostic `tw-core` with AWS specific things to an AWS Lambda function.
+- **tw-app-azure**: implements the interfaces defined in `tw-cloud-spi` with Azure specific code and also bundles the
+  cloud-agnostic `tw-core` with Azure specific things to an Azure Function.
 
 ![Building blocks](docs/assets/readme-static.drawio.png "Building blocks")
 
-The tw-core Gradle subproject consists of two independent modules (realized as Kotlin packages) with the following
+The `tw-core` Gradle subproject consists of two independent modules (realized as Kotlin packages) with the following
 responsibilities:
 
 **import**
@@ -60,19 +75,6 @@ responsibilities:
 - generating XLSX, PDF & CSV files from the domain model
 - storing the XLSX, PDF & CSV files on AWS S3 or Azure Blob Storage
 
-Timesheet-Wizard is
-
-- a Spring Boot application
-- written in Kotlin
-- built with Gradle
-- deployed continuously using GitHub Actions
-- running as **AWS Lambda** function and also as **Azure Function**
-- following the infrastructure-as-code-approach with provisioning
-  via [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc1=h_ls)
-- triggered by AWS EventBridge and Azure Function triggers
-
-![Technical context](docs/assets/readme-context-technical.drawio.png "Technical context")
-
 ## Getting started
 
 ### Prerequisites
@@ -81,8 +83,9 @@ Timesheet-Wizard is
 - Gradle
 - Docker (for tests using testcontainers)
 - [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) -
-  for building & invoking as Lambda on local machine
-- [Azure Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=linux%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-java#install-the-azure-functions-core-tools) - for building & invoking as Azure Function App on local machine
+  for building & invoking as AWS Lambda on local machine
+- [Azure Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=linux%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-java#install-the-azure-functions-core-tools) -
+  for building & invoking as Azure Function App on local machine
 
 ### Build & test
 
@@ -90,19 +93,20 @@ Timesheet-Wizard is
 
 ### Run
 
-#### Run as AWS Lambda with AWS SAM CLI on local machine
+#### as AWS Lambda with AWS SAM CLI on local machine
 
 - Emulate S3 storage with Minio in [docker-compose.yml](docker-compose.yml)
 - Create & upload a `configuration.json` file to local S3
-  - An example file is shown [here](tw-app-aws/requests/public/config/configuration.json)
+    - An example file is shown [here](tw-app-aws/requests/public/config/configuration.json)
 - Replace placeholders
-  in [tw-app-aws/requests/public/env.json](tw-app-aws/requests/public/env.json) with your
-  keys
+  in [tw-app-aws/requests/public/env.json](tw-app-aws/requests/public/env.json) with your keys
 - Set import params in [tw-app-aws/requests/public/event.json](tw-app-aws/requests/public/event.json)
-- Build: [./tw-app-aws/requests/public/build.sh](./tw-app-aws/requests/public/build.sh)
-- Invoke the AWS Lambda function locally: [tw-app-aws/requests/public/invoke-local.sh](tw-app-aws/requests/public/invoke-local.sh)
+- Build the AWS Lambda function
+  locally: [tw-app-aws/requests/public/build.sh](tw-app-aws/requests/public/build.sh)
+- Invoke the AWS Lambda function
+  locally: [tw-app-aws/requests/public/invoke-local.sh](tw-app-aws/requests/public/invoke-local.sh)
 
-#### Run as Azure Function App on local machine
+#### as Azure Function App on local machine
 
 - Emulate Azure Blob Storage with Azureite in [docker-compose.yml](docker-compose.yml)
 - Create & upload a `configuration.json` file to local Azure Storage to `tw-sheets/config`
@@ -112,6 +116,7 @@ Timesheet-Wizard is
 - Replace placeholders
   in [tw-app-azure/requests/public/run-function-local.sh](tw-app-azure/requests/public/run-function-local.sh) with your
   keys
-- Run the Azure Function locally: [./tw-app-azure/requests/public/run-function-local.sh](./tw-app-azure/requests/public/run-function-local.sh)
+- Build & run the Azure Function
+  locally: [tw-app-azure/requests/public/run-function-local.sh](tw-app-azure/requests/public/run-function-local.sh)
 - Invoke the Azure Function
   locally: [tw-app-azure/requests/public/invoke-function.http](tw-app-azure/requests/public/invoke-function.http)
