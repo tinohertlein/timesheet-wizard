@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sam build --template-file ./tw-app-aws/aws-sam/template.yml
+gradle clean :tw-app-aws:build && sam build --template-file ./tw-app-aws/aws-sam/template.yml

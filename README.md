@@ -80,35 +80,38 @@ Timesheet-Wizard is
 - Java 21+
 - Gradle
 - Docker (for tests using testcontainers)
-- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) (
-  for building & invoking as Lambda on local machine)
+- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) -
+  for building & invoking as Lambda on local machine
+- [Azure Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=linux%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-java#install-the-azure-functions-core-tools) - for building & invoking as Azure Function App on local machine
 
 ### Build & test
 
 - Build with `gradle build`
-- Test with `gradle test`
 
 ### Run
 
-#### Preparation
+#### Run as AWS Lambda with AWS SAM CLI on local machine
 
-- Replace placeholders in [application.yml](tw-app-aws/src/main/resources/application.yml) with real Clockify
-  credentials. Or
-  override them in a 'confidential' profile not commited to version control.
-    - timesheet-wizard.import.clockify.api-key
-    - timesheet-wizard.import.clockify.workspace-id
-- Create & upload configuration file to cloud storage. An example file is
-  shown [here](tw-core/src/testFixtures/resources/e2e/config/configuration.json).
-    - Use [Minio](http://localhost:9001/) for local AWS emulation
-    - S3 for remote AWS calls
-
-#### Run as AWS Lambda with AWS SAM CLI
-
+- Emulate S3 storage with Minio in [docker-compose.yml](docker-compose.yml)
+- Create & upload a `configuration.json` file to local S3
+  - An example file is shown [here](tw-app-aws/requests/public/config/configuration.json)
+- Replace placeholders
+  in [tw-app-aws/requests/public/env.json](tw-app-aws/requests/public/env.json) with your
+  keys
 - Set import params in [tw-app-aws/requests/public/event.json](tw-app-aws/requests/public/event.json)
-- Build: `gradle build && ./tw-app-aws/requests/public/build.sh`
-- Invoke locally: `./tw-app-aws/requests/public/invoke-local.sh`
-- Invoke remotely in AWS: `./tw-app-aws/requests/public/invoke-remote.sh`
+- Build: [./tw-app-aws/requests/public/build.sh](./tw-app-aws/requests/public/build.sh)
+- Invoke the AWS Lambda function locally: [tw-app-aws/requests/public/invoke-local.sh](tw-app-aws/requests/public/invoke-local.sh)
 
-#### Run as Azure Function App
+#### Run as Azure Function App on local machine
 
-- tbd
+- Emulate Azure Blob Storage with Azureite in [docker-compose.yml](docker-compose.yml)
+- Create & upload a `configuration.json` file to local Azure Storage to `tw-sheets/config`
+    - E.g. via [Azure Storage Explorer](https://azure.microsoft.com/en-us/products/storage/storage-explorer)
+    - An example file is
+      shown [here](tw-app-azure/requests/public/config/configuration.json)
+- Replace placeholders
+  in [tw-app-azure/requests/public/run-function-local.sh](tw-app-azure/requests/public/run-function-local.sh) with your
+  keys
+- Run the Azure Function locally: [./tw-app-azure/requests/public/run-function-local.sh](./tw-app-azure/requests/public/run-function-local.sh)
+- Invoke the Azure Function
+  locally: [tw-app-azure/requests/public/invoke-function.http](tw-app-azure/requests/public/invoke-function.http)
