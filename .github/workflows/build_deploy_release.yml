@@ -128,10 +128,10 @@ jobs:
         run: sam --version
 
       - name: Build AWS stack with SAM
-        run: sam build --template-file tw-app-aws/aws-sam/template.yml
+        run: sam build --template-file tw-app-aws/deployment/template.yml
 
       - name: Deploy AWS stack with SAM
-        run: sam deploy --config-file tw-app-aws/aws-sam/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }}
+        run: sam deploy --config-file tw-app-aws/deployment/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }}
 
       - name: Invoke ImportFunction with SAM
         run: >
