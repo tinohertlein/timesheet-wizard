@@ -33,11 +33,11 @@ As the Timesheet-Wizard should be easily extensible, testable and maintainable, 
 a [Ports & Adapters](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)) architecture, to separate domain
 logic and connecting to surrounding systems (**-> Quality goals QG3 & QG5**).
 
-For monitoring, logging, error notification and other shared concepts, AWS systems
+For monitoring, logging, error notification and other shared concepts, AWS or Azure systems
 like [AWS CloudWatch](https://aws.amazon.com/cloudwatch/?nc1=h_ls)
 , [AWS Simple Notification Service](https://aws.amazon.com/sns/?nc1=h_ls), ... are used. They are set up following an
 infrastructure-as-code approach
 using [AWS-SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html)
-and [AWS CloudFormation](https://aws.amazon.com/cloudformation/?nc1=h_ls).
+and [AWS CloudFormation](https://aws.amazon.com/cloudformation/?nc1=h_ls) in case of AWS or [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/) in case of Azure.
 All of these are free of charge up to a certain limit - which won't be reached by a tiny application like the
 Timesheet-Wizard (**-> Quality goal #QG2**). 
