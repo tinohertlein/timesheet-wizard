@@ -131,7 +131,7 @@ jobs:
         run: sam build --template-file tw-app-aws/deployment/template.yml
 
       - name: Deploy AWS stack with SAM
-        run: sam deploy --config-file tw-app-aws/deployment/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }}
+        run: sam deploy --config-file tw-app-aws/deployment/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }} ClockifyApiKey= ${{ env.TIMESHEET_WIZARD_IMPORT_CLOCKIFY_API_KEY }} ClockifyWorkspaceId= ${{ env.TIMESHEET_WIZARD_IMPORT_CLOCKIFY_WORKSPACE_ID }}
 
       - name: Invoke ImportFunction with SAM
         run: >

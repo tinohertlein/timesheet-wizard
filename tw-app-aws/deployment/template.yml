@@ -7,6 +7,10 @@ Parameters:
       - arm64
   MonitoringRecipient:
     Type: String
+  ClockifyApiKey:
+    Type: String
+  ClockifyWorkspaceId:
+    Type: String
 
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
@@ -25,9 +29,10 @@ Resources:
       PackageType: Zip
       Environment:
         Variables:
-         DISABLE_SIGNAL_HANDLERS: true
-         MAIN_CLASS: dev.hertlein.timesheetwizard.app.aws.TwAwsApplication
-         SPRING_PROFILES_ACTIVE: tbd
+          DISABLE_SIGNAL_HANDLERS: true
+          MAIN_CLASS: dev.hertlein.timesheetwizard.app.aws.TwAwsApplication
+          TIMESHEET_WIZARD_IMPORT_CLOCKIFY_API_KEY: !Ref ClockifyApiKey
+          TIMESHEET_WIZARD_IMPORT_CLOCKIFY_WORKSPACE_ID: !Ref ClockifyWorkspaceId
       Description: An AWS Lambda function to import timesheet reports from Clockify and export them to various targets in various formats
       MemorySize: 512
       Timeout: 60
