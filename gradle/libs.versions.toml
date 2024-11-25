@@ -75,6 +75,7 @@ spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure
 testing = ["mockk", "mockserver-netty", "mockserver-client", "spring-starter-test", "kotlin-junit", "rest-assured", "testcontainers-localstack", "testcontainers-mockserver"]
 
 [plugins]
+kotlinjvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
