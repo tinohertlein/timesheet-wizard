@@ -2,7 +2,6 @@ package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.ClockifyAdapter
-import dev.hertlein.timesheetwizard.core.export.core.port.PersistencePort
 import dev.hertlein.timesheetwizard.core.shared.configloader.ClockifyIdsLoader
 import dev.hertlein.timesheetwizard.core.shared.configloader.CustomerConfigLoader
 import dev.hertlein.timesheetwizard.core.shared.configloader.ExportConfigLoader
@@ -25,8 +24,8 @@ import org.mockserver.model.HttpResponse
 import org.mockserver.verify.VerificationTimes
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.HttpHeaders
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import java.time.LocalDate
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.hours
@@ -38,8 +37,8 @@ private const val A_WORKSPACE_ID = "a-workspace-id"
 
 @DisplayName("ClockifyAdapter")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@MockBean(classes = [CustomerConfigLoader::class, ClockifyIdsLoader::class, ExportConfigLoader::class, PersistencePort::class])
-@SpringBootTest(classes = [TestApplication::class],
+@SpringBootTest(
+    classes = [TestApplication::class],
     properties = [
         "timesheet-wizard.import.clockify.reports-url=$MOCK_SERVER_HOST:$MOCK_SERVER_PORT",
         "timesheet-wizard.import.clockify.api-key=$AN_API_KEY",
@@ -53,7 +52,7 @@ class ClockifyAdapterIT {
     @Autowired
     private lateinit var clockifyImportAdapter: ClockifyAdapter
 
-    @Autowired
+    @MockitoBean(extraInterfaces = [ExportConfigLoader::class, CustomerConfigLoader::class])
     private lateinit var clockifyIdsLoader: ClockifyIdsLoader
 
     @BeforeAll
