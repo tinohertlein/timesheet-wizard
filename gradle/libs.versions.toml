@@ -19,6 +19,8 @@ spring-thin = "1.0.31.RELEASE"
 shadow = "8.1.1"
 semver = "0.12.11"
 logstash-encoder = "8.0"
+javaagent = "0.5.1"
+byte-buddy-agent = "1.4.13"
 
 [libraries]
 lombok = { module = "org.projectlombok:lombok" }
@@ -60,6 +62,7 @@ kotlin-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
 rest-assured = { module = "io.rest-assured:rest-assured" }
 testcontainers-localstack = { module = "org.testcontainers:localstack" }
 testcontainers-mockserver = { module = "org.testcontainers:mockserver" }
+byte-buddy-agent = { module = "net.bytebuddy:byte-buddy-agent", version.ref = "byte-buddy-agent" }
 
 [bundles]
 export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt", "openpdf"]
@@ -80,3 +83,4 @@ spring-thin = { id = "org.springframework.boot.experimental.thin-launcher", vers
 shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
 semver = { id = "com.github.jmongard.git-semver-plugin", version.ref = "semver" }
 azure = { id = "com.microsoft.azure.azurefunctions", version.ref = "azure" }
+javaagent-test = { id = "com.ryandens.javaagent-test", version.ref = "javaagent" }

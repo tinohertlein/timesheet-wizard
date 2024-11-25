@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.spring.dependency.management)
     alias(libs.plugins.spring.thin)
     alias(libs.plugins.shadow)
+    alias(libs.plugins.javaagent.test)
 }
 
 
@@ -27,6 +28,7 @@ dependencies {
     implementation(libs.kotlin.logging)
     implementation(libs.guava)
 
+    testJavaagent(libs.byte.buddy.agent)
     testImplementation(libs.bundles.testing)
     testImplementation(testFixtures(project(":tw-core")))
 }

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.allopen)
     alias(libs.plugins.spring.boot) apply false
     alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.javaagent.test)
 }
 
 dependencyManagement {
@@ -24,6 +25,7 @@ dependencies {
     implementation(libs.guava)
     implementation(libs.bundles.export)
 
+    testJavaagent(libs.byte.buddy.agent)
     testImplementation(libs.bundles.testing)
     testFixturesApi(libs.bundles.testing)
 }
