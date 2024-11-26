@@ -19,7 +19,7 @@ spring-thin = "1.0.31.RELEASE"
 shadow = "8.1.1"
 semver = "0.12.11"
 logstash-encoder = "8.0"
-javaagent = "0.5.1"
+javaagent = "0.7.0"
 byte-buddy-agent = "1.15.10"
 
 [libraries]
