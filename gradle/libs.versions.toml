@@ -21,7 +21,6 @@ semver = "0.12.11"
 logstash-encoder = "8.0"
 javaagent = "0.7.0"
 byte-buddy-agent = "1.15.10"
-gson = "2.11.0"
 
 [libraries]
 lombok = { module = "org.projectlombok:lombok" }
@@ -53,7 +52,6 @@ spring-cloud-azure = { module = "com.azure.spring:spring-cloud-azure-dependencie
 spring-cloud-function-adapter-azure = { module = "org.springframework.cloud:spring-cloud-function-adapter-azure" }
 spring-cloud-azure-starter-storage = { module = "com.azure.spring:spring-cloud-azure-starter-storage-blob" }
 logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-encoder" }
-gson = { module = "com.google.code.gson:gson",  version.ref = "gson" }
 
 ## testing
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
@@ -71,7 +69,7 @@ export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "
 spring-web = ["spring-starter", "spring-starter-web"]
 spring-cloud = ["spring-cloud-function-context"]
 spring-cloud-aws = ["spring-cloud-function-adapter-aws", "spring-cloud-aws-starter", "spring-cloud-aws-starter-s3"]
-spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure-starter-storage", "logstash-encoder", "gson"]
+spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure-starter-storage", "logstash-encoder"]
 
 ## testing
 testing = ["mockk", "mockserver-netty", "mockserver-client", "spring-starter-test", "kotlin-junit", "rest-assured", "testcontainers-localstack", "testcontainers-mockserver"]
