@@ -24,8 +24,8 @@ import org.mockserver.model.HttpResponse
 import org.mockserver.verify.VerificationTimes
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.HttpHeaders
-import org.springframework.test.context.bean.override.mockito.MockitoBean
 import java.time.LocalDate
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.hours
@@ -52,7 +52,7 @@ class ClockifyAdapterIT {
     @Autowired
     private lateinit var clockifyImportAdapter: ClockifyAdapter
 
-    @MockitoBean(extraInterfaces = [ExportConfigLoader::class, CustomerConfigLoader::class])
+    @MockBean(extraInterfaces = [ExportConfigLoader::class, CustomerConfigLoader::class])
     private lateinit var clockifyIdsLoader: ClockifyIdsLoader
 
     @BeforeAll
