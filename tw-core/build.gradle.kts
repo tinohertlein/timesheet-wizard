@@ -19,6 +19,8 @@ dependencies {
 
     implementation(project(":tw-spi-cloud"))
     implementation(libs.bundles.spring.web)
+    implementation(platform(libs.spring.modulith))
+    implementation(libs.spring.modulith.starter.core)
     implementation(libs.kotlin.reflect)
     implementation(libs.jackson.kotlin)
     implementation(libs.kotlin.logging)
@@ -27,6 +29,7 @@ dependencies {
 
     testJavaagent(libs.byte.buddy.agent)
     testImplementation(libs.bundles.testing)
+    testImplementation(libs.spring.modulith.starter.test)
     testFixturesApi(libs.bundles.testing)
 }
 

@@ -15,6 +15,7 @@ spring-cloud = "2023.0.4"
 spring-cloud-aws = "3.2.0"
 spring-cloud-azure = "5.18.0"
 spring-dependency-management = "1.1.6"
+spring-modulith = "1.3.0"
 spring-thin = "1.0.31.RELEASE"
 shadow = "8.1.1"
 semver = "0.12.11"
@@ -37,6 +38,8 @@ jasperreports-pdf = { module = "net.sf.jasperreports:jasperreports-pdf", version
 jasperreports-jdt = { module = "net.sf.jasperreports:jasperreports-jdt", version.ref = "jasper" }
 openpdf = { module = "com.github.librepdf:openpdf", version.ref = "openpdf" }
 spring-starter = { module = "org.springframework.boot:spring-boot-starter" }
+spring-modulith = { module = "org.springframework.modulith:spring-modulith-bom", version.ref = "spring-modulith" }
+spring-modulith-starter-core = { module = "org.springframework.modulith:spring-modulith-starter-core" }
 spring-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 spring-cloud = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }
 spring-cloud-function-context = { module = "org.springframework.cloud:spring-cloud-function-context" }
@@ -58,6 +61,7 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockserver-netty = { module = "org.mock-server:mockserver-netty", version.ref = "mock-server" }
 mockserver-client = { module = "org.mock-server:mockserver-client-java", version.ref = "mock-server" }
 spring-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+spring-modulith-starter-test = { module = "org.springframework.modulith:spring-modulith-starter-test" }
 kotlin-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
 rest-assured = { module = "io.rest-assured:rest-assured" }
 testcontainers-localstack = { module = "org.testcontainers:localstack" }
