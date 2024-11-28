@@ -3,7 +3,6 @@ package dev.hertlein.timesheetwizard.core
 import dev.hertlein.timesheetwizard.core._import.core.ImportServiceImpl
 import dev.hertlein.timesheetwizard.core._import.core.model.DateRangeType
 import dev.hertlein.timesheetwizard.core._import.core.model.ImportParams
-import dev.hertlein.timesheetwizard.core.util.TestApplication
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

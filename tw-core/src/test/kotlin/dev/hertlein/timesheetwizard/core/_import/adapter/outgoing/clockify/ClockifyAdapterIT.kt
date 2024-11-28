@@ -10,7 +10,7 @@ import dev.hertlein.timesheetwizard.core.shared.model.Customer
 import dev.hertlein.timesheetwizard.core.shared.model.Customer.Id
 import dev.hertlein.timesheetwizard.core.shared.model.Customer.Name
 import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
-import dev.hertlein.timesheetwizard.core.util.TestApplication
+import dev.hertlein.timesheetwizard.core.TestApplication
 import org.apache.http.entity.ContentType
 import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.*

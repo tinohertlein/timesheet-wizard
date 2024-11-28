@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core.util
+package dev.hertlein.timesheetwizard.core
 
 import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.config.ClockifyConfig
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 import org.springframework.cache.annotation.EnableCaching
 
-@SpringBootApplication(scanBasePackages = ["dev.hertlein.timesheetwizard"])
+@SpringBootApplication(scanBasePackages = ["dev.hertlein.timesheetwizard.core"])
 @EnableConfigurationProperties(ClockifyConfig::class)
 @EnableCaching
 class TestApplication

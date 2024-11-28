@@ -4,7 +4,7 @@ import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core.shared.model.ClockifyId
 import dev.hertlein.timesheetwizard.core.shared.model.Customer
 import dev.hertlein.timesheetwizard.core.shared.model.ExportStrategyConfig
-import dev.hertlein.timesheetwizard.core.util.TestApplication
+import dev.hertlein.timesheetwizard.core.TestApplication
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.*
