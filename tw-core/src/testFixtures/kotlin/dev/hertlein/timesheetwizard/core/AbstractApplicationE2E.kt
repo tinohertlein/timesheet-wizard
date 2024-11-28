@@ -1,10 +1,12 @@
 package dev.hertlein.timesheetwizard.core
 
 import org.apache.http.entity.ContentType
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.api.io.CleanupMode
+import org.junit.jupiter.api.io.TempDir
 import org.mockserver.integration.ClientAndServer
 import org.mockserver.matchers.MatchType
 import org.mockserver.matchers.Times
@@ -12,7 +14,9 @@ import org.mockserver.model.*
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import java.io.File
+import java.nio.file.Path
 import java.util.concurrent.TimeUnit
+import kotlin.io.path.absolutePathString
 
 const val MOCK_SERVER_HOST = "http://localhost"
 const val MOCK_SERVER_PORT = 1081
@@ -31,9 +35,10 @@ open class AbstractApplicationE2E {
         }
     }
 
-    private val saveDownloadedTimesheets: Boolean = false
-
     private lateinit var mockServer: ClientAndServer
+
+    @TempDir(cleanup = CleanupMode.ALWAYS)
+    lateinit var tempDir: Path
 
     @BeforeAll
     fun beforeAll() {
@@ -44,7 +49,6 @@ open class AbstractApplicationE2E {
     fun afterAll() {
         mockServer.stop()
     }
-
 
     protected fun executeTest(
         uploadToStorage: (String, ByteArray) -> Unit,
@@ -67,14 +71,16 @@ open class AbstractApplicationE2E {
 
         expectedFilenames.forEach {
             val bytes = downloadFromStorage("${it.first}${it.second}")
-            Assertions.assertThat(bytes.size).isGreaterThan(0)
-
-            if (saveDownloadedTimesheets) {
-                File("${System.currentTimeMillis()}_${it.second}").writeBytes(bytes)
-            }
+            storeLocally(it, bytes)
+            assertThat(bytes.size).isGreaterThan(0)
         }
     }
 
+    private fun storeLocally(fileDescriptors: Pair<String, String>, bytes: ByteArray) {
+        val tmpFile = File(tempDir.absolutePathString() + "/${System.currentTimeMillis()}_${fileDescriptors.second}")
+        tmpFile.writeBytes(bytes)
+        println("Stored ${fileDescriptors.first}${fileDescriptors.second} to ${tmpFile.absolutePath}")
+    }
 
     private fun prepareClockifyServer() {
         val requestBody = ResourcesReader.stringFromResourceFile("e2e/clockify_request.json")
