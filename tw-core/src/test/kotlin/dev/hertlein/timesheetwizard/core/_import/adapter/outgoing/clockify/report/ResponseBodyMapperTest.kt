@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report
 
-import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
+import dev.hertlein.timesheetwizard.core._import.core.model.ImportTimesheet
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -36,7 +36,7 @@ internal class ResponseBodyMapperTest {
     private val anotherDateUpperAsString = "2022-09-30T15:00:00+01:00"
 
     @Nested
-    inner class ToTimesheetEntries {
+    inner class ToExportTimesheetEntries {
 
         private val responseBodyMapper = ResponseBodyMapper()
 
@@ -83,8 +83,8 @@ internal class ResponseBodyMapperTest {
         ),
     )
 
-    private fun expected(): List<Timesheet.Entry> = listOf(
-        Timesheet.Entry.of(
+    private fun expected(): List<ImportTimesheet.Entry> = listOf(
+        ImportTimesheet.Entry.of(
             aProject,
             aTask,
             someTagsAsStrings,
@@ -92,7 +92,7 @@ internal class ResponseBodyMapperTest {
             aDateUpperAsDateTime,
             2.hours
         ),
-        Timesheet.Entry.of(
+        ImportTimesheet.Entry.of(
             aProject,
             aTask,
             someTagsAsStrings,
@@ -100,7 +100,7 @@ internal class ResponseBodyMapperTest {
             anotherDateUpperAsDateTime,
             3.hours
         ),
-        Timesheet.Entry.of(
+        ImportTimesheet.Entry.of(
             aProject,
             anotherTask,
             someTagsAsStrings,
@@ -108,7 +108,7 @@ internal class ResponseBodyMapperTest {
             aDateUpperAsDateTime,
             2.hours
         ),
-        Timesheet.Entry.of(
+        ImportTimesheet.Entry.of(
             anotherProject,
             aTask,
             someTagsAsStrings,
@@ -116,7 +116,7 @@ internal class ResponseBodyMapperTest {
             aDateUpperAsDateTime,
             2.hours
         ),
-        Timesheet.Entry.of(
+        ImportTimesheet.Entry.of(
             anotherProject,
             anotherTask,
             someTagsAsStrings,

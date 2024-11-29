@@ -1,11 +1,10 @@
 package dev.hertlein.timesheetwizard.core.export.core.model
 
-import dev.hertlein.timesheetwizard.core.shared.model.Customer
 import java.time.LocalDate
 
 internal data class TimesheetDocument(
     val type: Type,
-    val customer: Customer,
+    val customerName: String,
     val dateRange: ClosedRange<LocalDate>,
     val content: ByteArray
 ) {

@@ -1,7 +1,7 @@
-package dev.hertlein.timesheetwizard.core.shared.configloader.model
+package dev.hertlein.timesheetwizard.core.export.core.model
 
-import dev.hertlein.timesheetwizard.core.util.TestFixture.anEmptyTimesheet
-import dev.hertlein.timesheetwizard.core.util.TestFixture.anEntry
+import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.anEntry
+import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.aTimesheet
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -9,18 +9,7 @@ import org.junit.jupiter.api.Test
 import kotlin.time.Duration.Companion.hours
 
 @DisplayName("Timesheet")
-internal class TimesheetTest {
-
-    @Nested
-    inner class Add {
-
-        @Test
-        fun `should add entries`() {
-            val timesheetAfterAdd = anEmptyTimesheet.add(anEntry)
-
-            assertThat(timesheetAfterAdd.entries).hasSize(1)
-        }
-    }
+internal class ExportTimesheetTest {
 
     @Nested
     inner class TotalDuration {
@@ -30,7 +19,7 @@ internal class TimesheetTest {
             val entries = (1..10).map {
                 anEntry.copy(duration = it.hours)
             }
-            val timesheet = anEmptyTimesheet.copy(entries = entries)
+            val timesheet = aTimesheet(entries)
 
             val totalDuration = timesheet.totalDuration()
 
@@ -39,7 +28,7 @@ internal class TimesheetTest {
 
         @Test
         fun `should sum up duration if no entries present`() {
-            val totalDuration = anEmptyTimesheet.totalDuration()
+            val totalDuration = aTimesheet(emptyList()).totalDuration()
 
             assertThat(totalDuration).isEqualTo((0.hours))
         }

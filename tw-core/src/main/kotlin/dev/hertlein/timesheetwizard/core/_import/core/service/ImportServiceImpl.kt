@@ -2,7 +2,7 @@ package dev.hertlein.timesheetwizard.core._import.core.service
 
 import dev.hertlein.timesheetwizard.core._import.core.model.ImportParams
 import dev.hertlein.timesheetwizard.core._import.core.port.EventPublishPort
-import dev.hertlein.timesheetwizard.core._import.core.port.TimesheetDataFetchPort
+import dev.hertlein.timesheetwizard.core._import.core.port.TimesheetSourcePort
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
 
@@ -16,7 +16,7 @@ interface ImportService {
 internal class ImportServiceImpl(
     private val customerFactory: CustomerFactory,
     private val dateTimeFactory: DateTimeFactory,
-    private val timesheetDataFetchPort: TimesheetDataFetchPort,
+    private val timesheetSourcePort: TimesheetSourcePort,
     private val eventPublishPort: EventPublishPort
 ) : ImportService {
 
@@ -28,7 +28,7 @@ internal class ImportServiceImpl(
 
         customers.forEach { customer ->
             logger.info { "Importing timesheet for customer '${customer.id.value}' and date range $dateRange..." }
-            timesheetDataFetchPort
+            timesheetSourcePort
                 .fetchTimesheet(customer, dateRange)
                 ?.also { logger.info { "Imported timesheet for customer '${customer.id.value}' and date range $dateRange." } }
                 ?.also { eventPublishPort.publish(it) }

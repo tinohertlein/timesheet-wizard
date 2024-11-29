@@ -1,11 +1,10 @@
 package dev.hertlein.timesheetwizard.core.export.core.service.strategy
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
-import dev.hertlein.timesheetwizard.core.export.core.strategy.XlsxV2
-import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
-import dev.hertlein.timesheetwizard.core.util.TestFixture.aZoneOffset
-import dev.hertlein.timesheetwizard.core.util.TestFixture.anEmptyTimesheet
-import dev.hertlein.timesheetwizard.core.util.TestFixture.anEntry
+import dev.hertlein.timesheetwizard.core.export.core.model.ExportTimesheet
+import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.aZoneOffset
+import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.anEntry
+import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.aTimesheet
 import org.apache.poi.ss.usermodel.DataFormatter
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
@@ -27,9 +26,9 @@ class XlsxV2Test {
         val workEnd = workStart.plusHours(workDurationHours)
         val work = anEntry.copy(
             duration = workDurationHours.toDuration(DurationUnit.HOURS),
-            dateTimeRange = Timesheet.Entry.DateTimeRange(workStart, workEnd)
+            dateTimeRange = ExportTimesheet.Entry.DateTimeRange(workStart, workEnd)
         )
-        val timesheet = anEmptyTimesheet.add(work)
+        val timesheet = aTimesheet(work)
         val expected =
             ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/timesheet_v2_PiedPiper_20220101-20221231.xlsx")
 

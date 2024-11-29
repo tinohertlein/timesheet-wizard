@@ -2,7 +2,7 @@ package dev.hertlein.timesheetwizard.core._import.core.service
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core.TestApplication
-import dev.hertlein.timesheetwizard.core.shared.model.Customer
+import dev.hertlein.timesheetwizard.core._import.core.model.Customer
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach

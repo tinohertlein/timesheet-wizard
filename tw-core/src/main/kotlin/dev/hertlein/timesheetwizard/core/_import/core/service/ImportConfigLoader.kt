@@ -2,7 +2,7 @@ package dev.hertlein.timesheetwizard.core._import.core.service
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
-import dev.hertlein.timesheetwizard.core.shared.model.Customer
+import dev.hertlein.timesheetwizard.core._import.core.model.Customer
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import mu.KotlinLogging
 import org.springframework.cache.annotation.Cacheable

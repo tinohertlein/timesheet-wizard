@@ -1,5 +1,6 @@
 package dev.hertlein.timesheetwizard.core
 
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -15,6 +16,7 @@ class ArchitectureTest {
 
         @Test
         fun `should have no dependencies on each other`() {
+            modules.forEach { println(it) }
             modules.verify()
         }
     }

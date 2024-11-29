@@ -1,7 +1,7 @@
-package dev.hertlein.timesheetwizard.core.export.core.strategy
+package dev.hertlein.timesheetwizard.core.export.core.service.strategy
 
+import dev.hertlein.timesheetwizard.core.export.core.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.export.core.model.TimesheetDocument
-import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
 import org.apache.poi.ss.usermodel.CellCopyPolicy
 import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.xssf.usermodel.XSSFSheet
@@ -19,16 +19,16 @@ internal class XlsxV1 : ExportStrategy {
 
     companion object {
 
-        private fun format(project: Timesheet.Entry.Project) = project.name
-        private fun format(task: Timesheet.Entry.Task) = task.name
-        private fun format(tags: List<Timesheet.Entry.Tag>) = tags.joinToString(" ") { it.name }
+        private fun format(project: ExportTimesheet.Entry.Project) = project.name
+        private fun format(task: ExportTimesheet.Entry.Task) = task.name
+        private fun format(tags: List<ExportTimesheet.Entry.Tag>) = tags.joinToString(" ") { it.name }
     }
 
     override fun type(): TimesheetDocument.Type {
         return TimesheetDocument.Type.XLSX_V1
     }
 
-    override fun create(exportParams: Map<String, String>, timesheet: Timesheet): TimesheetDocument {
+    override fun create(exportParams: Map<String, String>, timesheet: ExportTimesheet): TimesheetDocument {
         val outputStream = ByteArrayOutputStream()
 
         template("${type()}/timesheet_template.xlsx")
@@ -48,7 +48,7 @@ internal class XlsxV1 : ExportStrategy {
 
         return TimesheetDocument(
             TimesheetDocument.Type.XLSX_V1,
-            timesheet.customer,
+            timesheet.customer.name,
             timesheet.dateRange,
             outputStream.toByteArray()
         )
@@ -82,7 +82,7 @@ internal class XlsxV1 : ExportStrategy {
         sheet.getRow(rowOffset).getCell(columnOffset).setCellValue(totalDuration.toDouble(DurationUnit.HOURS))
     }
 
-    private fun fillInEntries(sheet: XSSFSheet, entries: List<Timesheet.Entry>) {
+    private fun fillInEntries(sheet: XSSFSheet, entries: List<ExportTimesheet.Entry>) {
         val rowOffset = 6
         val columnOffset = 0
         val referenceRow = sheet.getRow(rowOffset)
@@ -106,7 +106,7 @@ internal class XlsxV1 : ExportStrategy {
             .createRow(rowNumber)
             .also { it.copyRowFrom(referenceRow, cellCopyPolicy) }
 
-    private fun entryComparator(): Comparator<Timesheet.Entry> =
+    private fun entryComparator(): Comparator<ExportTimesheet.Entry> =
         compareBy(
             { it.dateTimeRange.start },
             { it.project.name },

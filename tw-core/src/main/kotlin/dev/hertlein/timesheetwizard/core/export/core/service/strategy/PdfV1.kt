@@ -1,7 +1,7 @@
-package dev.hertlein.timesheetwizard.core.export.core.strategy
+package dev.hertlein.timesheetwizard.core.export.core.service.strategy
 
+import dev.hertlein.timesheetwizard.core.export.core.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.export.core.model.TimesheetDocument
-import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
 import net.sf.jasperreports.engine.*
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
 import org.springframework.stereotype.Component
@@ -18,9 +18,9 @@ internal class PdfV1 : ExportStrategy {
 
     companion object {
 
-        private fun format(project: Timesheet.Entry.Project) = project.name
-        private fun format(task: Timesheet.Entry.Task) = task.name
-        private fun format(tags: List<Timesheet.Entry.Tag>) = tags.joinToString(" ") { it.name }
+        private fun format(project: ExportTimesheet.Entry.Project) = project.name
+        private fun format(task: ExportTimesheet.Entry.Task) = task.name
+        private fun format(tags: List<ExportTimesheet.Entry.Tag>) = tags.joinToString(" ") { it.name }
         private fun format(date: LocalDate): String = date.format(java.time.format.DateTimeFormatter.ISO_DATE)
         private fun format(dateTime: OffsetDateTime): String = format(dateTime.toLocalDate())
         private fun format(double: Double): String =
@@ -33,7 +33,7 @@ internal class PdfV1 : ExportStrategy {
     ) {
 
         companion object {
-            fun of(entry: Timesheet.Entry): PdfTimesheetEntry {
+            fun of(entry: ExportTimesheet.Entry): PdfTimesheetEntry {
                 return PdfTimesheetEntry(
                     format(entry.dateTimeRange.start),
                     format(entry.project),
@@ -53,7 +53,7 @@ internal class PdfV1 : ExportStrategy {
         return TimesheetDocument.Type.PDF_V1
     }
 
-    override fun create(exportParams: Map<String, String>, timesheet: Timesheet): TimesheetDocument {
+    override fun create(exportParams: Map<String, String>, timesheet: ExportTimesheet): TimesheetDocument {
         val values = createValuesForLayoutParams(exportParams, timesheet)
         val outputStream = ByteArrayOutputStream()
 
@@ -66,11 +66,11 @@ internal class PdfV1 : ExportStrategy {
         }
 
         return TimesheetDocument(
-            TimesheetDocument.Type.PDF_V1, timesheet.customer, timesheet.dateRange, outputStream.toByteArray()
+            TimesheetDocument.Type.PDF_V1, timesheet.customer.name, timesheet.dateRange, outputStream.toByteArray()
         )
     }
 
-    private fun createValuesForLayoutParams(exportParams: Map<String, String>, timesheet: Timesheet) = mapOf(
+    private fun createValuesForLayoutParams(exportParams: Map<String, String>, timesheet: ExportTimesheet) = mapOf(
         "name" to exportParams["contact-name"],
         "email" to exportParams["contact-email"],
         "period_start" to format(timesheet.dateRange.start),
@@ -79,9 +79,9 @@ internal class PdfV1 : ExportStrategy {
         "timesheet_entries" to JRBeanCollectionDataSource(toDataSource(timesheet))
     )
 
-    private fun toDataSource(timesheet: Timesheet) =
+    private fun toDataSource(timesheet: ExportTimesheet) =
         timesheet.entries.sortedWith(entryComparator()).map { PdfTimesheetEntry.of(it) }
 
-    private fun entryComparator(): Comparator<Timesheet.Entry> =
+    private fun entryComparator(): Comparator<ExportTimesheet.Entry> =
         compareBy({ it.dateTimeRange.start }, { it.project.name }, { format(it.tags) }, { it.duration })
 }

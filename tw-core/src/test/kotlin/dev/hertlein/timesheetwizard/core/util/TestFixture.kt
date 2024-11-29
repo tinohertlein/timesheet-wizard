@@ -1,39 +1,47 @@
 package dev.hertlein.timesheetwizard.core.util
 
-import dev.hertlein.timesheetwizard.core.shared.model.Customer
-import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
+import dev.hertlein.timesheetwizard.core.export.core.model.ExportTimesheet
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import kotlin.time.Duration.Companion.hours
 
 internal object TestFixture {
-    fun aCustomer() = Customer(Customer.Id("a-customer-id"), Customer.Name("a-customer-name"), true)
 
-    val aZoneOffset = ZoneOffset.ofHours(1)
+    object Export {
 
-    val aProject = Timesheet.Entry.Project("a-project")
+        val aZoneOffset: ZoneOffset = ZoneOffset.ofHours(1)
 
-    val aTask = Timesheet.Entry.Task("a-task")
+        private val aStart: OffsetDateTime = OffsetDateTime.of(2022, 1, 1, 8, 0, 0, 0, aZoneOffset)
 
-    val someTags = listOf("a-tag").map { Timesheet.Entry.Tag(it) }
+        private val anEnd: OffsetDateTime = OffsetDateTime.of(2022, 1, 1, 10, 0, 0, 0, aZoneOffset)
 
-    val aStart: OffsetDateTime = OffsetDateTime.of(2022, 1, 1, 8, 0, 0, 0, aZoneOffset)
+        private val aDateRange = LocalDate.of(2022, 1, 1)..LocalDate.of(2022, 12, 31)
 
-    val anEnd: OffsetDateTime = OffsetDateTime.of(2022, 1, 1, 10, 0, 0, 0, aZoneOffset)
+        private val aCustomer = ExportTimesheet.Customer("a-customer-id", "a-customer-name")
 
-    val aDateRange = LocalDate.of(2022, 1, 1)..LocalDate.of(2022, 12, 31)
+        private val aProject = ExportTimesheet.Entry.Project("a-project")
 
-    val aDateTimeRange = Timesheet.Entry.DateTimeRange(aStart, anEnd)
+        private val aTask = ExportTimesheet.Entry.Task("a-task")
 
-    val anEntry =
-        Timesheet.Entry(
-            aProject,
-            aTask,
-            someTags,
-            aDateTimeRange,
-            2.hours
-        )
+        private val someTags = listOf("a-tag").map { ExportTimesheet.Entry.Tag(it) }
 
-    val anEmptyTimesheet = Timesheet(aCustomer(), aDateRange, emptyList())
+        private val aDateTimeRange = ExportTimesheet.Entry.DateTimeRange(aStart, anEnd)
+
+        val anEntry =
+            ExportTimesheet.Entry(
+                aProject,
+                aTask,
+                someTags,
+                aDateTimeRange,
+                2.hours
+            )
+
+        fun aTimesheet(vararg entries: ExportTimesheet.Entry) =
+            aTimesheet(entries.toList())
+
+        fun aTimesheet(entries: List<ExportTimesheet.Entry>) =
+            ExportTimesheet(aCustomer, aDateRange, entries)
+    }
+
 }

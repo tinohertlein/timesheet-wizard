@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core.shared.model
+package dev.hertlein.timesheetwizard.core._import.core.model
 
 internal data class Customer(val id: Id, val name: Name, val enabled: Boolean? = null) {
 

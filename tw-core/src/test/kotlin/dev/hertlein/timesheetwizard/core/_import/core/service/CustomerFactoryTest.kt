@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.core._import.core.service
 
-import dev.hertlein.timesheetwizard.core.shared.model.Customer
+import dev.hertlein.timesheetwizard.core._import.core.model.Customer
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions

@@ -12,7 +12,7 @@ import java.util.*
 internal class FilenameFactory {
 
     fun filenameFrom(metaData: DocumentMetaData, timesheetDocument: TimesheetDocument): String {
-        val customerName = timesheetDocument.customer.name.value
+        val customerName = timesheetDocument.customerName
         val startDate = formatLocalDate(timesheetDocument.dateRange.start)
         val endDate = formatLocalDate(timesheetDocument.dateRange.endInclusive)
 

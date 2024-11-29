@@ -2,7 +2,6 @@ package dev.hertlein.timesheetwizard.core.export.core.service.config
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core.TestApplication
-import dev.hertlein.timesheetwizard.core.shared.model.Customer
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
@@ -33,8 +32,8 @@ internal class ExportConfigLoaderIT {
 
     @Test
     fun `should load export config`() {
-        val customer = Customer.of("1000", "PiedPiper", true)
-        val exportConfig = exportConfigLoader.loadExportConfig(customer)
+        val customerId = "1000"
+        val exportConfig = exportConfigLoader.loadExportConfig(customerId)
 
         Assertions.assertThat(exportConfig).containsExactly(
             ExportConfig("CSV_V1", mapOf("login" to "rihe")),

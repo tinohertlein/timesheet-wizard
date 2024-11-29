@@ -1,9 +1,9 @@
-package dev.hertlein.timesheetwizard.core.export.core.strategy
+package dev.hertlein.timesheetwizard.core.export.core.service.strategy
 
 import com.opencsv.CSVWriter
 import com.opencsv.ICSVWriter
+import dev.hertlein.timesheetwizard.core.export.core.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.export.core.model.TimesheetDocument
-import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
 import org.springframework.stereotype.Component
 import java.io.ByteArrayOutputStream
 import java.io.OutputStreamWriter
@@ -30,7 +30,7 @@ internal class CsvV1 : ExportStrategy {
         private const val CATEGORY = ""
         private const val DESCRIPTION = ""
 
-        private fun format(project: Timesheet.Entry.Project) = project.name
+        private fun format(project: ExportTimesheet.Entry.Project) = project.name
         private fun format(date: LocalDate): String = date.format(DateTimeFormatter.ISO_DATE)
         private fun format(time: LocalTime): String = time.format(
             DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(locale)
@@ -43,14 +43,14 @@ internal class CsvV1 : ExportStrategy {
 
    internal data  class CsvEntryKey(
         val login: String,
-        val project: Timesheet.Entry.Project,
+        val project: ExportTimesheet.Entry.Project,
         val category: String,
         val description: String,
         val date: LocalDate
     ) {
         companion object {
             fun of(
-                project: Timesheet.Entry.Project,
+                project: ExportTimesheet.Entry.Project,
                 startTime: OffsetDateTime,
                 login: String
             ) = CsvEntryKey(
@@ -71,8 +71,8 @@ internal class CsvV1 : ExportStrategy {
     )
 
    internal data  class CsvEntry(
-        val key: CsvEntryKey,
-        val value: CsvEntryValue
+       val key: CsvEntryKey,
+       val value: CsvEntryValue
     )
 
     private val headings = arrayOf(
@@ -93,7 +93,7 @@ internal class CsvV1 : ExportStrategy {
         return TimesheetDocument.Type.CSV_V1
     }
 
-    override fun create(exportParams: Map<String, String>, timesheet: Timesheet): TimesheetDocument {
+    override fun create(exportParams: Map<String, String>, timesheet: ExportTimesheet): TimesheetDocument {
         val outputStream = ByteArrayOutputStream()
         outputStream.use { bos ->
             OutputStreamWriter(bos, Charsets.UTF_8).use { osw ->
@@ -107,14 +107,14 @@ internal class CsvV1 : ExportStrategy {
             }
         }
         return TimesheetDocument(
-            TimesheetDocument.Type.CSV_V1, timesheet.customer, timesheet.dateRange, outputStream.toByteArray()
+            TimesheetDocument.Type.CSV_V1, timesheet.customer.name, timesheet.dateRange, outputStream.toByteArray()
         )
     }
 
-    private fun toCsv(exportParams: Map<String, String>, timesheet: Timesheet): List<Array<String>> =
+    private fun toCsv(exportParams: Map<String, String>, timesheet: ExportTimesheet): List<Array<String>> =
         listOf(headings) + toCsvRows(exportParams, timesheet.entries)
 
-    private fun toCsvRows(exportParams: Map<String, String>, entries: List<Timesheet.Entry>): List<Array<String>> {
+    private fun toCsvRows(exportParams: Map<String, String>, entries: List<ExportTimesheet.Entry>): List<Array<String>> {
         return entries
             .groupBy { CsvEntryKey.of(it.project, it.dateTimeRange.start, getLogin(exportParams)) }
             .map { groupedEntry ->

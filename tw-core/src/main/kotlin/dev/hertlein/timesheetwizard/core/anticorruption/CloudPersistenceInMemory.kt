@@ -1,7 +1,6 @@
-package dev.hertlein.timesheetwizard.core.shared
+package dev.hertlein.timesheetwizard.core.anticorruption
 
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
-import jakarta.annotation.PostConstruct
 import mu.KotlinLogging
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
@@ -18,11 +17,6 @@ internal class Factory {
 }
 
 internal class CloudPersistenceInMemory : CloudPersistence {
-
-    @PostConstruct
-    fun init() {
-        logger.warn { "No other bean found for ${CloudPersistence::class} -> Creating memory store." }
-    }
 
     private val store = mutableMapOf<String, ByteArray>()
 

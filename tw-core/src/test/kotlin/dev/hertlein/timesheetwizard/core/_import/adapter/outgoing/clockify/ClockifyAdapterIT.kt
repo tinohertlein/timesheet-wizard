@@ -4,10 +4,10 @@ import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core.TestApplication
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyIdsLoader
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyId
-import dev.hertlein.timesheetwizard.core.shared.model.Customer
-import dev.hertlein.timesheetwizard.core.shared.model.Customer.Id
-import dev.hertlein.timesheetwizard.core.shared.model.Customer.Name
-import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
+import dev.hertlein.timesheetwizard.core._import.core.model.ImportTimesheet
+import dev.hertlein.timesheetwizard.core._import.core.model.Customer
+import dev.hertlein.timesheetwizard.core._import.core.model.Customer.Id
+import dev.hertlein.timesheetwizard.core._import.core.model.Customer.Name
 import org.apache.http.entity.ContentType
 import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.*
@@ -84,11 +84,12 @@ class ClockifyAdapterIT {
         mockServer.verify(HttpRequest.request(), VerificationTimes.exactly(3))
         SoftAssertions().apply {
             assertThat(timesheet).isNotNull
-            assertThat(timesheet?.customer).isEqualTo(aCustomer)
+            assertThat(timesheet?.customer?.id?.value).isEqualTo(aCustomer.id.value)
+            assertThat(timesheet?.customer?.name?.value).isEqualTo(aCustomer.name.value)
             assertThat(timesheet?.dateRange?.start).isEqualTo(startDate)
             assertThat(timesheet?.dateRange?.endInclusive).isEqualTo(endDate)
             assertThat(timesheet?.entries?.get(0)?.duration).isEqualTo(9.hours)
-            assertThat(timesheet?.entries?.get(0)?.tags).containsExactly(Timesheet.Entry.Tag("Remote"))
+            assertThat(timesheet?.entries?.get(0)?.tags).containsExactly(ImportTimesheet.Entry.Tag("Remote"))
             assertThat(timesheet?.entries?.get(1)?.duration).isEqualTo(9.hours)
             assertThat(timesheet?.entries?.get(1)?.tags).isEmpty()
         }.assertAll()

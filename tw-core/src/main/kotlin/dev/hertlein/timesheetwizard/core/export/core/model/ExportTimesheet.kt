@@ -1,19 +1,15 @@
-package dev.hertlein.timesheetwizard.core.shared.model
+package dev.hertlein.timesheetwizard.core.export.core.model
 
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
 
-internal data class Timesheet(
+internal data class ExportTimesheet(
     val customer: Customer,
     val dateRange: ClosedRange<LocalDate>,
     val entries: List<Entry> = emptyList()
 ) {
-
-    fun add(entries: List<Entry>): Timesheet = copy(entries = this.entries + entries)
-
-    fun add(vararg entry: Entry): Timesheet = add(entry.toList())
 
     fun isEmpty() = entries.isEmpty()
 
@@ -21,6 +17,8 @@ internal data class Timesheet(
         entries
             .map { it.duration }
             .fold(0.hours) { total, current -> total + current }
+
+    internal data class Customer(val id: String, val name: String)
 
     internal data class Entry(
         val project: Project,

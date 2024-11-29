@@ -1,10 +1,10 @@
 package dev.hertlein.timesheetwizard.core.export.core.service
 
+import dev.hertlein.timesheetwizard.core.export.core.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.export.core.port.PersistencePort
 import dev.hertlein.timesheetwizard.core.export.core.service.config.ExportConfig
 import dev.hertlein.timesheetwizard.core.export.core.service.config.ExportConfigLoader
-import dev.hertlein.timesheetwizard.core.export.core.strategy.ExportStrategy
-import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
+import dev.hertlein.timesheetwizard.core.export.core.service.strategy.ExportStrategy
 import lombok.SneakyThrows
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
@@ -19,18 +19,18 @@ internal class ExportService(
 ) {
 
     @SneakyThrows
-    fun export(timesheet: Timesheet) {
-        val exportStrategiesForCustomer = exportConfigLoader.loadExportConfig(timesheet.customer)
+    fun export(timesheet: ExportTimesheet) {
+        val exportStrategiesForCustomer = exportConfigLoader.loadExportConfig(timesheet.customer.id)
         val applicableExportStrategiesForCustomer = findApplicableStrategies(exportStrategiesForCustomer)
 
         if (exportStrategiesForCustomer.isEmpty()) {
-            logger.error { "No export strategy ids found for customer id ${timesheet.customer.id.value}." }
+            logger.error { "No export strategy ids found for customer id ${timesheet.customer.id}." }
 
         } else if (applicableExportStrategiesForCustomer.isEmpty()) {
-            logger.error { "No applicable export strategies found for customer id ${timesheet.customer.id.value}." }
+            logger.error { "No applicable export strategies found for customer id ${timesheet.customer.id}." }
 
         } else if (timesheet.isEmpty()) {
-            logger.info { "Timesheet for customer '${timesheet.customer.id.value}' and date range ${timesheet.dateRange} is empty." }
+            logger.info { "Timesheet for customer '${timesheet.customer.id}' and date range ${timesheet.dateRange} is empty." }
 
         } else {
             applicableExportStrategiesForCustomer.forEach { strategy ->

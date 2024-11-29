@@ -1,7 +1,7 @@
-package dev.hertlein.timesheetwizard.core.export.core.strategy
+package dev.hertlein.timesheetwizard.core.export.core.service.strategy
 
+import dev.hertlein.timesheetwizard.core.export.core.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.export.core.model.TimesheetDocument
-import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
 import org.apache.poi.ss.usermodel.CellCopyPolicy
 import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.xssf.usermodel.XSSFSheet
@@ -22,21 +22,21 @@ internal class XlsxV2 : ExportStrategy {
     companion object {
         private val locale: Locale = Locale.GERMAN
 
-        private fun format(task: Timesheet.Entry.Task) = task.name
+        private fun format(task: ExportTimesheet.Entry.Task) = task.name
         private fun format(duration: Duration): String =
             duration.toComponents { hours, minutes, _, _ -> String.format(locale, "%02d:%02d", hours, minutes) }
 
     }
 
    internal data  class XlsxEntryKey(
-        val project: Timesheet.Entry.Project,
-        val description: Timesheet.Entry.Task,
+        val project: ExportTimesheet.Entry.Project,
+        val description: ExportTimesheet.Entry.Task,
         val date: LocalDate
     ) {
         companion object {
             fun of(
-                project: Timesheet.Entry.Project,
-                task: Timesheet.Entry.Task,
+                project: ExportTimesheet.Entry.Project,
+                task: ExportTimesheet.Entry.Task,
                 startTime: OffsetDateTime
             ) = XlsxEntryKey(
                 project,
@@ -51,15 +51,15 @@ internal class XlsxV2 : ExportStrategy {
     )
 
    internal data  class XlsxEntry(
-        val key: XlsxEntryKey,
-        val value: XlsxEntryValue
+       val key: XlsxEntryKey,
+       val value: XlsxEntryValue
     )
 
     override fun type(): TimesheetDocument.Type {
         return TimesheetDocument.Type.XLSX_V2
     }
 
-    override fun create(exportParams: Map<String, String>, timesheet: Timesheet): TimesheetDocument {
+    override fun create(exportParams: Map<String, String>, timesheet: ExportTimesheet): TimesheetDocument {
         val outputStream = ByteArrayOutputStream()
 
         template("${type()}/timesheet_template.xlsx")
@@ -76,13 +76,13 @@ internal class XlsxV2 : ExportStrategy {
 
         return TimesheetDocument(
             TimesheetDocument.Type.XLSX_V2,
-            timesheet.customer,
+            timesheet.customer.name,
             timesheet.dateRange,
             outputStream.toByteArray()
         )
     }
 
-    private fun aggregate(entries: List<Timesheet.Entry>): List<XlsxEntry> {
+    private fun aggregate(entries: List<ExportTimesheet.Entry>): List<XlsxEntry> {
         return entries
             .groupBy { XlsxEntryKey.of(it.project, it.task, it.dateTimeRange.start) }
             .map { groupedEntry ->
