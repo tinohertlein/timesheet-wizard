@@ -1,8 +1,9 @@
 package dev.hertlein.timesheetwizard.core.export.core.service
 
 import dev.hertlein.timesheetwizard.core.export.core.port.PersistencePort
+import dev.hertlein.timesheetwizard.core.export.core.service.config.ExportConfig
+import dev.hertlein.timesheetwizard.core.export.core.service.config.ExportConfigLoader
 import dev.hertlein.timesheetwizard.core.export.core.strategy.ExportStrategy
-import dev.hertlein.timesheetwizard.core.export.core.strategy.ExportStrategyConfig
 import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
 import lombok.SneakyThrows
 import mu.KotlinLogging
@@ -39,7 +40,7 @@ internal class ExportService(
         }
     }
 
-    private fun findApplicableStrategies(configs: List<ExportStrategyConfig>): List<Pair<ExportStrategy, ExportStrategyConfig>> {
+    private fun findApplicableStrategies(configs: List<ExportConfig>): List<Pair<ExportStrategy, ExportConfig>> {
         return configs.map { config -> Pair(availableExportStrategies.first { it.type().name == config.type }, config) }
     }
 }

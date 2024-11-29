@@ -1,6 +1,7 @@
-package dev.hertlein.timesheetwizard.core.export.core.strategy
+package dev.hertlein.timesheetwizard.core.export.core.service.strategy
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
+import dev.hertlein.timesheetwizard.core.export.core.strategy.CsvV1
 import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
 import dev.hertlein.timesheetwizard.core.shared.model.Timesheet.Entry.DateTimeRange
 import dev.hertlein.timesheetwizard.core.util.TestFixture.aZoneOffset
@@ -31,7 +32,7 @@ class CsvV1Test {
         val lunchBreakStart = morningWorkEnd
         val lunchBreakEnd = morningWorkEnd.plusMinutes(lunchBreakDurationMinutes)
         val lunchBreak = anEntry.copy(
-            task = Timesheet.Entry.Task(CsvV1.Companion.TASK_BREAK),
+            task = Timesheet.Entry.Task(CsvV1.TASK_BREAK),
             duration = lunchBreakDurationMinutes.toDuration(DurationUnit.MINUTES),
             dateTimeRange = DateTimeRange(lunchBreakStart, lunchBreakEnd)
         )
@@ -43,6 +44,7 @@ class CsvV1Test {
         )
 
         val timesheet = anEmptyTimesheet.add(morningWork).add(lunchBreak).add(afternoonWork)
+        // dev/hertlein/timesheetwizard/core/export/core/service/strategy
         val expected =
             ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/timesheet_PiedPiper_20220101-20221231.csv")
 

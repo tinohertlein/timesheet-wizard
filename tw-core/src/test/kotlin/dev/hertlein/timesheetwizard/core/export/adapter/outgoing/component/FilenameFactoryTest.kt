@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.export.adapter.outgoing.persistence.component
+package dev.hertlein.timesheetwizard.core.export.adapter.outgoing.component
 
 import dev.hertlein.timesheetwizard.core.export.adapter.outgoing.persistence.component.DocumentMetaData
 import dev.hertlein.timesheetwizard.core.export.adapter.outgoing.persistence.component.FilenameFactory

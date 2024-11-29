@@ -1,11 +1,10 @@
-package dev.hertlein.timesheetwizard.core.export.core.service
+package dev.hertlein.timesheetwizard.core.export.core.service.config
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core.TestApplication
-import dev.hertlein.timesheetwizard.core.export.core.strategy.ExportStrategyConfig
 import dev.hertlein.timesheetwizard.core.shared.model.Customer
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -37,21 +36,21 @@ internal class ExportConfigLoaderIT {
         val customer = Customer.of("1000", "PiedPiper", true)
         val exportConfig = exportConfigLoader.loadExportConfig(customer)
 
-        assertThat(exportConfig).containsExactly(
-            ExportStrategyConfig("CSV_V1", mapOf("login" to "rihe")),
-            ExportStrategyConfig(
+        Assertions.assertThat(exportConfig).containsExactly(
+            ExportConfig("CSV_V1", mapOf("login" to "rihe")),
+            ExportConfig(
                 "XLSX_V1", mapOf(
                     "contact-name" to "Richard Hendricks",
                     "contact-email" to "Richard.Hendricks@example.org"
                 )
             ),
-            ExportStrategyConfig(
+            ExportConfig(
                 "PDF_V1", mapOf(
                     "contact-name" to "Richard Hendricks",
                     "contact-email" to "Richard.Hendricks@example.org"
                 )
             ),
-            ExportStrategyConfig("XLSX_V2", emptyMap()),
+            ExportConfig("XLSX_V2", emptyMap()),
         )
     }
 }

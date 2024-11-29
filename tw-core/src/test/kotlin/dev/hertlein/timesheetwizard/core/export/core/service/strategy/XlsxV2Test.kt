@@ -1,7 +1,8 @@
-package dev.hertlein.timesheetwizard.core.export.core.strategy
+package dev.hertlein.timesheetwizard.core.export.core.service.strategy
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
-import dev.hertlein.timesheetwizard.core.shared.model.Timesheet.Entry.DateTimeRange
+import dev.hertlein.timesheetwizard.core.export.core.strategy.XlsxV2
+import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
 import dev.hertlein.timesheetwizard.core.util.TestFixture.aZoneOffset
 import dev.hertlein.timesheetwizard.core.util.TestFixture.anEmptyTimesheet
 import dev.hertlein.timesheetwizard.core.util.TestFixture.anEntry
@@ -15,8 +16,8 @@ import java.time.OffsetDateTime
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
-@DisplayName("XlsxV1")
-class XlsxV1Test {
+@DisplayName("XlsxV2")
+class XlsxV2Test {
 
     @Test
     fun `should create an xlsx document from timesheet`() {
@@ -26,16 +27,18 @@ class XlsxV1Test {
         val workEnd = workStart.plusHours(workDurationHours)
         val work = anEntry.copy(
             duration = workDurationHours.toDuration(DurationUnit.HOURS),
-            dateTimeRange = DateTimeRange(workStart, workEnd)
+            dateTimeRange = Timesheet.Entry.DateTimeRange(workStart, workEnd)
         )
         val timesheet = anEmptyTimesheet.add(work)
         val expected =
-            ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/timesheet_v1_PiedPiper_20220101-20221231.xlsx")
+            ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/timesheet_v2_PiedPiper_20220101-20221231.xlsx")
 
-        val actual =
-            XlsxV1().create(mapOf("contact-name" to "a-contact-name", "contact-email" to "a-contact-email"), timesheet)
+        val actual = XlsxV2().create(emptyMap(), timesheet)
 
-        ExcelVerification.assertEquals(actual.content, expected)
+        ExcelVerification.assertEquals(
+            actual.content,
+            expected
+        )
     }
 
     object ExcelVerification {
@@ -45,7 +48,7 @@ class XlsxV1Test {
             val expectedSheet = sheetFrom(expected)
             val cellFormatter = DataFormatter()
             val maxRowIndex = expectedSheet.lastRowNum
-            val maxColumnIndex = 4
+            val maxColumnIndex = 3
 
             assertThat(actualSheet.lastRowNum).isEqualTo(expectedSheet.lastRowNum)
 
