@@ -53,3 +53,4 @@ build
 /tw-app-aws/.aws-sam/
 
 /tw-app-azure/requests/confidential/
+/config/confidential/

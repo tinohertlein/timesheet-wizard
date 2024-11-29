@@ -96,8 +96,8 @@ responsibilities:
 #### as AWS Lambda with AWS SAM CLI on local machine
 
 - Emulate S3 storage with Minio in [docker-compose.yml](docker-compose.yml)
-- Create & upload a `configuration.json` file to local S3
-    - An example file is shown [here](tw-app-aws/requests/public/config/configuration.json)
+- Create & upload the configuration file to local S3
+   - Example file is shown [here](config/public/configuration.json)
 - Replace placeholders
   in [tw-app-aws/requests/public/env.json](tw-app-aws/requests/public/env.json) with your keys
 - Set import params in [tw-app-aws/requests/public/event.json](tw-app-aws/requests/public/event.json)
@@ -109,10 +109,9 @@ responsibilities:
 #### as Azure Function App on local machine
 
 - Emulate Azure Blob Storage with Azureite in [docker-compose.yml](docker-compose.yml)
-- Create & upload a `configuration.json` file to local Azure Storage to `tw-sheets/config`
+- Create & upload the configuration file to local Azure Storage to `tw-sheets/config`
     - E.g. via [Azure Storage Explorer](https://azure.microsoft.com/en-us/products/storage/storage-explorer)
-    - An example file is
-      shown [here](tw-app-azure/requests/public/config/configuration.json)
+    - Example file is shown [here](config/public/configuration.json)
 - Replace placeholders
   in [tw-app-azure/requests/public/run-function-local.sh](tw-app-azure/requests/public/run-function-local.sh) with your
   keys
