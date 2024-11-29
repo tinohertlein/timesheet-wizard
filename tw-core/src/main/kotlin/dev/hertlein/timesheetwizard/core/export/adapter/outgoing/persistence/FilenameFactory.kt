@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core.export.adapter.outgoing.persistence.component
+package dev.hertlein.timesheetwizard.core.export.adapter.outgoing.persistence
 
 import dev.hertlein.timesheetwizard.core.export.core.model.TimesheetDocument
 import org.springframework.stereotype.Component
