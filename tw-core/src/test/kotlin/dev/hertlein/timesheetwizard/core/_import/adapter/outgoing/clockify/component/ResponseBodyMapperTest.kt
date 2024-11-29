@@ -1,10 +1,9 @@
 package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component
 
-import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.component.ResponseBodyMapper
-import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.model.ResponseBody
-import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.model.ResponseBody.TimeEntry
-import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.model.ResponseBody.TimeEntry.Tag
-import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.model.ResponseBody.TimeEntry.TimeInterval
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody.TimeEntry
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody.TimeEntry.Tag
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody.TimeEntry.TimeInterval
 import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName

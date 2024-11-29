@@ -1,10 +1,9 @@
 package dev.hertlein.timesheetwizard.core.shared.configloader
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
-import dev.hertlein.timesheetwizard.core.shared.model.ClockifyId
+import dev.hertlein.timesheetwizard.core.TestApplication
 import dev.hertlein.timesheetwizard.core.shared.model.Customer
 import dev.hertlein.timesheetwizard.core.shared.model.ExportStrategyConfig
-import dev.hertlein.timesheetwizard.core.TestApplication
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.*
@@ -38,17 +37,6 @@ internal class ConfigLoaderIT {
             val customers = configLoader.loadCustomers()
 
             assertThat(customers).containsExactly(Customer.of("1000", "PiedPiper", true))
-        }
-    }
-
-    @Nested
-    inner class LoadClockifyIds {
-
-        @Test
-        fun `should load clockify ids`() {
-            val clockifyIds = configLoader.loadClockifyIds()
-
-            assertThat(clockifyIds).containsExactly(ClockifyId("1000", "62dd35202849d633796f5459"))
         }
     }
 

@@ -1,7 +1,7 @@
-package dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.component
+package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component
 
-import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.model.ResponseBody
-import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.model.ResponseBody.TimeEntry
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody.TimeEntry
 import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
 import org.springframework.stereotype.Component
 import java.time.OffsetDateTime

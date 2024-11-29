@@ -1,9 +1,9 @@
-package dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.component
+package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component
 
 import com.google.common.net.HttpHeaders.ACCEPT
-import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.config.ClockifyConfig
-import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.model.RequestBody
-import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.model.ResponseBody
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyConfig
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.RequestBody
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestClient

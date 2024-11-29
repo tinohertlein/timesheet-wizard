@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.config
+package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 

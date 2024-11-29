@@ -1,7 +1,6 @@
 package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component
 
-import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.component.RequestBodyFactory
-import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.model.RequestBody
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.RequestBody
 import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested

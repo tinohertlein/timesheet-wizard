@@ -1,16 +1,13 @@
 package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
-import dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.clockify.ClockifyAdapter
-import dev.hertlein.timesheetwizard.core.shared.configloader.ClockifyIdsLoader
-import dev.hertlein.timesheetwizard.core.shared.configloader.CustomerConfigLoader
-import dev.hertlein.timesheetwizard.core.shared.configloader.ExportConfigLoader
-import dev.hertlein.timesheetwizard.core.shared.model.ClockifyId
+import dev.hertlein.timesheetwizard.core.TestApplication
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component.ClockifyIdsLoader
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ClockifyId
 import dev.hertlein.timesheetwizard.core.shared.model.Customer
 import dev.hertlein.timesheetwizard.core.shared.model.Customer.Id
 import dev.hertlein.timesheetwizard.core.shared.model.Customer.Name
 import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
-import dev.hertlein.timesheetwizard.core.TestApplication
 import org.apache.http.entity.ContentType
 import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.*
@@ -52,7 +49,7 @@ class ClockifyAdapterIT {
     @Autowired
     private lateinit var clockifyImportAdapter: ClockifyAdapter
 
-    @MockBean(extraInterfaces = [ExportConfigLoader::class, CustomerConfigLoader::class])
+    @MockBean
     private lateinit var clockifyIdsLoader: ClockifyIdsLoader
 
     @BeforeAll

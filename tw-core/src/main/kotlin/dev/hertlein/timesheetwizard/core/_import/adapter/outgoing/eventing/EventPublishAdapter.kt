@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core._import.core.adapter.outgoing.eventing
+package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.eventing
 
 import dev.hertlein.timesheetwizard.core._import.core.port.EventPublishPort
 import dev.hertlein.timesheetwizard.core.shared.model.Timesheet

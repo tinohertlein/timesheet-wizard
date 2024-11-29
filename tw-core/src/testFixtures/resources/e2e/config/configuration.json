@@ -3,7 +3,6 @@
     "id": "1000",
     "name": "PiedPiper",
     "enabled": true,
-    "clockifyId": "62dd35202849d633796f5459",
     "strategies": [
       {
         "type": "CSV_V1",

@@ -55,10 +55,16 @@ open class AbstractApplicationE2E {
         downloadFromStorage: (String) -> ByteArray,
         run: () -> Unit
     ) {
-        uploadToStorage(
-            "config/configuration.json",
-            ResourcesReader.bytesFromResourceFile("e2e/config/configuration.json")
+        val configFileNames = listOf(
+            "config/configuration.json" to "e2e/config/configuration.json",
+            "config/clockify.json" to "e2e/config/clockify.json",
         )
+        configFileNames.forEach {
+            uploadToStorage(
+                it.first,
+                ResourcesReader.bytesFromResourceFile(it.second)
+            )
+        }
         prepareClockifyServer()
         val expectedFilenames = listOf(
             "customers/PiedPiper/csv/v1/" to "timesheet_20220101-20221231.csv",
