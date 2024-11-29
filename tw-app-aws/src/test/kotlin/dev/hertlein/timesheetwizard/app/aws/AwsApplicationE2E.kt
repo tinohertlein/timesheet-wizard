@@ -1,9 +1,9 @@
 package dev.hertlein.timesheetwizard.app.aws
 
 import dev.hertlein.timesheetwizard.app.aws.util.S3Operations
-import dev.hertlein.timesheetwizard.app.aws.util.SpringTestProfiles.TESTCONTAINERS
 import dev.hertlein.timesheetwizard.app.aws.util.TestcontainersConfiguration
 import dev.hertlein.timesheetwizard.core.AbstractApplicationE2E
+import dev.hertlein.timesheetwizard.core.SpringTestProfiles.TESTCONTAINERS
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

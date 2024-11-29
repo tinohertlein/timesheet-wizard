@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.app.aws.util
+package dev.hertlein.timesheetwizard.core
 
 object SpringTestProfiles {
 
