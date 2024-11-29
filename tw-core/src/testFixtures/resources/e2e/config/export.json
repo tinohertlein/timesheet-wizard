@@ -1,6 +1,6 @@
 [
   {
-    "id": "1000",
+    "customerId": "1000",
     "strategies": [
       {
         "type": "CSV_V1",

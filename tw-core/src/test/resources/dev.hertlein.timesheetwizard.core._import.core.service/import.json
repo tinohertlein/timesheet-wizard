@@ -1,7 +1,7 @@
 [
   {
-    "id": "1000",
-    "name": "PiedPiper",
+    "customerId": "1000",
+    "customerName": "PiedPiper",
     "enabled": true
   }
 ]

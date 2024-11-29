@@ -21,7 +21,7 @@ internal class ImportConfigLoader(
     @Cacheable("customers")
     fun loadCustomers(): List<Customer> {
         return configuration
-            .map { Customer.of(it.id, it.name, it.enabled) }
+            .map { Customer.of(it.customerId, it.customerName, it.enabled) }
             .also { logger.info { "Loaded ${it.size} customer(s)." } }
     }
 
@@ -31,8 +31,8 @@ internal class ImportConfigLoader(
     }
 
     private data class ConfigDto(
-        val id: String,
-        val name: String,
+        val customerId: String,
+        val customerName: String,
         val enabled: Boolean,
     )
 }

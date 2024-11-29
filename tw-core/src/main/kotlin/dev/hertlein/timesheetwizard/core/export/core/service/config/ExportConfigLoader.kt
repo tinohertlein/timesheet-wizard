@@ -21,7 +21,7 @@ internal class ExportConfigLoader(
     @Cacheable("export-config")
     fun loadExportConfig(customer: Customer): List<ExportConfig> {
         return configuration
-            .filter { it.id == customer.id.value }
+            .filter { it.customerId == customer.id.value }
             .flatMap { it.strategies }
             .map { ExportConfig(it.type, it.params.orEmpty()) }
             .also { logger.info { "Loaded ${it.size} export config(s)." } }
@@ -33,7 +33,7 @@ internal class ExportConfigLoader(
     }
 
     private data class ConfigDto(
-        val id: String,
+        val customerId: String,
         val strategies: List<ExportStrategyConfigDto>
     ) {
         data class ExportStrategyConfigDto(val type: String, val params: Map<String, String>?)
