@@ -2,8 +2,7 @@ package dev.hertlein.timesheetwizard.core.export.core
 
 import dev.hertlein.timesheetwizard.core.export.core.port.PersistencePort
 import dev.hertlein.timesheetwizard.core.export.core.strategy.ExportStrategy
-import dev.hertlein.timesheetwizard.core.shared.configloader.ExportConfigLoader
-import dev.hertlein.timesheetwizard.core.shared.model.ExportStrategyConfig
+import dev.hertlein.timesheetwizard.core.export.core.strategy.ExportStrategyConfig
 import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
 import lombok.SneakyThrows
 import mu.KotlinLogging

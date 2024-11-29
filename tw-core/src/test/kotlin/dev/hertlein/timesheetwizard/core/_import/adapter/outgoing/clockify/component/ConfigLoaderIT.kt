@@ -12,7 +12,7 @@ import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
-@DisplayName("ConfigLoader")
+@DisplayName("ClockifyIdsLoader")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(classes = [TestApplication::class])
 internal class ConfigLoaderIT {

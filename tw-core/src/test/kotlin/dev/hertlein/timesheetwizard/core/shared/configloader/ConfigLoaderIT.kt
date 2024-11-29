@@ -3,7 +3,6 @@ package dev.hertlein.timesheetwizard.core.shared.configloader
 import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core.TestApplication
 import dev.hertlein.timesheetwizard.core.shared.model.Customer
-import dev.hertlein.timesheetwizard.core.shared.model.ExportStrategyConfig
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.*
@@ -37,33 +36,6 @@ internal class ConfigLoaderIT {
             val customers = configLoader.loadCustomers()
 
             assertThat(customers).containsExactly(Customer.of("1000", "PiedPiper", true))
-        }
-    }
-
-    @Nested
-    inner class LoadExportConfig {
-
-        @Test
-        fun `should load export config`() {
-            val customer = Customer.of("1000", "PiedPiper", true)
-            val exportConfig = configLoader.loadExportConfig(customer)
-
-            assertThat(exportConfig).containsExactly(
-                ExportStrategyConfig("CSV_V1", mapOf("login" to "rihe")),
-                ExportStrategyConfig(
-                    "XLSX_V1", mapOf(
-                        "contact-name" to "Richard Hendricks",
-                        "contact-email" to "Richard.Hendricks@example.org"
-                    )
-                ),
-                ExportStrategyConfig(
-                    "PDF_V1", mapOf(
-                        "contact-name" to "Richard Hendricks",
-                        "contact-email" to "Richard.Hendricks@example.org"
-                    )
-                ),
-                ExportStrategyConfig("XLSX_V2", emptyMap()),
-            )
         }
     }
 }
