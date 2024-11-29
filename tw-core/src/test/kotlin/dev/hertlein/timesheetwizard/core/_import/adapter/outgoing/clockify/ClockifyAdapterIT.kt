@@ -2,8 +2,8 @@ package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core.TestApplication
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component.ClockifyIdsLoader
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ClockifyId
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyIdsLoader
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyId
 import dev.hertlein.timesheetwizard.core.shared.model.Customer
 import dev.hertlein.timesheetwizard.core.shared.model.Customer.Id
 import dev.hertlein.timesheetwizard.core.shared.model.Customer.Name

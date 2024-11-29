@@ -1,16 +1,10 @@
-package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component
+package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report
 
-import com.google.common.net.HttpHeaders.ACCEPT
+import com.google.common.net.HttpHeaders
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyConfig
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.RequestBody
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody
-import mu.KotlinLogging
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestClient
 import org.springframework.web.util.UriComponentsBuilder
-
-private val logger = KotlinLogging.logger {}
-
 
 @Component
 internal class ReportClient(
@@ -30,7 +24,7 @@ internal class ReportClient(
             .post()
             .uri(uri)
             .body(requestBody)
-            .header(ACCEPT, "application/json")
+            .header(HttpHeaders.ACCEPT, "application/json")
             .header("X-Api-Key", clockifyConfig.apiKey)
             .retrieve()
             .body(ResponseBody::class.java)

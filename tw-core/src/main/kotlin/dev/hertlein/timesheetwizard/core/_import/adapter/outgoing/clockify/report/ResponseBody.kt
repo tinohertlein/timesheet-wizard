@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model
+package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report
 
 internal data class ResponseBody(
     val timeentries: List<TimeEntry>,

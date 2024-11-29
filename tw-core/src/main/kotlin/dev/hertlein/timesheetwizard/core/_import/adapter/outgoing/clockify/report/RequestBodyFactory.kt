@@ -1,6 +1,5 @@
-package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component
+package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report
 
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.RequestBody
 import org.springframework.stereotype.Component
 import java.time.LocalDate
 import java.time.LocalDateTime

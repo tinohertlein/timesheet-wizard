@@ -1,12 +1,12 @@
 package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify
 
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component.ClockifyIdsLoader
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component.ReportClient
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component.RequestBodyFactory
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component.ResponseBodyMapper
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.RequestBody
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyIdsLoader
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.ReportClient
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.RequestBodyFactory
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.ResponseBodyMapper
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.RequestBody
 import dev.hertlein.timesheetwizard.core._import.core.port.TimesheetDataFetchPort
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ClockifyId
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyId
 import dev.hertlein.timesheetwizard.core.shared.model.Customer
 import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
 import mu.KotlinLogging

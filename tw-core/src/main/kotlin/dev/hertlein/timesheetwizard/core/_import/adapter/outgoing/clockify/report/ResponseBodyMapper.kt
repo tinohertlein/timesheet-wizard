@@ -1,7 +1,5 @@
-package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component
+package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report
 
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody.TimeEntry
 import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
 import org.springframework.stereotype.Component
 import java.time.OffsetDateTime
@@ -19,11 +17,11 @@ internal class ResponseBodyMapper {
             ?.map { toTimesheetEntry(it) }
             ?: emptyList()
 
-    private fun toTimesheetEntry(it: TimeEntry) =
+    private fun toTimesheetEntry(it: ResponseBody.TimeEntry) =
         Timesheet.Entry.of(
             it.projectName,
             it.description,
-            it.tags?.map { tag -> TimeEntry.Tag(tag.name).name } ?: emptyList(),
+            it.tags?.map { tag -> ResponseBody.TimeEntry.Tag(tag.name).name } ?: emptyList(),
             OffsetDateTime.parse(it.timeInterval.start, FORMAT),
             OffsetDateTime.parse(it.timeInterval.end, FORMAT),
             it.timeInterval.duration.seconds

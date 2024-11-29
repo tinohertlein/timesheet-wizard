@@ -1,11 +1,7 @@
-package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.component
+package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report
 
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody.TimeEntry
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody.TimeEntry.Tag
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.model.ResponseBody.TimeEntry.TimeInterval
 import dev.hertlein.timesheetwizard.core.shared.model.Timesheet
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -27,7 +23,7 @@ internal class ResponseBodyMapperTest {
     private val anotherTask = "another task"
 
     private val someTagsAsStrings = listOf("onsite")
-    private val someTagsAsTags = someTagsAsStrings.map { Tag(it) }
+    private val someTagsAsTags = someTagsAsStrings.map { ResponseBody.TimeEntry.Tag(it) }
 
     private val aDateLowerAsDateTime = OffsetDateTime.of(2022, 8, 1, 8, 0, 0, 0, zoneOffset)
     private val aDateLowerAsString = "2022-08-01T08:00:00+01:00"
@@ -50,40 +46,40 @@ internal class ResponseBodyMapperTest {
 
             val timesheetEntries = responseBodyMapper.toTimesheetEntries(responseBody)
 
-            assertThat(timesheetEntries).isEqualTo(expected())
+            Assertions.assertThat(timesheetEntries).isEqualTo(expected())
         }
     }
 
-    private fun input(): List<TimeEntry> = listOf(
-        TimeEntry(
+    private fun input(): List<ResponseBody.TimeEntry> = listOf(
+        ResponseBody.TimeEntry(
             aProject,
             aTask,
             someTagsAsTags,
-            TimeInterval(aDateLowerAsString, aDateUpperAsString, toSeconds(2))
+            ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, toSeconds(2))
         ),
-        TimeEntry(
+        ResponseBody.TimeEntry(
             aProject,
             aTask,
             someTagsAsTags,
-            TimeInterval(anotherDateLowerAsString, anotherDateUpperAsString, toSeconds(3))
+            ResponseBody.TimeEntry.TimeInterval(anotherDateLowerAsString, anotherDateUpperAsString, toSeconds(3))
         ),
-        TimeEntry(
+        ResponseBody.TimeEntry(
             aProject,
             anotherTask,
             someTagsAsTags,
-            TimeInterval(aDateLowerAsString, aDateUpperAsString, toSeconds(2))
+            ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, toSeconds(2))
         ),
-        TimeEntry(
+        ResponseBody.TimeEntry(
             anotherProject,
             aTask,
             someTagsAsTags,
-            TimeInterval(aDateLowerAsString, aDateUpperAsString, toSeconds(2))
+            ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, toSeconds(2))
         ),
-        TimeEntry(
+        ResponseBody.TimeEntry(
             anotherProject,
             anotherTask,
             someTagsAsTags,
-            TimeInterval(aDateLowerAsString, aDateUpperAsString, toSeconds(2))
+            ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, toSeconds(2))
         ),
     )
 
