@@ -56,9 +56,9 @@ open class AbstractApplicationE2E {
         run: () -> Unit
     ) {
         val configFileNames = listOf(
-            "config/configuration.json" to "e2e/config/configuration.json",
             "config/clockify.json" to "e2e/config/clockify.json",
             "config/export.json" to "e2e/config/export.json",
+            "config/import.json" to "e2e/config/import.json",
         )
         configFileNames.forEach {
             uploadToStorage(

@@ -3,7 +3,6 @@ package dev.hertlein.timesheetwizard.core._import.core
 import dev.hertlein.timesheetwizard.core._import.core.model.ImportParams
 import dev.hertlein.timesheetwizard.core._import.core.port.EventPublishPort
 import dev.hertlein.timesheetwizard.core._import.core.port.TimesheetDataFetchPort
-import dev.hertlein.timesheetwizard.core.shared.CustomerFactory
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
 
