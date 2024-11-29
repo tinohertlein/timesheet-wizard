@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.core
 
-import dev.hertlein.timesheetwizard.core._import.core.ImportServiceImpl
+import dev.hertlein.timesheetwizard.core._import.core.service.ImportServiceImpl
 import dev.hertlein.timesheetwizard.core._import.core.model.DateRangeType
 import dev.hertlein.timesheetwizard.core._import.core.model.ImportParams
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence

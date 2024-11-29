@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core._import.core
+package dev.hertlein.timesheetwizard.core._import.core.service
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core.TestApplication

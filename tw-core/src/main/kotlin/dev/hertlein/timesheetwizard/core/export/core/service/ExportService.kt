@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core.export.core
+package dev.hertlein.timesheetwizard.core.export.core.service
 
 import dev.hertlein.timesheetwizard.core.export.core.port.PersistencePort
 import dev.hertlein.timesheetwizard.core.export.core.strategy.ExportStrategy

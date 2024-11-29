@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core._import.core
+package dev.hertlein.timesheetwizard.core._import.core.service
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

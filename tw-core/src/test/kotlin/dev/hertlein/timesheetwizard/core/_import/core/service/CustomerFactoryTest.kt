@@ -1,7 +1,5 @@
-package dev.hertlein.timesheetwizard.core.export.core
+package dev.hertlein.timesheetwizard.core._import.core.service
 
-import dev.hertlein.timesheetwizard.core._import.core.CustomerFactory
-import dev.hertlein.timesheetwizard.core._import.core.ImportConfigLoader
 import dev.hertlein.timesheetwizard.core.shared.model.Customer
 import io.mockk.every
 import io.mockk.mockk
@@ -10,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-
 
 private const val CUSTOMER_ID_1 = "customer-id-1"
 private const val CUSTOMER_NAME_1 = "customer-name-1"

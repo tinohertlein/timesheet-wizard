@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core._import.core
+package dev.hertlein.timesheetwizard.core._import.core.service
 
 import dev.hertlein.timesheetwizard.core._import.core.model.ImportParams
 import dev.hertlein.timesheetwizard.core._import.core.port.EventPublishPort

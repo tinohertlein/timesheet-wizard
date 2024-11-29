@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core._import.core
+package dev.hertlein.timesheetwizard.core._import.core.service
 
 import dev.hertlein.timesheetwizard.core.shared.model.Customer
 import org.springframework.stereotype.Component
