@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.core.export.adapter.outgoing.persistence
 
-import dev.hertlein.timesheetwizard.core.export.core.model.TimesheetDocument
+import dev.hertlein.timesheetwizard.core.export.domain.model.TimesheetDocument
 import org.springframework.stereotype.Component
 import java.time.LocalDate
 import java.time.format.DateTimeFormatterBuilder

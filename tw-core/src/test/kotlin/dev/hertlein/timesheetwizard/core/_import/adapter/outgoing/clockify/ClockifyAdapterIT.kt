@@ -4,10 +4,10 @@ import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core.TestApplication
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyIdsLoader
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyId
-import dev.hertlein.timesheetwizard.core._import.core.model.ImportTimesheet
-import dev.hertlein.timesheetwizard.core._import.core.model.Customer
-import dev.hertlein.timesheetwizard.core._import.core.model.Customer.Id
-import dev.hertlein.timesheetwizard.core._import.core.model.Customer.Name
+import dev.hertlein.timesheetwizard.core._import.domain.model.ImportTimesheet
+import dev.hertlein.timesheetwizard.core._import.domain.model.Customer
+import dev.hertlein.timesheetwizard.core._import.domain.model.Customer.Id
+import dev.hertlein.timesheetwizard.core._import.domain.model.Customer.Name
 import org.apache.http.entity.ContentType
 import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.*

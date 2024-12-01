@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report
 
-import dev.hertlein.timesheetwizard.core._import.core.model.ImportTimesheet
+import dev.hertlein.timesheetwizard.core._import.domain.model.ImportTimesheet
 import org.springframework.stereotype.Component
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter

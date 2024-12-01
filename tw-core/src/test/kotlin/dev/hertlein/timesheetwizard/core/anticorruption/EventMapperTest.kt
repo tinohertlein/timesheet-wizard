@@ -1,8 +1,8 @@
 package dev.hertlein.timesheetwizard.core.anticorruption
 
-import dev.hertlein.timesheetwizard.core._import.core.model.Customer
-import dev.hertlein.timesheetwizard.core._import.core.model.ImportTimesheet
-import dev.hertlein.timesheetwizard.core.export.core.model.ExportTimesheet
+import dev.hertlein.timesheetwizard.core._import.domain.model.Customer
+import dev.hertlein.timesheetwizard.core._import.domain.model.ImportTimesheet
+import dev.hertlein.timesheetwizard.core.export.domain.model.ExportTimesheet
 import io.mockk.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName

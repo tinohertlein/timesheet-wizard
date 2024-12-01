@@ -1,7 +1,7 @@
 package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.eventing
 
-import dev.hertlein.timesheetwizard.core._import.core.model.ImportTimesheet
-import dev.hertlein.timesheetwizard.core._import.core.port.EventPublishPort
+import dev.hertlein.timesheetwizard.core._import.domain.model.ImportTimesheet
+import dev.hertlein.timesheetwizard.core._import.domain.port.EventPublishPort
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Component
 

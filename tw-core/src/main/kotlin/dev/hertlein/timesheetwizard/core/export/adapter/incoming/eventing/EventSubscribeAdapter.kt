@@ -1,7 +1,7 @@
 package dev.hertlein.timesheetwizard.core.export.adapter.incoming.eventing
 
-import dev.hertlein.timesheetwizard.core.export.core.model.ExportTimesheet
-import dev.hertlein.timesheetwizard.core.export.core.service.ExportService
+import dev.hertlein.timesheetwizard.core.export.domain.model.ExportTimesheet
+import dev.hertlein.timesheetwizard.core.export.domain.service.ExportService
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
 

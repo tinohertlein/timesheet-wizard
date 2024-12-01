@@ -6,9 +6,9 @@ import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.repor
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.RequestBody
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.RequestBodyFactory
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.ResponseBodyMapper
-import dev.hertlein.timesheetwizard.core._import.core.model.ImportTimesheet
-import dev.hertlein.timesheetwizard.core._import.core.port.TimesheetSourcePort
-import dev.hertlein.timesheetwizard.core._import.core.model.Customer
+import dev.hertlein.timesheetwizard.core._import.domain.model.ImportTimesheet
+import dev.hertlein.timesheetwizard.core._import.domain.port.TimesheetSourcePort
+import dev.hertlein.timesheetwizard.core._import.domain.model.Customer
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
 import java.time.LocalDate

@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.core.util
 
-import dev.hertlein.timesheetwizard.core.export.core.model.ExportTimesheet
+import dev.hertlein.timesheetwizard.core.export.domain.model.ExportTimesheet
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
