@@ -10,19 +10,19 @@ The individual parts of importing timesheets and transforming them to other form
 can be updated or even replaced independently of each other. To achieve this, both modules are realized in the Gradle
 subproject 'tw-core' as separate
 Kotlin packages on the top level that are not allowed to have
-dependencies on each other. Shared code is placed in a package 'shared'. (**-> Quality goals QG3 & QG5**).
+dependencies on each other. Code that is mapping domain classes from module `import` to module `export` is placed in a
+package `anticorruption`. (**-> Quality goals QG3 & QG5**).
 
 This results in three top level packages:
 
 - import
 - export
-- shared
+- anticorruption
 
-where 'import' and 'export' are allowed to access 'shared' but not each other.
-To facilitate communication between 'import' and 'export' Spring Boot application events are used to signal successful
+To facilitate communication between `import` and `export` Spring Boot application events are used to signal successful
 imports of timesheets.
 
-The Timesheet-Wizard is not accessible outside of AWS (**-> Quality goal #QG1**). Neither the S3 buckets containing
+The Timesheet-Wizard is not accessible outside of AWS or Azure (**-> Quality goal #QG1**). Neither the S3 buckets containing
 timesheets are visible from the outside nor the initiation of the workflow can be triggered without proper AWS
 credentials and user access rights.
 
@@ -38,6 +38,7 @@ like [AWS CloudWatch](https://aws.amazon.com/cloudwatch/?nc1=h_ls)
 , [AWS Simple Notification Service](https://aws.amazon.com/sns/?nc1=h_ls), ... are used. They are set up following an
 infrastructure-as-code approach
 using [AWS-SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html)
-and [AWS CloudFormation](https://aws.amazon.com/cloudformation/?nc1=h_ls) in case of AWS or [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/) in case of Azure.
+and [AWS CloudFormation](https://aws.amazon.com/cloudformation/?nc1=h_ls) in case of AWS
+or [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/) in case of Azure.
 All of these are free of charge up to a certain limit - which won't be reached by a tiny application like the
 Timesheet-Wizard (**-> Quality goal #QG2**). 

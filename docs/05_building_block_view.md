@@ -14,7 +14,7 @@ The Timesheet-Wizard consists of the following Gradle subprojects:
 
 ## Level 2
 
-The tw-core Gradle subproject consists of two business modules and a shared module.
+The tw-core Gradle subproject consists of two business modules and an anticorruption module.
 
 ![Static-level-2](assets/static-level-2.drawio.png "Static-level-2")
 
@@ -24,7 +24,8 @@ The tw-core Gradle subproject consists of two business modules and a shared modu
 - **export**: this module is responsible for transforming the model created by `import` by generating an
   XLSX, PDF or CSV file from that data. The XLSX, PDF and CSV files then are stored in some cloud storage, where they
   are available for a manual download.
-- **shared**: this module contains code that is shared by the two business modules, like e.g. the domain model.
+- **anticorruption**: this module contains code that maps domain model classes of module `import` to domain model classes
+  of module `export`.
 
 ## Level 3
 
@@ -36,13 +37,11 @@ visible in the code immediately on the package level.
 
 ## Level 4
 
-- The package 'shared.model' is in the
-  centre of the architecture without any dependencies to other parts of the system.
-- The entities in the domain-logic are
-  used by the application services ImportService & ExportService in packages import.core & export.core that are
-  responsible for orchestrating the workflow.
-- In package import.core & export.core there are also `port`-interfaces, which are implemented in package `adapter` to
-  invert dependencies.
+- The package `domain.model` is in the centre of the architecture without any dependencies to other parts of the system.
+- The entities in the domain-logic are used by the application services ImportService & ExportService in packages
+`import.domain.service` & `export.domain.service` that are responsible for orchestrating the workflow.
+- In package `import.domain.port` & `export.domain.port` there are also `port`-interfaces, which are implemented in package
+  `adapter` to invert dependencies.
 - Only `outgoing`-ports are decoupled via an interface, having one corresponding adapter.
 
 ![Static-level-4](assets/static-level-4.drawio.png "Static-level-4")
