@@ -2,7 +2,7 @@ name: timesheet-wizard
 
 services:
   minio:
-    image: bitnami/minio
+    image: bitnami/minio:2024.12.18
     ports:
       - '9000:9000'
       - '9001:9001'
@@ -14,7 +14,7 @@ services:
       - BITNAMI_DEBUG=true
 
   createbucket:
-    image: minio/mc
+    image: minio/mc:RELEASE.2024-11-21T17-21-54Z
     depends_on:
       - minio
     entrypoint: >
@@ -25,7 +25,7 @@ services:
       exit 0;
       "
   azureit:
-    image: mcr.microsoft.com/azure-storage/azurite
+    image: mcr.microsoft.com/azure-storage/azurite:3.33.0
     ports:
       - '10000:10000'
       - '10001:10001'

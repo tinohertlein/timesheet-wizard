@@ -17,7 +17,7 @@ class TestcontainersConfiguration {
     @Bean(initMethod = "start", destroyMethod = "stop")
     @Profile(TESTCONTAINERS)
     fun azureContainer(): GenericContainer<*> {
-        return GenericContainer(DockerImageName.parse("mcr.microsoft.com/azure-storage/azurite:3.32.0"))
+        return GenericContainer(DockerImageName.parse("mcr.microsoft.com/azure-storage/azurite:3.33.0"))
             .withCommand("azurite-blob", "--blobHost", "0.0.0.0")
             .withExposedPorts(AZURE_CONTAINER_PORT)
     }
