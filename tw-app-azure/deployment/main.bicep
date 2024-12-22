@@ -4,7 +4,7 @@ param name string
 param functionAppName string
 param location string
 
-resource newRG 'Microsoft.Resources/resourceGroups@2024-08-01' = {
+resource newRG 'Microsoft.Resources/resourceGroups@2024-11-01' = {
   name: name
   location: location
 }
