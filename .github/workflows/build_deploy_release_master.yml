@@ -110,8 +110,12 @@ jobs:
           inlineScript: |
             MASTER_KEY=$(az functionapp keys list -g ${{ env.AZURE_RESOURCE_GROUP }} -n ${{ env.AZURE_FUNCTIONAPP_NAME }} | jq -r '.masterKey')
             echo "::add-mask::$MASTER_KEY"
-            RESPONSE_CODE=$(curl --write-out '%{http_code}' --silent --output /dev/null -i -X POST --location "https://${{ env.AZURE_FUNCTIONAPP_NAME }}.azurewebsites.net/api/import?code=$MASTER_KEY" -d '{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}')
-            echo "Response: $RESPONSE_CODE"
+            ACTUAL_RESPONSE_CODE=$(curl --write-out '%{http_code}' --silent --output /dev/null -i -X POST --location "https://${{ env.AZURE_FUNCTIONAPP_NAME }}.azurewebsites.net/api/import?code=$MASTER_KEY" -d '{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}')
+            echo "Actual response status code: $ACTUAL_RESPONSE_CODE"
+            EXPECTED_RESPONSE_CODE="204"
+            if [ "$ACTUAL_RESPONSE_CODE" != "$EXPECTED_RESPONSE_CODE" ]; then 
+              exit 1 
+            fi
 
   deploy-to-aws:
     runs-on: ubuntu-latest
