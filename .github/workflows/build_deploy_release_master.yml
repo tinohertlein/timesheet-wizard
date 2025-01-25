@@ -89,7 +89,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDS }}
 
       - name: Deploy Azure resources
-        uses: azure/bicep-deploy@v1
+        uses: azure/bicep-deploy@v2
         with:
           type: deployment
           operation: create
