@@ -12,7 +12,7 @@ param appServicePlanLocation string
 param functionAppName string
 param functionAppLocation string
 
-resource storageAccount 'Microsoft.Storage/storageAccounts@2024-01-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2024-11-01' = {
     name: storageName
     location: storageLocation
     sku: {
