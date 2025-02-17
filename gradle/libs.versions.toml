@@ -21,7 +21,7 @@ shadow = "8.1.1"
 semver = "0.14.0"
 logstash-encoder = "8.0"
 javaagent = "0.7.0"
-byte-buddy-agent = "1.16.1"
+byte-buddy-agent = "1.17.1"
 
 [libraries]
 lombok = { module = "org.projectlombok:lombok" }
