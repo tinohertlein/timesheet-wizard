@@ -86,8 +86,6 @@ class ArchitectureTest {
 
                     .check(classes)
             }
-
         }
-
     }
 }
