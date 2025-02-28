@@ -2,12 +2,12 @@ package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core.TestApplication
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyIdsLoader
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyId
-import dev.hertlein.timesheetwizard.core._import.domain.model.ImportTimesheet
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyIdsLoader
 import dev.hertlein.timesheetwizard.core._import.domain.model.Customer
 import dev.hertlein.timesheetwizard.core._import.domain.model.Customer.Id
 import dev.hertlein.timesheetwizard.core._import.domain.model.Customer.Name
+import dev.hertlein.timesheetwizard.core._import.domain.model.ImportTimesheet
 import org.apache.http.entity.ContentType
 import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.*
@@ -21,8 +21,8 @@ import org.mockserver.model.HttpResponse
 import org.mockserver.verify.VerificationTimes
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.HttpHeaders
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import java.time.LocalDate
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.hours
@@ -49,7 +49,7 @@ class ClockifyAdapterIT {
     @Autowired
     private lateinit var clockifyImportAdapter: ClockifyAdapter
 
-    @MockBean
+    @MockitoBean
     private lateinit var clockifyIdsLoader: ClockifyIdsLoader
 
     @BeforeAll
