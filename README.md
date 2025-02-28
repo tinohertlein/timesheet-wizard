@@ -1,6 +1,8 @@
 # What is the Timesheet-Wizard?
 
 [![Master branch](https://github.com/tinohertlein/timesheet-wizard/actions/workflows/build_deploy_release_master.yml/badge.svg)](https://github.com/tinohertlein/timesheet-wizard/actions/workflows/build_deploy_release_master.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5013f0858d60a9b7c757/maintainability)](https://codeclimate.com/github/tinohertlein/timesheet-wizard/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/5013f0858d60a9b7c757/test_coverage)](https://codeclimate.com/github/tinohertlein/timesheet-wizard/test_coverage)
 
 The Timesheet-Wizard is a personal pet project to fetch timesheets from [Clockify](https://clockify.me/de/), transform
 them to various formats and export them again into other tools.
