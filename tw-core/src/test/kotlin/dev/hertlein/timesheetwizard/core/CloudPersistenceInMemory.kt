@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core.anticorruption
+package dev.hertlein.timesheetwizard.core
 
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import mu.KotlinLogging
