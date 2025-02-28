@@ -2,6 +2,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
     id("org.jetbrains.kotlin.jvm") apply false
+    jacoco
 }
 
 repositories {
@@ -25,7 +26,16 @@ kotlin {
     }
 }
 
+tasks.jacocoTestReport {
+    reports {
+        csv.required = false
+        xml.required = true
+        html.required = true
+    }
+}
+
 tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
     testLogging.events = setOf(
         PASSED,
         SKIPPED,
