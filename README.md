@@ -11,9 +11,9 @@ As of now, the only target formats that are supported are XLSX, PDF and CSV, res
 following main features of Timesheet-Wizard:
 
 - Fetch timesheets from Clockify
-- Generate & store XLSX files from these timesheets
-- Generate & store PDF files from these timesheets
-- Generate & store CSV files from these timesheets
+- Generate XLSX files from imported timesheets & store them
+- Generate PDF files from imported timesheets & store them
+- Generate CSV files from imported timesheets & store them
 
 ## Motivation
 
