@@ -39,7 +39,7 @@ jobs:
         run: ./gradlew test
 
       - name: Generate test report (tw-core)
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         if: success() || failure()
         with:
           name: generate test report (tw-core)
@@ -47,7 +47,7 @@ jobs:
           reporter: java-junit
 
       - name: Generate test report (tw-app-aws)
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         if: success() || failure()
         with:
           name: generate test report (tw-app-aws)
@@ -55,7 +55,7 @@ jobs:
           reporter: java-junit
 
       - name: Generate test report (tw-app-azure)
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         if: success() || failure()
         with:
           name: generate test report (tw-app-azure)
