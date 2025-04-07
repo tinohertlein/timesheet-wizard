@@ -19,7 +19,7 @@ spring-modulith = "1.3.4"
 spring-thin = "1.0.31.RELEASE"
 shadow = "8.1.1"
 semver = "0.16.0"
-logstash-encoder = "8.0"
+logstash-encoder = "8.1"
 javaagent = "0.8.0"
 byte-buddy-agent = "1.17.5"
 
