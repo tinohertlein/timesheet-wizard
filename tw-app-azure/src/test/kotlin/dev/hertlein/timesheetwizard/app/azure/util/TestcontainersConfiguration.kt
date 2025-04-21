@@ -2,7 +2,6 @@ package dev.hertlein.timesheetwizard.app.azure.util
 
 import com.azure.storage.blob.BlobServiceClientBuilder
 import dev.hertlein.timesheetwizard.core.SpringTestProfiles.TESTCONTAINERS
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Profile
@@ -17,7 +16,7 @@ class TestcontainersConfiguration {
     @Bean(initMethod = "start", destroyMethod = "stop")
     @Profile(TESTCONTAINERS)
     fun azureContainer(): GenericContainer<*> {
-        return GenericContainer(DockerImageName.parse("mcr.microsoft.com/azure-storage/azurite:3.33.0"))
+        return GenericContainer(DockerImageName.parse("mcr.microsoft.com/azure-storage/azurite:3.34.0"))
             .withCommand("azurite-blob", "--blobHost", "0.0.0.0")
             .withExposedPorts(AZURE_CONTAINER_PORT)
     }
@@ -26,8 +25,6 @@ class TestcontainersConfiguration {
     @Profile(TESTCONTAINERS)
     fun blobServiceClientBuilder(
         azureContainer: GenericContainer<*>,
-        @Value("\${timesheet-wizard.azure.blob.container}")
-        container: String
     ): BlobServiceClientBuilder {
         val blobPort = azureContainer.getMappedPort(AZURE_CONTAINER_PORT)
         return BlobServiceClientBuilder()
