@@ -2,6 +2,8 @@ package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.repo
 
 import com.google.common.net.HttpHeaders
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyConfig
+import org.springframework.http.MediaType.APPLICATION_JSON
+import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestClient
 import org.springframework.web.util.UriComponentsBuilder
@@ -23,8 +25,9 @@ internal class ReportClient(
         return restClient
             .post()
             .uri(uri)
+            .contentType(APPLICATION_JSON)
             .body(requestBody)
-            .header(HttpHeaders.ACCEPT, "application/json")
+            .header(HttpHeaders.ACCEPT, APPLICATION_JSON_VALUE)
             .header("X-Api-Key", clockifyConfig.apiKey)
             .retrieve()
             .body(ResponseBody::class.java)
