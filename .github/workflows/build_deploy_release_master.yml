@@ -111,6 +111,15 @@ jobs:
       - name: Build, package, deploy Azure Function
         run: ./gradlew tw-app-azure:build -x test :tw-app-azure:azureFunctionsDeploy
 
+  test-azure:
+    runs-on: ubuntu-24.04
+    needs: deploy-to-azure
+    steps:
+      - name: Login to Azure
+        uses: Azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDS }}
+
       - name: Invoke Azure Function
         uses: azure/cli@v2
         with:
@@ -155,15 +164,26 @@ jobs:
       - name: Deploy AWS stack with SAM
         run: sam deploy --config-file tw-app-aws/deployment/samconfig.toml --parameter-overrides MonitoringRecipient=${{ secrets.MONITORING_RECIPIENT }} ClockifyApiKey=${{ env.TIMESHEET_WIZARD_IMPORT_CLOCKIFY_API_KEY }} ClockifyWorkspaceId=${{ env.TIMESHEET_WIZARD_IMPORT_CLOCKIFY_WORKSPACE_ID }}
 
-      - name: Invoke ImportFunction with SAM
+  test-aws:
+    runs-on: ubuntu-latest
+    needs: deploy-to-aws
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Invoke Lambda
         run: >
           sam remote invoke --stack-name tw TwFunction -e '{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}'
 
   release:
     runs-on: ubuntu-latest
     needs:
-      - deploy-to-aws
-      - deploy-to-azure
+      - test-azure
+      - test-aws
     steps:
       - name: Checkout
         uses: actions/checkout@v4
