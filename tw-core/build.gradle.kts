@@ -9,7 +9,9 @@ plugins {
 
 dependencyManagement {
     imports {
-        mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+        mavenBom(libs.spring.boot.dependencies.get().toString()) {
+            bomProperty("kotlin.version", libs.plugins.kotlinjvm.get().version.toString())
+        }
     }
 }
 

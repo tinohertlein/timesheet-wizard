@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.1.21"
+kotlin = "2.2.0"
 guava = "33.4.8-jre"
 kotlin-logging = "3.0.5"
 jackson-kotlin = "2.19.1"
@@ -38,6 +38,7 @@ jasperreports-pdf = { module = "net.sf.jasperreports:jasperreports-pdf", version
 jasperreports-jdt = { module = "net.sf.jasperreports:jasperreports-jdt", version.ref = "jasper" }
 openpdf = { module = "com.github.librepdf:openpdf", version.ref = "openpdf" }
 spring-starter = { module = "org.springframework.boot:spring-boot-starter" }
+spring-boot-dependencies = { group = "org.springframework.boot", name = "spring-boot-dependencies", version.ref = "spring-boot" }
 spring-modulith = { module = "org.springframework.modulith:spring-modulith-bom", version.ref = "spring-modulith" }
 spring-modulith-starter-core = { module = "org.springframework.modulith:spring-modulith-starter-core" }
 spring-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
@@ -70,7 +71,7 @@ byte-buddy-agent = { module = "net.bytebuddy:byte-buddy-agent", version.ref = "b
 
 [bundles]
 export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt", "openpdf"]
-spring-web = ["spring-starter", "spring-starter-web"]
+spring-web = ["spring-boot-dependencies", "spring-starter", "spring-starter-web"]
 spring-cloud = ["spring-cloud-function-context"]
 spring-cloud-aws = ["spring-cloud-function-adapter-aws", "spring-cloud-aws-starter", "spring-cloud-aws-starter-s3"]
 spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure-starter-storage", "logstash-encoder"]
