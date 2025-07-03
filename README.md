@@ -1,8 +1,6 @@
 # What is the Timesheet-Wizard?
 
 [![Master branch](https://github.com/tinohertlein/timesheet-wizard/actions/workflows/build_deploy_release_master.yml/badge.svg)](https://github.com/tinohertlein/timesheet-wizard/actions/workflows/build_deploy_release_master.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/5013f0858d60a9b7c757/maintainability)](https://codeclimate.com/github/tinohertlein/timesheet-wizard/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/5013f0858d60a9b7c757/test_coverage)](https://codeclimate.com/github/tinohertlein/timesheet-wizard/test_coverage)
 
 The Timesheet-Wizard is a personal pet project to fetch timesheets from [Clockify](https://clockify.me/de/), transform
 them to various formats and export them again into other tools.
@@ -51,6 +49,7 @@ the [doc-folder](docs/README.md).
 - triggered by AWS EventBridge and Azure Function triggers
 
 ![Technical context](docs/assets/readme-context-technical.drawio.png "Technical context")
+*Technical context*
 
 #### The Timesheet-Wizard consists of four Gradle subprojects:
 
@@ -62,10 +61,8 @@ the [doc-folder](docs/README.md).
 - **tw-app-azure**: implements the interfaces defined in `tw-cloud-spi` with Azure specific code and also bundles the
   cloud-agnostic `tw-core` with Azure specific things to an Azure Function.
 
-![Building blocks](docs/assets/readme-static.drawio.png "Building blocks")
-
-The `tw-core` Gradle subproject consists of two independent modules (realized as Kotlin packages) with the following
-responsibilities:
+The `tw-core` Gradle subproject contains two Kotlin packages without any dependencies on each other, having the
+following responsibilities:
 
 **import**
 
@@ -75,7 +72,12 @@ responsibilities:
 **export**
 
 - generating XLSX, PDF & CSV files from the domain model
-- storing the XLSX, PDF & CSV files on AWS S3 or Azure Blob Storage
+- storing the XLSX, PDF & CSV files in the cloud
+
+There is a third package '**anticorruption**', which is building the bridge between the other two packages by observing and sending application events.
+
+![Building blocks](docs/assets/readme-static.drawio.png "Building blocks")
+*Building blocks*
 
 ## Getting started
 
@@ -99,7 +101,7 @@ responsibilities:
 
 - Emulate S3 storage with Minio in [docker-compose.yml](docker-compose.yml)
 - Create & upload configuration files to local S3
-   - Example files are shown [here](config/public/)
+    - Example files are shown [here](config/public/)
 - Replace placeholders
   in [tw-app-aws/requests/public/env.json](tw-app-aws/requests/public/env.json) with your keys
 - Set import params in [tw-app-aws/requests/public/event.json](tw-app-aws/requests/public/event.json)
