@@ -78,7 +78,9 @@ spring-cloud-aws = ["spring-cloud-function-adapter-aws", "spring-cloud-aws-start
 spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure-starter-storage", "logstash-encoder"]
 
 ## testing
-testing = ["mockk", "mockserver-netty", "mockserver-client", "spring-starter-test", "kotlin-junit", "rest-assured", "testcontainers-localstack", "testcontainers-azure", "testcontainers-mockserver"]
+testing = ["mockk", "mockserver-netty", "mockserver-client", "spring-starter-test", "kotlin-junit", "rest-assured", "testcontainers-mockserver"]
+testing-aws = ["testcontainers-localstack"]
+testing-azure = ["testcontainers-azure", ]
 
 [plugins]
 kotlinjvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

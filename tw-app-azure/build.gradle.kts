@@ -36,6 +36,7 @@ dependencies {
 
     testJavaagent(libs.byte.buddy.agent)
     testImplementation(libs.bundles.testing)
+    testImplementation(libs.bundles.testing.azure)
     testImplementation(testFixtures(project(":tw-core")))
 }
 
