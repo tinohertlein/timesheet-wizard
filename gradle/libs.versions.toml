@@ -66,6 +66,7 @@ spring-modulith-starter-test = { module = "org.springframework.modulith:spring-m
 kotlin-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
 rest-assured = { module = "io.rest-assured:rest-assured" }
 testcontainers-localstack = { module = "org.testcontainers:localstack" }
+testcontainers-azure = { module = "org.testcontainers:azure" }
 testcontainers-mockserver = { module = "org.testcontainers:mockserver" }
 byte-buddy-agent = { module = "net.bytebuddy:byte-buddy-agent", version.ref = "byte-buddy-agent" }
 
@@ -77,7 +78,7 @@ spring-cloud-aws = ["spring-cloud-function-adapter-aws", "spring-cloud-aws-start
 spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure-starter-storage", "logstash-encoder"]
 
 ## testing
-testing = ["mockk", "mockserver-netty", "mockserver-client", "spring-starter-test", "kotlin-junit", "rest-assured", "testcontainers-localstack", "testcontainers-mockserver"]
+testing = ["mockk", "mockserver-netty", "mockserver-client", "spring-starter-test", "kotlin-junit", "rest-assured", "testcontainers-localstack", "testcontainers-azure", "testcontainers-mockserver"]
 
 [plugins]
 kotlinjvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
