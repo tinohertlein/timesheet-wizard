@@ -1,3 +1,4 @@
+import com.github.jengelman.gradle.plugins.shadow.transformers.PropertiesFileTransformer
 
 plugins {
     id("buildlogic.kotlin-application-conventions")
@@ -5,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.allopen)
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.shadow)
     alias(libs.plugins.javaagent.test)
 }
 
@@ -44,6 +46,26 @@ tasks.bootJar {
     layered {
         enabled = true
     }
+}
+
+tasks.shadowJar {
+    dependsOn("jar")
+    manifest.inheritFrom(project.tasks.jar.get().manifest)
+    manifest {
+        attributes["Main-Class"] = "dev.hertlein.timesheetwizard.app.azure.TwAwsApplication"
+    }
+    mergeServiceFiles()
+    append("META-INF/spring.handlers")
+    append("META-INF/spring.schemas")
+    append("META-INF/spring.tooling")
+    append("META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports")
+    append("META-INF/spring/org.springframework.boot.actuate.autoconfigure.web.ManagementContextConfiguration.imports")
+
+    transform(PropertiesFileTransformer::class.java) {
+        paths = mutableListOf("META-INF/spring.factories")
+        mergeStrategy.set(PropertiesFileTransformer.MergeStrategy.Append)
+    }
+    archiveFileName.set("timesheet-wizard-aws-shadow.jar")
 }
 
 tasks.assemble {
