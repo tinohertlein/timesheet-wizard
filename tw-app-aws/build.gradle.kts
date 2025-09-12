@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.kotlin.allopen)
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
-    alias(libs.plugins.spring.thin)
     alias(libs.plugins.shadow)
     alias(libs.plugins.javaagent.test)
 }
@@ -39,17 +38,21 @@ tasks.withType<GenerateModuleMetadata> {
 }
 
 tasks.jar {
-    archiveFileName.set("timesheet-wizard-aws.jar")
+    enabled = false
+    archiveClassifier = ""
+
 }
 
-tasks.thinJar {
-    dependsOn("jar")
-    archiveFileName.set("timesheet-wizard-aws-thin.jar")
+tasks.bootJar {
+    archiveFileName.set("tw-app-aws.jar")
+    layered {
+        enabled = true
+    }
 }
 
 tasks.shadowJar {
-    dependsOn("thinJar")
-    manifest.inheritFrom(project.tasks.thinJar.get().manifest)
+    dependsOn("jar")
+    manifest.inheritFrom(project.tasks.jar.get().manifest)
     mergeServiceFiles()
     append("META-INF/spring.handlers")
     append("META-INF/spring.schemas")
