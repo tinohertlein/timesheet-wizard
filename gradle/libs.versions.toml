@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.2.20"
-guava = "33.4.8-jre"
+guava = "33.5.0-jre"
 kotlin-logging = "3.0.5"
 jackson-kotlin = "2.20.0"
 mockk = "1.14.5"
