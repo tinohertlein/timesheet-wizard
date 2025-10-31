@@ -2,7 +2,7 @@
 kotlin = "2.2.20"
 guava = "33.4.8-jre"
 kotlin-logging = "3.0.5"
-jackson-kotlin = "2.20.0"
+jackson-kotlin = "2.20.1"
 mockk = "1.14.5"
 mock-server = "5.15.0"
 opencsv = "5.12.0"
