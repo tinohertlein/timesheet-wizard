@@ -8,7 +8,6 @@ mock-server = "5.15.0"
 opencsv = "5.12.0"
 poi = "5.4.1"
 jasper = "7.0.3"
-openpdf = "2.4.0"
 spring-boot = "3.5.7"
 azure = "1.16.1"
 spring-cloud = "2025.0.0"
@@ -36,7 +35,6 @@ poi-ooxml = { module = "org.apache.poi:poi-ooxml", version.ref = "poi" }
 jasperreports = { module = "net.sf.jasperreports:jasperreports", version.ref = "jasper" }
 jasperreports-pdf = { module = "net.sf.jasperreports:jasperreports-pdf", version.ref = "jasper" }
 jasperreports-jdt = { module = "net.sf.jasperreports:jasperreports-jdt", version.ref = "jasper" }
-openpdf = { module = "com.github.librepdf:openpdf", version.ref = "openpdf" }
 spring-starter = { module = "org.springframework.boot:spring-boot-starter" }
 spring-boot-dependencies = { group = "org.springframework.boot", name = "spring-boot-dependencies", version.ref = "spring-boot" }
 spring-modulith = { module = "org.springframework.modulith:spring-modulith-bom", version.ref = "spring-modulith" }
@@ -71,7 +69,7 @@ testcontainers-mockserver = { module = "org.testcontainers:mockserver" }
 byte-buddy-agent = { module = "net.bytebuddy:byte-buddy-agent", version.ref = "byte-buddy-agent" }
 
 [bundles]
-export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt", "openpdf"]
+export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt"]
 spring-web = ["spring-boot-dependencies", "spring-starter", "spring-starter-web"]
 spring-cloud = ["spring-cloud-function-context"]
 spring-cloud-aws = ["spring-cloud-function-adapter-aws", "spring-cloud-aws-starter", "spring-cloud-aws-starter-s3"]
