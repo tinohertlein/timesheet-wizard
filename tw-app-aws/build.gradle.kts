@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.allopen)
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.spring.thin)
     alias(libs.plugins.shadow)
     alias(libs.plugins.javaagent.test)
 }
@@ -37,23 +38,17 @@ tasks.withType<GenerateModuleMetadata> {
 }
 
 tasks.jar {
-    enabled = false
-    archiveClassifier = ""
+    archiveFileName.set("timesheet-wizard-aws.jar")
 }
 
-tasks.bootJar {
-    archiveFileName.set("tw-app-aws.jar")
-    layered {
-        enabled = true
-    }
+tasks.thinJar {
+    dependsOn("jar")
+    archiveFileName.set("timesheet-wizard-aws-thin.jar")
 }
 
 tasks.shadowJar {
-    dependsOn("jar")
-    manifest.inheritFrom(project.tasks.jar.get().manifest)
-    manifest {
-        attributes["Main-Class"] = "dev.hertlein.timesheetwizard.app.azure.TwAwsApplication"
-    }
+    dependsOn("thinJar")
+    manifest.inheritFrom(project.tasks.thinJar.get().manifest)
     mergeServiceFiles()
     append("META-INF/spring.handlers")
     append("META-INF/spring.schemas")
@@ -63,11 +58,11 @@ tasks.shadowJar {
 
     transform(PropertiesFileTransformer::class.java) {
         paths = mutableListOf("META-INF/spring.factories")
-        mergeStrategy.set(PropertiesFileTransformer.MergeStrategy.Append)
+        mergeStrategy = "append"
     }
     archiveFileName.set("timesheet-wizard-aws-shadow.jar")
 }
 
 tasks.assemble {
-    dependsOn("jar")
+    dependsOn("shadowJar")
 }
