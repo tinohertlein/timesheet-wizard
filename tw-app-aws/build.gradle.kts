@@ -58,7 +58,7 @@ tasks.shadowJar {
 
     transform(PropertiesFileTransformer::class.java) {
         paths = mutableListOf("META-INF/spring.factories")
-        mergeStrategy = "append"
+        mergeStrategy.set(PropertiesFileTransformer.MergeStrategy.Append)
     }
     archiveFileName.set("timesheet-wizard-aws-shadow.jar")
 }

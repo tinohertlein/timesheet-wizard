@@ -16,7 +16,7 @@ spring-cloud-azure = "6.0.0"
 spring-dependency-management = "1.1.7"
 spring-modulith = "1.4.4"
 spring-thin = "1.0.31.RELEASE"
-shadow = "8.1.1"
+shadow = "9.2.2"
 semver = "0.16.1"
 logstash-encoder = "9.0"
 javaagent = "0.10.0"
@@ -87,7 +87,7 @@ kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "ko
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
 spring-thin = { id = "org.springframework.boot.experimental.thin-launcher", version.ref = "spring-thin" }
-shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 semver = { id = "com.github.jmongard.git-semver-plugin", version.ref = "semver" }
 azure = { id = "com.microsoft.azure.azurefunctions", version.ref = "azure" }
 javaagent-test = { id = "com.ryandens.javaagent-test", version.ref = "javaagent" }
