@@ -39,7 +39,7 @@ internal class XlsxV1 : ExportStrategy {
                         fillInContact(exportParams, sheet)
                         fillInDateRange(sheet, timesheet.dateRange)
                         fillInTotalWorkedHours(sheet, timesheet.totalDuration())
-                        fillInEntries(sheet, timesheet.entries)
+                        fillInEntries(sheet, timesheet.entriesGroupedByProjectAndTaskAndTagsAndStartDate())
                         autoSizeColumnWidths(sheet)
                         workbook.write(out)
                     }

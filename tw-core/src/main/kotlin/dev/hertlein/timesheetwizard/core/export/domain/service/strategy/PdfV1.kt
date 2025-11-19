@@ -28,7 +28,7 @@ internal class PdfV1 : ExportStrategy {
     }
 
     @Suppress("ConstructorParameterNaming")
-   internal data  class PdfTimesheetEntry(
+    internal data class PdfTimesheetEntry(
         val date: String, val project: String, val location: String, val activity: String, val working_hours: String
     ) {
 
@@ -80,7 +80,9 @@ internal class PdfV1 : ExportStrategy {
     )
 
     private fun toDataSource(timesheet: ExportTimesheet) =
-        timesheet.entries.sortedWith(entryComparator()).map { PdfTimesheetEntry.of(it) }
+        timesheet.entriesGroupedByProjectAndTaskAndTagsAndStartDate()
+            .sortedWith(entryComparator())
+            .map { PdfTimesheetEntry.of(it) }
 
     private fun entryComparator(): Comparator<ExportTimesheet.Entry> =
         compareBy({ it.dateTimeRange.start }, { it.project.name }, { format(it.tags) }, { it.duration })

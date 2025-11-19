@@ -2,8 +2,10 @@ package dev.hertlein.timesheetwizard.core.export.domain.model
 
 import java.time.LocalDate
 import java.time.OffsetDateTime
+import java.time.temporal.ChronoUnit
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.minutes
 
 internal data class ExportTimesheet(
     val customer: Customer,
@@ -17,6 +19,40 @@ internal data class ExportTimesheet(
         entries
             .map { it.duration }
             .fold(0.hours) { total, current -> total + current }
+
+    fun entriesGroupedByProjectAndTaskAndTagsAndStartDate(): List<Entry> {
+        return entries
+            .groupBy { Grouping.Key(it.project, it.task, it.tags, it.dateTimeRange.start.truncatedTo(ChronoUnit.DAYS)) }
+            .map { grouped ->
+                val sumDuration = grouped.value.sumOf { it.duration.inWholeMinutes }
+                Grouping(grouped.key, Grouping.Value(sumDuration.minutes))
+            }
+            .map {
+                Entry(
+                    it.key.project,
+                    it.key.task,
+                    it.key.tags,
+                    Entry.DateTimeRange(it.key.date, it.key.date),
+                    it.value.workDuration
+                )
+            }
+    }
+
+    private class Grouping(
+        val key: Key,
+        val value: Value
+    ) {
+        data class Key(
+            val project: Entry.Project,
+            val task: Entry.Task,
+            val tags: List<Entry.Tag>,
+            val date: OffsetDateTime
+        )
+
+        data class Value(
+            val workDuration: Duration
+        )
+    }
 
     internal data class Customer(val id: String, val name: String)
 
