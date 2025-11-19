@@ -74,5 +74,4 @@ class XlsxV2Test {
         private fun cellValue(formatter: DataFormatter, sheet: XSSFSheet, rowIndex: Int, columnIndex: Int): String =
             formatter.formatCellValue(sheet.getRow(rowIndex).getCell(columnIndex))
     }
-
 }

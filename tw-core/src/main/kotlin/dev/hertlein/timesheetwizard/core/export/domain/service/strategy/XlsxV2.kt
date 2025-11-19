@@ -8,11 +8,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.springframework.stereotype.Component
 import java.io.ByteArrayOutputStream
-import java.time.LocalDate
-import java.time.OffsetDateTime
 import java.util.*
 import kotlin.time.Duration
-import kotlin.time.Duration.Companion.minutes
 
 private val cellCopyPolicy = CellCopyPolicy.Builder().cellValue(false).build()
 
@@ -25,35 +22,7 @@ internal class XlsxV2 : ExportStrategy {
         private fun format(task: ExportTimesheet.Entry.Task) = task.name
         private fun format(duration: Duration): String =
             duration.toComponents { hours, minutes, _, _ -> String.format(locale, "%02d:%02d", hours, minutes) }
-
     }
-
-   internal data  class XlsxEntryKey(
-        val project: ExportTimesheet.Entry.Project,
-        val description: ExportTimesheet.Entry.Task,
-        val date: LocalDate
-    ) {
-        companion object {
-            fun of(
-                project: ExportTimesheet.Entry.Project,
-                task: ExportTimesheet.Entry.Task,
-                startTime: OffsetDateTime
-            ) = XlsxEntryKey(
-                project,
-                task,
-                startTime.toLocalDate()
-            )
-        }
-    }
-
-   internal data  class XlsxEntryValue(
-        val workDuration: Duration
-    )
-
-   internal data  class XlsxEntry(
-       val key: XlsxEntryKey,
-       val value: XlsxEntryValue
-    )
 
     override fun type(): TimesheetDocument.Type {
         return TimesheetDocument.Type.XLSX_V2
@@ -67,7 +36,7 @@ internal class XlsxV2 : ExportStrategy {
                 XSSFWorkbook(template).use { workbook ->
                     outputStream.use { out ->
                         val sheet = workbook.getSheetAt(0)
-                        fillInEntries(sheet, aggregate(timesheet.entries))
+                        fillInEntries(sheet, timesheet.entriesGroupedByProjectAndTaskAndTagsAndStartDate())
                         autoSizeColumnWidths(sheet)
                         workbook.write(out)
                     }
@@ -82,18 +51,7 @@ internal class XlsxV2 : ExportStrategy {
         )
     }
 
-    private fun aggregate(entries: List<ExportTimesheet.Entry>): List<XlsxEntry> {
-        return entries
-            .groupBy { XlsxEntryKey.of(it.project, it.task, it.dateTimeRange.start) }
-            .map { groupedEntry ->
-                val workDuration = groupedEntry.value.sumOf { it.duration.inWholeMinutes }
-                val value = XlsxEntryValue(workDuration.minutes)
-                XlsxEntry(groupedEntry.key, value)
-            }
-            .sortedWith(entryComparator())
-    }
-
-    private fun fillInEntries(sheet: XSSFSheet, entries: List<XlsxEntry>) {
+    private fun fillInEntries(sheet: XSSFSheet, entries: List<ExportTimesheet.Entry>) {
         val rowOffset = 1
         val columnOffset = 0
         val referenceRow = sheet.getRow(rowOffset)
@@ -103,9 +61,9 @@ internal class XlsxV2 : ExportStrategy {
             .forEachIndexed { index, entry ->
                 (if (index == 0) referenceRow else createEntryRow(sheet, index + rowOffset, referenceRow))
                     .run {
-                        getCell(columnOffset + 0).setCellValue(entry.key.date)
-                        getCell(columnOffset + 1).setCellValue(format(entry.key.description))
-                        getCell(columnOffset + 2).setCellValue(format(entry.value.workDuration))
+                        getCell(columnOffset + 0).setCellValue(entry.dateTimeRange.start.toLocalDate())
+                        getCell(columnOffset + 1).setCellValue(format(entry.task))
+                        getCell(columnOffset + 2).setCellValue(format(entry.duration))
                     }
             }
     }
@@ -115,12 +73,12 @@ internal class XlsxV2 : ExportStrategy {
             .createRow(rowNumber)
             .also { it.copyRowFrom(referenceRow, cellCopyPolicy) }
 
-    private fun entryComparator(): Comparator<XlsxEntry> =
+    private fun entryComparator(): Comparator<ExportTimesheet.Entry> =
         compareBy(
-            { it.key.date },
-            { it.key.project.name },
-            { it.key.description.name },
-            { it.value.workDuration })
+            { it.dateTimeRange.start },
+            { it.project.name },
+            { it.task.name },
+            { it.duration })
 
     private fun autoSizeColumnWidths(sheet: XSSFSheet) {
         for (columnIndex in 0..2) {
