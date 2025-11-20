@@ -33,7 +33,7 @@ internal data class ExportTimesheet(
                     it.key.task,
                     it.key.tags,
                     Entry.DateTimeRange(it.key.date, it.key.date),
-                    it.value.workDuration
+                    it.value.duration
                 )
             }
     }
@@ -50,7 +50,7 @@ internal data class ExportTimesheet(
         )
 
         data class Value(
-            val workDuration: Duration
+            val duration: Duration
         )
     }
 
