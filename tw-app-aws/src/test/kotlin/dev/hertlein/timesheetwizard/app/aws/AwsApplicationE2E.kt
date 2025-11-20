@@ -20,7 +20,7 @@ import software.amazon.awssdk.services.s3.S3Client
 class AwsApplicationE2E : AbstractApplicationE2E() {
 
     @Autowired
-    private lateinit var lambdaAdapter: LambdaAdapter
+    private lateinit var awsLambdaAdapter: AwsLambdaAdapter
 
     @Autowired
     private lateinit var s3Client: S3Client
@@ -43,6 +43,6 @@ class AwsApplicationE2E : AbstractApplicationE2E() {
     }
 
     private fun run() {
-        lambdaAdapter.accept("""{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}""")
+        awsLambdaAdapter.accept("""{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}""")
     }
 }

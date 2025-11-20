@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 import java.util.function.Consumer
 
 @Component
-class LambdaAdapter(
+class AwsLambdaAdapter(
     private val objectMapper: ObjectMapper,
     private val importService: ImportService
 ) : Consumer<String> {

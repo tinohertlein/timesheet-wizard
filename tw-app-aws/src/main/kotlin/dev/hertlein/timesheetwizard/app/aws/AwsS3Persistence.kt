@@ -25,14 +25,16 @@ class CloudPersistenceS3(
     override fun root(): String = bucket
 
     override fun download(key: String): ByteArray {
-        val request = GetObjectRequest
-            .builder()
-            .bucket(bucket)
-            .key(key)
-            .build()
-        return s3Client.getObject(request).readAllBytes().also {
-            logger.info { "Downloaded content from ${location(key)} " }
-        }
+        return s3Client.getObject(
+            GetObjectRequest
+                .builder()
+                .bucket(bucket)
+                .key(key)
+                .build()
+        ).readAllBytes()
+            .also {
+                logger.info { "Downloaded content from ${location(key)} " }
+            }
     }
 
     override fun upload(key: String, content: ByteArray) {
