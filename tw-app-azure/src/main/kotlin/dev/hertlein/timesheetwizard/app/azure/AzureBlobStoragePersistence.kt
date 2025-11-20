@@ -5,11 +5,11 @@ import com.azure.storage.blob.BlobContainerClient
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import mu.KotlinLogging
 import org.springframework.context.annotation.Primary
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Repository
 
 private val logger = KotlinLogging.logger {}
 
-@Component
+@Repository
 @Primary
 class AzureBlobStoragePersistence(
     private val client: BlobContainerClient

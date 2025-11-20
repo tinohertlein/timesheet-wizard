@@ -4,7 +4,7 @@ import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Primary
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Repository
 import software.amazon.awssdk.core.sync.RequestBody
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.GetObjectRequest
@@ -12,7 +12,7 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest
 
 private val logger = KotlinLogging.logger {}
 
-@Component
+@Repository
 @Primary
 class CloudPersistenceS3(
     private val s3Client: S3Client,
