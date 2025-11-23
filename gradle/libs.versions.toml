@@ -14,13 +14,15 @@ spring-cloud = "2025.0.0"
 spring-cloud-aws = "3.4.1"
 spring-cloud-azure = "6.0.0"
 spring-dependency-management = "1.1.7"
-spring-modulith = "1.4.4"
+spring-modulith = "2.0.0"
 spring-thin = "1.0.31.RELEASE"
 shadow = "9.2.2"
 semver = "0.16.1"
 logstash-encoder = "9.0"
 javaagent = "0.10.0"
 byte-buddy-agent = "1.18.1"
+rest-assured = "5.5.6"
+testcontainers = "1.21.3"
 
 [libraries]
 lombok = { module = "org.projectlombok:lombok" }
@@ -62,10 +64,10 @@ mockserver-client = { module = "org.mock-server:mockserver-client-java", version
 spring-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-modulith-starter-test = { module = "org.springframework.modulith:spring-modulith-starter-test" }
 kotlin-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
-rest-assured = { module = "io.rest-assured:rest-assured" }
-testcontainers-localstack = { module = "org.testcontainers:localstack" }
-testcontainers-azure = { module = "org.testcontainers:azure" }
-testcontainers-mockserver = { module = "org.testcontainers:mockserver" }
+rest-assured = { module = "io.rest-assured:rest-assured", version.ref = "rest-assured" }
+testcontainers-localstack = { module = "org.testcontainers:localstack", version.ref = "testcontainers" }
+testcontainers-azure = { module = "org.testcontainers:azure", version.ref = "testcontainers" }
+testcontainers-mockserver = { module = "org.testcontainers:mockserver", version.ref = "testcontainers" }
 byte-buddy-agent = { module = "net.bytebuddy:byte-buddy-agent", version.ref = "byte-buddy-agent" }
 
 [bundles]
