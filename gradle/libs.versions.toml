@@ -42,6 +42,8 @@ spring-boot-dependencies = { group = "org.springframework.boot", name = "spring-
 spring-modulith = { module = "org.springframework.modulith:spring-modulith-bom", version.ref = "spring-modulith" }
 spring-modulith-starter-core = { module = "org.springframework.modulith:spring-modulith-starter-core" }
 spring-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-starter-cache = { module = "org.springframework.boot:spring-boot-starter-cache" }
+spring-jackson2 = { module = "org.springframework.boot:spring-boot-jackson2" }
 spring-cloud = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }
 spring-cloud-function-context = { module = "org.springframework.cloud:spring-cloud-function-context" }
 
@@ -72,7 +74,7 @@ byte-buddy-agent = { module = "net.bytebuddy:byte-buddy-agent", version.ref = "b
 
 [bundles]
 export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt"]
-spring-web = ["spring-boot-dependencies", "spring-starter", "spring-starter-web"]
+spring-web = ["spring-boot-dependencies", "spring-starter", "spring-starter-web", "spring-starter-cache", "spring-jackson2"]
 spring-cloud = ["spring-cloud-function-context"]
 spring-cloud-aws = ["spring-cloud-function-adapter-aws", "spring-cloud-aws-starter", "spring-cloud-aws-starter-s3"]
 spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure-starter-storage", "logstash-encoder"]
