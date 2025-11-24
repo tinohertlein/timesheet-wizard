@@ -1,9 +1,11 @@
 package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
-import dev.hertlein.timesheetwizard.core.TestApplication
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyId
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyIdsLoader
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.ReportClient
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.RequestBodyFactory
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.ResponseBodyMapper
 import dev.hertlein.timesheetwizard.core._import.domain.model.Customer
 import dev.hertlein.timesheetwizard.core._import.domain.model.Customer.Id
 import dev.hertlein.timesheetwizard.core._import.domain.model.Customer.Name
@@ -20,7 +22,7 @@ import org.mockserver.model.HttpRequest
 import org.mockserver.model.HttpResponse
 import org.mockserver.verify.VerificationTimes
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.autoconfigure.web.client.RestClientTest
 import org.springframework.http.HttpHeaders
 import org.springframework.test.context.bean.override.mockito.MockitoBean
 import java.time.LocalDate
@@ -34,8 +36,8 @@ private const val A_WORKSPACE_ID = "a-workspace-id"
 
 @DisplayName("ClockifyAdapter")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@SpringBootTest(
-    classes = [TestApplication::class],
+@RestClientTest(
+    components = [ClockifyAdapter::class, ReportClient::class, RequestBodyFactory::class, ResponseBodyMapper::class],
     properties = [
         "timesheet-wizard.import.clockify.reports-url=$MOCK_SERVER_HOST:$MOCK_SERVER_PORT",
         "timesheet-wizard.import.clockify.api-key=$AN_API_KEY",
