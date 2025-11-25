@@ -22,7 +22,8 @@ import org.mockserver.model.HttpRequest
 import org.mockserver.model.HttpResponse
 import org.mockserver.verify.VerificationTimes
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.client.RestClientTest
+import org.springframework.boot.cache.test.autoconfigure.AutoConfigureCache
+import org.springframework.boot.restclient.test.autoconfigure.RestClientTest
 import org.springframework.http.HttpHeaders
 import org.springframework.test.context.bean.override.mockito.MockitoBean
 import java.time.LocalDate
@@ -36,6 +37,7 @@ private const val A_WORKSPACE_ID = "a-workspace-id"
 
 @DisplayName("ClockifyAdapter")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@AutoConfigureCache
 @RestClientTest(
     components = [ClockifyAdapter::class, ReportClient::class, RequestBodyFactory::class, ResponseBodyMapper::class],
     properties = [
