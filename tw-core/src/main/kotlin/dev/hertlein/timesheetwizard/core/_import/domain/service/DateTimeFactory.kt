@@ -1,7 +1,12 @@
 package dev.hertlein.timesheetwizard.core._import.domain.service
 
 import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType
-import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType.*
+import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType.CUSTOM_MONTH
+import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType.CUSTOM_YEAR
+import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType.LAST_MONTH
+import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType.LAST_YEAR
+import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType.THIS_MONTH
+import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType.THIS_YEAR
 import org.springframework.stereotype.Component
 import java.time.Clock
 import java.time.LocalDate

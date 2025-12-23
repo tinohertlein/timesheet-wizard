@@ -14,7 +14,7 @@ private val logger = KotlinLogging.logger {}
 
 @Repository
 @Primary
-class CloudPersistenceS3(
+class AwsS3Persistence(
     private val s3Client: S3Client,
     @Value("\${timesheet-wizard.aws.s3.bucket}")
     private val bucket: String,

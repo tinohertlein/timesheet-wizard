@@ -1,7 +1,11 @@
 package dev.hertlein.timesheetwizard.app.azure
 
 import com.azure.storage.blob.BlobServiceClient
-import com.microsoft.azure.functions.*
+import com.microsoft.azure.functions.HttpMethod
+import com.microsoft.azure.functions.HttpRequestMessage
+import com.microsoft.azure.functions.HttpResponseMessage
+import com.microsoft.azure.functions.HttpStatus
+import com.microsoft.azure.functions.HttpStatusType
 import dev.hertlein.timesheetwizard.app.azure.util.AzureBlobOperations
 import dev.hertlein.timesheetwizard.app.azure.util.TestcontainersConfiguration
 import dev.hertlein.timesheetwizard.core.AbstractApplicationE2E
@@ -14,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
 import java.net.URI
-import java.util.*
+import java.util.Optional
 
 @DisplayName("Azure Application")
 @SpringBootTest

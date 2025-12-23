@@ -10,7 +10,11 @@ import org.junit.jupiter.api.io.TempDir
 import org.mockserver.integration.ClientAndServer
 import org.mockserver.matchers.MatchType
 import org.mockserver.matchers.Times
-import org.mockserver.model.*
+import org.mockserver.model.Header
+import org.mockserver.model.Headers
+import org.mockserver.model.HttpRequest
+import org.mockserver.model.HttpResponse
+import org.mockserver.model.JsonBody
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import java.io.File

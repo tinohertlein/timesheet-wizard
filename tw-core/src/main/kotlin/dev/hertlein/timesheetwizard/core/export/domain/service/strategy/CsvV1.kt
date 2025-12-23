@@ -13,7 +13,7 @@ import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
-import java.util.*
+import java.util.Locale
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
 
@@ -41,7 +41,7 @@ internal class CsvV1 : ExportStrategy {
             duration.toComponents { hours, minutes, _, _ -> String.format(locale, "%02d:%02d", hours, minutes) }
     }
 
-   internal data  class CsvEntryKey(
+    internal data class CsvEntryKey(
         val login: String,
         val project: ExportTimesheet.Entry.Project,
         val category: String,
@@ -63,16 +63,16 @@ internal class CsvV1 : ExportStrategy {
         }
     }
 
-   internal data  class CsvEntryValue(
+    internal data class CsvEntryValue(
         val startTime: OffsetDateTime,
         val endTime: OffsetDateTime,
         val workDuration: Duration,
         val breakDuration: Duration
     )
 
-   internal data  class CsvEntry(
-       val key: CsvEntryKey,
-       val value: CsvEntryValue
+    internal data class CsvEntry(
+        val key: CsvEntryKey,
+        val value: CsvEntryValue
     )
 
     private val headings = arrayOf(

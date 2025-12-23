@@ -3,7 +3,7 @@ package dev.hertlein.timesheetwizard.core.export.adapter.outgoing.persistence
 import dev.hertlein.timesheetwizard.core.export.domain.model.TimesheetDocument
 
 
-internal data  class DocumentMetaData(val version: String, val suffix: String) {
+internal data class DocumentMetaData(val version: String, val suffix: String) {
 
     companion object {
 

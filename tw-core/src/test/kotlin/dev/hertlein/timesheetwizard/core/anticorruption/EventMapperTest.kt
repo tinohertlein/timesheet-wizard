@@ -3,7 +3,12 @@ package dev.hertlein.timesheetwizard.core.anticorruption
 import dev.hertlein.timesheetwizard.core._import.domain.model.Customer
 import dev.hertlein.timesheetwizard.core._import.domain.model.ImportTimesheet
 import dev.hertlein.timesheetwizard.core.export.domain.model.ExportTimesheet
-import io.mockk.*
+import io.mockk.Runs
+import io.mockk.confirmVerified
+import io.mockk.every
+import io.mockk.just
+import io.mockk.mockk
+import io.mockk.verify
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -21,7 +26,7 @@ class EventMapperTest {
     private val aStart: OffsetDateTime = OffsetDateTime.of(2022, 1, 1, 8, 0, 0, 0, aZoneOffset)
     private val anEnd: OffsetDateTime = aStart.plusHours(1)
 
-    private val aDateRange = aStart.toLocalDate()  ..anEnd.toLocalDate()
+    private val aDateRange = aStart.toLocalDate()..anEnd.toLocalDate()
 
     private val aCustomerId = "a-customer-id"
     private val aCustomerName = "a-customer-name"

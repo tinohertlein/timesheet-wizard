@@ -63,10 +63,12 @@ internal class ExportTimesheetTest {
             val actual = aTimesheet(morningWork, afternoonWork).entriesGroupedByProjectAndTaskAndTagsAndStartDate()
 
             assertThat(actual).isEqualTo(
-                    listOf(anEntry.copy(
+                listOf(
+                    anEntry.copy(
                         duration = (morningWorkDurationHours + afterNoonWorkDurationHours).toDuration(DurationUnit.HOURS),
                         dateTimeRange = DateTimeRange(morningWorkStart.truncatedTo(ChronoUnit.DAYS), morningWorkStart.truncatedTo(ChronoUnit.DAYS))
-                    ))
+                    )
+                )
             )
         }
     }
