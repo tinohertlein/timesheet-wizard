@@ -21,6 +21,8 @@ semver = "0.17.1"
 logstash-encoder = "9.0"
 javaagent = "0.10.0"
 byte-buddy-agent = "1.18.3"
+rest-assured = "6.0.0"
+testcontainers = "1.21.4"
 
 [libraries]
 lombok = { module = "org.projectlombok:lombok" }
@@ -35,13 +37,13 @@ poi-ooxml = { module = "org.apache.poi:poi-ooxml", version.ref = "poi" }
 jasperreports = { module = "net.sf.jasperreports:jasperreports", version.ref = "jasper" }
 jasperreports-pdf = { module = "net.sf.jasperreports:jasperreports-pdf", version.ref = "jasper" }
 jasperreports-jdt = { module = "net.sf.jasperreports:jasperreports-jdt", version.ref = "jasper" }
-spring-starter = { module = "org.springframework.boot:spring-boot-starter" }
 spring-boot-dependencies = { group = "org.springframework.boot", name = "spring-boot-dependencies", version.ref = "spring-boot" }
 spring-modulith = { module = "org.springframework.modulith:spring-modulith-bom", version.ref = "spring-modulith" }
-spring-modulith-starter-core = { module = "org.springframework.modulith:spring-modulith-starter-core" }
-spring-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 spring-cloud = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }
 spring-cloud-function-context = { module = "org.springframework.cloud:spring-cloud-function-context" }
+spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-modulith-starter-core = { module = "org.springframework.modulith:spring-modulith-starter-core" }
 
 ## AWS
 spring-cloud-aws = { module = "io.awspring.cloud:spring-cloud-aws-dependencies", version.ref = "spring-cloud-aws" }
@@ -62,15 +64,15 @@ mockserver-client = { module = "org.mock-server:mockserver-client-java", version
 spring-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-modulith-starter-test = { module = "org.springframework.modulith:spring-modulith-starter-test" }
 kotlin-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
-rest-assured = { module = "io.rest-assured:rest-assured" }
-testcontainers-localstack = { module = "org.testcontainers:localstack" }
-testcontainers-azure = { module = "org.testcontainers:azure" }
-testcontainers-mockserver = { module = "org.testcontainers:mockserver" }
+rest-assured = { module = "io.rest-assured:rest-assured", version.ref = "rest-assured" }
+testcontainers-localstack = { module = "org.testcontainers:localstack", version.ref = "testcontainers" }
+testcontainers-azure = { module = "org.testcontainers:azure", version.ref = "testcontainers" }
+testcontainers-mockserver = { module = "org.testcontainers:mockserver", version.ref = "testcontainers" }
 byte-buddy-agent = { module = "net.bytebuddy:byte-buddy-agent", version.ref = "byte-buddy-agent" }
 
 [bundles]
 export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt"]
-spring-web = ["spring-boot-dependencies", "spring-starter", "spring-starter-web"]
+spring-base = ["spring-boot-dependencies", "spring-boot-starter", "spring-boot-starter-web"]
 spring-cloud = ["spring-cloud-function-context"]
 spring-cloud-aws = ["spring-cloud-function-adapter-aws", "spring-cloud-aws-starter", "spring-cloud-aws-starter-s3"]
 spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure-starter-storage", "logstash-encoder"]

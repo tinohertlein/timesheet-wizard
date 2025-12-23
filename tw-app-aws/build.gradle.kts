@@ -17,7 +17,7 @@ dependencies {
 
     implementation(project(":tw-spi-cloud"))
     implementation(project(":tw-core"))
-    implementation(libs.bundles.spring.web)
+    implementation(libs.bundles.spring.base)
     implementation(platform(libs.spring.cloud))
     implementation(libs.bundles.spring.cloud)
     implementation(platform(libs.spring.cloud.aws))

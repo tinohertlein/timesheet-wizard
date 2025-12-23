@@ -20,7 +20,7 @@ dependencies {
     compileOnly(libs.lombok)
 
     implementation(project(":tw-spi-cloud"))
-    implementation(libs.bundles.spring.web)
+    implementation(libs.bundles.spring.base)
     implementation(platform(libs.spring.modulith))
     implementation(libs.spring.modulith.starter.core)
     implementation(libs.kotlin.reflect)
