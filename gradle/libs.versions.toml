@@ -1,6 +1,7 @@
 [versions]
 kotlin = "2.3.0"
 guava = "33.5.0-jre"
+lombok = "1.18.42"
 kotlin-logging = "3.0.5"
 jackson-kotlin = "2.20.1"
 mockk = "1.14.7"
@@ -22,10 +23,11 @@ logstash-encoder = "9.0"
 javaagent = "0.10.0"
 byte-buddy-agent = "1.18.3"
 rest-assured = "6.0.0"
+assertj = "3.27.6"
 testcontainers = "1.21.4"
 
 [libraries]
-lombok = { module = "org.projectlombok:lombok" }
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-logging = { module = "io.github.microutils:kotlin-logging-jvm", version.ref = "kotlin-logging" }
@@ -62,6 +64,7 @@ spring-cloud-azure-starter-storage = { module = "com.azure.spring:spring-cloud-a
 logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-encoder" }
 
 ## testing
+assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockserver-netty = { module = "org.mock-server:mockserver-netty", version.ref = "mock-server" }
 mockserver-client = { module = "org.mock-server:mockserver-client-java", version.ref = "mock-server" }
@@ -82,7 +85,7 @@ spring-cloud-aws = ["spring-cloud-function-adapter-aws", "spring-cloud-aws-start
 spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure-starter-storage", "logstash-encoder"]
 
 ## testing
-testing = ["mockk", "mockserver-netty", "mockserver-client", "kotlin-junit", "rest-assured", "testcontainers-mockserver"]
+testing = ["assertj", "mockk", "mockserver-netty", "mockserver-client", "kotlin-junit", "rest-assured", "testcontainers-mockserver"]
 testing-aws = ["testcontainers-localstack"]
 testing-azure = ["testcontainers-azure", ]
 
