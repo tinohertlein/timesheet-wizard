@@ -29,6 +29,7 @@ dependencies {
 
     testJavaagent(libs.byte.buddy.agent)
     testImplementation(libs.bundles.testing)
+    testImplementation(libs.spring.starter.test)
     testImplementation(libs.bundles.testing.aws)
     testImplementation(testFixtures(project(":tw-core")))
 }

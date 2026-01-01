@@ -31,8 +31,10 @@ dependencies {
 
     testJavaagent(libs.byte.buddy.agent)
     testImplementation(libs.bundles.testing)
+    testImplementation(libs.spring.starter.test)
     testImplementation(libs.spring.modulith.starter.test)
     testFixturesApi(libs.bundles.testing)
+    testFixturesApi(libs.spring.starter.test)
 }
 
 tasks.compileJava {
