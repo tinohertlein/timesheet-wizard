@@ -1,6 +1,5 @@
 package dev.hertlein.timesheetwizard.app.azure
 
-import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportService
 import dev.hertlein.timesheetwizard.core.anticorruption.Core
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties
@@ -12,9 +11,7 @@ import org.springframework.context.annotation.Bean
 class TwAzureApplication {
 
     @Bean
-    fun importService(repository: AzureBlobStorageRepository, clockifyConfig: AzureClockifyConfig): ImportService {
-        return Core.bootstrap(repository, clockifyConfig)
-    }
+    fun eventBus(repository: AzureBlobStorageRepository, clockifyConfig: AzureClockifyConfig) = Core.bootstrap(repository, clockifyConfig)
 }
 
 fun main(args: Array<String>) {

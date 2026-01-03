@@ -4,18 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.google.common.eventbus.EventBus
-import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.ClockifyAdapter
-import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.config.ClockifyIdsLoader
-import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.HttpReportClient
-import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.RequestBodyFactory
-import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.ResponseBodyMapper
-import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.eventing.EventPublishAdapter
-import dev.hertlein.timesheetwizard.core.importing.domain.service.CustomerFactory
-import dev.hertlein.timesheetwizard.core.importing.domain.service.DateTimeFactory
-import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportConfigLoader
-import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportService
-import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportServiceImpl
-import dev.hertlein.timesheetwizard.core.exporting.adapter.incoming.eventing.EventSubscribeAdapter
+import dev.hertlein.timesheetwizard.core.exporting.adapter.incoming.eventing.ExportingStartedEventAdapter
 import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.persistence.CloudPersistenceAdapter
 import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.persistence.FilenameFactory
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.ExportService
@@ -24,13 +13,24 @@ import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.CsvV1
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.PdfV1
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.XlsxV1
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.XlsxV2
+import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.ImportingStartedEventAdapter
+import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.ClockifyAdapter
+import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.config.ClockifyIdsLoader
+import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.HttpReportClient
+import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.RequestBodyFactory
+import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.ResponseBodyMapper
+import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.eventing.ImportingFinishedEventAdapter
+import dev.hertlein.timesheetwizard.core.importing.domain.service.CustomerFactory
+import dev.hertlein.timesheetwizard.core.importing.domain.service.DateTimeFactory
+import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportConfigLoader
+import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportService
 import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
 import dev.hertlein.timesheetwizard.spi.cloud.Repository
 import java.net.http.HttpClient
 
 object Core {
 
-    fun bootstrap(repository: Repository, clockifyConfig: ClockifyConfig): ImportService {
+    fun bootstrap(repository: Repository, clockifyConfig: ClockifyConfig): EventBus {
         val objectMapper = ObjectMapper().apply {
             registerKotlinModule()
             configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -41,9 +41,10 @@ object Core {
         val exportService = bootstrapExportService(repository, objectMapper)
 
         EventMapper(eventBus)
-        EventSubscribeAdapter(eventBus, exportService)
+        ImportingStartedEventAdapter(eventBus, importService)
+        ExportingStartedEventAdapter(eventBus, exportService)
 
-        return importService
+        return eventBus
     }
 
     private fun bootstrapImportService(
@@ -57,8 +58,8 @@ object Core {
         val clockifyAdapter = ClockifyAdapter(clockifyIdsLoader, httpReportClient, RequestBodyFactory(), ResponseBodyMapper())
         val importConfigLoader = ImportConfigLoader(repository, objectMapper)
         val customerFactory = CustomerFactory(importConfigLoader)
-        val eventPublishPort = EventPublishAdapter(eventBus)
-        val importService = ImportServiceImpl(customerFactory, DateTimeFactory(), clockifyAdapter, eventPublishPort)
+        val eventPublishPort = ImportingFinishedEventAdapter(eventBus)
+        val importService = ImportService(customerFactory, DateTimeFactory(), clockifyAdapter, eventPublishPort)
         return importService
     }
 

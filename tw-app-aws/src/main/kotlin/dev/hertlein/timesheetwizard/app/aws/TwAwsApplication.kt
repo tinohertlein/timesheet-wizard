@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.app.aws
 
-import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportService
+import com.google.common.eventbus.EventBus
 import dev.hertlein.timesheetwizard.core.anticorruption.Core
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties
@@ -12,9 +12,7 @@ import org.springframework.context.annotation.Bean
 class TwAwsApplication {
 
     @Bean
-    fun importService(repository: AwsS3Repository, clockifyConfig: AwsClockifyConfig): ImportService {
-        return Core.bootstrap(repository, clockifyConfig)
-    }
+    fun eventBus(repository: AwsS3Repository, clockifyConfig: AwsClockifyConfig) = Core.bootstrap(repository, clockifyConfig)
 }
 
 

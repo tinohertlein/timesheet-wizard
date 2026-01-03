@@ -1,6 +1,7 @@
 package dev.hertlein.timesheetwizard.app.azure
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.google.common.eventbus.EventBus
 import com.microsoft.azure.functions.ExecutionContext
 import com.microsoft.azure.functions.HttpMethod
 import com.microsoft.azure.functions.HttpRequestMessage
@@ -9,7 +10,6 @@ import com.microsoft.azure.functions.annotation.FunctionName
 import com.microsoft.azure.functions.annotation.HttpTrigger
 import com.microsoft.azure.functions.annotation.TimerTrigger
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
-import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportService
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
 import java.util.Optional
@@ -19,7 +19,7 @@ private val logger = KotlinLogging.logger {}
 @Component
 class AzureFunctionAdapter(
     private val objectMapper: ObjectMapper,
-    private val importService: ImportService
+    private val eventBus: EventBus,
 ) {
 
     @FunctionName("import")
@@ -51,7 +51,7 @@ class AzureFunctionAdapter(
 
     private fun doImport(body: Optional<String>) {
         if (body.isPresent) {
-            importService.import(toInputParams(body.get()))
+            eventBus.post(toInputParams(body.get()))
         } else {
             logger.warn { "No input received!" }
         }

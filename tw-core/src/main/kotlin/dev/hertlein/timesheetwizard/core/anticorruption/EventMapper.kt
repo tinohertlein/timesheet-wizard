@@ -2,9 +2,9 @@ package dev.hertlein.timesheetwizard.core.anticorruption
 
 import com.google.common.eventbus.EventBus
 import com.google.common.eventbus.Subscribe
+import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportTimesheet
-import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
 
 internal class EventMapper(private val eventBus: EventBus) {
 

@@ -1,8 +1,8 @@
 package dev.hertlein.timesheetwizard.core
 
+import dev.hertlein.timesheetwizard.core.anticorruption.Core
 import dev.hertlein.timesheetwizard.core.importing.domain.model.DateRangeType
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
-import dev.hertlein.timesheetwizard.core.anticorruption.Core
 import dev.hertlein.timesheetwizard.core.util.RepositoryInMemory
 import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
 import org.junit.jupiter.api.DisplayName
@@ -22,7 +22,7 @@ class ApplicationE2E : AbstractApplicationE2E() {
             get() = "a-workspace-id"
     }
 
-    private val importService = Core.bootstrap(repository, clockifyConfig)
+    private val eventBus = Core.bootstrap(repository, clockifyConfig)
 
     @Test
     fun `should import and export timesheets to memory`() {
@@ -38,6 +38,6 @@ class ApplicationE2E : AbstractApplicationE2E() {
     }
 
     private fun run() {
-        importService.import(ImportParams(listOf("1000"), DateRangeType.CUSTOM_YEAR, "2022"))
+        eventBus.post(ImportParams(listOf("1000"), DateRangeType.CUSTOM_YEAR, "2022"))
     }
 }

@@ -50,12 +50,14 @@ class ArchitectureTest {
                     .layer("Domain Services").definedBy("..domain.service..")
                     .layer("Domain Ports").definedBy("..domain.port..")
                     .layer("Clockify Adapter").definedBy("..adapter.outgoing.clockify..")
-                    .layer("Eventing Adapter").definedBy("..adapter.outgoing.eventing..")
+                    .layer("Outgoing Eventing Adapter").definedBy("..adapter.outgoing.eventing..")
+                    .layer("Incoming Eventing Adapter").definedBy("..adapter.incoming.eventing..")
 
-                    .whereLayer("Domain Services").mayNotBeAccessedByAnyLayer()
-                    .whereLayer("Domain Ports").mayOnlyBeAccessedByLayers("Domain Services", "Clockify Adapter", "Eventing Adapter")
+                    .whereLayer("Domain Services").mayOnlyBeAccessedByLayers("Incoming Eventing Adapter")
+                    .whereLayer("Domain Ports").mayOnlyBeAccessedByLayers("Domain Services", "Clockify Adapter", "Outgoing Eventing Adapter")
                     .whereLayer("Clockify Adapter").mayNotBeAccessedByAnyLayer()
-                    .whereLayer("Eventing Adapter").mayNotBeAccessedByAnyLayer()
+                    .whereLayer("Incoming Eventing Adapter").mayNotBeAccessedByAnyLayer()
+                    .whereLayer("Outgoing Eventing Adapter").mayNotBeAccessedByAnyLayer()
 
                     .check(classes)
             }

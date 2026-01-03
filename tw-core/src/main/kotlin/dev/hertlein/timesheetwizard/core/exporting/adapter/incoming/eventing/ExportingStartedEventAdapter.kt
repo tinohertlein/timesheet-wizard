@@ -5,14 +5,14 @@ import com.google.common.eventbus.Subscribe
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.ExportService
 
-internal class EventSubscribeAdapter(eventBus: EventBus, private val exportService: ExportService) {
+internal class ExportingStartedEventAdapter(eventBus: EventBus, private val exportService: ExportService) {
 
     init {
         eventBus.register(this)
     }
 
     @Subscribe
-    fun onTimesheetImported(timesheet: ExportTimesheet) {
+    fun onExportingStarted(timesheet: ExportTimesheet) {
         exportService.export(timesheet)
     }
 }
