@@ -8,8 +8,8 @@ import com.microsoft.azure.functions.annotation.AuthorizationLevel
 import com.microsoft.azure.functions.annotation.FunctionName
 import com.microsoft.azure.functions.annotation.HttpTrigger
 import com.microsoft.azure.functions.annotation.TimerTrigger
-import dev.hertlein.timesheetwizard.core._import.domain.model.ImportParams
-import dev.hertlein.timesheetwizard.core._import.domain.service.ImportService
+import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
+import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportService
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
 import java.util.Optional

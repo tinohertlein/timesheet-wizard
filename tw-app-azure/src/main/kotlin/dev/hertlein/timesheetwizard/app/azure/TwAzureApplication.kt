@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.app.azure
 
-import dev.hertlein.timesheetwizard.core._import.domain.service.ImportService
+import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportService
 import dev.hertlein.timesheetwizard.core.anticorruption.Core
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties

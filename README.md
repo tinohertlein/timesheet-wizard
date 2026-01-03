@@ -66,12 +66,12 @@ the [doc-folder](docs/README.md).
 The `tw-core` Gradle subproject contains two Kotlin packages without any dependencies on each other, having the
 following responsibilities:
 
-**import**
+**importing**
 
 - importing timesheets from Clockify
 - transforming them into the domain model
 
-**export**
+**exporting**
 
 - generating XLSX, PDF & CSV files from the domain model
 - storing the XLSX, PDF & CSV files in the cloud

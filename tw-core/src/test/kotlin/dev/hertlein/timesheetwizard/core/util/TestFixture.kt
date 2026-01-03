@@ -3,7 +3,7 @@ package dev.hertlein.timesheetwizard.core.util
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import dev.hertlein.timesheetwizard.core.export.domain.model.ExportTimesheet
+import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.ZoneOffset

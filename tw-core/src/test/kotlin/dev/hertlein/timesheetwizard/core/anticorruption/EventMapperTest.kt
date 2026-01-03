@@ -1,9 +1,9 @@
 package dev.hertlein.timesheetwizard.core.anticorruption
 
 import com.google.common.eventbus.EventBus
-import dev.hertlein.timesheetwizard.core._import.domain.model.Customer
-import dev.hertlein.timesheetwizard.core._import.domain.model.ImportTimesheet
-import dev.hertlein.timesheetwizard.core.export.domain.model.ExportTimesheet
+import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer
+import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportTimesheet
+import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
 import io.mockk.Runs
 import io.mockk.confirmVerified
 import io.mockk.every

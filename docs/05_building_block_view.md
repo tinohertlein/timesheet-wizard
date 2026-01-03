@@ -20,15 +20,15 @@ The tw-core Gradle subproject consists of two business modules and an anticorrup
 
 ![Static-level-2](assets/static-level-2.drawio.png "Static-level-2")
 
-- **import**: the timesheet, that can be fetched via the Clockify-API in json-format, is modelled in a very
+- **importing**: the timesheet, that can be fetched via the Clockify-API in json-format, is modelled in a very
   generic way and does not fit my use-cases. Therefor, this module is responsible to fetch the json from Clockify,
   transform it to the domain model of the Timesheet-Wizard and signal a successful import.
-- **export**: this module is responsible for transforming the model created by `import` by generating an
+- **exporting**: this module is responsible for transforming the model created by `importing` by generating an
   XLSX, PDF or CSV file from that data. The XLSX, PDF and CSV files then are stored in some cloud storage, where they
   are available for a manual download.
-- **anticorruption**: this module contains code that maps domain model classes of module `import` to domain model
+- **anticorruption**: this module contains code that maps domain model classes of module `importing` to domain model
   classes
-  of module `export`.
+  of module `exporting`.
 
 ## Level 3
 
@@ -42,8 +42,8 @@ visible in the code immediately on the package level.
 
 - The package `domain.model` is in the centre of the architecture without any dependencies to other parts of the system.
 - The entities in the domain-logic are used by the application services ImportService & ExportService in packages
-  `import.domain.service` & `export.domain.service` that are responsible for orchestrating the workflow.
-- In package `import.domain.port` & `export.domain.port` there are also `port`-interfaces, which are implemented in
+  `importing.domain.service` & `exporting.domain.service` that are responsible for orchestrating the workflow.
+- In package `importing.domain.port` & `exporting.domain.port` there are also `port`-interfaces, which are implemented in
   package
   `adapter` to invert dependencies.
 - Only `outgoing`-ports are decoupled via an interface, having one corresponding adapter.

@@ -24,8 +24,8 @@ class ArchitectureTest {
             layeredArchitecture()
                 .consideringAllDependencies()
 
-                .layer("Import").definedBy(".._import..")
-                .layer("Export").definedBy("..export..")
+                .layer("Import").definedBy("..importing..")
+                .layer("Export").definedBy("..exporting..")
                 .layer("Anticorruption").definedBy("..anticorruption..")
 
                 .whereLayer("Import").mayOnlyBeAccessedByLayers("Anticorruption")
@@ -41,7 +41,7 @@ class ArchitectureTest {
             fun `should adhere to ports & adapters architecture`() {
                 val classes = ClassFileImporter()
                     .withImportOption(ImportOption.DoNotIncludeTests())
-                    .importPackages("$basePackage._import")
+                    .importPackages("$basePackage.importing")
 
                 layeredArchitecture()
                     .consideringAllDependencies()
@@ -68,7 +68,7 @@ class ArchitectureTest {
             fun `should adhere to ports & adapters architecture`() {
                 val classes = ClassFileImporter()
                     .withImportOption(ImportOption.DoNotIncludeTests())
-                    .importPackages("$basePackage.export")
+                    .importPackages("$basePackage.exporting")
 
                 layeredArchitecture()
                     .consideringAllDependencies()

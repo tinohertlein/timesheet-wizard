@@ -1,7 +1,7 @@
 package dev.hertlein.timesheetwizard.core
 
-import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType
-import dev.hertlein.timesheetwizard.core._import.domain.model.ImportParams
+import dev.hertlein.timesheetwizard.core.importing.domain.model.DateRangeType
+import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
 import dev.hertlein.timesheetwizard.core.anticorruption.Core
 import dev.hertlein.timesheetwizard.core.util.RepositoryInMemory
 import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig

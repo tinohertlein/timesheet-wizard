@@ -18,16 +18,16 @@ The individual parts of importing timesheets and transforming them to other form
 can be updated or even replaced independently of each other. To achieve this, both modules are realized in the Gradle
 subproject `tw-core` as separate
 Kotlin packages on the top level that are not allowed to have
-dependencies on each other. Code that is mapping domain classes from module `import` to module `export` is placed in a
+dependencies on each other. Code that is mapping domain classes from module `importing` to module `exporting` is placed in a
 package `anticorruption`. This is enforced automatically by Architecture tests. (**-> Quality goal QG3**).
 
-This results in three top level packages:
+This results in three top-level packages:
 
-- import
-- export
+- importing
+- exporting
 - anticorruption
 
-To facilitate communication between `import` and `export` events are used to signal successful
+To facilitate communication between `importing` and `exporting` events are used to signal successful
 imports of timesheets.
 
 The Timesheet-Wizard is not accessible outside AWS or Azure (**-> Quality goal #QG1**). Neither the S3 buckets
