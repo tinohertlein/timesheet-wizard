@@ -1,7 +1,7 @@
 package dev.hertlein.timesheetwizard.app.azure.util
 
 import com.azure.storage.blob.BlobServiceClientBuilder
-import dev.hertlein.timesheetwizard.core.SpringTestProfiles.TESTCONTAINERS
+import dev.hertlein.timesheetwizard.app.azure.util.TestProfiles.TESTCONTAINERS
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Profile

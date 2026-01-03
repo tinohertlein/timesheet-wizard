@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.app.aws.util
 
-import dev.hertlein.timesheetwizard.core.SpringTestProfiles.TESTCONTAINERS
+import dev.hertlein.timesheetwizard.app.aws.util.TestProfiles.TESTCONTAINERS
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Profile
