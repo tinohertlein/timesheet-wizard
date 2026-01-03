@@ -2,18 +2,17 @@ package dev.hertlein.timesheetwizard.app.azure
 
 import com.azure.core.util.BinaryData
 import com.azure.storage.blob.BlobContainerClient
-import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
+import dev.hertlein.timesheetwizard.spi.cloud.Repository
 import mu.KotlinLogging
 import org.springframework.context.annotation.Primary
-import org.springframework.stereotype.Repository
 
 private val logger = KotlinLogging.logger {}
 
-@Repository
+@org.springframework.stereotype.Repository
 @Primary
-class AzureBlobStoragePersistence(
+class AzureBlobStorageRepository(
     private val client: BlobContainerClient
-) : CloudPersistence {
+) : Repository {
 
     override fun type(): String = "AzureBlobStorage"
 

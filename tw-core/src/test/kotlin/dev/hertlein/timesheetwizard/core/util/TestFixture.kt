@@ -12,7 +12,7 @@ import kotlin.time.Duration.Companion.hours
 internal object TestFixture {
 
     object App {
-        val cloudPersistenceInMemory = CloudPersistenceInMemory()
+        val repositoryInMemory = RepositoryInMemory()
         val objectMapper = ObjectMapper().apply {
             registerKotlinModule()
             configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

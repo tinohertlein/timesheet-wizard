@@ -3,7 +3,7 @@ package dev.hertlein.timesheetwizard.core
 import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType
 import dev.hertlein.timesheetwizard.core._import.domain.model.ImportParams
 import dev.hertlein.timesheetwizard.core.anticorruption.Core
-import dev.hertlein.timesheetwizard.core.util.CloudPersistenceInMemory
+import dev.hertlein.timesheetwizard.core.util.RepositoryInMemory
 import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 @DisplayName("Application")
 class ApplicationE2E : AbstractApplicationE2E() {
 
-    private val cloudPersistence = CloudPersistenceInMemory()
+    private val repository = RepositoryInMemory()
     private val clockifyConfig = object : ClockifyConfig {
         override val reportsUrl: String
             get() = "${MOCK_SERVER_HOST}:${MOCK_SERVER_PORT}"
@@ -22,7 +22,7 @@ class ApplicationE2E : AbstractApplicationE2E() {
             get() = "a-workspace-id"
     }
 
-    private val importService = Core.bootstrap(cloudPersistence, clockifyConfig)
+    private val importService = Core.bootstrap(repository, clockifyConfig)
 
     @Test
     fun `should import and export timesheets to memory`() {
@@ -30,11 +30,11 @@ class ApplicationE2E : AbstractApplicationE2E() {
     }
 
     private fun upload(key: String, bytes: ByteArray) {
-        cloudPersistence.upload(key, bytes)
+        repository.upload(key, bytes)
     }
 
     private fun download(key: String): ByteArray {
-        return cloudPersistence.download(key)
+        return repository.download(key)
     }
 
     private fun run() {

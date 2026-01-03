@@ -1,11 +1,11 @@
 package dev.hertlein.timesheetwizard.core.util
 
-import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
+import dev.hertlein.timesheetwizard.spi.cloud.Repository
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-class CloudPersistenceInMemory : CloudPersistence {
+class RepositoryInMemory : Repository {
 
     private val store = mutableMapOf<String, ByteArray>()
 

@@ -2,13 +2,13 @@ package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.conf
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
-import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
+import dev.hertlein.timesheetwizard.spi.cloud.Repository
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
 internal class ClockifyIdsLoader(
-    private val cloudPersistence: CloudPersistence,
+    private val repository: Repository,
     private val objectMapper: ObjectMapper
 ) {
 
@@ -21,7 +21,7 @@ internal class ClockifyIdsLoader(
     }
 
     private fun loadConfiguration(): List<ConfigDto> {
-        val json = cloudPersistence.download("config/clockify.json")
+        val json = repository.download("config/clockify.json")
         return objectMapper.readValue(json, object : TypeReference<List<ConfigDto>?>() {}) ?: emptyList()
     }
 

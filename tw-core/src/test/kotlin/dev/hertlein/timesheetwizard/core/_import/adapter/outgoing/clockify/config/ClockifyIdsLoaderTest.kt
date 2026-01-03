@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test
 @DisplayName("ClockifyIdsLoader")
 internal class ClockifyIdsLoaderTest {
 
-    private val cloudPersistence = TestFixture.App.cloudPersistenceInMemory
-    private val clockifyIdsLoader: ClockifyIdsLoader = ClockifyIdsLoader(cloudPersistence, TestFixture.App.objectMapper)
+    private val repository = TestFixture.App.repositoryInMemory
+    private val clockifyIdsLoader: ClockifyIdsLoader = ClockifyIdsLoader(repository, TestFixture.App.objectMapper)
 
     @BeforeEach
     fun setup() {
-        cloudPersistence.upload(
+        repository.upload(
             "config/clockify.json",
             ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/clockify.json")
         )

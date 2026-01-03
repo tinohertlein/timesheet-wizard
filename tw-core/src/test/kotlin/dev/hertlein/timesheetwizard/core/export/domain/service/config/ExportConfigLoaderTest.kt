@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test
 @DisplayName("ExportConfigLoader")
 internal class ExportConfigLoaderTest {
 
-    private val cloudPersistence = TestFixture.App.cloudPersistenceInMemory
-    private val exportConfigLoader = ExportConfigLoader(cloudPersistence, TestFixture.App.objectMapper)
+    private val repository = TestFixture.App.repositoryInMemory
+    private val exportConfigLoader = ExportConfigLoader(repository, TestFixture.App.objectMapper)
 
     @BeforeEach
     fun setup() {
-        cloudPersistence.upload(
+        repository.upload(
             "config/export.json",
             ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/export.json")
         )

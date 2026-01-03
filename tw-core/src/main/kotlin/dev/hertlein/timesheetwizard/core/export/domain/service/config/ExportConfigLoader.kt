@@ -2,13 +2,13 @@ package dev.hertlein.timesheetwizard.core.export.domain.service.config
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
-import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
+import dev.hertlein.timesheetwizard.spi.cloud.Repository
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
 internal class ExportConfigLoader(
-    private val cloudPersistence: CloudPersistence,
+    private val repository: Repository,
     private val objectMapper: ObjectMapper
 ) {
 
@@ -23,7 +23,7 @@ internal class ExportConfigLoader(
     }
 
     private fun loadConfiguration(): List<ConfigDto> {
-        val json = cloudPersistence.download("config/export.json")
+        val json = repository.download("config/export.json")
         return objectMapper.readValue(json, object : TypeReference<List<ConfigDto>?>() {}) ?: emptyList()
     }
 

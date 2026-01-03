@@ -25,20 +25,20 @@ import dev.hertlein.timesheetwizard.core.export.domain.service.strategy.PdfV1
 import dev.hertlein.timesheetwizard.core.export.domain.service.strategy.XlsxV1
 import dev.hertlein.timesheetwizard.core.export.domain.service.strategy.XlsxV2
 import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
-import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
+import dev.hertlein.timesheetwizard.spi.cloud.Repository
 import java.net.http.HttpClient
 
 object Core {
 
-    fun bootstrap(persistence: CloudPersistence, clockifyConfig: ClockifyConfig): ImportService {
+    fun bootstrap(repository: Repository, clockifyConfig: ClockifyConfig): ImportService {
         val objectMapper = ObjectMapper().apply {
             registerKotlinModule()
             configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         }
         val eventBus = EventBus()
 
-        val importService = bootstrapImportService(clockifyConfig, objectMapper, persistence, eventBus)
-        val exportService = bootstrapExportService(persistence, objectMapper)
+        val importService = bootstrapImportService(clockifyConfig, objectMapper, repository, eventBus)
+        val exportService = bootstrapExportService(repository, objectMapper)
 
         EventMapper(eventBus)
         EventSubscribeAdapter(eventBus, exportService)
@@ -49,13 +49,13 @@ object Core {
     private fun bootstrapImportService(
         clockifyConfig: ClockifyConfig,
         objectMapper: ObjectMapper,
-        persistence: CloudPersistence,
+        repository: Repository,
         eventBus: EventBus
     ): ImportService {
         val httpReportClient = HttpReportClient(clockifyConfig, HttpClient.newHttpClient(), objectMapper)
-        val clockifyIdsLoader = ClockifyIdsLoader(persistence, objectMapper)
+        val clockifyIdsLoader = ClockifyIdsLoader(repository, objectMapper)
         val clockifyAdapter = ClockifyAdapter(clockifyIdsLoader, httpReportClient, RequestBodyFactory(), ResponseBodyMapper())
-        val importConfigLoader = ImportConfigLoader(persistence, objectMapper)
+        val importConfigLoader = ImportConfigLoader(repository, objectMapper)
         val customerFactory = CustomerFactory(importConfigLoader)
         val eventPublishPort = EventPublishAdapter(eventBus)
         val importService = ImportServiceImpl(customerFactory, DateTimeFactory(), clockifyAdapter, eventPublishPort)
@@ -63,11 +63,11 @@ object Core {
     }
 
     private fun bootstrapExportService(
-        persistence: CloudPersistence,
+        repository: Repository,
         objectMapper: ObjectMapper
     ): ExportService {
-        val persistencePort = CloudPersistenceAdapter(persistence, FilenameFactory())
-        val exportConfigLoader = ExportConfigLoader(persistence, objectMapper)
+        val persistencePort = CloudPersistenceAdapter(repository, FilenameFactory())
+        val exportConfigLoader = ExportConfigLoader(repository, objectMapper)
         val exportService = ExportService(exportConfigLoader, listOf(CsvV1(), PdfV1(), XlsxV1(), XlsxV2()), persistencePort)
         return exportService
     }

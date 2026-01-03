@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Bean
 class TwAwsApplication {
 
     @Bean
-    fun importService(persistence: AwsS3Persistence, clockifyConfig: AwsClockifyConfig): ImportService {
-        return Core.bootstrap(persistence, clockifyConfig)
+    fun importService(repository: AwsS3Repository, clockifyConfig: AwsClockifyConfig): ImportService {
+        return Core.bootstrap(repository, clockifyConfig)
     }
 }
 

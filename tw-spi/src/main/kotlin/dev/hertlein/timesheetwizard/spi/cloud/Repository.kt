@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.spi.cloud
 
-interface CloudPersistence {
+interface Repository {
 
     fun type(): String
 

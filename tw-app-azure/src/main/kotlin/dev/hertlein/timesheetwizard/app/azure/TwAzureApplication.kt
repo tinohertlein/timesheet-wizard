@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Bean
 class TwAzureApplication {
 
     @Bean
-    fun importService(persistence: AzureBlobStoragePersistence, clockifyConfig: AzureClockifyConfig): ImportService {
-        return Core.bootstrap(persistence, clockifyConfig)
+    fun importService(repository: AzureBlobStorageRepository, clockifyConfig: AzureClockifyConfig): ImportService {
+        return Core.bootstrap(repository, clockifyConfig)
     }
 }
 

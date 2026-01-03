@@ -11,12 +11,12 @@ import org.junit.jupiter.api.Test
 @DisplayName("ImportConfigLoader")
 internal class ImportConfigLoaderTest {
 
-    private val cloudPersistence = TestFixture.App.cloudPersistenceInMemory
-    private val configLoader = ImportConfigLoader(cloudPersistence, TestFixture.App.objectMapper)
+    private val repository = TestFixture.App.repositoryInMemory
+    private val configLoader = ImportConfigLoader(repository, TestFixture.App.objectMapper)
 
     @BeforeEach
     fun setup() {
-        cloudPersistence.upload(
+        repository.upload(
             "config/import.json",
             ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/import.json")
         )

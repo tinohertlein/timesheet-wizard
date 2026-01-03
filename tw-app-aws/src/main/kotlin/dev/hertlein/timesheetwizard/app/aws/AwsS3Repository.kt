@@ -1,10 +1,9 @@
 package dev.hertlein.timesheetwizard.app.aws
 
-import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
+import dev.hertlein.timesheetwizard.spi.cloud.Repository
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Primary
-import org.springframework.stereotype.Repository
 import software.amazon.awssdk.core.sync.RequestBody
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.GetObjectRequest
@@ -12,13 +11,13 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest
 
 private val logger = KotlinLogging.logger {}
 
-@Repository
+@org.springframework.stereotype.Repository
 @Primary
-class AwsS3Persistence(
+class AwsS3Repository(
     private val s3Client: S3Client,
     @Value("\${timesheet-wizard.aws.s3.bucket}")
     private val bucket: String,
-) : CloudPersistence {
+) : Repository {
 
     override fun type(): String = "S3"
 
