@@ -9,11 +9,11 @@ mock-server = "5.15.0"
 opencsv = "5.12.0"
 poi = "5.5.1"
 jasper = "7.0.3"
-spring-boot = "3.5.8"
+spring-boot = "4.0.1"
 azure = "1.16.1"
-spring-cloud = "2025.0.0"
-spring-cloud-aws = "3.4.1"
-spring-cloud-azure = "6.1.0"
+spring-cloud = "2025.1.0"
+spring-cloud-aws = "4.0.0-M1"
+spring-cloud-azure = "7.0.0-beta.1"
 spring-dependency-management = "1.1.7"
 spring-thin = "1.0.31.RELEASE"
 shadow = "9.3.0"
@@ -45,6 +45,7 @@ jasperreports-jdt = { module = "net.sf.jasperreports:jasperreports-jdt", version
 
 ## Spring
 spring-boot-dependencies = { group = "org.springframework.boot", name = "spring-boot-dependencies", version.ref = "spring-boot" }
+spring-jackson2 = { module = "org.springframework.boot:spring-boot-jackson2" }
 spring-cloud = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }
 spring-cloud-function-context = { module = "org.springframework.cloud:spring-cloud-function-context" }
 spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
@@ -78,7 +79,7 @@ archunit = { module = "com.tngtech.archunit:archunit", version.ref = "archunit" 
 
 [bundles]
 export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt"]
-spring-base = ["spring-boot-dependencies", "spring-boot-starter", "spring-boot-starter-web"]
+spring-base = ["spring-boot-dependencies", "spring-boot-starter", "spring-boot-starter-web", "spring-jackson2"]
 spring-cloud = ["spring-cloud-function-context"]
 spring-cloud-aws = ["spring-cloud-function-adapter-aws", "spring-cloud-aws-starter", "spring-cloud-aws-starter-s3"]
 spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure-starter-storage", "logstash-encoder"]
