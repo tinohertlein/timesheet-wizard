@@ -1,6 +1,5 @@
 package dev.hertlein.timesheetwizard.app.azure
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.microsoft.azure.functions.ExecutionContext
 import com.microsoft.azure.functions.HttpMethod
 import com.microsoft.azure.functions.HttpRequestMessage
@@ -12,6 +11,7 @@ import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
 import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportService
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
+import tools.jackson.databind.ObjectMapper
 import java.util.Optional
 
 private val logger = KotlinLogging.logger {}

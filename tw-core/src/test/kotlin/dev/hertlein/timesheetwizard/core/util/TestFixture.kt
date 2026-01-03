@@ -1,9 +1,11 @@
 package dev.hertlein.timesheetwizard.core.util
 
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import dev.hertlein.timesheetwizard.core.anticorruption.Core
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
+import tools.jackson.core.StreamReadFeature
+import tools.jackson.databind.SerializationFeature
+import tools.jackson.databind.json.JsonMapper
+import tools.jackson.module.kotlin.kotlinModule
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
@@ -13,10 +15,7 @@ internal object TestFixture {
 
     object App {
         val repositoryInMemory = RepositoryInMemory()
-        val objectMapper = ObjectMapper().apply {
-            registerKotlinModule()
-            configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        }
+        val objectMapper = Core.objectMapper
     }
 
     object Export {

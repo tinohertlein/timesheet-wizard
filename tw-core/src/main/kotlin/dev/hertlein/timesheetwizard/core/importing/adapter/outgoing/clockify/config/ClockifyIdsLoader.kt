@@ -1,9 +1,9 @@
 package dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.config
 
-import com.fasterxml.jackson.core.type.TypeReference
-import com.fasterxml.jackson.databind.ObjectMapper
 import dev.hertlein.timesheetwizard.spi.cloud.Repository
 import mu.KotlinLogging
+import tools.jackson.core.type.TypeReference
+import tools.jackson.databind.ObjectMapper
 
 private val logger = KotlinLogging.logger {}
 

@@ -3,7 +3,7 @@ kotlin = "2.3.0"
 guava = "33.5.0-jre"
 lombok = "1.18.42"
 kotlin-logging = "3.0.5"
-jackson-kotlin = "2.20.1"
+jackson-kotlin = "3.0.1"
 mockk = "1.14.7"
 mock-server = "5.15.0"
 opencsv = "5.12.0"
@@ -33,7 +33,7 @@ guava = { module = "com.google.guava:guava", version.ref = "guava" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-logging = { module = "io.github.microutils:kotlin-logging-jvm", version.ref = "kotlin-logging" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
-jackson-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson-kotlin" }
+jackson-kotlin = { module = "tools.jackson.module:jackson-module-kotlin", version.ref = "jackson-kotlin" }
 
 ## Export
 opencsv = { module = "com.opencsv:opencsv", version.ref = "opencsv" }
@@ -45,7 +45,6 @@ jasperreports-jdt = { module = "net.sf.jasperreports:jasperreports-jdt", version
 
 ## Spring
 spring-boot-dependencies = { group = "org.springframework.boot", name = "spring-boot-dependencies", version.ref = "spring-boot" }
-spring-jackson2 = { module = "org.springframework.boot:spring-boot-jackson2" }
 spring-cloud = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }
 spring-cloud-function-context = { module = "org.springframework.cloud:spring-cloud-function-context" }
 spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
@@ -79,7 +78,7 @@ archunit = { module = "com.tngtech.archunit:archunit", version.ref = "archunit" 
 
 [bundles]
 export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt"]
-spring-base = ["spring-boot-dependencies", "spring-boot-starter", "spring-boot-starter-web", "spring-jackson2"]
+spring-base = ["spring-boot-dependencies", "spring-boot-starter", "spring-boot-starter-web"]
 spring-cloud = ["spring-cloud-function-context"]
 spring-cloud-aws = ["spring-cloud-function-adapter-aws", "spring-cloud-aws-starter", "spring-cloud-aws-starter-s3"]
 spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure-starter-storage", "logstash-encoder"]

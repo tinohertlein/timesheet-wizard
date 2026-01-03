@@ -1,9 +1,9 @@
 package dev.hertlein.timesheetwizard.app.aws
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
 import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportService
 import org.springframework.stereotype.Component
+import tools.jackson.databind.ObjectMapper
 import java.util.function.Consumer
 
 @Component
