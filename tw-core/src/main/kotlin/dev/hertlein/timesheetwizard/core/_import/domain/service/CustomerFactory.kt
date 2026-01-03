@@ -1,9 +1,7 @@
 package dev.hertlein.timesheetwizard.core._import.domain.service
 
 import dev.hertlein.timesheetwizard.core._import.domain.model.Customer
-import org.springframework.stereotype.Component
 
-@Component
 internal class CustomerFactory(private val importConfigLoader: ImportConfigLoader) {
 
     fun customersFrom(customerIds: List<String>): List<Customer> = filterCustomers(customerIds)

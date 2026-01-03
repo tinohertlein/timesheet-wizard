@@ -1,5 +1,8 @@
 package dev.hertlein.timesheetwizard.core.util
 
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import dev.hertlein.timesheetwizard.core.export.domain.model.ExportTimesheet
 import java.time.LocalDate
 import java.time.OffsetDateTime
@@ -7,6 +10,14 @@ import java.time.ZoneOffset
 import kotlin.time.Duration.Companion.hours
 
 internal object TestFixture {
+
+    object App {
+        val cloudPersistenceInMemory = CloudPersistenceInMemory()
+        val objectMapper = ObjectMapper().apply {
+            registerKotlinModule()
+            configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        }
+    }
 
     object Export {
 

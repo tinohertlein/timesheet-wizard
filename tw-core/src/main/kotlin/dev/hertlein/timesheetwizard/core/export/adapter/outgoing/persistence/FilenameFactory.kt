@@ -1,14 +1,12 @@
 package dev.hertlein.timesheetwizard.core.export.adapter.outgoing.persistence
 
 import dev.hertlein.timesheetwizard.core.export.domain.model.TimesheetDocument
-import org.springframework.stereotype.Component
 import java.time.LocalDate
 import java.time.format.DateTimeFormatterBuilder
 import java.time.format.SignStyle
 import java.time.temporal.ChronoField
 import java.util.Locale
 
-@Component
 internal class FilenameFactory {
 
     fun filenameFrom(metaData: DocumentMetaData, timesheetDocument: TimesheetDocument): String {

@@ -1,20 +1,22 @@
 package dev.hertlein.timesheetwizard.core.anticorruption
 
+import com.google.common.eventbus.EventBus
+import com.google.common.eventbus.Subscribe
 import dev.hertlein.timesheetwizard.core._import.domain.model.Customer
 import dev.hertlein.timesheetwizard.core._import.domain.model.ImportTimesheet
 import dev.hertlein.timesheetwizard.core.export.domain.model.ExportTimesheet
-import org.springframework.context.ApplicationEventPublisher
-import org.springframework.context.event.EventListener
-import org.springframework.stereotype.Component
 
-@Component
-internal class EventMapper(val eventPublisher: ApplicationEventPublisher) {
+internal class EventMapper(private val eventBus: EventBus) {
 
-    @EventListener
+    init {
+        eventBus.register(this)
+    }
+
+    @Subscribe
     fun onTimesheetImported(importTimesheet: ImportTimesheet) {
         val entries: List<ExportTimesheet.Entry> = mapEntries(importTimesheet.entries)
         val exportTimesheet = ExportTimesheet(mapCustomer(importTimesheet.customer), importTimesheet.dateRange, entries)
-        eventPublisher.publishEvent(exportTimesheet)
+        eventBus.post(exportTimesheet)
     }
 
     private fun mapEntries(entries: List<ImportTimesheet.Entry>): List<ExportTimesheet.Entry> {

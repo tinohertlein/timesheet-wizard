@@ -6,14 +6,12 @@ import org.apache.poi.ss.usermodel.CellCopyPolicy
 import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
-import org.springframework.stereotype.Component
 import java.io.ByteArrayOutputStream
 import java.util.Locale
 import kotlin.time.Duration
 
 private val cellCopyPolicy = CellCopyPolicy.Builder().cellValue(false).build()
 
-@Component
 internal class XlsxV2 : ExportStrategy {
 
     companion object {

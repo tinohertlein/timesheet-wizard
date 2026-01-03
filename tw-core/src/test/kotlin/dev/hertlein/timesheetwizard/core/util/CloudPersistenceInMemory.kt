@@ -1,22 +1,11 @@
-package dev.hertlein.timesheetwizard.core
+package dev.hertlein.timesheetwizard.core.util
 
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import mu.KotlinLogging
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
 
 private val logger = KotlinLogging.logger {}
 
-@Configuration
-internal class Factory {
-
-    @Bean
-    @ConditionalOnMissingBean
-    fun cloudPersistenceInMemory(): CloudPersistenceInMemory = CloudPersistenceInMemory()
-}
-
-internal class CloudPersistenceInMemory : CloudPersistence {
+class CloudPersistenceInMemory : CloudPersistence {
 
     private val store = mutableMapOf<String, ByteArray>()
 

@@ -1,14 +1,17 @@
 package dev.hertlein.timesheetwizard.core.export.adapter.incoming.eventing
 
+import com.google.common.eventbus.EventBus
+import com.google.common.eventbus.Subscribe
 import dev.hertlein.timesheetwizard.core.export.domain.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.export.domain.service.ExportService
-import org.springframework.context.event.EventListener
-import org.springframework.stereotype.Component
 
-@Component
-internal class EventSubscribeAdapter(private val exportService: ExportService) {
+internal class EventSubscribeAdapter(eventBus: EventBus, private val exportService: ExportService) {
 
-    @EventListener
+    init {
+        eventBus.register(this)
+    }
+
+    @Subscribe
     fun onTimesheetImported(timesheet: ExportTimesheet) {
         exportService.export(timesheet)
     }

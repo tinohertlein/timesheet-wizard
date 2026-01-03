@@ -1,26 +1,17 @@
 package dev.hertlein.timesheetwizard.core.export.domain.service.config
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
-import dev.hertlein.timesheetwizard.core.TestApplication
-import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
+import dev.hertlein.timesheetwizard.core.util.TestFixture
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 
 @DisplayName("ExportConfigLoader")
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@SpringBootTest(classes = [TestApplication::class])
-internal class ExportConfigLoaderIT {
+internal class ExportConfigLoaderTest {
 
-    @Autowired
-    private lateinit var cloudPersistence: CloudPersistence
-
-    @Autowired
-    private lateinit var exportConfigLoader: ExportConfigLoader
+    private val cloudPersistence = TestFixture.App.cloudPersistenceInMemory
+    private val exportConfigLoader = ExportConfigLoader(cloudPersistence, TestFixture.App.objectMapper)
 
     @BeforeEach
     fun setup() {

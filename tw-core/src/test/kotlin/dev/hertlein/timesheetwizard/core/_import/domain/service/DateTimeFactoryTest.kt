@@ -15,8 +15,8 @@ import java.time.ZoneId
 
 @DisplayName("DateTimeFactory")
 class DateTimeFactoryTest {
-    private val clock: Clock = mockk()
 
+    private val clock: Clock = mockk()
     private val dateTimeFactory = DateTimeFactory(clock)
 
     @BeforeEach

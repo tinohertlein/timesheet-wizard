@@ -8,7 +8,6 @@ import net.sf.jasperreports.engine.JasperCompileManager
 import net.sf.jasperreports.engine.JasperExportManager
 import net.sf.jasperreports.engine.JasperFillManager
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
-import org.springframework.stereotype.Component
 import java.io.ByteArrayOutputStream
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -17,7 +16,6 @@ import java.time.OffsetDateTime
 import java.util.Locale
 import kotlin.time.DurationUnit
 
-@Component
 internal class PdfV1 : ExportStrategy {
 
     companion object {

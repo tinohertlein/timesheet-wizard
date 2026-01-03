@@ -3,6 +3,8 @@ package dev.hertlein.timesheetwizard.app.aws
 import dev.hertlein.timesheetwizard.app.aws.util.S3Operations
 import dev.hertlein.timesheetwizard.app.aws.util.TestcontainersConfiguration
 import dev.hertlein.timesheetwizard.core.AbstractApplicationE2E
+import dev.hertlein.timesheetwizard.core.MOCK_SERVER_HOST
+import dev.hertlein.timesheetwizard.core.MOCK_SERVER_PORT
 import dev.hertlein.timesheetwizard.core.SpringTestProfiles.TESTCONTAINERS
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -11,6 +13,8 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.DynamicPropertyRegistry
+import org.springframework.test.context.DynamicPropertySource
 import software.amazon.awssdk.services.s3.S3Client
 
 @DisplayName("AWS Application")
@@ -18,6 +22,17 @@ import software.amazon.awssdk.services.s3.S3Client
 @ActiveProfiles(TESTCONTAINERS)
 @Import(TestcontainersConfiguration::class)
 class AwsApplicationE2E : AbstractApplicationE2E() {
+
+    companion object {
+
+        @DynamicPropertySource
+        @JvmStatic
+        fun clockifyProperties(registry: DynamicPropertyRegistry) {
+            registry.add("timesheet-wizard.import.clockify.reports-url", { "$MOCK_SERVER_HOST:$MOCK_SERVER_PORT" })
+            registry.add("timesheet-wizard.import.clockify.api-key", { "an-api-key" })
+            registry.add("timesheet-wizard.import.clockify.workspace-id", { "a-workspace-id" })
+        }
+    }
 
     @Autowired
     private lateinit var awsLambdaAdapter: AwsLambdaAdapter

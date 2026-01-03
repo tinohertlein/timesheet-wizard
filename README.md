@@ -53,13 +53,15 @@ the [doc-folder](docs/README.md).
 
 #### The Timesheet-Wizard consists of four Gradle subprojects:
 
-- **tw-cloud-spi**: the service provider interface to be implemented for any cloud specific things. Like e.g. uploading
+- **tw-spi**: the service provider interface to be implemented for any cloud specific things. Like e.g. uploading
   timesheets to some cloud storage.
-- **tw-core**: the code module that contains the business logic. This subproject is cloud-agnostic.
-- **tw-app-aws**: implements the interfaces defined in `tw-cloud-spi` with AWS specific code and also bundles the
-  cloud-agnostic `tw-core` with AWS specific things to an AWS Lambda function.
-- **tw-app-azure**: implements the interfaces defined in `tw-cloud-spi` with Azure specific code and also bundles the
-  cloud-agnostic `tw-core` with Azure specific things to an Azure Function.
+- **tw-core**: the code module that contains the business logic. This subproject is cloud-agnostic to switch cloud
+  vendors (e.g. AWS, Azure, GCP, ...) easily. This subproject is also
+  framework-agnostic to switch web frameworks (e.g. Spring Boot, Quarkus,...) easily.
+- **tw-app-aws**: implements the interfaces defined in `tw-spi` with AWS specific code and also bundles the `tw-core`
+  with AWS specific things to a Spring Boot AWS Lambda function.
+- **tw-app-azure**: implements the interfaces defined in `tw-spi` with Azure specific code and also bundles the
+  `tw-core` with Azure specific things to a Spring Boot Azure Function.
 
 The `tw-core` Gradle subproject contains two Kotlin packages without any dependencies on each other, having the
 following responsibilities:
@@ -74,7 +76,8 @@ following responsibilities:
 - generating XLSX, PDF & CSV files from the domain model
 - storing the XLSX, PDF & CSV files in the cloud
 
-There is a third package '**anticorruption**', which is building the bridge between the other two packages by observing and sending application events.
+There is a third package '**anticorruption**', which is building the bridge between the other two packages by observing
+and sending application events.
 
 ![Building blocks](docs/assets/readme-static.drawio.png "Building blocks")
 *Building blocks*

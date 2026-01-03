@@ -7,16 +7,17 @@ import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType.LAST
 import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType.LAST_YEAR
 import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType.THIS_MONTH
 import dev.hertlein.timesheetwizard.core._import.domain.model.DateRangeType.THIS_YEAR
-import org.springframework.stereotype.Component
 import java.time.Clock
 import java.time.LocalDate
 import java.time.Year
 import java.time.YearMonth
+import java.time.ZoneId
 import java.time.temporal.TemporalAdjusters.lastDayOfMonth
 import java.time.temporal.TemporalAdjusters.lastDayOfYear
 
-@Component
-internal class DateTimeFactory(private val clock: Clock) {
+const val TIMEZONE = "Europe/Berlin"
+
+internal class DateTimeFactory(private val clock: Clock = Clock.system(ZoneId.of(TIMEZONE))) {
 
     fun create(
         dateRangeType: DateRangeType,

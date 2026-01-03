@@ -1,5 +1,6 @@
 package dev.hertlein.timesheetwizard.core.anticorruption
 
+import com.google.common.eventbus.EventBus
 import dev.hertlein.timesheetwizard.core._import.domain.model.Customer
 import dev.hertlein.timesheetwizard.core._import.domain.model.ImportTimesheet
 import dev.hertlein.timesheetwizard.core.export.domain.model.ExportTimesheet
@@ -12,7 +13,6 @@ import io.mockk.verify
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.springframework.context.ApplicationEventPublisher
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import kotlin.time.DurationUnit
@@ -35,12 +35,13 @@ class EventMapperTest {
     private val aTask = "a-task"
     private val someTags = listOf("a-tag")
 
-    private val applicationEventPublisher: ApplicationEventPublisher = mockk(relaxed = true)
-    private val eventMapper = EventMapper(applicationEventPublisher)
+    private val eventBus: EventBus = mockk(relaxed = true)
+    private val eventMapper = EventMapper(eventBus)
 
     @BeforeEach
     fun setup() {
-        every { applicationEventPublisher.publishEvent(any()) } just Runs
+        every { eventBus.register(any()) } just Runs
+        every { eventBus.post(any()) } just Runs
     }
 
     @Test
@@ -68,7 +69,8 @@ class EventMapperTest {
 
         eventMapper.onTimesheetImported(importTimesheet)
 
-        verify { applicationEventPublisher.publishEvent(exportTimesheet) }
-        confirmVerified(applicationEventPublisher)
+        verify { eventBus.register(eventMapper) }
+        verify { eventBus.post(exportTimesheet) }
+        confirmVerified(eventBus)
     }
 }

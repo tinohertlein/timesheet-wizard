@@ -9,4 +9,4 @@ plugins {
 }
 
 rootProject.name = "timesheet-wizard"
-include("tw-app-azure", "tw-app-aws", "tw-spi-cloud", "tw-core")
+include("tw-app-azure", "tw-app-aws", "tw-spi", "tw-core")

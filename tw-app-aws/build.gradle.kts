@@ -15,7 +15,7 @@ dependencies {
     annotationProcessor(libs.lombok)
     compileOnly(libs.lombok)
 
-    implementation(project(":tw-spi-cloud"))
+    implementation(project(":tw-spi"))
     implementation(project(":tw-core"))
     implementation(libs.bundles.spring.base)
     implementation(platform(libs.spring.cloud))

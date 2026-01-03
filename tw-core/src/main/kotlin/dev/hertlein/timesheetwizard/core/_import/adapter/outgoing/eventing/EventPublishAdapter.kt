@@ -1,14 +1,12 @@
 package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.eventing
 
+import com.google.common.eventbus.EventBus
 import dev.hertlein.timesheetwizard.core._import.domain.model.ImportTimesheet
 import dev.hertlein.timesheetwizard.core._import.domain.port.EventPublishPort
-import org.springframework.context.ApplicationEventPublisher
-import org.springframework.stereotype.Component
 
-@Component
-internal class EventPublishAdapter(val eventPublisher: ApplicationEventPublisher) : EventPublishPort {
+internal class EventPublishAdapter(private val eventBus: EventBus) : EventPublishPort {
 
     override fun publish(timesheet: ImportTimesheet) {
-        eventPublisher.publishEvent(timesheet)
+        eventBus.post(timesheet)
     }
 }

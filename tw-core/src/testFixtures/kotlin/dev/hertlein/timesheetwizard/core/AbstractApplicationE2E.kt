@@ -1,5 +1,6 @@
 package dev.hertlein.timesheetwizard.core
 
+import org.apache.http.HttpHeaders
 import org.apache.http.entity.ContentType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
@@ -15,8 +16,7 @@ import org.mockserver.model.Headers
 import org.mockserver.model.HttpRequest
 import org.mockserver.model.HttpResponse
 import org.mockserver.model.JsonBody
-import org.springframework.test.context.DynamicPropertyRegistry
-import org.springframework.test.context.DynamicPropertySource
+import org.testcontainers.shaded.com.google.common.net.MediaType
 import java.io.File
 import java.nio.file.Path
 import java.util.concurrent.TimeUnit
@@ -28,16 +28,7 @@ const val MOCK_SERVER_PORT = 1081
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 open class AbstractApplicationE2E {
 
-    companion object {
 
-        @DynamicPropertySource
-        @JvmStatic
-        fun clockifyProperties(registry: DynamicPropertyRegistry) {
-            registry.add("timesheet-wizard.import.clockify.reports-url", { "$MOCK_SERVER_HOST:$MOCK_SERVER_PORT" })
-            registry.add("timesheet-wizard.import.clockify.api-key", { "an-api-key" })
-            registry.add("timesheet-wizard.import.clockify.workspace-id", { "a-workspace-id" })
-        }
-    }
 
     private lateinit var mockServer: ClientAndServer
 
@@ -83,7 +74,7 @@ open class AbstractApplicationE2E {
         expectedFilenames.forEach {
             val bytes = downloadFromStorage("${it.first}${it.second}")
             storeLocally(it, bytes)
-            assertThat(bytes.size).isGreaterThan(0)
+            assertThat(bytes).isNotEmpty
         }
     }
 
@@ -105,7 +96,7 @@ open class AbstractApplicationE2E {
                 .withPath("/workspaces/a-workspace-id/reports/detailed")
                 .withBody(JsonBody.json(requestBody, MatchType.STRICT))
                 .withHeader("X-Api-Key", "an-api-key")
-                .withHeader("accept", ContentType.APPLICATION_JSON.mimeType),
+                .withHeader(HttpHeaders.ACCEPT, MediaType.JSON_UTF_8.toString()),
             Times.exactly(1)
         ).respond(
             HttpResponse.response()
@@ -114,7 +105,7 @@ open class AbstractApplicationE2E {
                 .withDelay(TimeUnit.SECONDS, 1)
                 .withHeaders(
                     Headers(
-                        Header.header("content-type", ContentType.APPLICATION_JSON.mimeType)
+                        Header.header(HttpHeaders.CONTENT_TYPE, MediaType.JSON_UTF_8.toString())
                     )
                 )
         )

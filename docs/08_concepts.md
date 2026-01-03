@@ -14,5 +14,5 @@ recognized, an email is sent to Tino's email-address. No further error-handling 
 
 ## Persistence
 
-Cloud storage is used to store data objects - being it 'final' XLSX, PDF or CSV files or 'intermediate' data objects like
-json-representations of the imported timesheets. In case of AWS it's S3, in case of Azure it's Azure Blob Storage.
+Cloud storage is used to store data objects – being it 'final' XLSX, PDF or CSV files or 'intermediate' data objects like
+json-representations of the imported timesheets. In the case of AWS it's S3, in the case of Azure it's Azure Blob Storage.

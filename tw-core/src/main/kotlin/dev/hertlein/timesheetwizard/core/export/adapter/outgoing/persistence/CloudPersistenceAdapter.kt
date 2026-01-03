@@ -4,11 +4,9 @@ import dev.hertlein.timesheetwizard.core.export.domain.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.core.export.domain.port.PersistencePort
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import mu.KotlinLogging
-import org.springframework.stereotype.Component
 
 private val logger = KotlinLogging.logger {}
 
-@Component
 internal class CloudPersistenceAdapter(
     private val cloudPersistence: CloudPersistence,
     private val filenameFactory: FilenameFactory

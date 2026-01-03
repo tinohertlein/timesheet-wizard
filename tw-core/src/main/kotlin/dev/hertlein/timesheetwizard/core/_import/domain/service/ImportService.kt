@@ -4,7 +4,6 @@ import dev.hertlein.timesheetwizard.core._import.domain.model.ImportParams
 import dev.hertlein.timesheetwizard.core._import.domain.port.EventPublishPort
 import dev.hertlein.timesheetwizard.core._import.domain.port.TimesheetSourcePort
 import mu.KotlinLogging
-import org.springframework.stereotype.Service
 
 private val logger = KotlinLogging.logger {}
 
@@ -12,7 +11,6 @@ interface ImportService {
     fun import(importParams: ImportParams)
 }
 
-@Service
 internal class ImportServiceImpl(
     private val customerFactory: CustomerFactory,
     private val dateTimeFactory: DateTimeFactory,

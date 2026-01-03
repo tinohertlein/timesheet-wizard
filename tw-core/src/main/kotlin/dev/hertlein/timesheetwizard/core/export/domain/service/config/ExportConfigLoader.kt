@@ -4,12 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import mu.KotlinLogging
-import org.springframework.cache.annotation.Cacheable
-import org.springframework.stereotype.Component
 
 private val logger = KotlinLogging.logger {}
 
-@Component
 internal class ExportConfigLoader(
     private val cloudPersistence: CloudPersistence,
     private val objectMapper: ObjectMapper
@@ -17,7 +14,6 @@ internal class ExportConfigLoader(
 
     private val configuration by lazy { loadConfiguration() }
 
-    @Cacheable("export-config")
     fun loadExportConfig(customerId: String): List<ExportConfig> {
         return configuration
             .filter { it.customerId == customerId }

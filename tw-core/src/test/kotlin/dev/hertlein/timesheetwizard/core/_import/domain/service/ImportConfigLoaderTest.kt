@@ -1,27 +1,18 @@
 package dev.hertlein.timesheetwizard.core._import.domain.service
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
-import dev.hertlein.timesheetwizard.core.TestApplication
 import dev.hertlein.timesheetwizard.core._import.domain.model.Customer
-import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
+import dev.hertlein.timesheetwizard.core.util.TestFixture
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 
 @DisplayName("ImportConfigLoader")
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@SpringBootTest(classes = [TestApplication::class])
-internal class ImportConfigLoaderIT {
+internal class ImportConfigLoaderTest {
 
-    @Autowired
-    private lateinit var cloudPersistence: CloudPersistence
-
-    @Autowired
-    private lateinit var configLoader: ImportConfigLoader
+    private val cloudPersistence = TestFixture.App.cloudPersistenceInMemory
+    private val configLoader = ImportConfigLoader(cloudPersistence, TestFixture.App.objectMapper)
 
     @BeforeEach
     fun setup() {

@@ -15,12 +15,12 @@
 | OC2 | Time schedule                     | Start is during my time-off in summer 2022. The Timesheet-Wizard should be usable by autumn 2022 when starting to work for clients.        |
 | OC3 | Technical setup                   | Docker, AWS-SAM, Java 21 are mandatory for local testing.                                                                                  |
 | OC4 | Configuration and version control | Store source code in a public Github repo. Follow infrastructure-as-code via e.g. AWS Cloud Formation. Realize CI/CD using Github Actions. |
-| OC5 | Testing                           | Use Detekt, JUnit, AssertJ, RestAssured, Mockk, Testcontainers.                                                                            |
+| OC5 | Testing                           | Use JUnit, AssertJ, RestAssured, Mockk, Testcontainers, ArchUnit.                                                                          |
 
 ## Conventions
 
 | Nr | Constraint                 | Explanation                                                  |                                                                          
 |----|----------------------------|--------------------------------------------------------------|
 | C1 | Architecture documentation | Use arc42 with Markdown files.                               |
-| C2 | Coding conventions         | Use Kotlin Coding Conventions given by Detekt.               |
+| C2 | Coding conventions         | Use Kotlin Coding Conventions.                               |
 | C3 | Language                   | English. Coding & Documenting in German feels totally weird. |

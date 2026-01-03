@@ -7,11 +7,9 @@ import dev.hertlein.timesheetwizard.core.export.domain.service.config.ExportConf
 import dev.hertlein.timesheetwizard.core.export.domain.service.strategy.ExportStrategy
 import lombok.SneakyThrows
 import mu.KotlinLogging
-import org.springframework.stereotype.Service
 
 private val logger = KotlinLogging.logger {}
 
-@Service
 internal class ExportService(
     private val exportConfigLoader: ExportConfigLoader,
     private val availableExportStrategies: List<ExportStrategy>,

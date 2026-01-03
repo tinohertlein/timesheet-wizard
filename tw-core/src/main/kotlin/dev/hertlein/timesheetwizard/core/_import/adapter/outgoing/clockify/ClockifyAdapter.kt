@@ -2,7 +2,7 @@ package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify
 
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyId
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.config.ClockifyIdsLoader
-import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.ReportClient
+import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.HttpReportClient
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.RequestBody
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.RequestBodyFactory
 import dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report.ResponseBodyMapper
@@ -10,15 +10,13 @@ import dev.hertlein.timesheetwizard.core._import.domain.model.Customer
 import dev.hertlein.timesheetwizard.core._import.domain.model.ImportTimesheet
 import dev.hertlein.timesheetwizard.core._import.domain.port.TimesheetSourcePort
 import mu.KotlinLogging
-import org.springframework.stereotype.Component
 import java.time.LocalDate
 
 private val logger = KotlinLogging.logger {}
 
-@Component
 internal class ClockifyAdapter(
     private val clockifyIdsLoader: ClockifyIdsLoader,
-    private val reportClient: ReportClient,
+    private val reportClient: HttpReportClient,
     private val requestBodyFactory: RequestBodyFactory,
     private val entityMapper: ResponseBodyMapper
 ) : TimesheetSourcePort {

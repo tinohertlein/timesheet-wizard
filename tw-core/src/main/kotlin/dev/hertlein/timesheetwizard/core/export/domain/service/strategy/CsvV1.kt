@@ -4,7 +4,6 @@ import com.opencsv.CSVWriter
 import com.opencsv.ICSVWriter
 import dev.hertlein.timesheetwizard.core.export.domain.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.export.domain.model.TimesheetDocument
-import org.springframework.stereotype.Component
 import java.io.ByteArrayOutputStream
 import java.io.OutputStreamWriter
 import java.time.LocalDate
@@ -17,7 +16,6 @@ import java.util.Locale
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
 
-@Component
 internal class CsvV1 : ExportStrategy {
 
     companion object {

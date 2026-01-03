@@ -3,12 +3,9 @@ package dev.hertlein.timesheetwizard.core
 import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.core.importer.ImportOption
 import com.tngtech.archunit.library.Architectures.layeredArchitecture
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import org.springframework.modulith.core.ApplicationModules
-import org.springframework.modulith.docs.Documenter
 
 @DisplayName("Architecture")
 class ArchitectureTest {
@@ -17,21 +14,24 @@ class ArchitectureTest {
     inner class Modules {
 
         private val basePackage = "dev.hertlein.timesheetwizard.core"
-        private val modules = ApplicationModules.of(TestApplication::class.java)
 
         @Test
-        fun `should have no dependencies on each other`() {
-            modules.forEach { println(it) }
-            modules.verify()
-        }
+        fun `import and export should have no dependencies on each other`() {
+            val classes = ClassFileImporter()
+                .withImportOption(ImportOption.DoNotIncludeTests())
+                .importPackages(basePackage)
 
-        @Test
-        @Disabled("Disabled by default, as there is no need to generate module documentation with each build.")
-        fun `can be used for module documentation generation`() {
-            // Please find the output in directory tw-core/build/spring-modulith-docs
-            Documenter(modules)
-                .writeModulesAsPlantUml()
-                .writeIndividualModulesAsPlantUml();
+            layeredArchitecture()
+                .consideringAllDependencies()
+
+                .layer("Import").definedBy(".._import..")
+                .layer("Export").definedBy("..export..")
+                .layer("Anticorruption").definedBy("..anticorruption..")
+
+                .whereLayer("Import").mayOnlyBeAccessedByLayers("Anticorruption")
+                .whereLayer("Export").mayOnlyBeAccessedByLayers("Anticorruption")
+
+                .check(classes)
         }
 
         @Nested

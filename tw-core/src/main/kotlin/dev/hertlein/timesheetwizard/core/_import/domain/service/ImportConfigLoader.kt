@@ -5,12 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import dev.hertlein.timesheetwizard.core._import.domain.model.Customer
 import dev.hertlein.timesheetwizard.spi.cloud.CloudPersistence
 import mu.KotlinLogging
-import org.springframework.cache.annotation.Cacheable
-import org.springframework.stereotype.Component
 
 private val logger = KotlinLogging.logger {}
 
-@Component
 internal class ImportConfigLoader(
     private val cloudPersistence: CloudPersistence,
     private val objectMapper: ObjectMapper
@@ -18,7 +15,6 @@ internal class ImportConfigLoader(
 
     private val configuration by lazy { loadConfiguration() }
 
-    @Cacheable("customers")
     fun loadCustomers(): List<Customer> {
         return configuration
             .map { Customer.of(it.customerId, it.customerName, it.enabled) }

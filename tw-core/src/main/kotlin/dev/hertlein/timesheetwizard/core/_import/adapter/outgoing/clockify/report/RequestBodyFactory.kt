@@ -1,12 +1,10 @@
 package dev.hertlein.timesheetwizard.core._import.adapter.outgoing.clockify.report
 
-import org.springframework.stereotype.Component
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
-@Component
 internal class RequestBodyFactory {
 
     fun requestBodyFrom(clockifyId: String, dateRange: ClosedRange<LocalDate>): RequestBody {
@@ -19,12 +17,10 @@ internal class RequestBodyFactory {
     }
 
     private fun toDateTimeRange(range: ClosedRange<LocalDate>) =
-        LocalDateTime.of(range.start, LocalTime.MIN)..
-                LocalDateTime.of(range.endInclusive, LocalTime.MAX)
+        LocalDateTime.of(range.start, LocalTime.MIN)..LocalDateTime.of(range.endInclusive, LocalTime.MAX)
 
     private fun toStringRange(range: ClosedRange<LocalDateTime>) =
-        format(range.start)..
-                format(range.endInclusive)
+        format(range.start)..format(range.endInclusive)
 
     private fun format(dateTime: LocalDateTime): String = dateTime.format(DateTimeFormatter.ISO_DATE_TIME)
 }

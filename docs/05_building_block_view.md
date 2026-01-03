@@ -6,12 +6,12 @@ The Timesheet-Wizard consists of the following Gradle subprojects:
 
 ![Static-level-1](assets/static-level-1.drawio.png "Static-level-1")
 
-- **tw-cloud-spi**: the service provider interface to be implemented for any cloud specific things. Like e.g. uploading
+- **tw-spi**: the service provider interface to be implemented for any cloud specific things. Like e.g. uploading
   timesheets to some cloud storage.
 - **tw-core**: the core module that contains the business logic. This subproject is cloud-agnostic.
-- **tw-app-aws**: implements the interfaces of tw-cloud-spi with AWS specific code and also bundles the cloud-agnostic
+- **tw-app-aws**: implements the interfaces of tw-spi with AWS specific code and also bundles the cloud-agnostic
   tw-core with AWS specific things to an AWS Lambda function.
-- **tw-app-azure**: implements the interfaces of tw-cloud-spi with Azure specific code and also bundles the
+- **tw-app-azure**: implements the interfaces of tw-spi with Azure specific code and also bundles the
   cloud-agnostic tw-core with Azure specific things to an Azure function.
 
 ## Level 2
