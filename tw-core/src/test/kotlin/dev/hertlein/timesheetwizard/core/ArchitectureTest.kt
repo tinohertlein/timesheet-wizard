@@ -78,12 +78,12 @@ class ArchitectureTest {
                     .layer("Domain Model").definedBy("..domain.model..")
                     .layer("Domain Services").definedBy("..domain.service..")
                     .layer("Domain Ports").definedBy("..domain.port..")
-                    .layer("Persistence Adapter").definedBy("..adapter.outgoing.persistence..")
+                    .layer("Repository Adapter").definedBy("..adapter.outgoing.repository..")
                     .layer("Eventing Adapter").definedBy("..adapter.incoming.eventing..")
 
                     .whereLayer("Domain Services").mayOnlyBeAccessedByLayers("Eventing Adapter")
-                    .whereLayer("Domain Ports").mayOnlyBeAccessedByLayers("Domain Services", "Persistence Adapter")
-                    .whereLayer("Persistence Adapter").mayNotBeAccessedByAnyLayer()
+                    .whereLayer("Domain Ports").mayOnlyBeAccessedByLayers("Domain Services", "Repository Adapter")
+                    .whereLayer("Repository Adapter").mayNotBeAccessedByAnyLayer()
                     .whereLayer("Eventing Adapter").mayNotBeAccessedByAnyLayer()
 
                     .check(classes)

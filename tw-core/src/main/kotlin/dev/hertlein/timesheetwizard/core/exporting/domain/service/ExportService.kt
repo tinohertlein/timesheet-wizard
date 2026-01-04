@@ -1,7 +1,7 @@
 package dev.hertlein.timesheetwizard.core.exporting.domain.service
 
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
-import dev.hertlein.timesheetwizard.core.exporting.domain.port.PersistencePort
+import dev.hertlein.timesheetwizard.core.exporting.domain.port.RepositoryPort
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.config.ExportConfig
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.config.ExportConfigLoader
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.ExportStrategy
@@ -13,7 +13,7 @@ private val logger = KotlinLogging.logger {}
 internal class ExportService(
     private val exportConfigLoader: ExportConfigLoader,
     private val availableExportStrategies: List<ExportStrategy>,
-    private val persistencePort: PersistencePort
+    private val repositoryPort: RepositoryPort
 ) {
 
     @SneakyThrows
@@ -33,7 +33,7 @@ internal class ExportService(
         } else {
             applicableExportStrategiesForCustomer.forEach { strategy ->
                 val timesheetDocument = strategy.first.create(strategy.second.params, timesheet)
-                persistencePort.save(timesheetDocument)
+                repositoryPort.save(timesheetDocument)
             }
         }
     }

@@ -1,16 +1,16 @@
-package dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.persistence
+package dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository
 
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.TimesheetDocument
-import dev.hertlein.timesheetwizard.core.exporting.domain.port.PersistencePort
+import dev.hertlein.timesheetwizard.core.exporting.domain.port.RepositoryPort
 import dev.hertlein.timesheetwizard.spi.cloud.Repository
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-internal class CloudPersistenceAdapter(
+internal class RepositoryAdapter(
     private val repository: Repository,
     private val filenameFactory: FilenameFactory
-) : PersistencePort {
+) : RepositoryPort {
 
     override fun save(timesheetDocument: TimesheetDocument) {
         logger.debug { "Persisting document of type '${timesheetDocument.type}' ..." }

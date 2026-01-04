@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.persistence
+package dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository
 
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.TimesheetDocument
 

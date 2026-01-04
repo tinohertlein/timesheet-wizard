@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.google.common.eventbus.EventBus
-import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.persistence.CloudPersistenceAdapter
-import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.persistence.FilenameFactory
+import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository.RepositoryAdapter
+import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository.FilenameFactory
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.ExportService
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.config.ExportConfigLoader
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.CsvV1
@@ -67,9 +67,9 @@ object Core {
         repository: Repository,
         objectMapper: ObjectMapper
     ): ExportService {
-        val persistencePort = CloudPersistenceAdapter(repository, FilenameFactory())
+        val repositoryAdapter = RepositoryAdapter(repository, FilenameFactory())
         val exportConfigLoader = ExportConfigLoader(repository, objectMapper)
-        val exportService = ExportService(exportConfigLoader, listOf(CsvV1(), PdfV1(), XlsxV1(), XlsxV2()), persistencePort)
+        val exportService = ExportService(exportConfigLoader, listOf(CsvV1(), PdfV1(), XlsxV1(), XlsxV2()), repositoryAdapter)
         return exportService
     }
 }
