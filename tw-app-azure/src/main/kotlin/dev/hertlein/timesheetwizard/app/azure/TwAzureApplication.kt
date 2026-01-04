@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Bean
 class TwAzureApplication {
 
     @Bean
+    fun cloudFunctionJsonMapper() = Core.objectMapper
+
+    @Bean
     fun eventBus(repository: AzureBlobStorageRepository, clockifyConfig: AzureClockifyConfig) = Core.bootstrap(repository, clockifyConfig)
 }
 
