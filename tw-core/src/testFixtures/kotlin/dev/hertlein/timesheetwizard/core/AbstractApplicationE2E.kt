@@ -28,20 +28,18 @@ const val MOCK_SERVER_PORT = 1081
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 open class AbstractApplicationE2E {
 
-
-
     private lateinit var mockServer: ClientAndServer
 
     @TempDir(cleanup = CleanupMode.ALWAYS)
     lateinit var tempDir: Path
 
     @BeforeAll
-    fun beforeAll() {
+    open fun beforeAll() {
         mockServer = ClientAndServer.startClientAndServer(MOCK_SERVER_PORT)
     }
 
     @AfterAll
-    fun afterAll() {
+    open fun afterAll() {
         mockServer.stop()
     }
 

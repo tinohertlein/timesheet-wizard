@@ -2,22 +2,35 @@ package dev.hertlein.timesheetwizard.app.aws
 
 import dev.hertlein.timesheetwizard.spi.cloud.Repository
 import mu.KotlinLogging
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.context.annotation.Primary
 import software.amazon.awssdk.core.sync.RequestBody
+import software.amazon.awssdk.regions.Region
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.GetObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
 
 private val logger = KotlinLogging.logger {}
 
-@org.springframework.stereotype.Repository
-@Primary
 class AwsS3Repository(
     private val s3Client: S3Client,
-    @Value("\${timesheet-wizard.aws.s3.bucket}")
     private val bucket: String,
 ) : Repository {
+
+    init {
+        require(bucket.isNotBlank())
+    }
+
+    companion object {
+
+        fun fromProperties() = PropertiesLoader.properties.let {
+            val bucket = it.getProperty("timesheet-wizard.aws.s3.bucket", "")
+            require(bucket.isNotBlank())
+            val region = it.getProperty("timesheet-wizard.aws.s3.region", "")
+            require(region.isNotBlank())
+            val s3Client = S3Client.builder().region(Region.of(region)).build()
+
+            AwsS3Repository(s3Client, bucket)
+        }
+    }
 
     override fun type(): String = "S3"
 

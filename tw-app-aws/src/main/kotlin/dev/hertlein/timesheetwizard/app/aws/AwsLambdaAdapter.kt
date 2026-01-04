@@ -1,19 +1,30 @@
 package dev.hertlein.timesheetwizard.app.aws
 
+import com.amazonaws.services.lambda.runtime.Context
+import com.amazonaws.services.lambda.runtime.RequestStreamHandler
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.common.eventbus.EventBus
+import dev.hertlein.timesheetwizard.core.anticorruption.Core
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
-import org.springframework.stereotype.Component
-import java.util.function.Consumer
+import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
+import java.io.BufferedReader
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.io.OutputStream
 
-@Component
+
 class AwsLambdaAdapter(
-    private val objectMapper: ObjectMapper,
-    private val eventBus: EventBus
-) : Consumer<String> {
+    clockifyConfig: ClockifyConfig = AwsClockifyConfig.fromPropertiesAndEnv(),
+    repository: AwsS3Repository = AwsS3Repository.fromProperties(),
+    private val eventBus: EventBus = Core.bootstrap(repository, clockifyConfig),
+) : RequestStreamHandler {
 
-    override fun accept(input: String) {
-        eventBus.post(toInputParams(input))
+    private val objectMapper: ObjectMapper = Core.objectMapper
+
+    override fun handleRequest(input: InputStream, output: OutputStream?, context: Context?) {
+        BufferedReader(InputStreamReader(input, Charsets.US_ASCII)).use {
+            eventBus.post(toInputParams(it.readText()))
+        }
     }
 
     private fun toInputParams(input: String): ImportParams {

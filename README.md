@@ -17,32 +17,32 @@ following main features of Timesheet-Wizard:
 
 As a freelance Software-Engineer & -Architect doing mostly time & material contracting, tracking my working hours is
 quite essential. To ease this, I'm using [Clockify](https://clockify.me/). It's an awesome tool with a nice UI that
-allows me to track and also categorize my working hours. Besides supporting some Excel-reports out of the box, it also
+allows me to track and also categorize my working hours. Besides supporting some Excel reports out of the box, it also
 provides an API to export reports in JSON format as well.
 
-In order to have the freedom to customize the reports as much as I like and to transfer these reports automatically to
+To have the freedom to customize the reports as much as I like and to transfer these reports automatically to
 other tools, I decided to create my own little application allowing me to do that: the Timesheet-Wizard.
 
 In addition to the business motivation mentioned above, this is also a perfect opportunity to play around with
 technology in the [function-as-a-service](https://en.wikipedia.org/wiki/Function_as_a_service) territory. That's the
-reason, why the Timesheet Wizard is bundled and deployed to multiple hyperscalers - at the moment it's
+reason why the Timesheet Wizard is bundled and deployed to multiple hyperscalers – at the moment it's
 only [AWS Lambda](https://aws.amazon.com/de/lambda) & [Azure
 Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview?pivots=programming-language-java).
 
 ## Documentation
 
-A more verbose documentation of the architecture following [arc42](https://arc42.org/) can be found in
+More verbose documentation of the architecture following [arc42](https://arc42.org/) can be found in
 the [doc-folder](docs/README.md).
 
 ### TL;DR
 
 #### The Timesheet-Wizard is
 
-- a Spring Boot application
 - written in Kotlin
 - built with Gradle
 - deployed continuously to the cloud using [GitHub Actions](https://github.com/features/actions)
-- running as **AWS Lambda** function and also as **Azure Function**
+- running as **AWS Lambda** without any Web framework
+- running as **Azure Function** with Spring Boot Web Framework
 - following the infrastructure-as-code-approach with provisioning
   via [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc1=h_ls)
   and [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep)
@@ -59,7 +59,7 @@ the [doc-folder](docs/README.md).
   vendors (e.g. AWS, Azure, GCP, ...) easily. This subproject is also
   framework-agnostic to switch web frameworks (e.g. Spring Boot, Quarkus,...) easily.
 - **tw-app-aws**: implements the interfaces defined in `tw-spi` with AWS specific code and also bundles the `tw-core`
-  with AWS specific things to a Spring Boot AWS Lambda function.
+  with AWS specific things to an AWS Lambda function.
 - **tw-app-azure**: implements the interfaces defined in `tw-spi` with Azure specific code and also bundles the
   `tw-core` with Azure specific things to a Spring Boot Azure Function.
 
@@ -89,9 +89,9 @@ and sending application events.
 - Java 21+
 - Gradle
 - Docker (for tests using testcontainers)
-- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) -
+- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) –
   for building & invoking as AWS Lambda on local machine
-- [Azure Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=linux%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-java#install-the-azure-functions-core-tools) -
+- [Azure Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=linux%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-java#install-the-azure-functions-core-tools) –
   for building & invoking as Azure Function App on local machine
 
 ### Build & test
@@ -100,20 +100,7 @@ and sending application events.
 
 ### Run
 
-#### as AWS Lambda with AWS SAM CLI on local machine
-
-- Emulate S3 storage with Minio in [docker-compose.yml](docker-compose.yml)
-- Create & upload configuration files to local S3
-    - Example files are shown [here](config/public/)
-- Replace placeholders
-  in [tw-app-aws/requests/public/env.json](tw-app-aws/requests/public/env.json) with your keys
-- Set import params in [tw-app-aws/requests/public/event.json](tw-app-aws/requests/public/event.json)
-- Build the AWS Lambda function
-  locally: [tw-app-aws/requests/public/build.sh](tw-app-aws/requests/public/build.sh)
-- Invoke the AWS Lambda function
-  locally: [tw-app-aws/requests/public/invoke-local.sh](tw-app-aws/requests/public/invoke-local.sh)
-
-#### as Azure Function App on local machine
+#### as Azure Function App on a local machine
 
 - Emulate Azure Blob Storage with Azureite in [docker-compose.yml](docker-compose.yml)
 - Create & upload configuration files to local Azure Storage to `tw-sheets/config`

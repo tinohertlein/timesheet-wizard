@@ -2,10 +2,11 @@ package dev.hertlein.timesheetwizard.core.anticorruption
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.google.common.eventbus.EventBus
-import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository.RepositoryAdapter
 import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository.FilenameFactory
+import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository.RepositoryAdapter
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.ExportService
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.config.ExportConfigLoader
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.CsvV1
@@ -30,11 +31,14 @@ import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.Eve
 
 object Core {
 
+    val objectMapper = ObjectMapper().apply {
+        registerKotlinModule()
+        configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+        configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+        configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false)
+    }
+
     fun bootstrap(repository: Repository, clockifyConfig: ClockifyConfig): EventBus {
-        val objectMapper = ObjectMapper().apply {
-            registerKotlinModule()
-            configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        }
         val eventBus = EventBus()
 
         val importService = bootstrapImportService(clockifyConfig, objectMapper, repository, eventBus)

@@ -9,14 +9,18 @@ mock-server = "5.15.0"
 opencsv = "5.12.0"
 poi = "5.5.1"
 jasper = "7.0.3"
+aws-lambda-java-log4j2 = "1.6.0"
+log4j = "2.25.3"
+slf4j = "2.0.17"
+aws-sdk = "2.41.1"
+aws-lambda-java-core = "1.4.0"
+aws-lambda-java-events = "3.16.1"
 spring-boot = "3.5.8"
 azure = "1.16.1"
 spring-cloud = "2025.0.0"
-spring-cloud-aws = "3.4.1"
 spring-cloud-azure = "6.1.0"
 spring-dependency-management = "1.1.7"
 spring-thin = "1.0.31.RELEASE"
-shadow = "9.3.0"
 semver = "0.17.1"
 logstash-encoder = "9.0"
 javaagent = "0.10.0"
@@ -25,6 +29,7 @@ rest-assured = "6.0.0"
 assertj = "3.27.6"
 testcontainers = "1.21.4"
 archunit = "1.4.1"
+
 
 [libraries]
 ## Base
@@ -50,13 +55,16 @@ spring-cloud-function-context = { module = "org.springframework.cloud:spring-clo
 spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 
-## AWS
-spring-cloud-aws = { module = "io.awspring.cloud:spring-cloud-aws-dependencies", version.ref = "spring-cloud-aws" }
-spring-cloud-function-adapter-aws = { module = "org.springframework.cloud:spring-cloud-function-adapter-aws" }
-spring-cloud-aws-starter = { module = "io.awspring.cloud:spring-cloud-aws-starter" }
-spring-cloud-aws-starter-s3 = { module = "io.awspring.cloud:spring-cloud-aws-starter-s3" }
+## AWS Vanilla
+aws-lambda-java-log4j2 = { module = "com.amazonaws:aws-lambda-java-log4j2", version.ref = "aws-lambda-java-log4j2" }
+aws-sdk-bom = { module = "software.amazon.awssdk:bom", version.ref = "aws-sdk" }
+log4j-slf4j2-impl = { module = "org.apache.logging.log4j:log4j-slf4j2-impl", version.ref = "log4j" }
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+aws-sdk-s3 = { module = "software.amazon.awssdk:s3" }
+aws-lambda-java-core = { module = "com.amazonaws:aws-lambda-java-core", version.ref = "aws-lambda-java-core" }
+aws-lambda-java-events = { module = "com.amazonaws:aws-lambda-java-events", version.ref = "aws-lambda-java-events" }
 
-## Azure
+## Azure Spring
 spring-cloud-azure = { module = "com.azure.spring:spring-cloud-azure-dependencies", version.ref = "spring-cloud-azure" }
 spring-cloud-function-adapter-azure = { module = "org.springframework.cloud:spring-cloud-function-adapter-azure" }
 spring-cloud-azure-starter-storage = { module = "com.azure.spring:spring-cloud-azure-starter-storage-blob" }
@@ -80,8 +88,8 @@ archunit = { module = "com.tngtech.archunit:archunit", version.ref = "archunit" 
 export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt"]
 spring-base = ["spring-boot-dependencies", "spring-boot-starter", "spring-boot-starter-web"]
 spring-cloud = ["spring-cloud-function-context"]
-spring-cloud-aws = ["spring-cloud-function-adapter-aws", "spring-cloud-aws-starter", "spring-cloud-aws-starter-s3"]
 spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure-starter-storage", "logstash-encoder"]
+vanilla-aws = ["log4j-slf4j2-impl", "slf4j-api", "aws-sdk-s3", "aws-lambda-java-core", "aws-lambda-java-events"]
 
 ## Test
 testing = ["assertj", "mockk", "mockserver-netty", "mockserver-client", "kotlin-junit", "rest-assured", "testcontainers-mockserver", "archunit"]
@@ -95,7 +103,6 @@ kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "ko
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
 spring-thin = { id = "org.springframework.boot.experimental.thin-launcher", version.ref = "spring-thin" }
-shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 semver = { id = "com.github.jmongard.git-semver-plugin", version.ref = "semver" }
 azure = { id = "com.microsoft.azure.azurefunctions", version.ref = "azure" }
 javaagent-test = { id = "com.ryandens.javaagent-test", version.ref = "javaagent" }

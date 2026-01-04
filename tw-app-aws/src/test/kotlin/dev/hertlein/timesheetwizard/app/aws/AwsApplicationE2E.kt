@@ -1,47 +1,48 @@
 package dev.hertlein.timesheetwizard.app.aws
 
 import dev.hertlein.timesheetwizard.app.aws.util.S3Operations
-import dev.hertlein.timesheetwizard.app.aws.util.TestProfiles.TESTCONTAINERS
 import dev.hertlein.timesheetwizard.app.aws.util.TestcontainersConfiguration
 import dev.hertlein.timesheetwizard.core.AbstractApplicationE2E
 import dev.hertlein.timesheetwizard.core.MOCK_SERVER_HOST
 import dev.hertlein.timesheetwizard.core.MOCK_SERVER_PORT
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.Import
-import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.DynamicPropertyRegistry
-import org.springframework.test.context.DynamicPropertySource
 import software.amazon.awssdk.services.s3.S3Client
 
 @DisplayName("AWS Application")
-@SpringBootTest
-@ActiveProfiles(TESTCONTAINERS)
-@Import(TestcontainersConfiguration::class)
 class AwsApplicationE2E : AbstractApplicationE2E() {
 
-    companion object {
+    private lateinit var bucket: String
+    private lateinit var s3Client: S3Client
+    private val localStackContainer = TestcontainersConfiguration.localStackContainer()
 
-        @DynamicPropertySource
-        @JvmStatic
-        fun clockifyProperties(registry: DynamicPropertyRegistry) {
-            registry.add("timesheet-wizard.import.clockify.reports-url", { "$MOCK_SERVER_HOST:$MOCK_SERVER_PORT" })
-            registry.add("timesheet-wizard.import.clockify.api-key", { "an-api-key" })
-            registry.add("timesheet-wizard.import.clockify.workspace-id", { "a-workspace-id" })
-        }
-    }
-
-    @Autowired
     private lateinit var awsLambdaAdapter: AwsLambdaAdapter
 
-    @Autowired
-    private lateinit var s3Client: S3Client
+    @BeforeAll
+    override fun beforeAll() {
+        super.beforeAll()
+        localStackContainer.start()
+    }
 
-    @Value("\${timesheet-wizard.aws.s3.bucket}")
-    private lateinit var bucket: String
+    @AfterAll
+    override fun afterAll() {
+        super.afterAll()
+        localStackContainer.stop()
+    }
+
+    @BeforeEach
+    fun beforeEach() {
+        s3Client = TestcontainersConfiguration.s3Client(localStackContainer)
+        bucket = "tw-sheets"
+
+        awsLambdaAdapter = AwsLambdaAdapter(
+            clockifyConfig = AwsClockifyConfig("$MOCK_SERVER_HOST:$MOCK_SERVER_PORT", "an-api-key", "a-workspace-id"),
+            repository = AwsS3Repository(s3Client, bucket)
+        )
+    }
 
     @Test
     fun `should import and export timesheets to S3`() {
@@ -58,6 +59,10 @@ class AwsApplicationE2E : AbstractApplicationE2E() {
     }
 
     private fun run() {
-        awsLambdaAdapter.accept("""{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}""")
+        awsLambdaAdapter.handleRequest(
+            """{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}""".byteInputStream(Charsets.US_ASCII),
+            null,
+            null
+        )
     }
 }

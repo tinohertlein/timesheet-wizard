@@ -23,14 +23,13 @@ Resources:
       FunctionName: tw-app
       Architectures:
         - !Ref Architecture
-      Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
+      Handler: dev.hertlein.timesheetwizard.app.aws.AwsLambdaAdapter::handleRequest
       Runtime: java21
       CodeUri: ../
       PackageType: Zip
       Environment:
         Variables:
           DISABLE_SIGNAL_HANDLERS: true
-          MAIN_CLASS: dev.hertlein.timesheetwizard.app.aws.TwAwsApplication
           TIMESHEET_WIZARD_IMPORT_CLOCKIFY_API_KEY: !Ref ClockifyApiKey
           TIMESHEET_WIZARD_IMPORT_CLOCKIFY_WORKSPACE_ID: !Ref ClockifyWorkspaceId
       Description: An AWS Lambda function to import timesheet reports from Clockify and export them to various targets in various formats

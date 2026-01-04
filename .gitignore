@@ -48,9 +48,8 @@ build
 /.idea/
 /.kotlin/
 /build-logic/.kotlin/
-/tw-app-aws/src/main/resources/application-confidential.yml
-/tw-app-aws/requests/confidential/
-/tw-app-aws/.aws-sam/
 
+/tw-app-aws/.aws-sam/
+/tw-app-aws/requests/confidential/
 /tw-app-azure/requests/confidential/
 /config/confidential/

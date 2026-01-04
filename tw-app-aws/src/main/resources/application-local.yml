@@ -1,8 +1,0 @@
-spring:
-  cloud:
-    aws:
-      credentials:
-        access-key: minio
-        secret-key: miniosecret
-      s3:
-        endpoint: http://127.0.0.1:9000
