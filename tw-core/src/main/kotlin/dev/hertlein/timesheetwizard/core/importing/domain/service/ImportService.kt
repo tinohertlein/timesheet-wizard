@@ -1,7 +1,7 @@
 package dev.hertlein.timesheetwizard.core.importing.domain.service
 
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
-import dev.hertlein.timesheetwizard.core.importing.domain.port.ImportingFinishedEventPort
+import dev.hertlein.timesheetwizard.core.importing.domain.port.EventPublishPort
 import dev.hertlein.timesheetwizard.core.importing.domain.port.TimesheetSourcePort
 import mu.KotlinLogging
 
@@ -11,7 +11,7 @@ internal class ImportService(
     private val customerFactory: CustomerFactory,
     private val dateTimeFactory: DateTimeFactory,
     private val timesheetSourcePort: TimesheetSourcePort,
-    private val importingFinishedEventPort: ImportingFinishedEventPort
+    private val eventPublishPort: EventPublishPort
 ) {
 
     fun import(importParams: ImportParams) {
@@ -25,7 +25,7 @@ internal class ImportService(
             timesheetSourcePort
                 .fetchTimesheet(customer, dateRange)
                 ?.also { logger.info { "Imported timesheet for customer '${customer.id.value}' and date range $dateRange." } }
-                ?.also { importingFinishedEventPort.publish(it) }
+                ?.also { eventPublishPort.publish(it) }
         }
     }
 }

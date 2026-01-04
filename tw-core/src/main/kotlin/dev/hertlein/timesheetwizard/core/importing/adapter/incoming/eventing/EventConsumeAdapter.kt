@@ -5,7 +5,7 @@ import com.google.common.eventbus.Subscribe
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
 import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportService
 
-internal class ImportingStartedEventAdapter(eventBus: EventBus, private val importService: ImportService) {
+internal class EventConsumeAdapter(eventBus: EventBus, private val importService: ImportService) {
 
     init {
         eventBus.register(this)
