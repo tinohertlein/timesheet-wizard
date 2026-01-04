@@ -18,7 +18,7 @@ following main features of Timesheet-Wizard:
 As a freelance Software-Engineer & -Architect doing mostly time & material contracting, tracking my working hours is
 quite essential. To ease this, I'm using [Clockify](https://clockify.me/). It's an awesome tool with a nice UI that
 allows me to track and also categorize my working hours. Besides supporting some Excel-reports out of the box, it also
-provides an API to export reports in json-format as well.
+provides an API to export reports in JSON format as well.
 
 In order to have the freedom to customize the reports as much as I like and to transfer these reports automatically to
 other tools, I decided to create my own little application allowing me to do that: the Timesheet-Wizard.
