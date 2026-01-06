@@ -2,31 +2,49 @@ package dev.hertlein.timesheetwizard.core
 
 import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.core.importer.ImportOption
+import com.tngtech.archunit.lang.syntax.ArchRuleDefinition
 import com.tngtech.archunit.library.Architectures.layeredArchitecture
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
+private const val BASE_PACKAGE = "dev.hertlein.timesheetwizard.core"
+private const val IMPORTING_PACKAGE = "..importing.."
+private const val EXPORTING_PACKAGE = "..exporting.."
+private const val ANTICORRUPTION_PACKAGE = "..anticorruption.."
+
 @DisplayName("Architecture")
 class ArchitectureTest {
 
-    @Nested
-    inner class Modules {
+    private val classes = ClassFileImporter()
+        .withImportOption(ImportOption.DoNotIncludeTests())
+        .withImportOption(ImportOption.DoNotIncludeGradleTestFixtures())
+        .importPackages(BASE_PACKAGE)
 
-        private val basePackage = "dev.hertlein.timesheetwizard.core"
+    @Nested
+    inner class Classes {
+
+        @Test
+        fun `must reside within their respective domain`() {
+            ArchRuleDefinition.classes().that()
+                .resideInAPackage("$BASE_PACKAGE..")
+                .should()
+                .resideInAnyPackage(IMPORTING_PACKAGE, EXPORTING_PACKAGE, ANTICORRUPTION_PACKAGE)
+                .check(classes)
+        }
+    }
+
+    @Nested
+    inner class Module {
 
         @Test
         fun `import and export should have no dependencies on each other`() {
-            val classes = ClassFileImporter()
-                .withImportOption(ImportOption.DoNotIncludeTests())
-                .importPackages(basePackage)
-
             layeredArchitecture()
                 .consideringAllDependencies()
 
-                .layer("Import").definedBy("..importing..")
-                .layer("Export").definedBy("..exporting..")
-                .layer("Anticorruption").definedBy("..anticorruption..")
+                .layer("Import").definedBy(IMPORTING_PACKAGE)
+                .layer("Export").definedBy(EXPORTING_PACKAGE)
+                .layer("Anticorruption").definedBy(ANTICORRUPTION_PACKAGE)
 
                 .whereLayer("Import").mayOnlyBeAccessedByLayers("Anticorruption")
                 .whereLayer("Export").mayOnlyBeAccessedByLayers("Anticorruption")
@@ -39,25 +57,23 @@ class ArchitectureTest {
 
             @Test
             fun `should adhere to ports & adapters architecture`() {
+                val importing = "$BASE_PACKAGE.importing"
                 val classes = ClassFileImporter()
                     .withImportOption(ImportOption.DoNotIncludeTests())
-                    .importPackages("$basePackage.importing")
+                    .withImportOption(ImportOption.DoNotIncludeGradleTestFixtures())
+                    .importPackages(importing)
 
                 layeredArchitecture()
                     .consideringAllDependencies()
 
-                    .layer("Domain Model").definedBy("..domain.model..")
-                    .layer("Domain Services").definedBy("..domain.service..")
-                    .layer("Domain Ports").definedBy("..domain.port..")
-                    .layer("Clockify Adapter").definedBy("..adapter.outgoing.clockify..")
-                    .layer("Outgoing Eventing Adapter").definedBy("..adapter.outgoing.eventing..")
-                    .layer("Incoming Eventing Adapter").definedBy("..adapter.incoming.eventing..")
+                    .layer("Domain Model").definedBy("$importing.domain.model..")
+                    .layer("Domain Service").definedBy("$importing..domain.service..")
+                    .layer("Domain Port").definedBy("$importing..domain.port..")
+                    .layer("Adapter").definedBy("$importing..adapter..")
 
-                    .whereLayer("Domain Services").mayOnlyBeAccessedByLayers("Incoming Eventing Adapter")
-                    .whereLayer("Domain Ports").mayOnlyBeAccessedByLayers("Domain Services", "Clockify Adapter", "Outgoing Eventing Adapter")
-                    .whereLayer("Clockify Adapter").mayNotBeAccessedByAnyLayer()
-                    .whereLayer("Incoming Eventing Adapter").mayNotBeAccessedByAnyLayer()
-                    .whereLayer("Outgoing Eventing Adapter").mayNotBeAccessedByAnyLayer()
+                    .whereLayer("Domain Service").mayOnlyBeAccessedByLayers("Adapter")
+                    .whereLayer("Domain Port").mayOnlyBeAccessedByLayers("Domain Service", "Adapter")
+                    .whereLayer("Adapter").mayNotBeAccessedByAnyLayer()
 
                     .check(classes)
             }
@@ -68,23 +84,23 @@ class ArchitectureTest {
 
             @Test
             fun `should adhere to ports & adapters architecture`() {
+                val exporting = "$BASE_PACKAGE.exporting"
                 val classes = ClassFileImporter()
                     .withImportOption(ImportOption.DoNotIncludeTests())
-                    .importPackages("$basePackage.exporting")
+                    .withImportOption(ImportOption.DoNotIncludeGradleTestFixtures())
+                    .importPackages(exporting)
 
                 layeredArchitecture()
                     .consideringAllDependencies()
 
-                    .layer("Domain Model").definedBy("..domain.model..")
-                    .layer("Domain Services").definedBy("..domain.service..")
-                    .layer("Domain Ports").definedBy("..domain.port..")
-                    .layer("Repository Adapter").definedBy("..adapter.outgoing.repository..")
-                    .layer("Eventing Adapter").definedBy("..adapter.incoming.eventing..")
+                    .layer("Domain Model").definedBy("$exporting.domain.model..")
+                    .layer("Domain Service").definedBy("$exporting.domain.service..")
+                    .layer("Domain Port").definedBy("$exporting.domain.port..")
+                    .layer("Adapter").definedBy("$exporting.adapter..")
 
-                    .whereLayer("Domain Services").mayOnlyBeAccessedByLayers("Eventing Adapter")
-                    .whereLayer("Domain Ports").mayOnlyBeAccessedByLayers("Domain Services", "Repository Adapter")
-                    .whereLayer("Repository Adapter").mayNotBeAccessedByAnyLayer()
-                    .whereLayer("Eventing Adapter").mayNotBeAccessedByAnyLayer()
+                    .whereLayer("Domain Service").mayOnlyBeAccessedByLayers("Adapter")
+                    .whereLayer("Domain Port").mayOnlyBeAccessedByLayers("Domain Service", "Adapter")
+                    .whereLayer("Adapter").mayNotBeAccessedByAnyLayer()
 
                     .check(classes)
             }

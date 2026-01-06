@@ -18,8 +18,11 @@ The individual parts of importing timesheets and transforming them to other form
 can be updated or even replaced independently of each other. To achieve this, both modules are realized in the Gradle
 subproject `tw-core` as separate
 Kotlin packages on the top level that are not allowed to have
-dependencies on each other. Code that is mapping domain classes from module `importing` to module `exporting` is placed in a
-package `anticorruption`. This is enforced automatically by Architecture tests. (**-> Quality goal QG3**).
+dependencies on each other. Code that is mapping domain classes from module `importing` to module `exporting` is placed
+in a
+package `anticorruption`. This is enforced automatically
+by [Architecture tests](../tw-core/src/test/kotlin/dev/hertlein/timesheetwizard/core/ArchitectureTest.kt). (**-> Quality
+goal QG3**).
 
 This results in three top-level packages:
 
@@ -40,7 +43,8 @@ customer-related stuff is configured via private configuration files.
 
 As the Timesheet-Wizard should be easily extensible, testable and maintainable, both business modules will follow
 a [Ports & Adapters](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)) architecture, to separate domain
-logic and connecting to surrounding systems (**-> Quality goals QG3**).
+logic and connecting to surrounding systems. This is enforced automatically
+by [Architecture tests](../tw-core/src/test/kotlin/dev/hertlein/timesheetwizard/core/ArchitectureTest.kt). (**-> Quality goals QG3**).
 
 For monitoring, logging, error notification and other shared concepts, AWS or Azure systems
 like [AWS CloudWatch](https://aws.amazon.com/cloudwatch/?nc1=h_ls)
