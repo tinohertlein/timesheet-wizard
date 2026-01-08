@@ -24,8 +24,8 @@ internal class ImportService(
             logger.info { "Importing timesheet for customer '${customer.id.value}' and date range $dateRange..." }
             timesheetSourcePort
                 .fetchTimesheet(customer, dateRange)
-                ?.also { logger.info { "Imported timesheet for customer '${customer.id.value}' and date range $dateRange." } }
-                ?.also { eventPublishPort.publish(it) }
+                .also { logger.info { "Imported timesheet for customer '${customer.id.value}' and date range $dateRange." } }
+                .also { eventPublishPort.publish(it) }
         }
     }
 }

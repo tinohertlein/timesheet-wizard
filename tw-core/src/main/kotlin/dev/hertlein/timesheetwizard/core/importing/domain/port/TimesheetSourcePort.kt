@@ -6,5 +6,5 @@ import java.time.LocalDate
 
 internal interface TimesheetSourcePort {
 
-    fun fetchTimesheet(customer: Customer, dateRange: ClosedRange<LocalDate>): ImportTimesheet?
+    fun fetchTimesheet(customer: Customer, dateRange: ClosedRange<LocalDate>): ImportTimesheet
 }

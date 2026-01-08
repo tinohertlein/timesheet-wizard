@@ -23,12 +23,9 @@ internal class ClockifyAdapter(
 
     private val clockifyIds: List<ClockifyId> by lazy { clockifyIdsLoader.loadClockifyIds() }
 
-    override fun fetchTimesheet(customer: Customer, dateRange: ClosedRange<LocalDate>): ImportTimesheet? {
+    override fun fetchTimesheet(customer: Customer, dateRange: ClosedRange<LocalDate>): ImportTimesheet {
         val clockifyId = clockifyIds.firstOrNull { customer.id.value == it.customerId }
-        if (clockifyId == null) {
-            logger.warn { "No Clockify id found for customer id ${customer.id.value}." }
-            return null
-        }
+        require(clockifyId != null) { "No Clockify id found for customer id ${customer.id.value}." }
 
         val requestBody = requestBodyFactory.requestBodyFrom(clockifyId.clockifyId, dateRange)
         val timesheet = ImportTimesheet(customer, dateRange)
@@ -40,7 +37,7 @@ internal class ClockifyAdapter(
         logger.debug { "Fetching report page ${requestBody.page()} from Clockify for customer ${timesheet.customer.id}..." }
         val responseBody = reportClient.fetchReport(requestBody)
         val entries = entityMapper.toTimesheetEntries(responseBody)
-        logger.debug { "Fetched ${entries.size} report entries with page ${requestBody.page()} from Clockify for customer ${timesheet.customer.id}." }
+        logger.debug { "Fetched page ${requestBody.page()} with ${entries.size} report entries from Clockify for customer ${timesheet.customer.id}." }
 
         return if (entries.isEmpty()) {
             timesheet

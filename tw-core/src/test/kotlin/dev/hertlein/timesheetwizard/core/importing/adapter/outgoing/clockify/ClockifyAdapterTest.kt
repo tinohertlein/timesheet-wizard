@@ -18,6 +18,7 @@ import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -58,11 +59,11 @@ class ClockifyAdapterTest {
     }
 
     @BeforeEach
-    fun setup() {
+    fun beforeEach() {
         val clockifyIdsLoader: ClockifyIdsLoader = mockk()
         val clockifyConfig: ClockifyConfig = mockk()
 
-        every { clockifyIdsLoader.loadClockifyIds() } returns listOf(ClockifyId("1000", "62dd35202849d633796f5459"))
+        every { clockifyIdsLoader.loadClockifyIds() } returns listOf(ClockifyId(TestFixture.Import.aCustomer.id.value, ""))
         every { clockifyConfig.reportsUrl } returns "$MOCK_SERVER_HOST:$MOCK_SERVER_PORT"
         every { clockifyConfig.apiKey } returns AN_API_KEY
         every { clockifyConfig.workspaceId } returns A_WORKSPACE_ID
@@ -77,29 +78,33 @@ class ClockifyAdapterTest {
 
     @Test
     fun `should import a timesheet`() {
-        val aCustomer = Customer(Id("1000"), Name("PiedPiper"), true)
-        val startDate = LocalDate.of(2022, 1, 1)
-        val endDate = LocalDate.of(2022, 12, 31)
         prepareClockifyServer(
             "first_clockify_response.json",
             "second_clockify_response.json",
             "third_clockify_response.json"
         )
 
-        val timesheet = clockifyAdapter.fetchTimesheet(aCustomer, startDate..endDate)
+        val timesheet = clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer, TestFixture.Import.aDateRange)
 
         mockServer.verify(HttpRequest.request(), VerificationTimes.exactly(3))
         SoftAssertions().apply {
             assertThat(timesheet).isNotNull
-            assertThat(timesheet?.customer?.id?.value).isEqualTo(aCustomer.id.value)
-            assertThat(timesheet?.customer?.name?.value).isEqualTo(aCustomer.name.value)
-            assertThat(timesheet?.dateRange?.start).isEqualTo(startDate)
-            assertThat(timesheet?.dateRange?.endInclusive).isEqualTo(endDate)
-            assertThat(timesheet?.entries?.get(0)?.duration).isEqualTo(9.hours)
-            assertThat(timesheet?.entries?.get(0)?.tags).containsExactly(ImportTimesheet.Entry.Tag("Remote"))
-            assertThat(timesheet?.entries?.get(1)?.duration).isEqualTo(9.hours)
-            assertThat(timesheet?.entries?.get(1)?.tags).isEmpty()
+            assertThat(timesheet.customer.id.value).isEqualTo(TestFixture.Import.aCustomer.id.value)
+            assertThat(timesheet.customer.name.value).isEqualTo(TestFixture.Import.aCustomer.name.value)
+            assertThat(timesheet.dateRange.start).isEqualTo(TestFixture.Import.aDateRange.start)
+            assertThat(timesheet.dateRange.endInclusive).isEqualTo(TestFixture.Import.aDateRange.endInclusive)
+            assertThat(timesheet.entries[0].duration).isEqualTo(9.hours)
+            assertThat(timesheet.entries[0].tags).containsExactly(ImportTimesheet.Entry.Tag("Remote"))
+            assertThat(timesheet.entries[1].duration).isEqualTo(9.hours)
+            assertThat(timesheet.entries[1].tags).isEmpty()
         }.assertAll()
+    }
+
+    @Test
+    fun `should throw Exception if no Clockify id is found for given customer`() {
+        assertThrows(IllegalArgumentException::class.java) {
+            clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer.copy(id = Id("xxx")), TestFixture.Import.aDateRange)
+        }
     }
 
     private fun prepareClockifyServer(vararg responseFiles: String) {

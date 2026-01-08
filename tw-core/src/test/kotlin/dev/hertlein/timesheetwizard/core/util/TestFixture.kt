@@ -2,6 +2,7 @@ package dev.hertlein.timesheetwizard.core.util
 
 import dev.hertlein.timesheetwizard.core.anticorruption.Core
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
+import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
@@ -12,6 +13,12 @@ internal object TestFixture {
     object App {
         val repositoryInMemory = RepositoryInMemory()
         val objectMapper = Core.objectMapper
+    }
+
+    object Import {
+        val aDateRange = LocalDate.of(2022, 1, 1)..LocalDate.of(2022, 12, 31)
+
+        val aCustomer = Customer.of("a-customer-id", "a-customer-name", true)
     }
 
     object Export {
@@ -49,5 +56,4 @@ internal object TestFixture {
         fun aTimesheet(entries: List<ExportTimesheet.Entry>) =
             ExportTimesheet(aCustomer, aDateRange, entries)
     }
-
 }
