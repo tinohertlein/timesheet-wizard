@@ -74,7 +74,6 @@ internal class XlsxV2 : ExportStrategy {
     private fun entryComparator(): Comparator<ExportTimesheet.Entry> =
         compareBy(
             { it.dateTimeRange.start },
-            { it.project.name },
             { it.task.name },
             { it.duration })
 
