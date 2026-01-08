@@ -24,7 +24,7 @@ internal class ExportConfigLoaderTest {
     @Test
     fun `should load export config`() {
         val customerId = "1000"
-        val exportConfig = exportConfigLoader.loadExportConfig(customerId)
+        val exportConfig = exportConfigLoader.loadExportConfigFor(customerId)
 
         Assertions.assertThat(exportConfig).containsExactly(
             ExportConfig("CSV_V1", mapOf("login" to "rihe")),

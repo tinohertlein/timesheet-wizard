@@ -14,7 +14,7 @@ internal class ExportConfigLoader(
 
     private val configuration by lazy { loadConfiguration() }
 
-    fun loadExportConfig(customerId: String): List<ExportConfig> {
+    fun loadExportConfigFor(customerId: String): List<ExportConfig> {
         return configuration
             .filter { it.customerId == customerId }
             .flatMap { it.strategies }

@@ -18,7 +18,7 @@ internal class ExportService(
 
     @SneakyThrows
     fun export(timesheet: ExportTimesheet) {
-        val exportStrategiesForCustomer = exportConfigLoader.loadExportConfig(timesheet.customer.id)
+        val exportStrategiesForCustomer = exportConfigLoader.loadExportConfigFor(timesheet.customer.id)
         val applicableExportStrategiesForCustomer = findApplicableStrategies(exportStrategiesForCustomer)
 
         if (exportStrategiesForCustomer.isEmpty()) {
