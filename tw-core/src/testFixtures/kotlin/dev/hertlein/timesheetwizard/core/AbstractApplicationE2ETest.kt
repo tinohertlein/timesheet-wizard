@@ -26,7 +26,7 @@ const val MOCK_SERVER_HOST = "http://localhost"
 const val MOCK_SERVER_PORT = 1081
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-open class AbstractApplicationE2E {
+open class AbstractApplicationE2ETest {
 
     private lateinit var mockServer: ClientAndServer
 

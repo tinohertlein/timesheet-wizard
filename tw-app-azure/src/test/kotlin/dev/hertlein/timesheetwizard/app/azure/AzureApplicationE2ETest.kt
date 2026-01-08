@@ -9,7 +9,7 @@ import com.microsoft.azure.functions.HttpStatusType
 import dev.hertlein.timesheetwizard.app.azure.util.AzureBlobOperations
 import dev.hertlein.timesheetwizard.app.azure.util.TestProfiles.TESTCONTAINERS
 import dev.hertlein.timesheetwizard.app.azure.util.TestcontainersConfiguration
-import dev.hertlein.timesheetwizard.core.AbstractApplicationE2E
+import dev.hertlein.timesheetwizard.core.AbstractApplicationE2ETest
 import dev.hertlein.timesheetwizard.core.MOCK_SERVER_HOST
 import dev.hertlein.timesheetwizard.core.MOCK_SERVER_PORT
 import org.junit.jupiter.api.DisplayName
@@ -28,7 +28,7 @@ import java.util.Optional
 @SpringBootTest
 @ActiveProfiles(TESTCONTAINERS)
 @Import(TestcontainersConfiguration::class)
-class AzureApplicationE2E : AbstractApplicationE2E() {
+class AzureApplicationE2ETest : AbstractApplicationE2ETest() {
 
     companion object {
 

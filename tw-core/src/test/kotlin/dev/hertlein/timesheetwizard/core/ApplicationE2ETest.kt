@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 
 
 @DisplayName("Application")
-class ApplicationE2E : AbstractApplicationE2E() {
+class ApplicationE2ETest : AbstractApplicationE2ETest() {
 
     private val repository = RepositoryInMemory()
     private val clockifyConfig = object : ClockifyConfig {

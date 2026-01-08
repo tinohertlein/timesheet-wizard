@@ -2,7 +2,7 @@ package dev.hertlein.timesheetwizard.app.aws
 
 import dev.hertlein.timesheetwizard.app.aws.util.S3Operations
 import dev.hertlein.timesheetwizard.app.aws.util.TestcontainersConfiguration
-import dev.hertlein.timesheetwizard.core.AbstractApplicationE2E
+import dev.hertlein.timesheetwizard.core.AbstractApplicationE2ETest
 import dev.hertlein.timesheetwizard.core.MOCK_SERVER_HOST
 import dev.hertlein.timesheetwizard.core.MOCK_SERVER_PORT
 import org.junit.jupiter.api.AfterAll
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 import software.amazon.awssdk.services.s3.S3Client
 
 @DisplayName("AWS Application")
-class AwsApplicationE2E : AbstractApplicationE2E() {
+class AwsApplicationE2ETest : AbstractApplicationE2ETest() {
 
     private lateinit var bucket: String
     private lateinit var s3Client: S3Client
