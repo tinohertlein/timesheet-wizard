@@ -1,7 +1,9 @@
 package dev.hertlein.timesheetwizard.core.anticorruption
 
 import com.google.common.eventbus.EventBus
+import dev.hertlein.timesheetwizard.core.exporting.adapter.incoming.eventing.ExportingStartedEvent
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
+import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.eventing.ImportingFinishedEvent
 import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportTimesheet
 import io.mockk.Runs
@@ -67,10 +69,10 @@ class EventMapperTest {
         val exportTimesheet =
             ExportTimesheet(ExportTimesheet.Customer(aCustomerId, aCustomerName), aDateRange, listOf(exportEntry))
 
-        eventMapper.onTimesheetImported(importTimesheet)
+        eventMapper.onImportingFinished(ImportingFinishedEvent(importTimesheet))
 
         verify { eventBus.register(eventMapper) }
-        verify { eventBus.post(exportTimesheet) }
+        verify { eventBus.post(ExportingStartedEvent(exportTimesheet)) }
         confirmVerified(eventBus)
     }
 }

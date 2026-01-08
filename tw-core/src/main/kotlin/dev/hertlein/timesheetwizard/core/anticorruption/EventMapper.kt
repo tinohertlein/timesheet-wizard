@@ -2,7 +2,9 @@ package dev.hertlein.timesheetwizard.core.anticorruption
 
 import com.google.common.eventbus.EventBus
 import com.google.common.eventbus.Subscribe
+import dev.hertlein.timesheetwizard.core.exporting.adapter.incoming.eventing.ExportingStartedEvent
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
+import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.eventing.ImportingFinishedEvent
 import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportTimesheet
 
@@ -13,10 +15,10 @@ internal class EventMapper(private val eventBus: EventBus) {
     }
 
     @Subscribe
-    fun onTimesheetImported(importTimesheet: ImportTimesheet) {
-        val entries: List<ExportTimesheet.Entry> = mapEntries(importTimesheet.entries)
-        val exportTimesheet = ExportTimesheet(mapCustomer(importTimesheet.customer), importTimesheet.dateRange, entries)
-        eventBus.post(exportTimesheet)
+    fun onImportingFinished(event: ImportingFinishedEvent) {
+        val entries: List<ExportTimesheet.Entry> = mapEntries(event.timesheet.entries)
+        val exportTimesheet = ExportTimesheet(mapCustomer(event.timesheet.customer), event.timesheet.dateRange, entries)
+        eventBus.post(ExportingStartedEvent(exportTimesheet))
     }
 
     private fun mapEntries(entries: List<ImportTimesheet.Entry>): List<ExportTimesheet.Entry> {

@@ -26,8 +26,8 @@ The tw-core Gradle subproject consists of two business modules and an anticorrup
 - **exporting**: this module is responsible for transforming the model created by `importing` by generating an
   XLSX, PDF or CSV file from that data. The XLSX, PDF and CSV files then are stored in some cloud storage, where they
   are available for a manual download.
-- **anticorruption**: this module contains code that maps domain model classes of module `importing` to domain model
-  classes of module `exporting`.
+- **anticorruption**: this module contains code that maps domain model classes and events of module `importing` to domain model
+  classes and events of module `exporting`.
 
 ## Level 3
 

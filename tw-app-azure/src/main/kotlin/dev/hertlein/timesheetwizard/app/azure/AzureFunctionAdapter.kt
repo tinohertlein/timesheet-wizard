@@ -8,6 +8,7 @@ import com.microsoft.azure.functions.annotation.AuthorizationLevel
 import com.microsoft.azure.functions.annotation.FunctionName
 import com.microsoft.azure.functions.annotation.HttpTrigger
 import com.microsoft.azure.functions.annotation.TimerTrigger
+import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.ImportingStartedEvent
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
@@ -51,7 +52,7 @@ class AzureFunctionAdapter(
 
     private fun doImport(body: Optional<String>) {
         if (body.isPresent) {
-            eventBus.post(toInputParams(body.get()))
+            eventBus.post(ImportingStartedEvent(toInputParams(body.get())))
         } else {
             logger.warn { "No input received!" }
         }
