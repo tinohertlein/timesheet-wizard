@@ -8,9 +8,7 @@ import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.con
 import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.HttpReportClient
 import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.RequestBodyFactory
 import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.ResponseBodyMapper
-import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer
 import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer.Id
-import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer.Name
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportTimesheet
 import dev.hertlein.timesheetwizard.core.util.TestFixture
 import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
@@ -32,7 +30,6 @@ import org.mockserver.model.HttpRequest
 import org.mockserver.model.HttpResponse
 import org.mockserver.verify.VerificationTimes
 import java.net.http.HttpClient
-import java.time.LocalDate
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.hours
 
@@ -60,6 +57,7 @@ class ClockifyAdapterTest {
 
     @BeforeEach
     fun beforeEach() {
+        mockServer.reset()
         val clockifyIdsLoader: ClockifyIdsLoader = mockk()
         val clockifyConfig: ClockifyConfig = mockk()
 
@@ -105,6 +103,23 @@ class ClockifyAdapterTest {
         assertThrows(IllegalArgumentException::class.java) {
             clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer.copy(id = Id("xxx")), TestFixture.Import.aDateRange)
         }
+    }
+
+    @Test
+    fun `should import an empty timesheet`() {
+        prepareClockifyServer("empty_clockify_response.json")
+
+        val timesheet = clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer, TestFixture.Import.aDateRange)
+
+        mockServer.verify(HttpRequest.request(), VerificationTimes.exactly(1))
+        SoftAssertions().apply {
+            assertThat(timesheet).isNotNull
+            assertThat(timesheet.customer.id.value).isEqualTo(TestFixture.Import.aCustomer.id.value)
+            assertThat(timesheet.customer.name.value).isEqualTo(TestFixture.Import.aCustomer.name.value)
+            assertThat(timesheet.dateRange.start).isEqualTo(TestFixture.Import.aDateRange.start)
+            assertThat(timesheet.dateRange.endInclusive).isEqualTo(TestFixture.Import.aDateRange.endInclusive)
+            assertThat(timesheet.entries).isEmpty()
+        }.assertAll()
     }
 
     private fun prepareClockifyServer(vararg responseFiles: String) {

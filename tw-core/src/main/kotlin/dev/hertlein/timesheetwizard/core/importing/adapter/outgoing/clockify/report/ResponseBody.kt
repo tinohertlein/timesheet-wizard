@@ -1,7 +1,7 @@
 package dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report
 
 internal data class ResponseBody(
-    val timeentries: List<TimeEntry>,
+    val timeentries: List<TimeEntry>? = null,
     val totals: List<Totals?>? = null
 ) {
     data class Totals(val totalTime: Long, val entriesCount: Long)
