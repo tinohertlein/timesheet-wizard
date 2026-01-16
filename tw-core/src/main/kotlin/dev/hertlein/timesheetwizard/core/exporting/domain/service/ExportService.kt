@@ -18,6 +18,8 @@ internal class ExportService(
 
     @SneakyThrows
     fun export(timesheet: ExportTimesheet) {
+        logger.info { "Exporting timesheet for customer '${timesheet.customer.id}' and date range ${timesheet.dateRange}..." }
+
         val exportStrategiesForCustomer = exportConfigLoader.loadExportConfigFor(timesheet.customer.id)
         val applicableExportStrategiesForCustomer = findApplicableStrategies(exportStrategiesForCustomer)
 
@@ -34,6 +36,9 @@ internal class ExportService(
             applicableExportStrategiesForCustomer.forEach { strategy ->
                 val timesheetDocument = strategy.first.create(strategy.second.params, timesheet)
                 repositoryPort.save(timesheetDocument)
+            }
+            logger.info {
+                "Exported timesheet for customer '${timesheet.customer.id}' and date range ${timesheet.dateRange}."
             }
         }
     }

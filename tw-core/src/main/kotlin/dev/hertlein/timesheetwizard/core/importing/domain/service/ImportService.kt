@@ -15,6 +15,8 @@ internal class ImportService(
 ) {
 
     fun import(importParams: ImportParams) {
+        logger.info { "Importing timesheets with parameters: $importParams" }
+
         val customers = customerFactory.customersFrom(importParams.customerIds)
         val dateRange = dateTimeFactory.create(importParams.dateRangeType, importParams.dateRange)
 
@@ -27,5 +29,7 @@ internal class ImportService(
                 .also { logger.info { "Imported timesheet for customer '${customer.id.value}' and date range $dateRange." } }
                 .also { eventPublishPort.publish(it) }
         }
+        
+        logger.info { "Imported timesheets with parameters: $importParams" }
     }
 }
