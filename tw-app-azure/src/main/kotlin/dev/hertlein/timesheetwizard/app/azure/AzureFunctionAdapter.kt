@@ -58,7 +58,5 @@ class AzureFunctionAdapter(
         }
     }
 
-    private fun toInputParams(input: String): ImportParams {
-        return objectMapper.readValue(input, ImportParams::class.java)
-    }
+    private fun toInputParams(input: String) = objectMapper.readValue(input, ImportParams::class.java)
 }

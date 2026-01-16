@@ -11,16 +11,12 @@ import org.springframework.context.annotation.Configuration
 class AzureBeansFactory {
 
     @Bean
-    fun blobServiceClient(blobServiceClientBuilder: BlobServiceClientBuilder): BlobServiceClient {
-        return blobServiceClientBuilder.buildClient()
-    }
+    fun blobServiceClient(blobServiceClientBuilder: BlobServiceClientBuilder): BlobServiceClient = blobServiceClientBuilder.buildClient()
 
     @Bean
     fun blobConfigContainerClient(
         blobServiceClient: BlobServiceClient,
         @Value("\${timesheet-wizard.azure.blob.container}")
         container: String
-    ): BlobContainerClient {
-        return blobServiceClient.createBlobContainerIfNotExists(container)
-    }
+    ): BlobContainerClient = blobServiceClient.createBlobContainerIfNotExists(container)
 }

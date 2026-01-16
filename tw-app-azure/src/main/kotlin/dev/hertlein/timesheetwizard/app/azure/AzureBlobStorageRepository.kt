@@ -16,9 +16,7 @@ class AzureBlobStorageRepository(
 
     override fun type(): String = "AzureBlobStorage"
 
-    override fun root(): String {
-        return client.blobContainerName
-    }
+    override fun root(): String = client.blobContainerName
 
     override fun download(key: String): ByteArray {
         return client.getBlobClient(key)

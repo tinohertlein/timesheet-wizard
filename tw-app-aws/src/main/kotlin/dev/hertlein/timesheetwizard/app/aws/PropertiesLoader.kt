@@ -7,11 +7,10 @@ object PropertiesLoader {
 
     val properties: Properties by lazy { load() }
 
-    private fun load(): Properties {
-        return Properties().apply {
-            Resources.getResource("application.properties").openStream().use {
-                load(it)
-            }
-        }
+    private fun load() = Properties().apply {
+        Resources
+            .getResource("application.properties")
+            .openStream()
+            .use { load(it) }
     }
 }
