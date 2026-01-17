@@ -45,7 +45,7 @@ class AwsApplicationE2ETest : AbstractApplicationE2ETest() {
     }
 
     @Test
-    fun `should import and export timesheets to S3`() {
+    fun `should import and export timesheets to AWS S3`() {
         executeTest(this::upload, this::download, this::run)
     }
 

@@ -30,8 +30,11 @@ open class AbstractApplicationE2ETest {
 
     private lateinit var mockServer: ClientAndServer
 
-    @TempDir(cleanup = CleanupMode.ALWAYS)
-    lateinit var tempDir: Path
+    companion object {
+
+        @TempDir(cleanup = CleanupMode.ALWAYS)
+        lateinit var tempDir: Path
+    }
 
     @BeforeAll
     open fun beforeAll() {

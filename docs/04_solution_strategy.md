@@ -52,6 +52,6 @@ like [AWS CloudWatch](https://aws.amazon.com/cloudwatch/?nc1=h_ls)
 infrastructure-as-code approach
 using [AWS-SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html)
 and [AWS CloudFormation](https://aws.amazon.com/cloudformation/?nc1=h_ls) in case of AWS
-or [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/) in case of Azure.
+or [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/) in case of Azure or [Terraform](https://developer.hashicorp.com/terraform) in case of Google Cloud Platform
 All of these are free of charge up to a certain limit – which won't be reached by a tiny application like the
 Timesheet-Wizard (**-> Quality goal #QG2**). 

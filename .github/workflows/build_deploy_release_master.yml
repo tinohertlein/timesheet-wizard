@@ -20,6 +20,8 @@ env:
   AZURE_PACKAGE_DIRECTORY: './tw-app-azure/build/azure-functions'
   TIMESHEET_WIZARD_IMPORT_CLOCKIFY_API_KEY: ${{ secrets.TW_IMPORT_CLOCKIFY_API_KEY}}
   TIMESHEET_WIZARD_IMPORT_CLOCKIFY_WORKSPACE_ID: ${{ secrets.TW_IMPORT_CLOCKIFY_WORKSPACE_ID}}
+  TF_VAR_CLOCKIFY_API_KEY: ${{ secrets.TW_IMPORT_CLOCKIFY_API_KEY}}
+  TF_VAR_CLOCKIFY_WORKSPACE_ID: ${{ secrets.TW_IMPORT_CLOCKIFY_WORKSPACE_ID}}
 
 jobs:
   build:
@@ -61,6 +63,57 @@ jobs:
           name: generate test report (tw-app-azure)
           path: ./tw-app-azure/build/test-results/test/*.xml
           reporter: java-junit
+
+      - name: Generate test report (tw-app-gcp)
+        uses: dorny/test-reporter@v2
+        if: success() || failure()
+        with:
+          name: generate test report (tw-app-gcp)
+          path: ./tw-app-gcp/build/test-results/test/*.xml
+          reporter: java-junit
+
+  deploy-to-gcp:
+    runs-on: ubuntu-24.04
+    needs: build
+    steps:
+      - uses: hashicorp/setup-terraform@v3
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'corretto'
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: 'gradle'
+
+      - name: Build, package GCP Function
+        run: ./gradlew tw-app-gcp:build -x test
+
+      - name: Terraform Init
+        working-directory: ./tw-app-gcp/deployment
+        run: terraform init -input=false
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      ## Updating a function via Terraform seems not to work --> destroy and recreate
+      - name: Terraform Destroy function 
+        working-directory: ./tw-app-gcp/deployment
+        run: terraform apply --auto-approve -input=false -destroy -target google_cloudfunctions2_function.tw-app-gcp
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Terraform Plan
+        working-directory: ./tw-app-gcp/deployment
+        run: terraform plan -no-color -input=false
+        env: 
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+      
+      - name: Terraform Apply
+        working-directory: ./tw-app-gcp/deployment
+        run: terraform apply --auto-approve -input=false
+        env: 
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
   deploy-to-azure:
     runs-on: ubuntu-24.04
@@ -176,6 +229,7 @@ jobs:
     needs:
       - test-azure
       - test-aws
+      - deploy-to-gcp
     steps:
       - name: Checkout
         uses: actions/checkout@v6

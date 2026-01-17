@@ -26,8 +26,7 @@ other tools, I decided to create my own little application allowing me to do tha
 In addition to the business motivation mentioned above, this is also a perfect opportunity to play around with
 technology in the [function-as-a-service](https://en.wikipedia.org/wiki/Function_as_a_service) territory. That's the
 reason why the Timesheet Wizard is bundled and deployed to multiple hyperscalers – at the moment it's
-only [AWS Lambda](https://aws.amazon.com/de/lambda) & [Azure
-Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview?pivots=programming-language-java).
+[AWS Lambda](https://aws.amazon.com/de/lambda), [Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview?pivots=programming-language-java) and [Google Cloud Functions](https://cloud.google.com/functions).
 
 ## Documentation
 
@@ -43,15 +42,17 @@ the [doc-folder](docs/README.md).
 - deployed continuously to the cloud using [GitHub Actions](https://github.com/features/actions)
 - running as **AWS Lambda** without any Web framework
 - running as **Azure Function** with Spring Boot Web Framework
+- running as **Google Cloud Function** with Quarkus Web Framework
 - following the infrastructure-as-code-approach with provisioning
-  via [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc1=h_ls)
-  and [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep)
+  - via [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc1=h_ls) for AWS
+  - via [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep) for Azure
+  - via [Terraform](https://www.terraform.io/) for Google Cloud Platform
 - triggered by AWS EventBridge and Azure Function triggers
 
 ![Technical context](docs/assets/readme-context-technical.drawio.png "Technical context")
 *Technical context*
 
-#### The Timesheet-Wizard consists of four Gradle subprojects:
+#### The Timesheet-Wizard consists of five Gradle subprojects:
 
 - **tw-spi**: the service provider interface to be implemented for any cloud specific things. Like e.g. uploading
   timesheets to some cloud storage.
@@ -61,7 +62,9 @@ the [doc-folder](docs/README.md).
 - **tw-app-aws**: implements the interfaces defined in `tw-spi` with AWS specific code and also bundles the `tw-core`
   with AWS specific things to an AWS Lambda function.
 - **tw-app-azure**: implements the interfaces defined in `tw-spi` with Azure specific code and also bundles the
-  `tw-core` with Azure specific things to a Spring Boot Azure Function.
+  `tw-core` with Azure specific things to a [Spring Boot](https://spring.io/projects/spring-boot) Azure Function.
+- **tw-app-gcp**: implements the interfaces defined in `tw-spi` with Google Cloud specific code and also bundles the
+    `tw-core` with Google Cloud specific things to a [Quarkus](https://quarkus.io/) Google Cloud Function.
 
 The `tw-core` Gradle subproject contains two Kotlin packages without any dependencies on each other, having the
 following responsibilities:

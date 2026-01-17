@@ -10,8 +10,8 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 
-@DisplayName("Application")
-class ApplicationE2ETest : AbstractApplicationE2ETest() {
+@DisplayName("Core Application")
+class CoreApplicationE2ETest : AbstractApplicationE2ETest() {
 
     private val repository = RepositoryInMemory()
     private val clockifyConfig = object : ClockifyConfig {

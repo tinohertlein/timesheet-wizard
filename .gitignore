@@ -52,4 +52,8 @@ build
 /tw-app-aws/.aws-sam/
 /tw-app-aws/requests/confidential/
 /tw-app-azure/requests/confidential/
+/tw-app-gcp/requests/confidential/
 /config/confidential/
+/tw-app-gcp/deployment/.terraform/
+/tw-app-gcp/deployment/.terraform.lock.hcl
+/tw-app-gcp/deployment/terraform.tfstate.backup
