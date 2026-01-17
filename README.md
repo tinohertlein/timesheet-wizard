@@ -41,8 +41,8 @@ the [doc-folder](docs/README.md).
 - built with Gradle
 - deployed continuously to the cloud using [GitHub Actions](https://github.com/features/actions)
 - running as **AWS Lambda** without any Web framework
-- running as **Azure Function** with Spring Boot Web Framework
-- running as **Google Cloud Function** with Quarkus Web Framework
+- running as **Azure Function** with [Spring Boot Web Framework](https://spring.io/projects/spring-boot)
+- running as **Google Cloud Function** with [Quarkus Web Framework](https://quarkus.io/)
 - following the infrastructure-as-code-approach with provisioning
   - via [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc1=h_ls) for AWS
   - via [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep) for Azure
@@ -62,9 +62,9 @@ the [doc-folder](docs/README.md).
 - **tw-app-aws**: implements the interfaces defined in `tw-spi` with AWS specific code and also bundles the `tw-core`
   with AWS specific things to an AWS Lambda function.
 - **tw-app-azure**: implements the interfaces defined in `tw-spi` with Azure specific code and also bundles the
-  `tw-core` with Azure specific things to a [Spring Boot](https://spring.io/projects/spring-boot) Azure Function.
+  `tw-core` with Azure specific things to a Spring Boot Azure Function.
 - **tw-app-gcp**: implements the interfaces defined in `tw-spi` with Google Cloud specific code and also bundles the
-    `tw-core` with Google Cloud specific things to a [Quarkus](https://quarkus.io/) Google Cloud Function.
+    `tw-core` with Google Cloud specific things to a Quarkus Google Cloud Function.
 
 The `tw-core` Gradle subproject contains two Kotlin packages without any dependencies on each other, having the
 following responsibilities:
