@@ -12,6 +12,7 @@ on:
 
 env:
   JAVA_VERSION: '21'
+  MOCKSERVER_DISABLE_LOGGING: 'true'
   AWS_REGION: 'eu-central-1'
   AZURE_LOCATION: 'germanywestcentral'
   AZURE_FUNCTIONAPP_NAME: 'timesheetwizardapp'
