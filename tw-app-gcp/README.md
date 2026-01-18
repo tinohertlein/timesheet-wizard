@@ -8,6 +8,7 @@
 * [Google Cloud account](https://cloud.google.com/)
 * [Google Cloud CLI](https://cloud.google.com/cli)
 * [Terraform](https://developer.hashicorp.com/terraform)
+* [Docker (for tests using testcontainers)](https://www.docker.com/)
 
 ### Packaging and running the application locally
 

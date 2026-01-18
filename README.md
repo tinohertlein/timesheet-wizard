@@ -91,9 +91,9 @@ and sending application events.
 
 ### Prerequisites
 
-- Java 21+
-- Gradle
-- Docker (for tests using testcontainers)
+* [Java 21+](https://www.oracle.com/de/java/technologies/downloads/)
+* [Gradle](https://gradle.org/)
+* [Docker (for tests using testcontainers)](https://www.docker.com/)
 
 ### Build & test
 
