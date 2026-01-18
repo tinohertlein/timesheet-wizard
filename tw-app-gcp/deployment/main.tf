@@ -115,6 +115,7 @@ resource "google_cloudfunctions2_function" "tw-app-gcp" {
     max_instance_count = 1
     available_memory   = "512Mi"
     timeout_seconds    = 300
+    ingress_settings   = "ALLOW_INTERNAL_ONLY"
 
     environment_variables = {
       GCP_PROJECT_ID  = local.project
@@ -142,7 +143,7 @@ resource "google_storage_bucket" "sheets" {
   storage_class               = "STANDARD"
   force_destroy               = true
   uniform_bucket_level_access = true
-  
+
   hierarchical_namespace {
     enabled = true
   }
