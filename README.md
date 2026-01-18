@@ -26,7 +26,8 @@ other tools, I decided to create my own little application allowing me to do tha
 In addition to the business motivation mentioned above, this is also a perfect opportunity to play around with
 technology in the [function-as-a-service](https://en.wikipedia.org/wiki/Function_as_a_service) territory. That's the
 reason why the Timesheet Wizard is bundled and deployed to multiple hyperscalers – at the moment it's
-[AWS Lambda](https://aws.amazon.com/de/lambda), [Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview?pivots=programming-language-java) and [Google Cloud Functions](https://cloud.google.com/functions).
+[AWS Lambda](https://aws.amazon.com/de/lambda), [Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview?pivots=programming-language-java)
+and [Google Cloud Functions](https://cloud.google.com/functions).
 
 ## Documentation
 
@@ -44,9 +45,10 @@ the [doc-folder](docs/README.md).
 - running as **Azure Function** with [Spring Boot Web Framework](https://spring.io/projects/spring-boot)
 - running as **Google Cloud Function** with [Quarkus Web Framework](https://quarkus.io/)
 - following the infrastructure-as-code-approach with provisioning
-  - via [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc1=h_ls) for AWS
-  - via [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep) for Azure
-  - via [Terraform](https://www.terraform.io/) for Google Cloud Platform
+    - via [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc1=h_ls) for AWS
+    - via [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep) for
+      Azure
+    - via [Terraform](https://www.terraform.io/) for Google Cloud Platform
 - triggered by AWS EventBridge and Azure Function triggers
 
 ![Technical context](docs/assets/readme-context-technical.drawio.png "Technical context")
@@ -64,7 +66,7 @@ the [doc-folder](docs/README.md).
 - **tw-app-azure**: implements the interfaces defined in `tw-spi` with Azure specific code and also bundles the
   `tw-core` with Azure specific things to a Spring Boot Azure Function.
 - **tw-app-gcp**: implements the interfaces defined in `tw-spi` with Google Cloud specific code and also bundles the
-    `tw-core` with Google Cloud specific things to a Quarkus Google Cloud Function.
+  `tw-core` with Google Cloud specific things to a Quarkus Google Cloud Function.
 
 The `tw-core` Gradle subproject contains two Kotlin packages without any dependencies on each other, having the
 following responsibilities:
@@ -92,27 +94,13 @@ and sending application events.
 - Java 21+
 - Gradle
 - Docker (for tests using testcontainers)
-- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) –
-  for building & invoking as AWS Lambda on local machine
-- [Azure Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=linux%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-java#install-the-azure-functions-core-tools) –
-  for building & invoking as Azure Function App on local machine
 
 ### Build & test
 
 - Build with `gradle build`
 
-### Run
+### Package, run and deploy to a Cloud
 
-#### as Azure Function App on a local machine
-
-- Emulate Azure Blob Storage with Azureite in [docker-compose.yml](docker-compose.yml)
-- Create & upload configuration files to local Azure Storage to `tw-sheets/config`
-    - E.g. via [Azure Storage Explorer](https://azure.microsoft.com/en-us/products/storage/storage-explorer)
-    - Example files are shown [here](config/public/)
-- Replace placeholders
-  in [tw-app-azure/requests/public/run-function-local.sh](tw-app-azure/requests/public/run-function-local.sh) with your
-  keys
-- Build & run the Azure Function
-  locally: [tw-app-azure/requests/public/run-function-local.sh](tw-app-azure/requests/public/run-function-local.sh)
-- Invoke the Azure Function
-  locally: [tw-app-azure/requests/public/invoke-function.http](tw-app-azure/requests/public/invoke-function.http)
+* [tw-app-gcp on Google Cloud Platform](./tw-app-gcp/README.md)
+* [tw-app-aws on AWS](./tw-app-aws/README.md) - work in progress
+* [tw-app-azure on Microsoft Azure](./tw-app-azure/README.md) - work in progress

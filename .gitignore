@@ -57,3 +57,4 @@ build
 /tw-app-gcp/deployment/.terraform/
 /tw-app-gcp/deployment/.terraform.lock.hcl
 /tw-app-gcp/deployment/terraform.tfstate.backup
+/tw-app-gcp/deployment/prepare-deployment.sh
