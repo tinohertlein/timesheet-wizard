@@ -138,7 +138,7 @@ resource "google_cloudfunctions2_function" "tw-app-gcp" {
 }
 
 resource "google_storage_bucket" "sheets" {
-  name                        = "tw-sheets"
+  name                        = "tw-sheets-${random_id.default.hex}"
   location                    = local.region
   storage_class               = "STANDARD"
   force_destroy               = true
@@ -203,3 +203,10 @@ resource "google_cloud_scheduler_job" "monthly" {
   }
 }
 
+output "sheets-bucket" {
+  value = google_storage_bucket.sheets.name
+}
+
+output "daily-job" {
+  value = google_cloud_scheduler_job.daily.name
+}

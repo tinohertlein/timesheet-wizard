@@ -46,12 +46,12 @@
 
 2. Login to Google Cloud
     ```shell script
-    gcloud auth application-default login
+    gcloud auth login
     ```
 
 3. Create Google Cloud Project
    ```shell script
-    gcloud projects create timesheet-wizard
+    gcloud projects create timesheet-wizard --name=timesheet-wizard
     ```
 
 4. Set default Project Id for Google Cloud CLI
@@ -119,35 +119,39 @@
    export TF_VAR_CLOCKIFY_WORKSPACE_ID=<clockify-workspace-id>
    ```
 
-14. Initialize Terraform (in the tw-app-gcp/deployment directory)
+14. Adjust Terraform settings in [tw-app-gcp/deployment/main.tf](./deployment/main.tf)
+    - `locals.project` - Google Cloud Project Id
+    - `bucket` - Google Cloud Storage Bucket for Terraform Backend 
+
+15. Initialize Terraform (in the tw-app-gcp/deployment directory)
    ```shell script
    terraform init
    ```
 
-15. Check the Terraform plan (in the tw-app-gcp/deployment directory)
+16. Check the Terraform plan (in the tw-app-gcp/deployment directory)
    ```shell script
    terraform plan
    ```
 
-16. Apply the Terraform plan (in the tw-app-gcp/deployment directory)
+17. Apply the Terraform plan (in the tw-app-gcp/deployment directory)
    ```shell script
    terraform apply
    ```
 
-17. Upload config files to Bucket. Examples can be found in [../config/public](../config/public)
+18. Upload config files to Bucket. Examples can be found in [../config/public](../config/public). Use Bucket name from Terraform output
    ```shell script
-   gcloud storage folders create --recursive gs://tw-sheets/config
-   gcloud storage cp ../../config/public/clockify.json gs://tw-sheets/config/
-   gcloud storage cp ../../config/public/export.json gs://tw-sheets/config/
-   gcloud storage cp ../../config/public/import.json gs://tw-sheets/config/
+   gcloud storage folders create --recursive gs://<sheets-bucket>/config
+   gcloud storage cp ../../config/public/clockify.json gs://<sheets-bucket>/config/
+   gcloud storage cp ../../config/public/export.json gs://<sheets-bucket>/config/
+   gcloud storage cp ../../config/public/import.json gs://<sheets-bucket>/config/
    ```
 
-18. Test step 1: trigger the daily Import Job
+19. Test step 1: trigger the daily Import Job. Use job name from Terraform output
    ```shell script
-   gcloud scheduler jobs run tw-import-daily --location=europe-west3
+   gcloud scheduler jobs run <daily-job> --location=europe-west3
    ```
 
-19. Test step 2: check the Function log for errors
+20. Test step 2: check the Function log for errors
    ```shell script
   gcloud functions logs read tw-app-gcp --region=europe-west3
    ```
