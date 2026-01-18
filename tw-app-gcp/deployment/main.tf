@@ -2,7 +2,7 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "6.8.0"
+      version = "7.16.0"
     }
   }
   backend "gcs" {
@@ -142,6 +142,10 @@ resource "google_storage_bucket" "sheets" {
   storage_class               = "STANDARD"
   force_destroy               = true
   uniform_bucket_level_access = true
+  
+  hierarchical_namespace {
+    enabled = true
+  }
 }
 
 resource "google_cloud_scheduler_job" "daily" {
