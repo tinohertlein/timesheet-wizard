@@ -73,49 +73,6 @@ jobs:
           path: ./tw-app-gcp/build/test-results/test/*.xml
           reporter: java-junit
 
-  deploy-to-gcp:
-    runs-on: ubuntu-24.04
-    needs: build
-    steps:
-      - uses: hashicorp/setup-terraform@v3
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up JDK ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@v5
-        with:
-          distribution: 'corretto'
-          java-version: ${{ env.JAVA_VERSION }}
-          cache: 'gradle'
-
-      - name: Build, package GCP Function
-        run: ./gradlew tw-app-gcp:build -x test
-
-      - name: Terraform Init
-        working-directory: ./tw-app-gcp/deployment
-        run: terraform init -input=false
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-
-      ## Updating a function via Terraform seems not to work --> destroy and recreate
-      - name: Terraform Destroy function 
-        working-directory: ./tw-app-gcp/deployment
-        run: terraform apply --auto-approve -input=false -destroy -target google_cloudfunctions2_function.tw-app-gcp
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-
-      - name: Terraform Plan
-        working-directory: ./tw-app-gcp/deployment
-        run: terraform plan -no-color -input=false
-        env: 
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-      
-      - name: Terraform Apply
-        working-directory: ./tw-app-gcp/deployment
-        run: terraform apply --auto-approve -input=false
-        env: 
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-
   deploy-to-azure:
     runs-on: ubuntu-24.04
     needs: build
@@ -224,6 +181,49 @@ jobs:
       - name: Invoke Lambda
         run: >
           sam remote invoke --stack-name tw TwFunction -e '{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}'
+  
+  deploy-to-gcp:
+    runs-on: ubuntu-24.04
+    needs: build
+    steps:
+      - uses: hashicorp/setup-terraform@v3
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'corretto'
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: 'gradle'
+
+      - name: Build, package GCP Function
+        run: ./gradlew tw-app-gcp:build -x test
+
+      - name: Terraform Init
+        working-directory: ./tw-app-gcp/deployment
+        run: terraform init -input=false
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      ## Updating a function via Terraform seems not to work --> destroy and recreate
+      - name: Terraform Destroy function
+        working-directory: ./tw-app-gcp/deployment
+        run: terraform apply --auto-approve -input=false -destroy -target google_cloudfunctions2_function.tw-app-gcp
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Terraform Plan
+        working-directory: ./tw-app-gcp/deployment
+        run: terraform plan -no-color -input=false
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Terraform Apply
+        working-directory: ./tw-app-gcp/deployment
+        run: terraform apply --auto-approve -input=false
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
   release:
     runs-on: ubuntu-latest
