@@ -101,6 +101,6 @@ and sending application events.
 
 ### Package, run and deploy to a Cloud
 
-* [tw-app-gcp on Google Cloud Platform](./tw-app-gcp/README.md)
 * [tw-app-aws on AWS](./tw-app-aws/README.md) - work in progress
-* [tw-app-azure on Microsoft Azure](./tw-app-azure/README.md) - work in progress
+* [tw-app-azure on Microsoft Azure](./tw-app-azure/README.md)
+* [tw-app-gcp on Google Cloud Platform](./tw-app-gcp/README.md)
