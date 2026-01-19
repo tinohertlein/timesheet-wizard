@@ -23,7 +23,7 @@ class GcpFunctionAdapter : HttpFunction {
     private lateinit var objectMapper: ObjectMapper
 
     @ApplicationScoped
-    fun eventBus(repository: GCPStorageRepository, clockifyConfig: GcpClockifyConfig) = Core.bootstrap(repository, clockifyConfig)
+    fun eventBus(repository: GcpStorageRepository, clockifyConfig: GcpClockifyConfig) = Core.bootstrap(repository, clockifyConfig)
 
     @ApplicationScoped
     fun cloudFunctionJsonMapper() = Core.objectMapper

@@ -8,7 +8,7 @@ import jakarta.inject.Singleton
 import org.eclipse.microprofile.config.inject.ConfigProperty
 
 @Singleton
-class GCPStorageRepository(
+class GcpStorageRepository(
     @param:ConfigProperty(name = "timesheet-wizard.gcp.storage.bucket")
     private val bucket: String
 ) : Repository {

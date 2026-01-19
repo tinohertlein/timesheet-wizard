@@ -39,7 +39,7 @@ class GcpApplicationE2ETest : AbstractApplicationE2ETest(), QuarkusTestProfile {
     )
 
     @Inject
-    private lateinit var repository: GCPStorageRepository
+    private lateinit var repository: GcpStorageRepository
 
     @BeforeAll
     override fun beforeAll() {
