@@ -1,5 +1,11 @@
 # Timesheet Wizard on Google Cloud Platform
 
+[!WARNING]
+Deployment is usually done automatically via GitHub Actions.
+These are just my personal notes in case a manual deployment from local should be required. The steps outlined below are
+neither executed nor tested regularly: they might be outdated or might work differently in our situation (e.g., different
+location-settings might be required).
+
 ## Getting Started
 
 ### Prerequisites
@@ -10,7 +16,7 @@
 * [Terraform](https://developer.hashicorp.com/terraform)
 * [Docker (for tests using testcontainers)](https://www.docker.com/)
 
-### Packaging and running the application locally
+### Packaging and running the application locally with connection to Google Cloud Storage
 
 1. Package the application into an uber-jar (in the project root directory)
    ```shell script
@@ -121,7 +127,7 @@
 
 14. Adjust Terraform settings in [tw-app-gcp/deployment/main.tf](./deployment/main.tf)
     - `locals.project` - Google Cloud Project Id
-    - `bucket` - Google Cloud Storage Bucket for Terraform Backend 
+    - `bucket` - Google Cloud Storage Bucket for Terraform Backend
 
 15. Initialize Terraform (in the tw-app-gcp/deployment directory)
    ```shell script
@@ -138,7 +144,8 @@
    terraform apply
    ```
 
-18. Upload config files to Bucket. Examples can be found in [../config/public](../config/public). Use Bucket name from Terraform output
+18. Upload config files to Bucket. Examples can be found in [../config/public](../config/public). Use Bucket name from
+    Terraform output
    ```shell script
    gcloud storage folders create --recursive gs://<sheets-bucket>/config
    gcloud storage cp ../../config/public/clockify.json gs://<sheets-bucket>/config/
