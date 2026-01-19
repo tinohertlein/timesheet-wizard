@@ -53,7 +53,7 @@ tasks.jar {
 
 azurefunctions {
     resourceGroup = System.getenv("AZURE_RESOURCE_GROUP") ?: "timesheetwizard"
-    appName = System.getenv("AZURE_FUNCTIONAPP_NAME") ?: "timesheetwizardapp"
+    appName = System.getenv("AZURE_FUNCTIONAPP_NAME") ?: "tw-app-azure"
     region = System.getenv("AZURE_LOCATION") ?: "germanywestcentral"
 
     runtime = GradleRuntimeConfig()
@@ -62,8 +62,8 @@ azurefunctions {
     auth.type = "azure_cli"
 
     appSettings = mutableMapOf()
-    appSettings["TIMESHEET_WIZARD_IMPORT_CLOCKIFY_API_KEY"] = System.getenv("TIMESHEET_WIZARD_IMPORT_CLOCKIFY_API_KEY")
-    appSettings["TIMESHEET_WIZARD_IMPORT_CLOCKIFY_WORKSPACE_ID"] = System.getenv("TIMESHEET_WIZARD_IMPORT_CLOCKIFY_WORKSPACE_ID")
+    appSettings["CLOCKIFY_API_KEY"] = System.getenv("CLOCKIFY_API_KEY")
+    appSettings["CLOCKIFY_WORKSPACE_ID"] = System.getenv("CLOCKIFY_WORKSPACE_ID")
 
     // Uncomment to enable local debug
     // localDebug = "transport=dt_socket,server=y,suspend=n,address=5005"

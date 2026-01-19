@@ -15,8 +15,8 @@ timesheet-wizard:
   import:
     clockify:
       reports-url: "https://reports.api.clockify.me/"
-      api-key: your-api-key
-      workspace-id: your-workspace-id
+      api-key: ${CLOCKIFY_API_KEY}
+      workspace-id: ${CLOCKIFY_WORKSPACE_ID}
 
 logging:
   level:
