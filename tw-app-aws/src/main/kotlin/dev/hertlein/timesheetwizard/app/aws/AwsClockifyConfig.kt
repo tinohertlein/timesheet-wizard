@@ -11,21 +11,22 @@ data class AwsClockifyConfig(
 
     companion object {
 
-        fun fromPropertiesAndEnv() = PropertiesLoader.properties.let {
-            AwsClockifyConfig(
-                loadReportsUrl(it),
-                loadApiKey(it),
-                loadWorkspaceId(it)
-            )
-        }
+        fun fromEnv(reportsUrl: String) = AwsClockifyConfig(
+            reportsUrl,
+            loadApiKey(),
+            loadWorkspaceId()
+        )
 
-        private fun loadReportsUrl(properties: Properties) = System.getenv("TIMESHEET_WIZARD_IMPORT_CLOCKIFY_REPORTS_URL")
-            ?: properties.getProperty("timesheet-wizard.import.clockify.reports-url", "")
+        fun fromPropertiesAndEnv() = AwsClockifyConfig(
+            loadReportsUrl(PropertiesLoader.properties),
+            loadApiKey(),
+            loadWorkspaceId()
+        )
 
-        private fun loadApiKey(properties: Properties) = System.getenv("TIMESHEET_WIZARD_IMPORT_CLOCKIFY_API_KEY")
-            ?: properties.getProperty("timesheet-wizard.import.clockify.api-key", "")
+        private fun loadReportsUrl(properties: Properties) = properties.getProperty("timesheet-wizard.import.clockify.reports-url", "")
 
-        private fun loadWorkspaceId(properties: Properties) = System.getenv("TIMESHEET_WIZARD_IMPORT_CLOCKIFY_WORKSPACE_ID")
-            ?: properties.getProperty("timesheet-wizard.import.clockify.workspace-id", "")
+        private fun loadApiKey() = System.getenv("CLOCKIFY_API_KEY")
+
+        private fun loadWorkspaceId() = System.getenv("CLOCKIFY_WORKSPACE_ID")
     }
 }

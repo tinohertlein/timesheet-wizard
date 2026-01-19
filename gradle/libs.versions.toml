@@ -27,6 +27,7 @@ javaagent = "0.10.0"
 byte-buddy-agent = "1.18.4"
 rest-assured = "6.0.0"
 assertj = "3.27.6"
+junit-pioneer = "2.3.0"
 testcontainers = "1.21.4"
 archunit = "1.4.1"
 quarkus-plugin = "3.30.6"
@@ -84,6 +85,7 @@ quarkus-gcp-functions = { module = "io.quarkus:quarkus-google-cloud-functions" }
 
 ## Test
 assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+junit-pioneer = { module = "org.junit-pioneer:junit-pioneer", version.ref = "junit-pioneer" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockserver-netty = { module = "org.mock-server:mockserver-netty", version.ref = "mock-server" }
 mockserver-client = { module = "org.mock-server:mockserver-client-java", version.ref = "mock-server" }
@@ -108,7 +110,7 @@ quarkus-base = ["quarkus-kotlin", "quarkus-kotlin-stdlib-jdk8", "quarkus-arc"]
 quarkus-gcp = ["quarkus-gcp-storage", "quarkus-gcp-functions"]
 
 ## Test
-testing = ["assertj", "mockk", "mockserver-netty", "mockserver-client", "kotlin-junit", "rest-assured", "testcontainers-mockserver", "archunit"]
+testing = ["assertj", "junit-pioneer", "mockk", "mockserver-netty", "mockserver-client", "kotlin-junit", "rest-assured", "testcontainers-mockserver", "archunit"]
 testing-aws = ["testcontainers-localstack"]
 testing-azure = ["testcontainers-azure"]
 testing-gcp = ["quarkus-gcp-functions-test"]

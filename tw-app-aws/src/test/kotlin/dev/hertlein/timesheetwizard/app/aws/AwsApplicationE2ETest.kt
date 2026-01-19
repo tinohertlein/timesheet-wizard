@@ -10,9 +10,12 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junitpioneer.jupiter.SetEnvironmentVariable
 import software.amazon.awssdk.services.s3.S3Client
 
 @DisplayName("AWS Application")
+@SetEnvironmentVariable(key = "CLOCKIFY_API_KEY", value = "an-api-key")
+@SetEnvironmentVariable(key = "CLOCKIFY_WORKSPACE_ID", value = "a-workspace-id")
 class AwsApplicationE2ETest : AbstractApplicationE2ETest() {
 
     private lateinit var bucket: String
@@ -39,7 +42,7 @@ class AwsApplicationE2ETest : AbstractApplicationE2ETest() {
         bucket = "tw-sheets"
 
         awsLambdaAdapter = AwsLambdaAdapter(
-            clockifyConfig = AwsClockifyConfig("$MOCK_SERVER_HOST:$MOCK_SERVER_PORT", "an-api-key", "a-workspace-id"),
+            clockifyConfig = AwsClockifyConfig.fromEnv("$MOCK_SERVER_HOST:$MOCK_SERVER_PORT"),
             repository = AwsS3Repository(s3Client, bucket)
         )
     }

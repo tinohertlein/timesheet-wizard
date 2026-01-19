@@ -34,8 +34,14 @@ tasks.jacocoTestReport {
     }
 }
 
+
 tasks.test {
+    // https://junit-pioneer.org/docs/environment-variables/#warnings-for-reflective-access
+    jvmArgs("--add-opens", "java.base/java.util=ALL-UNNAMED")
+    jvmArgs("--add-opens", "java.base/java.lang=ALL-UNNAMED")
+
     finalizedBy(tasks.jacocoTestReport)
+
     testLogging.events = setOf(
         PASSED,
         SKIPPED,

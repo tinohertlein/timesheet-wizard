@@ -30,8 +30,8 @@ Resources:
       Environment:
         Variables:
           DISABLE_SIGNAL_HANDLERS: true
-          TIMESHEET_WIZARD_IMPORT_CLOCKIFY_API_KEY: !Ref ClockifyApiKey
-          TIMESHEET_WIZARD_IMPORT_CLOCKIFY_WORKSPACE_ID: !Ref ClockifyWorkspaceId
+          CLOCKIFY_API_KEY: !Ref ClockifyApiKey
+          CLOCKIFY_WORKSPACE_ID: !Ref ClockifyWorkspaceId
       Description: An AWS Lambda function to import timesheet reports from Clockify and export them to various targets in various formats
       MemorySize: 512
       Timeout: 60
