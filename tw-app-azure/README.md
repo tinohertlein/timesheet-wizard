@@ -1,5 +1,8 @@
 # Timesheet Wizard on Microsoft Azure
 
+> [!WARNING]
+> Deployment is usually done automatically via GitHub Actions. These are just my personal notes in case a manual deployment from local should be required. The steps outlined below are neither executed nor tested regularly: they might be outdated or work differently in our situation (e.g., different region-settings might be required).
+
 ## Getting Started
 
 ### Prerequisites
@@ -17,12 +20,13 @@
     ./gradlew :tw-app-azure:build
     ```
 
-2. Emulate Azure Blob Storage with [Azurite](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-Azurite) in [docker-compose.yml](../docker-compose.yml)
+2. Emulate Azure Blob Storage with [Azurite](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-Azurite)
+   in [docker-compose.yml](../docker-compose.yml)
     ```shell script
     docker-compose up
     ```
 
-3. Upload config files to Azurite Storage. Examples can be found in [../config/public](../config/public). 
+3. Upload config files to Azurite Storage. Examples can be found in [../config/public](../config/public).
    ```shell script
    # well known account key for Azurite
    az storage blob upload --blob-endpoint http://127.0.0.1:10000/devstoreaccount1 --account-key Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw== --container-name tw-sheets --name config/clockify.json --file ../../config/public/clockify.json
