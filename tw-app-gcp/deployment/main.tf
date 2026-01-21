@@ -150,9 +150,9 @@ resource "google_storage_bucket" "sheets" {
 }
 
 resource "google_cloud_scheduler_job" "daily" {
-  name             = "tw-import-daily"
-  description      = "Triggers tw-app-gcp to import timesheets for this month on a daily basis"
-  schedule         = "0 17 * * 1-5"
+  name             = "tw-import-eod"
+  description      = "Triggers tw-app-gcp to import timesheets for this month at the end of the day"
+  schedule         = "0 23 * * 1-5"
   time_zone        = "Europe/Berlin"
   attempt_deadline = "600s"
   region           = local.region
@@ -177,7 +177,7 @@ resource "google_cloud_scheduler_job" "daily" {
 }
 
 resource "google_cloud_scheduler_job" "monthly" {
-  name             = "tw-import-monthly"
+  name             = "tw-import-som"
   description      = "Triggers tw-app-gcp to import timesheets of last month at the beginning of a new month"
   schedule         = "0 5 1 * *"
   time_zone        = "Europe/Berlin"
