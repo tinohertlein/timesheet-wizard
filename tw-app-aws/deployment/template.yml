@@ -20,7 +20,7 @@ Resources:
   TwFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: tw-app
+      FunctionName: tw-app-aws
       Architectures:
         - !Ref Architecture
       Handler: dev.hertlein.timesheetwizard.app.aws.AwsLambdaAdapter::handleRequest
