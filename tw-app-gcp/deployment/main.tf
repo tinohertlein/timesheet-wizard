@@ -99,7 +99,7 @@ resource "google_cloudfunctions2_function" "tw-app-gcp" {
   description = "A GCP function to import timesheet reports from Clockify and export them to various formats"
 
   build_config {
-    runtime     = "java21"
+    runtime     = "java25"
     entry_point = "io.quarkus.gcp.functions.QuarkusHttpFunction"
 
     source {
