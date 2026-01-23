@@ -23,6 +23,7 @@ kotlin {
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
         javaParameters.set(true)
         freeCompilerArgs.addAll("-Xjsr305=strict")
+        freeCompilerArgs.add("-Xreturn-value-checker=full")
     }
 }
 
