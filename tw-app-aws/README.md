@@ -65,7 +65,7 @@
    export MONITORING_RECIPIENT=<email-of-monitoring-recipient>
    ```
 
-6. Build AWS stack with SAM
+6. Build AWS stack using AWS SAM
     ```shell script
    sam build --template-file tw-app-aws/deployment/template.yml
     ```

@@ -24,7 +24,7 @@ Resources:
       Architectures:
         - !Ref Architecture
       Handler: dev.hertlein.timesheetwizard.app.aws.AwsLambdaAdapter::handleRequest
-      Runtime: java21
+      Runtime: java25
       CodeUri: ../
       PackageType: Zip
       Environment:
