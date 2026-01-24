@@ -44,12 +44,13 @@ the [doc-folder](docs/README.md).
 - running as **AWS Lambda** without any Web framework
 - running as **Azure Function** with [Spring Boot Web Framework](https://spring.io/projects/spring-boot)
 - running as **Google Cloud Function** with [Quarkus Web Framework](https://quarkus.io/)
-- following the infrastructure-as-code-approach with provisioning
-    - via [AWS Cloudformation](https://aws.amazon.com/cloudformation/?nc1=h_ls) for AWS
-    - via [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep) for
-      Azure
-    - via [Terraform](https://www.terraform.io/) for Google Cloud Platform
-- triggered by AWS EventBridge and Azure Function triggers
+- using infrastructure-as-code for provisioning cloud resources
+
+| App          | Framework   | Hyperscaler | IaC            | Deployment instructions               |
+|--------------|-------------|-------------|----------------|---------------------------------------|
+| tw-app-aws   | n/a         | AWS         | CloudFormation | [README.md](./tw-app-aws/README.md)   |
+| tw-app-azure | Spring Boot | Azure       | Azure Bicep    | [README.md](./tw-app-azure/README.md) |
+| tw-app-gcp   | Quarkus     | GCP         | Terraform      | [README.md](./tw-app-gcp/README.md)   |
 
 ![Technical context](docs/assets/readme-context-technical.drawio.png "Technical context")
 *Technical context*
@@ -97,10 +98,4 @@ and sending application events.
 
 ### Build & test
 
-- Build with `gradle build`
-
-### Package, run and deploy to a Cloud
-
-* [tw-app-aws on AWS](./tw-app-aws/README.md) - work in progress
-* [tw-app-azure on Microsoft Azure](./tw-app-azure/README.md)
-* [tw-app-gcp on Google Cloud Platform](./tw-app-gcp/README.md)
+`gradle build`
