@@ -1,7 +1,7 @@
 # Timesheet Wizard on Google Cloud Platform
 
 > [!WARNING]
-> Deployment is usually done automatically via GitHub Actions. These are just my personal notes in case a manual deployment from local should be required. The steps outlined below are neither executed nor tested regularly: they might be outdated or might work differently in our situation (e.g., different location-settings might be required).
+> Deployment is usually done automatically via GitHub Actions. These are just my personal notes in case a manual deployment from local should be required. The steps outlined below are neither executed nor tested regularly: they might be outdated or might work differently in our situation (e.g., different location settings might be required).
 
 ## Getting Started
 

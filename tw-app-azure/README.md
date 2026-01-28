@@ -90,7 +90,7 @@
    az storage blob upload --account-key <account-key> --account-name timesheetwizard --container-name tw-sheets --name config/export.json --file ./config/public/export.json
    ```
 
-7. Test step 1: trigger the daily Import Job using Azure app key
+7. Test step 1: trigger the daily Import Job using the Azure app key
      ```shell script
      curl -X POST --location "https://tw-app-azure.azurewebsites.net/admin/functions/importDaily" \
          -H "x-functions-key: <app-key>" \

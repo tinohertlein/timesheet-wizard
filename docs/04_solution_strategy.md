@@ -47,8 +47,7 @@ logic and connecting to surrounding systems. This is enforced automatically
 by [Architecture tests](../tw-core/src/test/kotlin/dev/hertlein/timesheetwizard/core/ArchitectureTest.kt). (**-> Quality goals QG3**).
 
 For monitoring, logging, error notification and other shared concepts, AWS or Azure systems
-like [AWS CloudWatch](https://aws.amazon.com/cloudwatch/?nc1=h_ls)
-, [AWS Simple Notification Service](https://aws.amazon.com/sns/?nc1=h_ls), ... are used. They are set up following an
+like [AWS CloudWatch](https://aws.amazon.com/cloudwatch/?nc1=h_ls), [AWS Simple Notification Service](https://aws.amazon.com/sns/?nc1=h_ls), ... are used. They are set up following an
 infrastructure-as-code approach
 using [AWS-SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html)
 and [AWS CloudFormation](https://aws.amazon.com/cloudformation/?nc1=h_ls) in case of AWS
