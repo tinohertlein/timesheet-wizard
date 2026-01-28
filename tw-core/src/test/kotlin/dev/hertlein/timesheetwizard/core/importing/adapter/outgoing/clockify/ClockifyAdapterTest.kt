@@ -101,7 +101,7 @@ class ClockifyAdapterTest {
     @Test
     fun `should throw Exception if no Clockify id is found for given customer`() {
         assertThrows(IllegalArgumentException::class.java) {
-            clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer.copy(id = Id("xxx")), TestFixture.Import.aDateRange)
+            val _ = clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer.copy(id = Id("xxx")), TestFixture.Import.aDateRange)
         }
     }
 

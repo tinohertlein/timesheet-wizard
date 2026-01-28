@@ -23,7 +23,7 @@ class RepositoryInMemory : Repository {
         if (!store.containsKey(key)) {
             throw IllegalArgumentException("No content found for key '$key'")
         }
-        return store.get(key)!!.also {
+        return store[key]!!.also {
             logger.info { "Downloaded content from ${location(key)} " }
         }
     }

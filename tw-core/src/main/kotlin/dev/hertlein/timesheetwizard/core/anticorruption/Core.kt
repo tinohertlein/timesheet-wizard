@@ -46,9 +46,9 @@ object Core {
         val importService = bootstrapImportService(clockifyConfig, repository, eventBus)
         val exportService = bootstrapExportService(repository)
 
-        EventMapper(eventBus)
-        ImportingEventConsumeAdapter(eventBus, importService)
-        ExportingEventConsumeAdapter(eventBus, exportService)
+        val _ = EventMapper(eventBus)
+        val _ = ImportingEventConsumeAdapter(eventBus, importService)
+        val _ = ExportingEventConsumeAdapter(eventBus, exportService)
 
         return eventBus
     }

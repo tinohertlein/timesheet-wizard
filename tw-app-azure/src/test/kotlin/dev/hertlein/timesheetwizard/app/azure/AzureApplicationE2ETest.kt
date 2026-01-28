@@ -35,9 +35,9 @@ class AzureApplicationE2ETest : AbstractApplicationE2ETest() {
         @DynamicPropertySource
         @JvmStatic
         fun clockifyProperties(registry: DynamicPropertyRegistry) {
-            registry.add("timesheet-wizard.import.clockify.reports-url", { "$MOCK_SERVER_HOST:$MOCK_SERVER_PORT" })
-            registry.add("timesheet-wizard.import.clockify.api-key", { "an-api-key" })
-            registry.add("timesheet-wizard.import.clockify.workspace-id", { "a-workspace-id" })
+            registry.add("timesheet-wizard.import.clockify.reports-url") { "$MOCK_SERVER_HOST:$MOCK_SERVER_PORT" }
+            registry.add("timesheet-wizard.import.clockify.api-key") { "an-api-key" }
+            registry.add("timesheet-wizard.import.clockify.workspace-id") { "a-workspace-id" }
         }
     }
 
