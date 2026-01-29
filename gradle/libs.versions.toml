@@ -30,7 +30,7 @@ assertj = "3.27.7"
 junit-pioneer = "2.3.0"
 testcontainers = "1.21.4"
 archunit = "1.4.1"
-quarkus-plugin = "3.30.6"
+quarkus-plugin = "3.31.1"
 quarkus-platform = "3.30.8"
 
 [libraries]
