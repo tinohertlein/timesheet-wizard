@@ -1,4 +1,8 @@
-import org.gradle.api.tasks.testing.logging.TestLogEvent.*
+import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
+import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 
 plugins {
     id("org.jetbrains.kotlin.jvm") apply false
@@ -8,14 +12,6 @@ plugins {
 repositories {
     mavenLocal()
     mavenCentral()
-}
-
-testing {
-    suites {
-        val test by getting(JvmTestSuite::class) {
-            useJUnitJupiter()
-        }
-    }
 }
 
 kotlin {
@@ -35,11 +31,12 @@ tasks.jacocoTestReport {
     }
 }
 
-
 tasks.test {
     // https://junit-pioneer.org/docs/environment-variables/#warnings-for-reflective-access
     jvmArgs("--add-opens", "java.base/java.util=ALL-UNNAMED")
     jvmArgs("--add-opens", "java.base/java.lang=ALL-UNNAMED")
+
+    useJUnitPlatform()
 
     finalizedBy(tasks.jacocoTestReport)
 
@@ -51,4 +48,3 @@ tasks.test {
         STANDARD_ERROR
     )
 }
-
