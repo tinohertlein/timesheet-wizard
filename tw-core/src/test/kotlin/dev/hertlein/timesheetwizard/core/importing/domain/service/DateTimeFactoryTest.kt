@@ -40,7 +40,7 @@ class DateTimeFactoryTest {
         fun `should return date range for this month`() {
             dateTimeFactory.create(DateRangeType.THIS_MONTH).run {
                 assertThat(start).isEqualTo(LocalDate.of(2022, 7, 1))
-                assertThat(endInclusive).isEqualTo(LocalDate.of(2022, 7, 10))
+                assertThat(endInclusive).isEqualTo(LocalDate.of(2022, 7, 31))
             }
         }
 
@@ -98,7 +98,7 @@ class DateTimeFactoryTest {
         fun `should return date range for custom month if it's this month`() {
             dateTimeFactory.create(DateRangeType.CUSTOM_MONTH, "2022-07").run {
                 assertThat(start).isEqualTo(LocalDate.of(2022, 7, 1))
-                assertThat(endInclusive).isEqualTo(LocalDate.of(2022, 7, 10))
+                assertThat(endInclusive).isEqualTo(LocalDate.of(2022, 7, 31))
             }
         }
     }

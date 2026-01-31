@@ -54,15 +54,7 @@ internal class DateTimeFactory(private val clock: Clock = Clock.system(ZoneId.of
 
     private fun lastMonth() = customMonth(YearMonth.from(today().minusMonths(1)))
 
-    private fun customMonth(yearMonth: YearMonth): ClosedRange<LocalDate> {
-        val today = today()
-        val firstDayOfMonth = yearMonth.atDay(1)
-        val currentYearMonth = YearMonth.from(today)
-
-        return if (yearMonth.compareTo(currentYearMonth) == 0) {
-            firstDayOfMonth..today
-        } else {
-            firstDayOfMonth..firstDayOfMonth.with(lastDayOfMonth())
-        }
+    private fun customMonth(yearMonth: YearMonth): ClosedRange<LocalDate> = yearMonth.atDay(1).let {
+        it..it.with(lastDayOfMonth())
     }
 }
