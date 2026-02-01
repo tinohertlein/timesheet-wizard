@@ -40,16 +40,17 @@ More verbose documentation of the architecture following [arc42] can be found in
 - deployed continuously using [GitHub Actions]
 - using [Infrastructure as code] for provisioning cloud resources
 
-| App                                          | Built with                                  | Deployed to              | Provisioned with |
-|----------------------------------------------|---------------------------------------------|--------------------------|------------------|
-| [**tw-app-aws**](./tw-app-aws/README.md)     | -                                           | [AWS Lambda]             | [CloudFormation] |
-| [**tw-app-azure**](./tw-app-azure/README.md) | [![SpringBoot][SpringBoot]][SpringBoot-url] | [Azure Functions]        | [Azure Bicep]    |
-| [**tw-app-gcp**](./tw-app-gcp/README.md)     | [![Quarkus][Quarkus]][Quarkus-url]          | [Google Cloud Functions] | [Terraform]      |
+| App                                          | Built with                                  | Deployed to                                 | Provisioned with |
+|----------------------------------------------|---------------------------------------------|---------------------------------------------|------------------|
+| [**tw-app-aws**](./tw-app-aws/README.md)     | -                                           | [AWS Lambda]                                | [CloudFormation] |
+| [**tw-app-azure**](./tw-app-azure/README.md) | [![SpringBoot][SpringBoot]][SpringBoot-url] | [Azure Functions]                           | [Azure Bicep]    |
+| [**tw-app-gcp**](./tw-app-gcp/README.md)     | [![Quarkus][Quarkus]][Quarkus-url]          | [Google Cloud Functions]                    | [Terraform]      |
+| [**tw-app-local**](./tw-app-local/README.md) | -                                           | No cloud deployment. Just a simple CLI app. | -                |
 
 ![Technical context](docs/assets/readme-context-technical.drawio.png "Technical context")
 *Technical context*
 
-#### The Timesheet-Wizard consists of five Gradle subprojects:
+#### The Timesheet-Wizard consists of six Gradle subprojects:
 
 - **tw-spi**: the service provider interface to be implemented for any cloud specific things. Like e.g. uploading
   timesheets to some cloud storage.
@@ -62,6 +63,8 @@ More verbose documentation of the architecture following [arc42] can be found in
   `tw-core` with Azure specific things to a Spring Boot Azure Function.
 - **tw-app-gcp**: implements the interfaces defined in `tw-spi` with Google Cloud specific code and also bundles the
   `tw-core` with Google Cloud specific things to a Quarkus Google Cloud Function.
+- **tw-app-local**: implements the interfaces defined in `tw-spi` with local file system code and also bundles the
+  `tw-core` to a jar file that can be executed locally with `java -jar`.
 
 The `tw-core` Gradle subproject contains two Kotlin packages without any dependencies on each other, having the
 following responsibilities:

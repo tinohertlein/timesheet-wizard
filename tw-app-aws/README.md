@@ -18,7 +18,7 @@
 
 ### Packaging and running the application locally with connection to AWS S3
 
-1. Package the application into an uber-jar (in the project root directory)
+1. Package the application into an uber-jar (execute in the project root directory)
    ```shell script
    ./gradlew :tw-app-aws:build
    ```
@@ -31,7 +31,14 @@
    export MONITORING_RECIPIENT=<email-of-monitoring-recipient>
    ```
 
-3. Start & invoke the application as a local Function
+3. Upload config files to S3. Examples can be found in [../config/public](../config/public).
+   ```shell script
+   aws s3api put-object --bucket tw-sheets --key config/clockify.json --body ./config/public/clockify.json
+   aws s3api put-object --bucket tw-sheets --key config/export.json --body ./config/public/export.json
+   aws s3api put-object --bucket tw-sheets --key config/import.json --body ./config/public/import.json
+   ```
+
+4. Start & invoke the application as a local Function
    * Note: PDF-export won't work due to missing FontConfig in the local image.
    ```shell script
    echo '{"customerIds": [],"dateRangeType": "THIS_MONTH"}' > ./tw-app-aws/requests/event.json

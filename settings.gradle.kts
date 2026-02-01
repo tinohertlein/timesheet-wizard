@@ -1,7 +1,7 @@
 pluginManagement {
     // Include 'plugins build' to define convention plugins.
     includeBuild("build-logic")
-    
+
     repositories {
         mavenCentral()
         gradlePluginPortal()
@@ -15,4 +15,4 @@ plugins {
 }
 
 rootProject.name = "timesheet-wizard"
-include("tw-app-azure", "tw-app-aws", "tw-app-gcp", "tw-spi", "tw-core")
+include("tw-app-azure", "tw-app-aws", "tw-app-gcp", "tw-app-local", "tw-spi", "tw-core")

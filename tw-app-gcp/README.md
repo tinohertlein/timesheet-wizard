@@ -15,7 +15,7 @@
 
 ### Packaging and running the application locally with connection to Google Cloud Storage
 
-1. Package the application into an uber-jar (in the project root directory)
+1. Package the application into an uber-jar (execute in the project root directory)
    ```shell script
    ./gradlew :tw-app-gcp:build
    ```
@@ -29,13 +29,22 @@
    export CLOCKIFY_WORKSPACE_ID=<clockify-workspace-id>
    ```
 
-3. Start the application as a local Function
+3. Upload config files to Bucket. Examples can be found in [../config/public](../config/public). Use Bucket name from
+   Terraform output
+   ```shell script
+   gcloud storage folders create --recursive gs://<sheets-bucket>/config
+   gcloud storage cp ../../config/public/clockify.json gs://<sheets-bucket>/config/
+   gcloud storage cp ../../config/public/export.json gs://<sheets-bucket>/config/
+   gcloud storage cp ../../config/public/import.json gs://<sheets-bucket>/config/
+   ```
+
+4. Start the application as a local Function
    with [java-function-invoker-1.4.1.jar](./requests/java-function-invoker-1.4.1.jar)
    ```shell script
    java -jar java-function-invoker-1.4.1.jar --classpath ../build/tw-app-gcp-unspecified-runner.jar --target io.quarkus.gcp.functions.QuarkusHttpFunction
    ```
 
-4. Curl the Function
+5. Curl the Function
    ```shell script
    curl -X POST --location "http://localhost:8080/import" -d '{"customerIds": [], "dateRangeType": "LAST_MONTH"}'
    ````    

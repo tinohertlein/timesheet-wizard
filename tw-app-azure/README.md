@@ -15,7 +15,7 @@
 
 ### Packaging and running the application locally with emulated Azure Blob Storage (Azurite)
 
-1. Package the application (in the project root directory)
+1. Package the application (execute in the project root directory)
     ```shell script
     ./gradlew :tw-app-azure:build
     ```
