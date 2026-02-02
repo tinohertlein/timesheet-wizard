@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 @DisplayName("ImportConfigLoader")
 internal class ImportConfigLoaderTest {
 
-    private val repository = TestFixture.App.repositoryInMemory
+    private val repository = TestFixture.App.inMemoryRepository
     private val configLoader = ImportConfigLoader(repository, TestFixture.App.objectMapper)
 
     @BeforeEach

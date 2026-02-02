@@ -30,6 +30,4 @@ class LocalRepository(private val dataLocation: File) : Repository {
             .writeBytes(content)
             .also { logger.info { "Uploaded content to ${location(key)} " } }
     }
-
-    private fun location(key: String) = "${type()}:${root()}/$key"
 }

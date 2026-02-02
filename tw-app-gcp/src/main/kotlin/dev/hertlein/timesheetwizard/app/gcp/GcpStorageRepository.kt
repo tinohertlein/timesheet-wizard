@@ -5,7 +5,10 @@ import com.google.cloud.storage.Storage
 import dev.hertlein.timesheetwizard.spi.cloud.Repository
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
+import mu.KotlinLogging
 import org.eclipse.microprofile.config.inject.ConfigProperty
+
+private val logger = KotlinLogging.logger {}
 
 @Singleton
 class GcpStorageRepository(
@@ -18,7 +21,7 @@ class GcpStorageRepository(
             storage.create(BucketInfo.newBuilder(bucket).build())
         }
     }
-    
+
     @Inject
     private lateinit var storage: Storage
 
@@ -27,9 +30,13 @@ class GcpStorageRepository(
     override fun root() = bucket
 
     override fun upload(key: String, content: ByteArray) {
-        storage.get(bucket).create(key, content)
+        storage.get(bucket).create(key, content).also {
+            logger.info { "Downloaded content from ${location(key)} " }
+        }
     }
 
     override fun download(key: String): ByteArray =
-        storage.get(bucket).get(key).getContent()
+        storage.get(bucket).get(key).getContent().also {
+            logger.info { "Uploaded content to ${location(key)} " }
+        }
 }

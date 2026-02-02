@@ -9,4 +9,6 @@ interface Repository {
     fun upload(key: String, content: ByteArray)
 
     fun download(key: String): ByteArray
+
+    fun location(key: String) = "[${type()}]${root()}:$key"
 }

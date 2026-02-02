@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 @DisplayName("ExportConfigLoader")
 internal class ExportConfigLoaderTest {
 
-    private val repository = TestFixture.App.repositoryInMemory
+    private val repository = TestFixture.App.inMemoryRepository
     private val exportConfigLoader = ExportConfigLoader(repository, TestFixture.App.objectMapper)
 
     @BeforeEach

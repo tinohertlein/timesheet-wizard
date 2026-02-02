@@ -11,7 +11,7 @@ import kotlin.time.Duration.Companion.hours
 internal object TestFixture {
 
     object App {
-        val repositoryInMemory = RepositoryInMemory()
+        val inMemoryRepository = InMemoryRepository()
         val objectMapper = Core.objectMapper
     }
 

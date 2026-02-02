@@ -60,6 +60,4 @@ class AwsS3Repository(
             logger.info { "Uploaded content to ${location(key)} " }
         }
     }
-
-    private fun location(key: String) = "${type()}/${root()}/$key"
 }

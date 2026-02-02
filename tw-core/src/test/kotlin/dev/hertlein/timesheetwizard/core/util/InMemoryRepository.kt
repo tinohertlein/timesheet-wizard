@@ -5,7 +5,7 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-class RepositoryInMemory : Repository {
+class InMemoryRepository : Repository {
 
     private val store = mutableMapOf<String, ByteArray>()
 
@@ -27,6 +27,4 @@ class RepositoryInMemory : Repository {
             logger.info { "Downloaded content from ${location(key)} " }
         }
     }
-
-    private fun location(key: String) = "${type()}/${root()}/$key"
 }

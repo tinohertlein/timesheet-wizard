@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 @DisplayName("ClockifyIdsLoader")
 internal class ClockifyIdsLoaderTest {
 
-    private val repository = TestFixture.App.repositoryInMemory
+    private val repository = TestFixture.App.inMemoryRepository
     private val clockifyIdsLoader: ClockifyIdsLoader = ClockifyIdsLoader(repository, TestFixture.App.objectMapper)
 
     @BeforeEach
