@@ -15,6 +15,8 @@ The Timesheet-Wizard consists of the following Gradle subprojects:
   cloud-agnostic `tw-core` with Azure specific things to an Azure function.
 - **tw-app-gcp**: implements the interfaces of tw-spi with Google Cloud Platform specific code and also bundles the
   cloud-agnostic `tw-core` with Google Cloud Platform specific things to a Google Cloud function.
+- **tw-app-local**: implements the interfaces of tw-spi with local File System specific code and also bundles the
+  cloud-agnostic `tw-core` to a Java jar file.
 
 ## Level 2
 
@@ -28,7 +30,8 @@ The tw-core Gradle subproject consists of two business modules and an anticorrup
 - **exporting**: this module is responsible for transforming the model created by `importing` by generating an
   XLSX, PDF or CSV file from that data. The XLSX, PDF and CSV files then are stored in some cloud storage, where they
   are available for a manual download.
-- **anticorruption**: this module contains code that maps domain model classes and events of module `importing` to domain model
+- **anticorruption**: this module contains code that maps domain model classes and events of module `importing` to
+  domain model
   classes and events of module `exporting`.
 
 ## Level 3
