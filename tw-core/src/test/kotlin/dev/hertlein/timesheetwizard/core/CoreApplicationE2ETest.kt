@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test
 @DisplayName("Core Application")
 class CoreApplicationE2ETest : AbstractApplicationE2ETest() {
 
-    private val repository = InMemoryRepository()
     private val clockifyConfig = object : ClockifyConfig {
         override val reportsUrl: String
             get() = "${MOCK_SERVER_HOST}:${MOCK_SERVER_PORT}"
@@ -22,24 +21,15 @@ class CoreApplicationE2ETest : AbstractApplicationE2ETest() {
         override val workspaceId: String
             get() = "a-workspace-id"
     }
-
+    private val repository = InMemoryRepository()
     private val eventBus = Core.bootstrap(repository, clockifyConfig)
 
     @Test
     fun `should import and export timesheets to memory`() {
-        executeTest(this::upload, this::download, this::run)
-    }
-
-    private fun upload(key: String, bytes: ByteArray) {
-        repository.upload(key, bytes)
-    }
-
-    private fun download(key: String): ByteArray {
-        return repository.download(key)
+        executeTest(repository, this::run)
     }
 
     private fun run() {
         eventBus.post(ImportingStartedEvent(ImportParams(listOf("1000"), DateRangeType.CUSTOM_YEAR, "2022")))
-
     }
 }

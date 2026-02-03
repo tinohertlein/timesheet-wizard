@@ -21,6 +21,7 @@ import java.io.File
 import java.nio.file.Path
 import java.util.concurrent.TimeUnit
 import kotlin.io.path.absolutePathString
+import dev.hertlein.timesheetwizard.spi.cloud.Repository
 
 const val MOCK_SERVER_HOST = "http://localhost"
 const val MOCK_SERVER_PORT = 1081
@@ -47,8 +48,7 @@ open class AbstractApplicationE2ETest {
     }
 
     protected fun executeTest(
-        uploadToStorage: (String, ByteArray) -> Unit,
-        downloadFromStorage: (String) -> ByteArray,
+        repository: Repository,
         run: () -> Unit
     ) {
         val configFileNames = listOf(
@@ -57,7 +57,7 @@ open class AbstractApplicationE2ETest {
             "config/import.json" to "e2e/config/import.json",
         )
         configFileNames.forEach {
-            uploadToStorage(
+            repository.upload(
                 it.first,
                 ResourcesReader.bytesFromResourceFile(it.second)
             )
@@ -73,7 +73,7 @@ open class AbstractApplicationE2ETest {
         run()
 
         expectedFilenames.forEach {
-            val bytes = downloadFromStorage("${it.first}${it.second}")
+            val bytes = repository.download("${it.first}${it.second}")
             storeLocally(it, bytes)
             assertThat(bytes).isNotEmpty
         }

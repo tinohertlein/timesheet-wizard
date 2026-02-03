@@ -20,23 +20,15 @@ class LocalApplicationE2ETest : AbstractApplicationE2ETest() {
         .apply { writeText("""{"customerIds": ["1000"], "dateRangeType": "CUSTOM_YEAR", "dateRange": "2022"}""") }
 
     private val repository = LocalRepository(dataDirectory)
-    private val localCliAdapter = LocalCliAdapter(repository, "$MOCK_SERVER_HOST:$MOCK_SERVER_PORT")
+    private val adapter = LocalCliAdapter(repository, "$MOCK_SERVER_HOST:$MOCK_SERVER_PORT")
 
     @Test
-    fun `should import and export timesheets to AWS S3`() {
-        executeTest(this::upload, this::download, this::run)
-    }
-
-    private fun upload(key: String, bytes: ByteArray) {
-        repository.upload(key, bytes)
-    }
-
-    private fun download(key: String): ByteArray {
-        return repository.download(key)
+    fun `should import and export timesheets to local file system`() {
+        executeTest(repository, this::run)
     }
 
     private fun run() {
-        val result = localCliAdapter.test("${dataDirectory.absolutePath} ${eventFile.absolutePath}", includeSystemEnvvars = true)
+        val result = adapter.test("${dataDirectory.absolutePath} ${eventFile.absolutePath}", includeSystemEnvvars = true)
 
         assertThat(result.statusCode).withFailMessage { result.output }.isEqualTo(0)
     }

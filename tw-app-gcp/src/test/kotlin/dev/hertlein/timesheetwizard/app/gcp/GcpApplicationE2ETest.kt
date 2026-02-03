@@ -55,15 +55,7 @@ class GcpApplicationE2ETest : AbstractApplicationE2ETest(), QuarkusTestProfile {
 
     @Test
     fun `should import and export timesheets to Google Cloud Storage`() {
-        executeTest(this::upload, this::download, this::run)
-    }
-
-    private fun upload(key: String, bytes: ByteArray) {
-        repository.upload(key, bytes)
-    }
-
-    private fun download(key: String): ByteArray {
-        return repository.download(key)
+        executeTest(repository, this::run)
     }
 
     private fun run() {

@@ -1,12 +1,10 @@
 package dev.hertlein.timesheetwizard.app.azure
 
-import com.azure.storage.blob.BlobServiceClient
 import com.microsoft.azure.functions.HttpMethod
 import com.microsoft.azure.functions.HttpRequestMessage
 import com.microsoft.azure.functions.HttpResponseMessage
 import com.microsoft.azure.functions.HttpStatus
 import com.microsoft.azure.functions.HttpStatusType
-import dev.hertlein.timesheetwizard.app.azure.util.AzureBlobOperations
 import dev.hertlein.timesheetwizard.app.azure.util.TestProfiles.TESTCONTAINERS
 import dev.hertlein.timesheetwizard.app.azure.util.TestcontainersConfiguration
 import dev.hertlein.timesheetwizard.core.AbstractApplicationE2ETest
@@ -15,7 +13,6 @@ import dev.hertlein.timesheetwizard.core.MOCK_SERVER_PORT
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
@@ -42,25 +39,14 @@ class AzureApplicationE2ETest : AbstractApplicationE2ETest() {
     }
 
     @Autowired
-    private lateinit var azureFunctionAdapter: AzureFunctionAdapter
-
+    private lateinit var adapter: AzureFunctionAdapter
+    
     @Autowired
-    private lateinit var blobClient: BlobServiceClient
-
-    @Value("\${timesheet-wizard.azure.blob.container}")
-    private lateinit var container: String
+    private lateinit var repository: AzureBlobStorageRepository
 
     @Test
     fun `should import and export timesheets to Azure Blob Storage`() {
-        executeTest(this::upload, this::download, this::run)
-    }
-
-    private fun upload(key: String, bytes: ByteArray) {
-        AzureBlobOperations.upload(blobClient, container, key, bytes)
-    }
-
-    private fun download(key: String): ByteArray {
-        return AzureBlobOperations.download(blobClient, container, key)
+        executeTest(repository, this::run)
     }
 
     private fun run() {
@@ -94,6 +80,6 @@ class AzureApplicationE2ETest : AbstractApplicationE2ETest() {
                 TODO("Not yet implemented")
             }
         }
-        azureFunctionAdapter.import(message, null)
+        adapter.import(message, null)
     }
 }
