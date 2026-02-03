@@ -72,6 +72,14 @@ jobs:
           name: generate test report (tw-app-gcp)
           path: ./tw-app-gcp/build/test-results/test/*.xml
           reporter: java-junit
+      
+      - name: Generate test report (tw-app-local)
+        uses: dorny/test-reporter@v2
+        if: success() || failure()
+        with:
+          name: generate test report (tw-app-local)
+          path: ./tw-app-local/build/test-results/test/*.xml
+          reporter: java-junit
 
   deploy-to-azure:
     runs-on: ubuntu-24.04
