@@ -14,7 +14,7 @@ internal class FilenameFactory {
         val startDate = formatLocalDate(timesheetDocument.dateRange.start)
         val endDate = formatLocalDate(timesheetDocument.dateRange.endInclusive)
 
-        return "customers/$customerName/${metaData.suffix}/${metaData.version}/timesheet_$startDate-$endDate.${metaData.suffix}"
+        return "timesheets/$customerName/${metaData.suffix}/${metaData.version}/timesheet_$startDate-$endDate.${metaData.suffix}"
     }
 
     @Suppress("MagicNumber")

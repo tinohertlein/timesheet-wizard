@@ -29,7 +29,7 @@ internal class FilenameFactoryTest {
             val filename =
                 filenameFactory.filenameFrom(DocumentMetaData.from(TimesheetDocument.Type.XLSX_V1), timesheetDocument)
 
-            assertThat(filename).isEqualTo("customers/the-customer/xlsx/v1/timesheet_20220101-20220131.xlsx")
+            assertThat(filename).isEqualTo("timesheets/the-customer/xlsx/v1/timesheet_20220101-20220131.xlsx")
         }
     }
 }

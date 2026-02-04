@@ -64,10 +64,10 @@ open class AbstractApplicationE2ETest {
         }
         prepareClockifyServer()
         val expectedFilenames = listOf(
-            "customers/PiedPiper/csv/v1/" to "timesheet_20220101-20221231.csv",
-            "customers/PiedPiper/xlsx/v1/" to "timesheet_20220101-20221231.xlsx",
-            "customers/PiedPiper/xlsx/v2/" to "timesheet_20220101-20221231.xlsx",
-            "customers/PiedPiper/pdf/v1/" to "timesheet_20220101-20221231.pdf",
+            "timesheets/PiedPiper/csv/v1/" to "timesheet_20220101-20221231.csv",
+            "timesheets/PiedPiper/xlsx/v1/" to "timesheet_20220101-20221231.xlsx",
+            "timesheets/PiedPiper/xlsx/v2/" to "timesheet_20220101-20221231.xlsx",
+            "timesheets/PiedPiper/pdf/v1/" to "timesheet_20220101-20221231.pdf",
         )
 
         run()
