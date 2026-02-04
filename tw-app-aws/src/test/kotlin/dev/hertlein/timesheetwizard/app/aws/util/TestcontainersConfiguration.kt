@@ -10,7 +10,7 @@ import software.amazon.awssdk.services.s3.S3Client
 object TestcontainersConfiguration {
 
     fun localStackContainer(): LocalStackContainer {
-        return LocalStackContainer(DockerImageName.parse("localstack/localstack:3.4.0"))
+        return LocalStackContainer(DockerImageName.parse("localstack/localstack:s3-latest"))
     }
 
     fun s3Client(localstackContainer: LocalStackContainer): S3Client {
