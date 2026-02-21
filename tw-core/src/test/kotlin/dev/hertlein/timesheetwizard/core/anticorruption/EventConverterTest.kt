@@ -21,7 +21,7 @@ import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
 @DisplayName("EventMapper")
-class EventMapperTest {
+class EventConverterTest {
 
     private val aZoneOffset = ZoneOffset.ofHours(1)
 
@@ -38,7 +38,7 @@ class EventMapperTest {
     private val someTags = listOf("a-tag")
 
     private val eventBus: EventBus = mockk(relaxed = true)
-    private val eventMapper = EventMapper(eventBus)
+    private val eventConverter = EventConverter(eventBus)
 
     @BeforeEach
     fun setup() {
@@ -69,9 +69,9 @@ class EventMapperTest {
         val exportTimesheet =
             ExportTimesheet(ExportTimesheet.Customer(aCustomerId, aCustomerName), aDateRange, listOf(exportEntry))
 
-        eventMapper.onImportingFinished(ImportingFinishedEvent(importTimesheet))
+        eventConverter.onImportingFinished(ImportingFinishedEvent(importTimesheet))
 
-        verify { eventBus.register(eventMapper) }
+        verify { eventBus.register(eventConverter) }
         verify { eventBus.post(ExportingStartedEvent(exportTimesheet)) }
         confirmVerified(eventBus)
     }
