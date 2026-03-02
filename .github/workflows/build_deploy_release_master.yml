@@ -194,7 +194,7 @@ jobs:
     runs-on: ubuntu-24.04
     needs: build
     steps:
-      - uses: hashicorp/setup-terraform@v3
+      - uses: hashicorp/setup-terraform@v4
       - name: Checkout
         uses: actions/checkout@v6
 
