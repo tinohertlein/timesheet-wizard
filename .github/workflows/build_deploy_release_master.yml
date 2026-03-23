@@ -103,7 +103,7 @@ jobs:
           sudo apt-get install -y azure-functions-core-tools-4
 
       - name: Login to Azure
-        uses: Azure/login@v2
+        uses: Azure/login@v3
         with:
           creds: ${{ secrets.AZURE_CREDS }}
 
@@ -127,7 +127,7 @@ jobs:
     needs: deploy-to-azure
     steps:
       - name: Login to Azure
-        uses: Azure/login@v2
+        uses: Azure/login@v3
         with:
           creds: ${{ secrets.AZURE_CREDS }}
 
