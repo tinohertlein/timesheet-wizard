@@ -9,7 +9,9 @@ import software.amazon.awssdk.services.s3.S3Client
 object TestcontainersConfiguration {
 
     fun localStackContainer(): LocalStackContainer {
-        return LocalStackContainer("localstack/localstack").withServices("s3")
+        return LocalStackContainer("localstack/localstack")
+            .withServices("s3")
+            .withEnv("LOCALSTACK_AUTH_TOKEN", System.getenv("LOCALSTACK_AUTH_TOKEN"))
     }
 
     fun s3Client(localstackContainer: LocalStackContainer): S3Client {

@@ -23,7 +23,8 @@ env:
   CLOCKIFY_WORKSPACE_ID: ${{ secrets.CLOCKIFY_WORKSPACE_ID}}
   TF_VAR_CLOCKIFY_API_KEY: ${{ secrets.CLOCKIFY_API_KEY}}
   TF_VAR_CLOCKIFY_WORKSPACE_ID: ${{ secrets.CLOCKIFY_WORKSPACE_ID}}
-
+  LOCALSTACK_AUTH_TOKEN: ${{ secrets.LOCALSTACK_AUTH_TOKEN}}
+  
 jobs:
   build:
     runs-on: ubuntu-latest

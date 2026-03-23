@@ -16,7 +16,6 @@ import kotlin.test.Ignore
 @DisplayName("AWS Application")
 @SetEnvironmentVariable(key = "CLOCKIFY_API_KEY", value = "an-api-key")
 @SetEnvironmentVariable(key = "CLOCKIFY_WORKSPACE_ID", value = "a-workspace-id")
-@Ignore("Requires localstack auth-token/license as of 2026-03-23. TBD")
 class AwsApplicationE2ETest : AbstractApplicationE2ETest() {
 
     private val localStackContainer = TestcontainersConfiguration.localStackContainer()
