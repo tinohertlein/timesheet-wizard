@@ -30,7 +30,7 @@ byte-buddy-agent = "1.18.7"
 rest-assured = "6.0.0"
 assertj = "3.27.7"
 junit-pioneer = "2.3.0"
-testcontainers = "1.21.4"
+testcontainers = "2.0.4"
 archunit = "1.4.1"
 quarkus-plugin = "3.34.0"
 quarkus-platform = "3.31.4"
@@ -98,9 +98,9 @@ mockserver-netty = { module = "org.mock-server:mockserver-netty", version.ref = 
 mockserver-client = { module = "org.mock-server:mockserver-client-java", version.ref = "mock-server" }
 kotlin-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
 rest-assured = { module = "io.rest-assured:rest-assured", version.ref = "rest-assured" }
-testcontainers-localstack = { module = "org.testcontainers:localstack", version.ref = "testcontainers" }
-testcontainers-azure = { module = "org.testcontainers:azure", version.ref = "testcontainers" }
-testcontainers-mockserver = { module = "org.testcontainers:mockserver", version.ref = "testcontainers" }
+testcontainers-localstack = { module = "org.testcontainers:testcontainers-localstack", version.ref = "testcontainers" }
+testcontainers-azure = { module = "org.testcontainers:testcontainers-azure", version.ref = "testcontainers" }
+testcontainers-mockserver = { module = "org.testcontainers:testcontainers-mockserver", version.ref = "testcontainers" }
 byte-buddy-agent = { module = "net.bytebuddy:byte-buddy-agent", version.ref = "byte-buddy-agent" }
 spring-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 archunit = { module = "com.tngtech.archunit:archunit", version.ref = "archunit" }
