@@ -133,7 +133,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDS }}
 
       - name: Invoke Azure Function
-        uses: azure/cli@v2
+        uses: azure/cli@v3
         with:
           azcliversion: latest
           inlineScript: |
