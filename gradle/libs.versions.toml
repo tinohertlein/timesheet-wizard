@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.3.21"
-guava = "33.5.0-jre"
+guava = "33.6.0-jre"
 lombok = "1.18.46"
 shadow = "9.4.1"
 kotlin-logging = "3.0.5"
