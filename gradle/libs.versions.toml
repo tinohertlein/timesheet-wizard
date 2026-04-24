@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.3.20"
+kotlin = "2.3.21"
 guava = "33.5.0-jre"
 lombok = "1.18.44"
 shadow = "9.4.1"
