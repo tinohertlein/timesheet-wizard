@@ -32,7 +32,7 @@ assertj = "3.27.7"
 junit-pioneer = "2.3.0"
 testcontainers = "2.0.5"
 archunit = "1.4.2"
-quarkus-plugin = "3.36.0"
+quarkus-plugin = "3.36.1"
 quarkus-platform = "3.36.0"
 clikt = "5.1.0"
 
