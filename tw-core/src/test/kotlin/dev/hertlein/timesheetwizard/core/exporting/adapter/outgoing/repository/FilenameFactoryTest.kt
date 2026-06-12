@@ -1,6 +1,7 @@
 package dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository
 
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.TimesheetDocument
+import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -20,14 +21,14 @@ internal class FilenameFactoryTest {
             val start = LocalDate.of(2022, 1, 1)
             val end = LocalDate.of(2022, 1, 31)
             val timesheetDocument = TimesheetDocument(
-                TimesheetDocument.Type.XLSX_V1,
+                ExportType.XLSX_V1,
                 "the-customer",
                 start..end,
                 ByteArray(0)
             )
 
             val filename =
-                filenameFactory.filenameFrom(DocumentMetaData.from(TimesheetDocument.Type.XLSX_V1), timesheetDocument)
+                filenameFactory.filenameFrom(DocumentMetaData.from(ExportType.XLSX_V1), timesheetDocument)
 
             assertThat(filename).isEqualTo("timesheets/the-customer/xlsx/v1/timesheet_20220101-20220131.xlsx")
         }

@@ -16,8 +16,10 @@ internal class ResponseBodyMapperTest {
 
     private val zoneOffset = ZoneOffset.ofHours(1)
 
-    private val aProject = "a project"
-    private val anotherProject = "another project"
+    private val aProjectId = "#1"
+    private val aProjectName = "a project"
+    private val anotherProjectId = "#2"
+    private val anotherProjectName = "another project"
 
     private val aTask = "a task"
     private val anotherTask = "another task"
@@ -52,31 +54,36 @@ internal class ResponseBodyMapperTest {
 
     private fun input(): List<ResponseBody.TimeEntry> = listOf(
         ResponseBody.TimeEntry(
-            aProject,
+            aProjectId,
+            aProjectName,
             aTask,
             someTagsAsTags,
             ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, toSeconds(2))
         ),
         ResponseBody.TimeEntry(
-            aProject,
+            aProjectId,
+            aProjectName,
             aTask,
             someTagsAsTags,
             ResponseBody.TimeEntry.TimeInterval(anotherDateLowerAsString, anotherDateUpperAsString, toSeconds(3))
         ),
         ResponseBody.TimeEntry(
-            aProject,
+            aProjectId,
+            aProjectName,
             anotherTask,
             someTagsAsTags,
             ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, toSeconds(2))
         ),
         ResponseBody.TimeEntry(
-            anotherProject,
+            anotherProjectId,
+            anotherProjectName,
             aTask,
             someTagsAsTags,
             ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, toSeconds(2))
         ),
         ResponseBody.TimeEntry(
-            anotherProject,
+            anotherProjectId,
+            anotherProjectName,
             anotherTask,
             someTagsAsTags,
             ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, toSeconds(2))
@@ -85,7 +92,8 @@ internal class ResponseBodyMapperTest {
 
     private fun expected(): List<ImportTimesheet.Entry> = listOf(
         ImportTimesheet.Entry.of(
-            aProject,
+            aProjectId,
+            aProjectName,
             aTask,
             someTagsAsStrings,
             aDateLowerAsDateTime,
@@ -93,7 +101,8 @@ internal class ResponseBodyMapperTest {
             2.hours
         ),
         ImportTimesheet.Entry.of(
-            aProject,
+            aProjectId,
+            aProjectName,
             aTask,
             someTagsAsStrings,
             anotherDateLowerAsDateTime,
@@ -101,7 +110,8 @@ internal class ResponseBodyMapperTest {
             3.hours
         ),
         ImportTimesheet.Entry.of(
-            aProject,
+            aProjectId,
+            aProjectName,
             anotherTask,
             someTagsAsStrings,
             aDateLowerAsDateTime,
@@ -109,7 +119,8 @@ internal class ResponseBodyMapperTest {
             2.hours
         ),
         ImportTimesheet.Entry.of(
-            anotherProject,
+            anotherProjectId,
+            anotherProjectName,
             aTask,
             someTagsAsStrings,
             aDateLowerAsDateTime,
@@ -117,7 +128,8 @@ internal class ResponseBodyMapperTest {
             2.hours
         ),
         ImportTimesheet.Entry.of(
-            anotherProject,
+            anotherProjectId,
+            anotherProjectName,
             anotherTask,
             someTagsAsStrings,
             aDateLowerAsDateTime,

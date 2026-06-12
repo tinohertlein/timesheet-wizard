@@ -7,6 +7,7 @@ internal data class ResponseBody(
     data class Totals(val totalTime: Long, val entriesCount: Long)
 
     data class TimeEntry(
+        val projectId: String,
         val projectName: String,
         val description: String,
         val tags: List<Tag>?,

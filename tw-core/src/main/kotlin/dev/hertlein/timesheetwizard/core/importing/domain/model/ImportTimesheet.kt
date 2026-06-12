@@ -24,14 +24,15 @@ internal data class ImportTimesheet(
 
             @Suppress("LongParameterList")
             fun of(
-                project: String,
+                projectId: String,
+                projectName: String,
                 task: String,
                 tags: List<String>,
                 start: OffsetDateTime,
                 end: OffsetDateTime,
                 duration: Duration
             ) = Entry(
-                Project(project),
+                Project(projectId, projectName),
                 Task(task),
                 tags.map { Tag(it) },
                 DateTimeRange(start, end),
@@ -45,8 +46,7 @@ internal data class ImportTimesheet(
         @JvmInline
         internal value class Tag(val name: String)
 
-        @JvmInline
-        internal value class Project(val name: String)
+        internal data class Project(val id: String, val name: String)
 
         internal data class DateTimeRange(val start: OffsetDateTime, val end: OffsetDateTime)
     }

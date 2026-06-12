@@ -13,9 +13,9 @@ internal class RepositoryAdapter(
 ) : RepositoryPort {
 
     override fun save(timesheetDocument: TimesheetDocument) {
-        logger.debug { "Persisting document of type '${timesheetDocument.type}' ..." }
+        logger.debug { "Persisting document of type '${timesheetDocument.exportType}' ..." }
 
-        val metaData = DocumentMetaData.from(timesheetDocument.type)
+        val metaData = DocumentMetaData.from(timesheetDocument.exportType)
         val filename = filenameFactory.filenameFrom(metaData, timesheetDocument)
 
         repository.upload(filename, timesheetDocument.content)

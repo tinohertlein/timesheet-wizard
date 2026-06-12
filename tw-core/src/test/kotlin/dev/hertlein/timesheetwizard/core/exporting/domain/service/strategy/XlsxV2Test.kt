@@ -5,6 +5,7 @@ import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.aTimesheet
 import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.aZoneOffset
 import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.anEntry
+import io.mockk.mockk
 import org.apache.poi.ss.usermodel.DataFormatter
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
@@ -32,7 +33,7 @@ class XlsxV2Test {
         val expected =
             ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/timesheet_v2_PiedPiper_20220101-20221231.xlsx")
 
-        val actual = XlsxV2().create(emptyMap(), timesheet)
+        val actual = XlsxV2(mockk(relaxed = true)).create(emptyMap(), timesheet)
 
         ExcelVerification.assertEquals(
             actual.content,

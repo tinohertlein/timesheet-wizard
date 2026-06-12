@@ -3,7 +3,9 @@ package dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy
 import com.opencsv.CSVWriter
 import com.opencsv.ICSVWriter
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
+import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportType
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.TimesheetDocument
+import dev.hertlein.timesheetwizard.core.exporting.domain.port.RepositoryPort
 import java.io.ByteArrayOutputStream
 import java.io.OutputStreamWriter
 import java.time.LocalDate
@@ -16,7 +18,7 @@ import java.util.Locale
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
 
-internal class CsvV1 : ExportStrategy {
+internal class CsvV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(repositoryPort) {
 
     companion object {
 
@@ -87,8 +89,8 @@ internal class CsvV1 : ExportStrategy {
 
     private val separatorChar = ';'
 
-    override fun type(): TimesheetDocument.Type {
-        return TimesheetDocument.Type.CSV_V1
+    override fun type(): ExportType {
+        return ExportType.CSV_V1
     }
 
     override fun create(exportParams: Map<String, String>, timesheet: ExportTimesheet): TimesheetDocument {
@@ -105,7 +107,7 @@ internal class CsvV1 : ExportStrategy {
             }
         }
         return TimesheetDocument(
-            TimesheetDocument.Type.CSV_V1, timesheet.customer.name, timesheet.dateRange, outputStream.toByteArray()
+            ExportType.CSV_V1, timesheet.customer.name, timesheet.dateRange, outputStream.toByteArray()
         )
     }
 

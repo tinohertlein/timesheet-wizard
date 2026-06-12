@@ -33,7 +33,7 @@ internal object TestFixture {
 
         private val aCustomer = ExportTimesheet.Customer("a-customer-id", "a-customer-name")
 
-        private val aProject = ExportTimesheet.Entry.Project("a-project")
+        private val aProject = ExportTimesheet.Entry.Project("a-project-id", "a-project-name")
 
         private val aTask = ExportTimesheet.Entry.Task("a-task")
 

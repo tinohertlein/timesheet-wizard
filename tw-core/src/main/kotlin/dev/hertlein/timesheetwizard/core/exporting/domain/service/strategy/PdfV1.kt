@@ -2,6 +2,8 @@ package dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy
 
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.TimesheetDocument
+import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportType
+import dev.hertlein.timesheetwizard.core.exporting.domain.port.RepositoryPort
 import net.sf.jasperreports.engine.DefaultJasperReportsContext
 import net.sf.jasperreports.engine.JREmptyDataSource
 import net.sf.jasperreports.engine.JasperCompileManager
@@ -16,7 +18,7 @@ import java.time.OffsetDateTime
 import java.util.Locale
 import kotlin.time.DurationUnit
 
-internal class PdfV1 : ExportStrategy {
+internal class PdfV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(repositoryPort) {
 
     companion object {
 
@@ -51,8 +53,8 @@ internal class PdfV1 : ExportStrategy {
         DefaultJasperReportsContext.getInstance().setProperty("net.sf.jasperreports.compiler.temp.dir", "/tmp")
     }
 
-    override fun type(): TimesheetDocument.Type {
-        return TimesheetDocument.Type.PDF_V1
+    override fun type(): ExportType {
+        return ExportType.PDF_V1
     }
 
     override fun create(exportParams: Map<String, String>, timesheet: ExportTimesheet): TimesheetDocument {
@@ -68,7 +70,7 @@ internal class PdfV1 : ExportStrategy {
         }
 
         return TimesheetDocument(
-            TimesheetDocument.Type.PDF_V1, timesheet.customer.name, timesheet.dateRange, outputStream.toByteArray()
+            ExportType.PDF_V1, timesheet.customer.name, timesheet.dateRange, outputStream.toByteArray()
         )
     }
 

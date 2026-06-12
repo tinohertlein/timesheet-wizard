@@ -33,7 +33,8 @@ class EventConverterTest {
     private val aCustomerId = "a-customer-id"
     private val aCustomerName = "a-customer-name"
 
-    private val aProject = "a-project"
+    private val aProjectId = "a-project-id"
+    private val aProjectName = "a-project-name"
     private val aTask = "a-task"
     private val someTags = listOf("a-tag")
 
@@ -49,7 +50,8 @@ class EventConverterTest {
     @Test
     fun `should map importTimesheet to exportTimeSheet`() {
         val importEntry = ImportTimesheet.Entry.of(
-            aProject,
+            aProjectId,
+            aProjectName,
             aTask,
             someTags,
             aStart,
@@ -57,7 +59,8 @@ class EventConverterTest {
             2.toDuration(DurationUnit.HOURS)
         )
         val exportEntry = ExportTimesheet.Entry.of(
-            aProject,
+            aProjectId,
+            aProjectName,
             aTask,
             someTags,
             aStart,

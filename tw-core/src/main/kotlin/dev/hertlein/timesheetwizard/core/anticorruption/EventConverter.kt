@@ -30,9 +30,10 @@ internal class EventConverter(private val eventBus: EventBus) : Converter<Import
 
     private fun convertEntries(entries: List<ImportTimesheet.Entry>): List<Entry> = entries.map { importEntry ->
         Entry.of(
+            importEntry.project.id,
             importEntry.project.name,
             importEntry.task.name,
-            importEntry.tags.map { t -> t.name },
+            importEntry.tags.map { it.name },
             importEntry.dateTimeRange.start,
             importEntry.dateTimeRange.end,
             importEntry.duration

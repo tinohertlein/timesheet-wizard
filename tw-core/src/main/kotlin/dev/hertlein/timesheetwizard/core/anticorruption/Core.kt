@@ -73,7 +73,12 @@ object Core {
     ): ExportService {
         val repositoryAdapter = RepositoryAdapter(repository, FilenameFactory())
         val exportConfigLoader = ExportConfigLoader(repository, objectMapper)
-        val exportService = ExportService(exportConfigLoader, listOf(CsvV1(), PdfV1(), XlsxV1(), XlsxV2()), repositoryAdapter)
+        val exportService = ExportService(exportConfigLoader, listOf(
+            CsvV1(repositoryAdapter),
+            PdfV1(repositoryAdapter),
+            XlsxV1(repositoryAdapter),
+            XlsxV2(repositoryAdapter)
+        ))
         return exportService
     }
 }

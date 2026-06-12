@@ -1,11 +1,13 @@
 package dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader.bytesFromResourceFile
+import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository.RepositoryAdapter
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet.Entry
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet.Entry.DateTimeRange
 import dev.hertlein.timesheetwizard.core.util.TestFixture
 import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.aZoneOffset
 import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.anEntry
+import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -44,7 +46,7 @@ class CsvV1Test {
         val timesheet = TestFixture.Export.aTimesheet(morningWork, lunchBreak, afternoonWork)
         val expected = bytesFromResourceFile("${this.javaClass.packageName}/timesheet_PiedPiper_20220101-20221231.csv")
 
-        val actual = CsvV1().create(mapOf("login" to "rihe"), timesheet)
+        val actual = CsvV1(mockk(relaxed = true)).create(mapOf("login" to "rihe"), timesheet)
 
         assertThat(String(actual.content)).isEqualTo(String(expected))
     }

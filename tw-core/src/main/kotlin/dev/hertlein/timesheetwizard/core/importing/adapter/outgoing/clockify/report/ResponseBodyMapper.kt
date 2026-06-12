@@ -17,6 +17,7 @@ internal class ResponseBodyMapper {
 
     private fun toTimesheetEntry(it: ResponseBody.TimeEntry) =
         ImportTimesheet.Entry.of(
+            it.projectId,
             it.projectName,
             it.description,
             it.tags?.map { tag -> ResponseBody.TimeEntry.Tag(tag.name).name } ?: emptyList(),

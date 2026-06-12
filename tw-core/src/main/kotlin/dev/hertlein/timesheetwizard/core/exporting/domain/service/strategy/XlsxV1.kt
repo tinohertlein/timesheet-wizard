@@ -2,6 +2,8 @@ package dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy
 
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.TimesheetDocument
+import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportType
+import dev.hertlein.timesheetwizard.core.exporting.domain.port.RepositoryPort
 import org.apache.poi.ss.usermodel.CellCopyPolicy
 import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.xssf.usermodel.XSSFSheet
@@ -13,7 +15,7 @@ import kotlin.time.DurationUnit
 
 private val cellCopyPolicy = CellCopyPolicy.Builder().cellValue(false).build()
 
-internal class XlsxV1 : ExportStrategy {
+internal class XlsxV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(repositoryPort) {
 
     companion object {
 
@@ -22,8 +24,8 @@ internal class XlsxV1 : ExportStrategy {
         private fun format(tags: List<ExportTimesheet.Entry.Tag>) = tags.joinToString(" ") { it.name }
     }
 
-    override fun type(): TimesheetDocument.Type {
-        return TimesheetDocument.Type.XLSX_V1
+    override fun type(): ExportType {
+        return ExportType.XLSX_V1
     }
 
     override fun create(exportParams: Map<String, String>, timesheet: ExportTimesheet): TimesheetDocument {
@@ -45,7 +47,7 @@ internal class XlsxV1 : ExportStrategy {
             }
 
         return TimesheetDocument(
-            TimesheetDocument.Type.XLSX_V1,
+            ExportType.XLSX_V1,
             timesheet.customer.name,
             timesheet.dateRange,
             outputStream.toByteArray()

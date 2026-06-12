@@ -93,6 +93,8 @@ class ClockifyAdapterTest {
             assertThat(timesheet.dateRange.endInclusive).isEqualTo(TestFixture.Import.aDateRange.endInclusive)
             assertThat(timesheet.entries[0].duration).isEqualTo(9.hours)
             assertThat(timesheet.entries[0].tags).containsExactly(ImportTimesheet.Entry.Tag("Remote"))
+            assertThat(timesheet.entries[0].project.name).isEqualTo("The Box")
+            assertThat(timesheet.entries[0].project.id).isEqualTo("62dd35a6e4797e2d7a9988c6")
             assertThat(timesheet.entries[1].duration).isEqualTo(9.hours)
             assertThat(timesheet.entries[1].tags).isEmpty()
         }.assertAll()
