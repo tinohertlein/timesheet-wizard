@@ -12,6 +12,9 @@ plugins {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven {
+        url = uri("https://jaspersoft.jfrog.io/jaspersoft/jaspersoft-repo")
+    }
 }
 
 kotlin {
