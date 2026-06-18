@@ -16,6 +16,9 @@ internal class ResponseBodyMapperTest {
 
     private val zoneOffset = ZoneOffset.ofHours(1)
 
+    private val billable = true
+    private val notBillable = false
+
     private val aProjectId = "#1"
     private val aProjectName = "a project"
     private val anotherProjectId = "#2"
@@ -25,7 +28,7 @@ internal class ResponseBodyMapperTest {
     private val aTaskName = "a task"
     private val anotherTaskId = "#22"
     private val anotherTaskName = "another task"
-    
+
     private val aDescription = "a task"
     private val anotherDescription = "another task"
 
@@ -65,7 +68,18 @@ internal class ResponseBodyMapperTest {
             aTaskName,
             aDescription,
             someTagsAsTags,
+            billable,
             ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, hoursToSeconds(1))
+        ),
+        ResponseBody.TimeEntry(
+            aProjectId,
+            aProjectName,
+            aTaskId,
+            aTaskName,
+            aDescription,
+            someTagsAsTags,
+            notBillable,
+            ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, hoursToSeconds(2))
         ),
         ResponseBody.TimeEntry(
             aProjectId,
@@ -74,7 +88,8 @@ internal class ResponseBodyMapperTest {
             anotherTaskName,
             aDescription,
             someTagsAsTags,
-            ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, hoursToSeconds(2))
+            billable,
+            ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, hoursToSeconds(3))
         ),
         ResponseBody.TimeEntry(
             aProjectId,
@@ -83,7 +98,8 @@ internal class ResponseBodyMapperTest {
             aTaskName,
             aDescription,
             someTagsAsTags,
-            ResponseBody.TimeEntry.TimeInterval(anotherDateLowerAsString, anotherDateUpperAsString, hoursToSeconds(3))
+            billable,
+            ResponseBody.TimeEntry.TimeInterval(anotherDateLowerAsString, anotherDateUpperAsString, hoursToSeconds(4))
         ),
         ResponseBody.TimeEntry(
             aProjectId,
@@ -92,15 +108,7 @@ internal class ResponseBodyMapperTest {
             aTaskName,
             anotherDescription,
             someTagsAsTags,
-            ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, hoursToSeconds(4))
-        ),
-        ResponseBody.TimeEntry(
-            anotherProjectId,
-            anotherProjectName,
-            aTaskId,
-            aTaskName,
-            aDescription,
-            someTagsAsTags,
+            billable,
             ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, hoursToSeconds(5))
         ),
         ResponseBody.TimeEntry(
@@ -108,9 +116,20 @@ internal class ResponseBodyMapperTest {
             anotherProjectName,
             aTaskId,
             aTaskName,
+            aDescription,
+            someTagsAsTags,
+            billable,
+            ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, hoursToSeconds(6))
+        ),
+        ResponseBody.TimeEntry(
+            anotherProjectId,
+            anotherProjectName,
+            aTaskId,
+            aTaskName,
             anotherDescription,
             someTagsAsTags,
-            ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, hoursToSeconds(6))
+            billable,
+            ResponseBody.TimeEntry.TimeInterval(aDateLowerAsString, aDateUpperAsString, hoursToSeconds(7))
         ),
     )
 
@@ -124,7 +143,20 @@ internal class ResponseBodyMapperTest {
             someTagsAsStrings,
             aDateLowerAsDateTime,
             aDateUpperAsDateTime,
+            billable,
             1.hours
+        ),
+        ImportTimesheet.Entry.of(
+            aProjectId,
+            aProjectName,
+            aTaskId,
+            aTaskName,
+            aDescription,
+            someTagsAsStrings,
+            aDateLowerAsDateTime,
+            aDateUpperAsDateTime,
+            notBillable,
+            2.hours
         ),
         ImportTimesheet.Entry.of(
             aProjectId,
@@ -135,7 +167,8 @@ internal class ResponseBodyMapperTest {
             someTagsAsStrings,
             aDateLowerAsDateTime,
             aDateUpperAsDateTime,
-            2.hours
+            billable,
+            3.hours
         ),
         ImportTimesheet.Entry.of(
             aProjectId,
@@ -146,7 +179,8 @@ internal class ResponseBodyMapperTest {
             someTagsAsStrings,
             anotherDateLowerAsDateTime,
             anotherDateUpperAsDateTime,
-            3.hours
+            billable,
+            4.hours
         ),
         ImportTimesheet.Entry.of(
             aProjectId,
@@ -157,7 +191,8 @@ internal class ResponseBodyMapperTest {
             someTagsAsStrings,
             aDateLowerAsDateTime,
             aDateUpperAsDateTime,
-            4.hours
+            billable,
+            5.hours
         ),
         ImportTimesheet.Entry.of(
             anotherProjectId,
@@ -168,7 +203,8 @@ internal class ResponseBodyMapperTest {
             someTagsAsStrings,
             aDateLowerAsDateTime,
             aDateUpperAsDateTime,
-            5.hours
+            billable,
+            6.hours
         ),
         ImportTimesheet.Entry.of(
             anotherProjectId,
@@ -179,7 +215,8 @@ internal class ResponseBodyMapperTest {
             someTagsAsStrings,
             aDateLowerAsDateTime,
             aDateUpperAsDateTime,
-            6.hours
+            billable,
+            7.hours
         )
     )
 

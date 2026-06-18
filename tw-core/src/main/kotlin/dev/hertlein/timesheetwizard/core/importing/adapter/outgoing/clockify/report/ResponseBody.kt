@@ -13,7 +13,8 @@ internal data class ResponseBody(
         val taskName: String? = null,
         val description: String,
         val tags: List<Tag>?,
-        val timeInterval: TimeInterval
+        val billable: Boolean,
+        val timeInterval: TimeInterval,
     ) {
 
         data class Tag(val name: String)

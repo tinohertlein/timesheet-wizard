@@ -24,6 +24,8 @@ import kotlin.time.toDuration
 class EventConverterTest {
 
     private val aZoneOffset = ZoneOffset.ofHours(1)
+    
+    private val billable = true
 
     private val aStart: OffsetDateTime = OffsetDateTime.of(2022, 1, 1, 8, 0, 0, 0, aZoneOffset)
     private val anEnd: OffsetDateTime = aStart.plusHours(1)
@@ -62,6 +64,7 @@ class EventConverterTest {
             someTags,
             aStart,
             anEnd,
+            billable,
             2.toDuration(DurationUnit.HOURS)
         )
         val exportEntry = ExportTimesheet.Entry.of(
@@ -73,6 +76,7 @@ class EventConverterTest {
             someTags,
             aStart,
             anEnd,
+            billable,
             2.toDuration(DurationUnit.HOURS)
         )
         val importTimesheet =

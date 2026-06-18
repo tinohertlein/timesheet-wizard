@@ -25,6 +25,8 @@ internal object TestFixture {
 
         val aZoneOffset: ZoneOffset = ZoneOffset.ofHours(1)
 
+        private val billable = true
+        
         private val aStart: OffsetDateTime = OffsetDateTime.of(2022, 1, 1, 8, 0, 0, 0, aZoneOffset)
 
         private val anEnd: OffsetDateTime = OffsetDateTime.of(2022, 1, 1, 10, 0, 0, 0, aZoneOffset)
@@ -50,6 +52,7 @@ internal object TestFixture {
                 aDescription,
                 someTags,
                 aDateTimeRange,
+                billable,
                 2.hours
             )
 

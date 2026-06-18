@@ -39,7 +39,7 @@ internal class XlsxV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
                         fillInContact(exportParams, sheet)
                         fillInDateRange(sheet, timesheet.dateRange)
                         fillInTotalWorkedHours(sheet, timesheet.totalDuration())
-                        fillInEntries(sheet, timesheet.entriesGroupedByProjectAndTaskAndDescriptionAndTagsAndStartDate())
+                        fillInEntries(sheet, timesheet.entriesGroupedByProjectAndTaskAndDescriptionAndTagsAndStartDateAndBillable())
                         autoSizeColumnWidths(sheet)
                         workbook.write(out)
                     }

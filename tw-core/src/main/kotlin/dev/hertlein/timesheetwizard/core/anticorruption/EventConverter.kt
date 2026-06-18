@@ -38,6 +38,7 @@ internal class EventConverter(private val eventBus: EventBus) : Converter<Import
             importEntry.tags.map { it.value },
             importEntry.dateTimeRange.start,
             importEntry.dateTimeRange.end,
+            importEntry.billable.value,
             importEntry.duration
         )
     }

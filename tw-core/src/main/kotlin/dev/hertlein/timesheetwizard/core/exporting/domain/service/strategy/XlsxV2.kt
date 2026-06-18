@@ -36,7 +36,7 @@ internal class XlsxV2(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
                 XSSFWorkbook(template).use { workbook ->
                     outputStream.use { out ->
                         val sheet = workbook.getSheetAt(0)
-                        fillInEntries(sheet, timesheet.entriesGroupedByProjectAndTaskAndDescriptionAndTagsAndStartDate())
+                        fillInEntries(sheet, timesheet.entriesGroupedByProjectAndTaskAndDescriptionAndTagsAndStartDateAndBillable())
                         autoSizeColumnWidths(sheet)
                         workbook.write(out)
                     }

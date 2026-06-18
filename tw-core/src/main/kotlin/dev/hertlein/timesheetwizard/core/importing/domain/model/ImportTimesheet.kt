@@ -18,6 +18,7 @@ internal data class ImportTimesheet(
         val description: Description,
         val tags: List<Tag>,
         val dateTimeRange: DateTimeRange,
+        val billable: Billable,
         val duration: Duration
     ) {
 
@@ -33,6 +34,7 @@ internal data class ImportTimesheet(
                 tags: List<String>,
                 start: OffsetDateTime,
                 end: OffsetDateTime,
+                billable: Boolean,
                 duration: Duration
             ) = Entry(
                 Project(projectId, projectName),
@@ -40,6 +42,7 @@ internal data class ImportTimesheet(
                 Description(description),
                 tags.map { Tag(it) },
                 DateTimeRange(start, end),
+                Billable(billable),
                 duration
             )
         }
@@ -49,6 +52,9 @@ internal data class ImportTimesheet(
 
         @JvmInline
         internal value class Description(val value: String)
+
+        @JvmInline
+        internal value class Billable(val value: Boolean)
 
         internal data class Project(val id: String, val name: String)
 

@@ -20,9 +20,9 @@ internal data class ExportTimesheet(
             .map { it.duration }
             .fold(0.hours) { total, current -> total + current }
 
-    fun entriesGroupedByProjectAndTaskAndDescriptionAndTagsAndStartDate(): List<Entry> {
+    fun entriesGroupedByProjectAndTaskAndDescriptionAndTagsAndStartDateAndBillable(): List<Entry> {
         return entries
-            .groupBy { Grouping.Key(it.project, it.task, it.description, it.tags, it.dateTimeRange.start.truncatedTo(ChronoUnit.DAYS)) }
+            .groupBy { Grouping.Key(it.project, it.task, it.description, it.tags, it.dateTimeRange.start.truncatedTo(ChronoUnit.DAYS), it.billable) }
             .map { grouped ->
                 val sumDuration = grouped.value.sumOf { it.duration.inWholeMinutes }
                 Grouping(grouped.key, Grouping.Value(sumDuration.minutes))
@@ -34,7 +34,8 @@ internal data class ExportTimesheet(
                     it.key.description,
                     it.key.tags,
                     Entry.DateTimeRange(it.key.date, it.key.date),
-                    it.value.duration
+                    it.key.billable,
+                    it.value.duration,
                 )
             }
     }
@@ -48,7 +49,8 @@ internal data class ExportTimesheet(
             val task: Entry.Task,
             val description: Entry.Description,
             val tags: List<Entry.Tag>,
-            val date: OffsetDateTime
+            val date: OffsetDateTime,
+            val billable: Boolean
         )
 
         data class Value(
@@ -64,6 +66,7 @@ internal data class ExportTimesheet(
         val description: Description,
         val tags: List<Tag>,
         val dateTimeRange: DateTimeRange,
+        val billable: Boolean,
         val duration: Duration
     ) {
 
@@ -79,6 +82,7 @@ internal data class ExportTimesheet(
                 tags: List<String>,
                 start: OffsetDateTime,
                 end: OffsetDateTime,
+                billable: Boolean,
                 duration: Duration
             ) = Entry(
                 Project(projectId, projectName),
@@ -86,6 +90,7 @@ internal data class ExportTimesheet(
                 Description(description),
                 tags.map { Tag(it) },
                 DateTimeRange(start, end),
+                billable,
                 duration
             )
         }

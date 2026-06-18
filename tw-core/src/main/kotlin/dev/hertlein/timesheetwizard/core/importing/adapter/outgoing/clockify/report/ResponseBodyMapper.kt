@@ -25,6 +25,7 @@ internal class ResponseBodyMapper {
             it.tags?.map { tag -> ResponseBody.TimeEntry.Tag(tag.name).name } ?: emptyList(),
             OffsetDateTime.parse(it.timeInterval.start, FORMAT),
             OffsetDateTime.parse(it.timeInterval.end, FORMAT),
+            it.billable,
             it.timeInterval.duration.seconds
         )
 }

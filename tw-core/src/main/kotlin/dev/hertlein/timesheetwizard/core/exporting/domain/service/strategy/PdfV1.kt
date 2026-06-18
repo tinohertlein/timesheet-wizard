@@ -84,7 +84,7 @@ internal class PdfV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(re
     )
 
     private fun toDataSource(timesheet: ExportTimesheet) =
-        timesheet.entriesGroupedByProjectAndTaskAndDescriptionAndTagsAndStartDate()
+        timesheet.entriesGroupedByProjectAndTaskAndDescriptionAndTagsAndStartDateAndBillable()
             .sortedWith(entryComparator())
             .map { PdfTimesheetEntry.of(it) }
 
