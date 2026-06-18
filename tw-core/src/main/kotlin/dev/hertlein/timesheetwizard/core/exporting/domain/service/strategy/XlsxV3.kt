@@ -11,6 +11,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.ByteArrayOutputStream
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.OffsetDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -20,6 +22,7 @@ internal class XlsxV3(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
 
     companion object {
 
+        private val timezone = ZoneId.of("Europe/Berlin")
         private val locale: Locale = Locale.GERMAN
 
         private fun format(project: ExportTimesheet.Entry.Project) = project.name
@@ -27,9 +30,9 @@ internal class XlsxV3(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
         private fun format(description: ExportTimesheet.Entry.Description) = description.value
         private fun format(billable: Boolean) = if (billable) 1.0 else 0.0
         private fun format(date: LocalDate): String = date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy", locale))
-        private fun format(time: LocalTime): String = time.format(
-            DateTimeFormatter.ofPattern("H:mm", locale)
-        )
+        private fun format(time: LocalTime): String = time.format(DateTimeFormatter.ofPattern("H:mm", locale))
+        private fun format(time: OffsetDateTime): String = format(time.atZoneSameInstant(timezone).toLocalTime())
+
     }
 
     override fun type(): ExportType {
@@ -71,8 +74,8 @@ internal class XlsxV3(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
                     .run {
                         getCell(columnOffset + 0).setCellValue(exportParams["user"])
                         getCell(columnOffset + 1).setCellValue(format(entry.dateTimeRange.start.toLocalDate()))
-                        getCell(columnOffset + 2).setCellValue(format(entry.dateTimeRange.start.toLocalTime()))
-                        getCell(columnOffset + 3).setCellValue(format(entry.dateTimeRange.end.toLocalTime()))
+                        getCell(columnOffset + 2).setCellValue(format(entry.dateTimeRange.start))
+                        getCell(columnOffset + 3).setCellValue(format(entry.dateTimeRange.end))
                         getCell(columnOffset + 4).setCellValue(format(entry.project))
                         getCell(columnOffset + 5).setCellValue(format(entry.task))
                         getCell(columnOffset + 6).setCellValue(format(entry.description))
