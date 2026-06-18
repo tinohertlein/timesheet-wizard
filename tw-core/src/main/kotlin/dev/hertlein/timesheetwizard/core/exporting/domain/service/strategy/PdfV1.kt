@@ -23,7 +23,7 @@ internal class PdfV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(re
     companion object {
 
         private fun format(project: ExportTimesheet.Entry.Project) = project.name
-        private fun format(task: ExportTimesheet.Entry.Task) = task.name
+        private fun format(description: ExportTimesheet.Entry.Description) = description.value
         private fun format(tags: List<ExportTimesheet.Entry.Tag>) = tags.joinToString(" ") { it.name }
         private fun format(date: LocalDate): String = date.format(java.time.format.DateTimeFormatter.ISO_DATE)
         private fun format(dateTime: OffsetDateTime): String = format(dateTime.toLocalDate())
@@ -42,7 +42,7 @@ internal class PdfV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(re
                     format(entry.dateTimeRange.start),
                     format(entry.project),
                     format(entry.tags),
-                    format(entry.task),
+                    format(entry.description),
                     format(entry.duration.toDouble(DurationUnit.HOURS))
                 )
             }
@@ -84,7 +84,7 @@ internal class PdfV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(re
     )
 
     private fun toDataSource(timesheet: ExportTimesheet) =
-        timesheet.entriesGroupedByProjectAndTaskAndTagsAndStartDate()
+        timesheet.entriesGroupedByProjectAndTaskAndDescriptionAndTagsAndStartDate()
             .sortedWith(entryComparator())
             .map { PdfTimesheetEntry.of(it) }
 

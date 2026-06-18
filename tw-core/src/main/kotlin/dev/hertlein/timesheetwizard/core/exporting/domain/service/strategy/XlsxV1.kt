@@ -20,7 +20,7 @@ internal class XlsxV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
     companion object {
 
         private fun format(project: ExportTimesheet.Entry.Project) = project.name
-        private fun format(task: ExportTimesheet.Entry.Task) = task.name
+        private fun format(description: ExportTimesheet.Entry.Description) = description.value
         private fun format(tags: List<ExportTimesheet.Entry.Tag>) = tags.joinToString(" ") { it.name }
     }
 
@@ -39,7 +39,7 @@ internal class XlsxV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
                         fillInContact(exportParams, sheet)
                         fillInDateRange(sheet, timesheet.dateRange)
                         fillInTotalWorkedHours(sheet, timesheet.totalDuration())
-                        fillInEntries(sheet, timesheet.entriesGroupedByProjectAndTaskAndTagsAndStartDate())
+                        fillInEntries(sheet, timesheet.entriesGroupedByProjectAndTaskAndDescriptionAndTagsAndStartDate())
                         autoSizeColumnWidths(sheet)
                         workbook.write(out)
                     }
@@ -95,7 +95,7 @@ internal class XlsxV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
                         getCell(columnOffset + 0).setCellValue(entry.dateTimeRange.start.toLocalDate())
                         getCell(columnOffset + 1).setCellValue(format(entry.project))
                         getCell(columnOffset + 2).setCellValue(format(entry.tags))
-                        getCell(columnOffset + 3).setCellValue(format(entry.task))
+                        getCell(columnOffset + 3).setCellValue(format(entry.description))
                         getCell(columnOffset + 4).setCellValue(entry.duration.toDouble(DurationUnit.HOURS))
                     }
             }

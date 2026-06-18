@@ -19,7 +19,7 @@ internal class XlsxV2(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
     companion object {
         private val locale: Locale = Locale.GERMAN
 
-        private fun format(task: ExportTimesheet.Entry.Task) = task.name
+        private fun format(description: ExportTimesheet.Entry.Description) = description.value
         private fun format(duration: Duration): String =
             duration.toComponents { hours, minutes, _, _ -> String.format(locale, "%02d:%02d", hours, minutes) }
     }
@@ -36,7 +36,7 @@ internal class XlsxV2(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
                 XSSFWorkbook(template).use { workbook ->
                     outputStream.use { out ->
                         val sheet = workbook.getSheetAt(0)
-                        fillInEntries(sheet, timesheet.entriesGroupedByProjectAndTaskAndTagsAndStartDate())
+                        fillInEntries(sheet, timesheet.entriesGroupedByProjectAndTaskAndDescriptionAndTagsAndStartDate())
                         autoSizeColumnWidths(sheet)
                         workbook.write(out)
                     }
@@ -62,7 +62,7 @@ internal class XlsxV2(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
                 (if (index == 0) referenceRow else createEntryRow(sheet, index + rowOffset, referenceRow))
                     .run {
                         getCell(columnOffset + 0).setCellValue(entry.dateTimeRange.start.toLocalDate())
-                        getCell(columnOffset + 1).setCellValue(format(entry.task))
+                        getCell(columnOffset + 1).setCellValue(format(entry.description))
                         getCell(columnOffset + 2).setCellValue(format(entry.duration))
                     }
             }
@@ -76,7 +76,7 @@ internal class XlsxV2(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
     private fun entryComparator(): Comparator<ExportTimesheet.Entry> =
         compareBy(
             { it.dateTimeRange.start },
-            { it.task.name },
+            { it.description.value },
             { it.duration })
 
     private fun autoSizeColumnWidths(sheet: XSSFSheet) {

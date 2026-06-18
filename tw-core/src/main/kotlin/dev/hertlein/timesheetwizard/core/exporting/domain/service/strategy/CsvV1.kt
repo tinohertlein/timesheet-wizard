@@ -22,7 +22,7 @@ internal class CsvV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(re
 
     companion object {
 
-        const val TASK_BREAK = "Pause"
+        const val DESCRIPTION_BREAK = "Pause"
 
         private val timezone = ZoneId.of("Europe/Berlin")
         private val locale: Locale = Locale.GERMAN
@@ -120,7 +120,7 @@ internal class CsvV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(re
             .map { groupedEntry ->
                 val minStart = groupedEntry.value.minOf { it.dateTimeRange.start }
                 val maxEnd = groupedEntry.value.maxOf { it.dateTimeRange.end }
-                val (breakSlots, workSlots) = groupedEntry.value.partition { it.task.name == TASK_BREAK }
+                val (breakSlots, workSlots) = groupedEntry.value.partition { it.description.value == DESCRIPTION_BREAK }
                 val breakDuration = breakSlots.sumOf { it.duration.inWholeMinutes }
                 val workDuration = workSlots.sumOf { it.duration.inWholeMinutes }
 

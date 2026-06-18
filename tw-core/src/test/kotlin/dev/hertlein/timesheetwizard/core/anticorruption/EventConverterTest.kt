@@ -67,6 +67,8 @@ class EventConverterTest {
         val exportEntry = ExportTimesheet.Entry.of(
             aProjectId,
             aProjectName,
+            aTaskId,
+            aTaskName,
             aDescription,
             someTags,
             aStart,

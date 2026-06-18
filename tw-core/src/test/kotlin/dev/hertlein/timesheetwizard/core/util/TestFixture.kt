@@ -34,8 +34,10 @@ internal object TestFixture {
         private val aCustomer = ExportTimesheet.Customer("a-customer-id", "a-customer-name")
 
         private val aProject = ExportTimesheet.Entry.Project("a-project-id", "a-project-name")
+        
+        private val aTask = ExportTimesheet.Entry.Task("a-task-id", "a-task-name")
 
-        private val aTask = ExportTimesheet.Entry.Task("a-task")
+        private val aDescription = ExportTimesheet.Entry.Description("a-description")
 
         private val someTags = listOf("a-tag").map { ExportTimesheet.Entry.Tag(it) }
 
@@ -45,6 +47,7 @@ internal object TestFixture {
             ExportTimesheet.Entry(
                 aProject,
                 aTask,
+                aDescription,
                 someTags,
                 aDateTimeRange,
                 2.hours

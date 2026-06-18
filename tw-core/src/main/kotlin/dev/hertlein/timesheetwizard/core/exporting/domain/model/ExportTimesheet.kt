@@ -20,9 +20,9 @@ internal data class ExportTimesheet(
             .map { it.duration }
             .fold(0.hours) { total, current -> total + current }
 
-    fun entriesGroupedByProjectAndTaskAndTagsAndStartDate(): List<Entry> {
+    fun entriesGroupedByProjectAndTaskAndDescriptionAndTagsAndStartDate(): List<Entry> {
         return entries
-            .groupBy { Grouping.Key(it.project, it.task, it.tags, it.dateTimeRange.start.truncatedTo(ChronoUnit.DAYS)) }
+            .groupBy { Grouping.Key(it.project, it.task, it.description, it.tags, it.dateTimeRange.start.truncatedTo(ChronoUnit.DAYS)) }
             .map { grouped ->
                 val sumDuration = grouped.value.sumOf { it.duration.inWholeMinutes }
                 Grouping(grouped.key, Grouping.Value(sumDuration.minutes))
@@ -31,6 +31,7 @@ internal data class ExportTimesheet(
                 Entry(
                     it.key.project,
                     it.key.task,
+                    it.key.description,
                     it.key.tags,
                     Entry.DateTimeRange(it.key.date, it.key.date),
                     it.value.duration
@@ -45,6 +46,7 @@ internal data class ExportTimesheet(
         data class Key(
             val project: Entry.Project,
             val task: Entry.Task,
+            val description: Entry.Description,
             val tags: List<Entry.Tag>,
             val date: OffsetDateTime
         )
@@ -59,6 +61,7 @@ internal data class ExportTimesheet(
     internal data class Entry(
         val project: Project,
         val task: Task,
+        val description: Description,
         val tags: List<Tag>,
         val dateTimeRange: DateTimeRange,
         val duration: Duration
@@ -70,14 +73,17 @@ internal data class ExportTimesheet(
             fun of(
                 projectId: String,
                 projectName: String,
-                task: String,
+                taskId: String,
+                taskName: String,
+                description: String,
                 tags: List<String>,
                 start: OffsetDateTime,
                 end: OffsetDateTime,
                 duration: Duration
             ) = Entry(
                 Project(projectId, projectName),
-                Task(task),
+                Task(taskId, taskName),
+                Description(description),
                 tags.map { Tag(it) },
                 DateTimeRange(start, end),
                 duration
@@ -85,12 +91,14 @@ internal data class ExportTimesheet(
         }
 
         @JvmInline
-        internal value class Task(val name: String)
-
-        @JvmInline
         internal value class Tag(val name: String)
 
+        @JvmInline
+        internal value class Description(val value: String)
+
         internal data class Project(val id: String, val name: String)
+
+        internal data class Task(val id: String, val name: String)
 
         internal data class DateTimeRange(val start: OffsetDateTime, val end: OffsetDateTime)
     }

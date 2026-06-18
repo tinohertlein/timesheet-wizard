@@ -60,7 +60,7 @@ internal class ExportTimesheetTest {
                 dateTimeRange = DateTimeRange(afternoonWorkStart, afternoonWorkEnd)
             )
 
-            val actual = aTimesheet(morningWork, afternoonWork).entriesGroupedByProjectAndTaskAndTagsAndStartDate()
+            val actual = aTimesheet(morningWork, afternoonWork).entriesGroupedByProjectAndTaskAndDescriptionAndTagsAndStartDate()
 
             assertThat(actual).isEqualTo(
                 listOf(

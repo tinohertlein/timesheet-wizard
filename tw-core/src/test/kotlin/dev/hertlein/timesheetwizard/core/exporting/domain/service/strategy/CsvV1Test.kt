@@ -1,7 +1,6 @@
 package dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader.bytesFromResourceFile
-import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository.RepositoryAdapter
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet.Entry
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet.Entry.DateTimeRange
 import dev.hertlein.timesheetwizard.core.util.TestFixture
@@ -33,7 +32,7 @@ class CsvV1Test {
         val lunchBreakStart = morningWorkEnd
         val lunchBreakEnd = morningWorkEnd.plusMinutes(lunchBreakDurationMinutes)
         val lunchBreak = anEntry.copy(
-            task = Entry.Task(CsvV1.TASK_BREAK),
+            description = Entry.Description(CsvV1.DESCRIPTION_BREAK),
             duration = lunchBreakDurationMinutes.toDuration(DurationUnit.MINUTES),
             dateTimeRange = DateTimeRange(lunchBreakStart, lunchBreakEnd)
         )
