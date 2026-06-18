@@ -32,8 +32,8 @@ internal class EventConverter(private val eventBus: EventBus) : Converter<Import
         Entry.of(
             importEntry.project.id,
             importEntry.project.name,
-            importEntry.task.name,
-            importEntry.tags.map { it.name },
+            importEntry.description.value,
+            importEntry.tags.map { it.value },
             importEntry.dateTimeRange.start,
             importEntry.dateTimeRange.end,
             importEntry.duration

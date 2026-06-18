@@ -9,6 +9,8 @@ internal data class ResponseBody(
     data class TimeEntry(
         val projectId: String,
         val projectName: String,
+        val taskId: String? = null,
+        val taskName: String? = null,
         val description: String,
         val tags: List<Tag>?,
         val timeInterval: TimeInterval

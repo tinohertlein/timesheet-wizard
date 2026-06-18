@@ -35,7 +35,11 @@ class EventConverterTest {
 
     private val aProjectId = "a-project-id"
     private val aProjectName = "a-project-name"
-    private val aTask = "a-task"
+
+    private val aTaskId = "a-task-id"
+    private val aTaskName = "a-task-name"
+    
+    private val aDescription = "a-task"
     private val someTags = listOf("a-tag")
 
     private val eventBus: EventBus = mockk(relaxed = true)
@@ -52,7 +56,9 @@ class EventConverterTest {
         val importEntry = ImportTimesheet.Entry.of(
             aProjectId,
             aProjectName,
-            aTask,
+            aTaskId,
+            aTaskName,
+            aDescription,
             someTags,
             aStart,
             anEnd,
@@ -61,7 +67,7 @@ class EventConverterTest {
         val exportEntry = ExportTimesheet.Entry.of(
             aProjectId,
             aProjectName,
-            aTask,
+            aDescription,
             someTags,
             aStart,
             anEnd,

@@ -19,6 +19,8 @@ internal class ResponseBodyMapper {
         ImportTimesheet.Entry.of(
             it.projectId,
             it.projectName,
+            it.taskId ?: "",
+            it.taskName ?: "",
             it.description,
             it.tags?.map { tag -> ResponseBody.TimeEntry.Tag(tag.name).name } ?: emptyList(),
             OffsetDateTime.parse(it.timeInterval.start, FORMAT),
