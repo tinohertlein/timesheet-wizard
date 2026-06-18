@@ -3,7 +3,7 @@ package dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy
 import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportType
-import dev.hertlein.timesheetwizard.core.util.ExcelVerification
+import dev.hertlein.timesheetwizard.core.util.ExcelSheetAssert
 import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.aTimesheet
 import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.aZoneOffset
 import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.anEntry
@@ -40,7 +40,6 @@ class XlsxV3Test {
             softly.assertThat(actual.customerName).isEqualTo(timesheet.customer.name)
             softly.assertThat(actual.dateRange).isEqualTo(timesheet.dateRange)
         }
-        ExcelVerification.assertEquals(actual.content, expected, 8)
+        val _ = ExcelSheetAssert.assertThat(actual.content).isEqualTo(expected)
     }
-
 }
