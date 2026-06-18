@@ -24,6 +24,12 @@
       },
       {
         "type": "XLSX_V2"
+      },
+      {
+        "type": "XLSX_V3",
+        "params": {
+          "user": "rhendricks"
+        }
       }
     ]
   }

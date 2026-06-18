@@ -18,8 +18,8 @@ import java.time.OffsetDateTime
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
-@DisplayName("XlsxV2")
-class XlsxV2Test {
+@DisplayName("XlsxV3")
+class XlsxV3Test {
 
     @Test
     fun `should create an xlsx document from timesheet`() {
@@ -33,12 +33,13 @@ class XlsxV2Test {
         )
         val timesheet = aTimesheet(work)
         val expected =
-            ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/timesheet_v2_PiedPiper_20220101-20221231.xlsx")
+            ResourcesReader.bytesFromResourceFile("${this.javaClass.packageName}/timesheet_v3_PiedPiper_20220101-20221231.xlsx")
 
-        val actual = XlsxV2(mockk(relaxed = true)).create(emptyMap(), timesheet)
+        val actual =
+            XlsxV3(mockk(relaxed = true)).create(mapOf("user" to "a-user"), timesheet)
 
         assertSoftly { softly ->
-            softly.assertThat(actual.exportType).isEqualTo(ExportType.XLSX_V2)
+            softly.assertThat(actual.exportType).isEqualTo(ExportType.XLSX_V3)
             softly.assertThat(actual.customerName).isEqualTo(timesheet.customer.name)
             softly.assertThat(actual.dateRange).isEqualTo(timesheet.dateRange)
         }
@@ -52,7 +53,7 @@ class XlsxV2Test {
             val expectedSheet = sheetFrom(expected)
             val cellFormatter = DataFormatter()
             val maxRowIndex = expectedSheet.lastRowNum
-            val maxColumnIndex = 3
+            val maxColumnIndex = 8
 
             assertThat(actualSheet.lastRowNum).isEqualTo(expectedSheet.lastRowNum)
 

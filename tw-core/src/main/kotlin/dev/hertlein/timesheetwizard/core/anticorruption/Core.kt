@@ -9,6 +9,7 @@ import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.CsvV1
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.PdfV1
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.XlsxV1
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.XlsxV2
+import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.XlsxV3
 import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.ClockifyAdapter
 import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.config.ClockifyIdsLoader
 import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.HttpReportClient
@@ -77,7 +78,8 @@ object Core {
             CsvV1(repositoryAdapter),
             PdfV1(repositoryAdapter),
             XlsxV1(repositoryAdapter),
-            XlsxV2(repositoryAdapter)
+            XlsxV2(repositoryAdapter),
+            XlsxV3(repositoryAdapter)
         ))
         return exportService
     }

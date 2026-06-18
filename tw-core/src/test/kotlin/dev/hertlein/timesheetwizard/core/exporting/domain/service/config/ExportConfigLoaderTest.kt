@@ -2,7 +2,7 @@ package dev.hertlein.timesheetwizard.core.exporting.domain.service.config
 
 import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core.util.TestFixture
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -26,7 +26,7 @@ internal class ExportConfigLoaderTest {
         val customerId = "1000"
         val exportConfig = exportConfigLoader.loadExportConfigFor(customerId)
 
-        Assertions.assertThat(exportConfig).containsExactly(
+        assertThat(exportConfig).containsExactly(
             ExportConfig("CSV_V1", mapOf("login" to "rihe")),
             ExportConfig(
                 "XLSX_V1", mapOf(
@@ -41,6 +41,11 @@ internal class ExportConfigLoaderTest {
                 )
             ),
             ExportConfig("XLSX_V2", emptyMap()),
+            ExportConfig(
+                "XLSX_V3", mapOf(
+                    "user" to "rhendricks",
+                )
+            ),
         )
     }
 }
