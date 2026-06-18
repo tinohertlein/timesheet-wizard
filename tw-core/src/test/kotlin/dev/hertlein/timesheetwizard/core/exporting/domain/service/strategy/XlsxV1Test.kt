@@ -3,6 +3,7 @@ package dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy
 import dev.hertlein.timesheetwizard.core.ResourcesReader
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportType
+import dev.hertlein.timesheetwizard.core.util.ExcelVerification
 import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.aTimesheet
 import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.aZoneOffset
 import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.anEntry
@@ -43,42 +44,6 @@ class XlsxV1Test {
             softly.assertThat(actual.customerName).isEqualTo(timesheet.customer.name)
             softly.assertThat(actual.dateRange).isEqualTo(timesheet.dateRange)
         }
-        ExcelVerification.assertEquals(actual.content, expected)
+        ExcelVerification.assertEquals(actual.content, expected,4)
     }
-
-    object ExcelVerification {
-
-        fun assertEquals(actual: ByteArray, expected: ByteArray) {
-            val actualSheet = sheetFrom(actual)
-            val expectedSheet = sheetFrom(expected)
-            val cellFormatter = DataFormatter()
-            val maxRowIndex = expectedSheet.lastRowNum
-            val maxColumnIndex = 4
-
-            assertThat(actualSheet.lastRowNum).isEqualTo(expectedSheet.lastRowNum)
-
-            (0..maxRowIndex).forEach { rowIndex: Int ->
-                (0..maxColumnIndex).forEach { columnIndex: Int ->
-                    val actualCell = cellValue(cellFormatter, actualSheet, rowIndex, columnIndex)
-                    val expectedCell = cellValue(cellFormatter, expectedSheet, rowIndex, columnIndex)
-
-                    assertThat(actualCell).withFailMessage(
-                        """Cells in
-                            |row %d, column %d (starting both at 0)
-                            |do not match: %s (actual) <-> %s (expected).""".trimMargin(),
-                        rowIndex,
-                        columnIndex,
-                        actualCell,
-                        expectedCell
-                    ).isEqualTo(expectedCell)
-                }
-            }
-        }
-
-        private fun sheetFrom(byteArray: ByteArray): XSSFSheet = XSSFWorkbook(byteArray.inputStream()).getSheetAt(0)
-
-        private fun cellValue(formatter: DataFormatter, sheet: XSSFSheet, rowIndex: Int, columnIndex: Int): String =
-            formatter.formatCellValue(sheet.getRow(rowIndex).getCell(columnIndex))
-    }
-
 }
