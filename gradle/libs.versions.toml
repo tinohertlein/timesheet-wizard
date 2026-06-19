@@ -33,7 +33,7 @@ junit-pioneer = "2.3.0"
 testcontainers = "2.0.5"
 archunit = "1.4.2"
 quarkus-plugin = "3.37.0"
-quarkus-platform = "3.36.2"
+quarkus-platform = "3.36.3"
 clikt = "5.1.0"
 
 [libraries]
