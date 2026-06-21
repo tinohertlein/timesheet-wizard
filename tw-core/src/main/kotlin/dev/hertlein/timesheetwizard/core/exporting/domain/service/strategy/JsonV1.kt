@@ -50,5 +50,7 @@ internal class JsonV1(repositoryPort: RepositoryPort, private val objectMapper: 
         )
     }
 
+    override fun fileNameFrom(dateRange: ClosedRange<LocalDate>) = "timesheet.${type().type}"
+
     internal data class Entry(val datum: String, val von: String, val bis: String, val ort: String)
 }
