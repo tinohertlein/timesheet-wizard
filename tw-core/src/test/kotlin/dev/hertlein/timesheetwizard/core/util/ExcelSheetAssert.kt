@@ -41,8 +41,8 @@ class ExcelSheetAssert(actual: ByteArray) : AbstractAssert<ExcelSheetAssert, Byt
 
         (0..maxRowIndex).forEach { rowIndex: Int ->
             (0..expectedSheet.getRow(rowIndex).lastCellNum).forEach { columnIndex: Int ->
-                val actualCell = cellValue(cellFormatter, actualSheet, rowIndex, columnIndex)
                 val expectedCell = cellValue(cellFormatter, expectedSheet, rowIndex, columnIndex)
+                val actualCell = cellValue(cellFormatter, actualSheet, rowIndex, columnIndex)
 
                 assertThat(actualCell).withFailMessage(
                     """Cells in row %d column %d differ: 
@@ -51,8 +51,8 @@ class ExcelSheetAssert(actual: ByteArray) : AbstractAssert<ExcelSheetAssert, Byt
                         .trimMargin(),
                     rowIndex,
                     columnIndex,
-                    actualCell,
-                    expectedCell
+                    expectedCell,
+                    actualCell
                 ).isEqualTo(expectedCell)
             }
         }

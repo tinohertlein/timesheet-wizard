@@ -27,6 +27,7 @@ internal class XlsxV3(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
 
         private fun format(project: ExportTimesheet.Entry.Project) = project.name
         private fun format(task: ExportTimesheet.Entry.Task) = task.name
+        private fun format(tags: List<ExportTimesheet.Entry.Tag>) = tags.joinToString(" ") { it.name }
         private fun format(description: ExportTimesheet.Entry.Description) = description.value
         private fun format(billable: Boolean) = if (billable) 1.0 else 0.0
         private fun format(date: LocalDate): String = date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy", locale))
@@ -79,6 +80,7 @@ internal class XlsxV3(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
                         getCell(columnOffset + 4).setCellValue(format(entry.project))
                         getCell(columnOffset + 5).setCellValue(format(entry.task))
                         getCell(columnOffset + 6).setCellValue(format(entry.description))
+                        getCell(columnOffset + 7).setCellValue(format(entry.tags))
                         getCell(columnOffset + 8).setCellValue(format(entry.billable))
                     }
             }
