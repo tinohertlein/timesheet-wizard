@@ -56,7 +56,7 @@ Resources:
     Properties:
       Name: tw-daily
       ScheduleExpression: cron(30 17 ? * MON,TUE,WED,THU,FRI *)
-      State: ENABLED
+      State: DISABLED
       Targets:
         - Arn: !GetAtt TwFunction.Arn
           Id: tw-daily
@@ -67,7 +67,7 @@ Resources:
     Properties:
       Name: tw-monthly
       ScheduleExpression: cron(0 5 1 * ? *)
-      State: ENABLED
+      State: DISABLED
       Targets:
         - Arn: !GetAtt TwFunction.Arn
           Id: tw-monthly
