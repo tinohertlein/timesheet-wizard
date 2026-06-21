@@ -110,10 +110,28 @@ class DateTimeFactoryTest {
                 assertThat(endInclusive).isEqualTo(LocalDate.of(2022, 7, 4))
             }
         }
-        
+
         @Test
         fun `should return date range for this week at last day of week`() {
             dateTimeFactory.create(DateRangeType.THIS_WEEK).run {
+                assertThat(start).isEqualTo(LocalDate.of(2022, 7, 4))
+                assertThat(endInclusive).isEqualTo(LocalDate.of(2022, 7, 10))
+            }
+        }
+
+        @Test
+        fun `should return date range for this week at last day of week with month change`() {
+            every { clock.instant() } returns Instant.parse("2022-07-03T12:00:00.00Z")
+            dateTimeFactory.create(DateRangeType.THIS_WEEK).run {
+                assertThat(start).isEqualTo(LocalDate.of(2022, 7, 1))
+                assertThat(endInclusive).isEqualTo(LocalDate.of(2022, 7, 3))
+            }
+        }
+
+        @Test
+        fun `should return date range for last week at last day of week`() {
+            every { clock.instant() } returns Instant.parse("2022-07-11T12:00:00.00Z")
+            dateTimeFactory.create(DateRangeType.LAST_WEEK).run {
                 assertThat(start).isEqualTo(LocalDate.of(2022, 7, 4))
                 assertThat(endInclusive).isEqualTo(LocalDate.of(2022, 7, 10))
             }
