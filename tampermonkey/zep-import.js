@@ -2,7 +2,7 @@
 // @name                    ZEP import
 // @namespace               dev.hertlein.timesheetwizard
 // @version                 2026-06-21
-// @description             Imports entries from a given JSON file into ZEP
+// @description             Imports timesheet entries from a given JSON file into ZEP
 // @author                  Tino Hertlein
 // @match                   https://www.zep-online.de/*
 // @icon                    https://www.google.com/s2/favicons?sz=64&domain=zep-online.de
@@ -24,6 +24,9 @@ async function wait() {
 async function importEntries() {
     const timesheet = await GM_getResourceText("timesheet")
 
+    console.log("Started importing timesheet entries:");
+    console.log(timesheet);
+
     for (const entry of JSON.parse(timesheet)) {
         $('#calendar-btn-create').trigger("click");
 
@@ -39,9 +42,10 @@ async function importEntries() {
 
         await wait();
     }
+    console.log("Finished importing timesheet entries:");
 }
 
 (function () {
     'use strict';
-    GM_registerMenuCommand("Fill in timesheet entries", importEntries(), "");
+    GM_registerMenuCommand("Import timesheet entries", importEntries(), "");
 })();
