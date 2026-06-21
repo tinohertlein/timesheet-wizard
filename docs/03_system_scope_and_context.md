@@ -17,7 +17,7 @@ The external system that is providing an API to fetch the timesheets for a given
 
 #### AWS S3 (external system)
 
-The place where the generated XLSX, PDF and CSV files as well as any intermediate files are stored.
+The place where the generated XLSX, PDF, CSV and JSON files as well as any intermediate files are stored.
 
 #### Tino (actor)
 
@@ -37,7 +37,7 @@ The external system that is providing an API to fetch the timesheets for a given
 
 #### Azure Blob Storage (external system)
 
-The place where the generated XLSX, PDF and CSV files as well as any intermediate files are stored.
+The place where the generated XLSX, PDF, CSV and JSON files as well as any intermediate files are stored.
 
 #### Tino (actor)
 
@@ -57,7 +57,7 @@ The external system that is providing an API to fetch the timesheets for a given
 
 #### Cloud Storage (external system)
 
-The place where the generated XLSX, PDF and CSV files as well as any intermediate files are stored.
+The place where the generated XLSX, PDF, CSV and JSON files as well as any intermediate files are stored.
 
 #### Tino (actor)
 

@@ -28,7 +28,7 @@ The tw-core Gradle subproject consists of two business modules and an anticorrup
   generic way and does not fit my use-cases. Therefore, this module is responsible for fetching the JSON from Clockify,
   transforming it to the domain model of the Timesheet-Wizard and signaling a successful import.
 - **exporting**: this module is responsible for transforming the model created by `importing` by generating an
-  XLSX, PDF or CSV file from that data. The XLSX, PDF and CSV files then are stored in some cloud storage, where they
+  XLSX, PDF, CSV or JSON file from that data. The XLSX, PDF, CSV and JSON files then are stored in some cloud storage, where they
   are available for a manual download.
 - **anticorruption**: this module contains code that maps domain model classes and events of module `importing` to
   domain model

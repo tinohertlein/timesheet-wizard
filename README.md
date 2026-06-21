@@ -5,13 +5,14 @@
 The Timesheet-Wizard is a personal pet project to fetch timesheets from [Clockify], transform
 them to various formats and export them again into other tools.
 
-As of now, the only target formats that are supported are XLSX, PDF and CSV, resulting in the
+As of now, the only target formats that are supported are XLSX, PDF, CSV and JSON, resulting in the
 following main features of Timesheet-Wizard:
 
 - Fetch timesheets from Clockify
 - Generate XLSX files from imported timesheets & store them
 - Generate PDF files from imported timesheets & store them
 - Generate CSV files from imported timesheets & store them
+- Generate JSON files from imported timesheets & store them
 
 ## Motivation
 
@@ -76,8 +77,8 @@ following responsibilities:
 
 **exporting**
 
-- generating XLSX, PDF & CSV files from the domain model
-- storing the XLSX, PDF & CSV files in the cloud
+- generating XLSX, PDF, CSV & JSON files from the domain model
+- storing the XLSX, PDF, CSV & JSON files in the cloud
 
 There is a third package '**anticorruption**', which is building the bridge between the other two packages by observing
 and sending application events.
