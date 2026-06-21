@@ -47,7 +47,8 @@ internal class XlsxV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
             }
 
         return TimesheetDocument(
-            ExportType.XLSX_V1,
+            type(),
+            fileNameFrom(timesheet.dateRange),
             timesheet.customer.name,
             timesheet.dateRange,
             outputStream.toByteArray()

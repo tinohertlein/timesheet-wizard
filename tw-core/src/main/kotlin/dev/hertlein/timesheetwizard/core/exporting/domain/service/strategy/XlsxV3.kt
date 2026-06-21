@@ -56,13 +56,14 @@ internal class XlsxV3(repositoryPort: RepositoryPort) : DocumentExportStrategy(r
             }
 
         return TimesheetDocument(
-            ExportType.XLSX_V3,
+            type(),
+            fileNameFrom(timesheet.dateRange),
             timesheet.customer.name,
             timesheet.dateRange,
             outputStream.toByteArray()
         )
     }
-
+    
     private fun fillInEntries(exportParams: Map<String, String>, sheet: XSSFSheet, entries: List<ExportTimesheet.Entry>) {
         val rowOffset = 1
         val columnOffset = 0

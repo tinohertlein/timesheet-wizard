@@ -107,7 +107,7 @@ internal class CsvV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(re
             }
         }
         return TimesheetDocument(
-            ExportType.CSV_V1, timesheet.customer.name, timesheet.dateRange, outputStream.toByteArray()
+            type(), fileNameFrom(timesheet.dateRange), timesheet.customer.name, timesheet.dateRange, outputStream.toByteArray()
         )
     }
 

@@ -36,6 +36,7 @@ class XlsxV2Test {
 
         assertSoftly { softly ->
             softly.assertThat(actual.exportType).isEqualTo(ExportType.XLSX_V2)
+            softly.assertThat(actual.fileName).isEqualTo("timesheet_20220101-20221231.xlsx")
             softly.assertThat(actual.customerName).isEqualTo(timesheet.customer.name)
             softly.assertThat(actual.dateRange).isEqualTo(timesheet.dateRange)
         }

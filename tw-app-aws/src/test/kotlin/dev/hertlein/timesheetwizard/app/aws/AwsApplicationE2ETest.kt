@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test
 import org.junitpioneer.jupiter.SetEnvironmentVariable
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.CreateBucketRequest
-import kotlin.test.Ignore
 
 @DisplayName("AWS Application")
 @SetEnvironmentVariable(key = "CLOCKIFY_API_KEY", value = "an-api-key")

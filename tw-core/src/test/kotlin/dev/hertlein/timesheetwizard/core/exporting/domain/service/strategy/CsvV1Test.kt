@@ -3,11 +3,13 @@ package dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy
 import dev.hertlein.timesheetwizard.core.ResourcesReader.bytesFromResourceFile
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet.Entry
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet.Entry.DateTimeRange
+import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportType
 import dev.hertlein.timesheetwizard.core.util.TestFixture
 import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.aZoneOffset
 import dev.hertlein.timesheetwizard.core.util.TestFixture.Export.anEntry
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.SoftAssertions.assertSoftly
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import java.time.OffsetDateTime
@@ -47,6 +49,12 @@ class CsvV1Test {
 
         val actual = CsvV1(mockk(relaxed = true)).create(mapOf("login" to "rihe"), timesheet)
 
-        assertThat(String(actual.content)).isEqualTo(String(expected))
+        assertSoftly { softly ->
+            softly.assertThat(actual.exportType).isEqualTo(ExportType.CSV_V1)
+            softly.assertThat(actual.fileName).isEqualTo("timesheet_20220101-20221231.csv")
+            softly.assertThat(actual.customerName).isEqualTo(timesheet.customer.name)
+            softly.assertThat(actual.dateRange).isEqualTo(timesheet.dateRange)
+            assertThat(String(actual.content)).isEqualTo(String(expected))
+        }
     }
 }

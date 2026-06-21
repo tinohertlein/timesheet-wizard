@@ -1,7 +1,7 @@
 package dev.hertlein.timesheetwizard.core.anticorruption
 
 import com.google.common.eventbus.EventBus
-import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository.FilenameFactory
+import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository.FilePathFactory
 import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository.RepositoryAdapter
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.ExportService
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.config.ExportConfigLoader
@@ -73,7 +73,7 @@ object Core {
     private fun bootstrapExportService(
         repository: Repository
     ): ExportService {
-        val repositoryAdapter = RepositoryAdapter(repository, FilenameFactory())
+        val repositoryAdapter = RepositoryAdapter(repository, FilePathFactory())
         val exportConfigLoader = ExportConfigLoader(repository, objectMapper)
         val exportService = ExportService(exportConfigLoader, listOf(
             CsvV1(repositoryAdapter),

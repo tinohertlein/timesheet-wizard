@@ -1,8 +1,8 @@
 package dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy
 
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
-import dev.hertlein.timesheetwizard.core.exporting.domain.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportType
+import dev.hertlein.timesheetwizard.core.exporting.domain.model.TimesheetDocument
 import dev.hertlein.timesheetwizard.core.exporting.domain.port.RepositoryPort
 import net.sf.jasperreports.engine.DefaultJasperReportsContext
 import net.sf.jasperreports.engine.JREmptyDataSource
@@ -70,7 +70,7 @@ internal class PdfV1(repositoryPort: RepositoryPort) : DocumentExportStrategy(re
         }
 
         return TimesheetDocument(
-            ExportType.PDF_V1, timesheet.customer.name, timesheet.dateRange, outputStream.toByteArray()
+            type(), fileNameFrom(timesheet.dateRange), timesheet.customer.name, timesheet.dateRange, outputStream.toByteArray()
         )
     }
 

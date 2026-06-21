@@ -9,16 +9,15 @@ private val logger = KotlinLogging.logger {}
 
 internal class RepositoryAdapter(
     private val repository: Repository,
-    private val filenameFactory: FilenameFactory
+    private val filePathFactory: FilePathFactory
 ) : RepositoryPort {
 
     override fun save(timesheetDocument: TimesheetDocument) {
         logger.debug { "Persisting document of type '${timesheetDocument.exportType}' ..." }
 
-        val metaData = DocumentMetaData.from(timesheetDocument.exportType)
-        val filename = filenameFactory.filenameFrom(metaData, timesheetDocument)
+        val filePath = filePathFactory.filePathFrom(timesheetDocument)
 
-        repository.upload(filename, timesheetDocument.content)
-            .also { logger.debug { "Persisted document to '${repository.root()}/$filename'" } }
+        repository.upload(filePath, timesheetDocument.content)
+            .also { logger.debug { "Persisted document to '${repository.root()}/$filePath'" } }
     }
 }

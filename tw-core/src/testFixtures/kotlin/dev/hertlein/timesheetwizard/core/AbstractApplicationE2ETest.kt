@@ -1,5 +1,6 @@
 package dev.hertlein.timesheetwizard.core
 
+import dev.hertlein.timesheetwizard.spi.cloud.Repository
 import org.apache.http.HttpHeaders
 import org.apache.http.entity.ContentType
 import org.assertj.core.api.Assertions.assertThat
@@ -21,7 +22,6 @@ import java.io.File
 import java.nio.file.Path
 import java.util.concurrent.TimeUnit
 import kotlin.io.path.absolutePathString
-import dev.hertlein.timesheetwizard.spi.cloud.Repository
 
 const val MOCK_SERVER_HOST = "http://localhost"
 const val MOCK_SERVER_PORT = 1081
@@ -63,7 +63,7 @@ open class AbstractApplicationE2ETest {
             )
         }
         prepareClockifyServer()
-        val expectedFilenames = listOf(
+        val expectedFileNames = listOf(
             "timesheets/PiedPiper/csv/v1/" to "timesheet_20220101-20221231.csv",
             "timesheets/PiedPiper/xlsx/v1/" to "timesheet_20220101-20221231.xlsx",
             "timesheets/PiedPiper/xlsx/v2/" to "timesheet_20220101-20221231.xlsx",
@@ -74,7 +74,7 @@ open class AbstractApplicationE2ETest {
 
         run()
 
-        expectedFilenames.forEach {
+        expectedFileNames.forEach {
             val bytes = repository.download("${it.first}${it.second}")
             storeLocally(it, bytes)
             assertThat(bytes).isNotEmpty

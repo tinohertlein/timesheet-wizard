@@ -42,7 +42,8 @@ internal class JsonV1(repositoryPort: RepositoryPort, private val objectMapper: 
 
         val json = objectMapper.writeValueAsString(entries)
         return TimesheetDocument(
-            ExportType.JSON_V1,
+            type(),
+            fileNameFrom(timesheet.dateRange),
             timesheet.customer.name,
             timesheet.dateRange,
             json.toByteArray()
