@@ -6,14 +6,17 @@ import dev.hertlein.timesheetwizard.core.importing.domain.model.DateRangeType.CU
 import dev.hertlein.timesheetwizard.core.importing.domain.model.DateRangeType.LAST_MONTH
 import dev.hertlein.timesheetwizard.core.importing.domain.model.DateRangeType.LAST_YEAR
 import dev.hertlein.timesheetwizard.core.importing.domain.model.DateRangeType.THIS_MONTH
+import dev.hertlein.timesheetwizard.core.importing.domain.model.DateRangeType.THIS_WEEK
 import dev.hertlein.timesheetwizard.core.importing.domain.model.DateRangeType.THIS_YEAR
 import java.time.Clock
 import java.time.LocalDate
 import java.time.Year
 import java.time.YearMonth
 import java.time.ZoneId
+import java.time.temporal.TemporalAdjusters
 import java.time.temporal.TemporalAdjusters.lastDayOfMonth
 import java.time.temporal.TemporalAdjusters.lastDayOfYear
+import java.time.temporal.WeekFields
 
 const val TIMEZONE = "Europe/Berlin"
 
@@ -30,6 +33,7 @@ internal class DateTimeFactory(private val clock: Clock = Clock.system(ZoneId.of
             THIS_MONTH -> thisMonth()
             LAST_MONTH -> lastMonth()
             CUSTOM_MONTH -> customMonth(YearMonth.parse(requireNotNull(dateRange)))
+            THIS_WEEK -> thisWeek()
         }
 
     private fun today(): LocalDate = LocalDate.now(clock)
@@ -56,5 +60,9 @@ internal class DateTimeFactory(private val clock: Clock = Clock.system(ZoneId.of
 
     private fun customMonth(yearMonth: YearMonth): ClosedRange<LocalDate> = yearMonth.atDay(1).let {
         it..it.with(lastDayOfMonth())
+    }
+
+    private fun thisWeek(): ClosedRange<LocalDate> = today().let {
+        it.with(TemporalAdjusters.previousOrSame(WeekFields.ISO.firstDayOfWeek))..it
     }
 }
