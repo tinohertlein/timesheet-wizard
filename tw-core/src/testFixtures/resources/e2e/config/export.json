@@ -30,6 +30,9 @@
         "params": {
           "user": "rhendricks"
         }
+      },
+      {
+        "type": "JSON_V1"
       }
     ]
   }

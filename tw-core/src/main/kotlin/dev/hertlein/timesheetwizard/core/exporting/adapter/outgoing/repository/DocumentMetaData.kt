@@ -13,6 +13,7 @@ internal data class DocumentMetaData(val version: String, val suffix: String) {
             ExportType.XLSX_V3 -> DocumentMetaData("v3", "xlsx")
             ExportType.PDF_V1 -> DocumentMetaData("v1", "pdf")
             ExportType.CSV_V1 -> DocumentMetaData("v1", "csv")
+            ExportType.JSON_V1 -> DocumentMetaData("v1", "json")
         }
     }
 }

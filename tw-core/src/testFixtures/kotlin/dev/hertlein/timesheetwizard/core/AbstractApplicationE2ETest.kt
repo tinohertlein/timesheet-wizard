@@ -69,6 +69,7 @@ open class AbstractApplicationE2ETest {
             "timesheets/PiedPiper/xlsx/v2/" to "timesheet_20220101-20221231.xlsx",
             "timesheets/PiedPiper/xlsx/v3/" to "timesheet_20220101-20221231.xlsx",
             "timesheets/PiedPiper/pdf/v1/" to "timesheet_20220101-20221231.pdf",
+            "timesheets/PiedPiper/json/v1/" to "timesheet_20220101-20221231.json",
         )
 
         run()
