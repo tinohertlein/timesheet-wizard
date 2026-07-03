@@ -4,7 +4,7 @@ import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
 import com.google.common.eventbus.EventBus
 import dev.hertlein.timesheetwizard.core.anticorruption.Core
-import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.ImportingStartedEvent
+import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.ImportStartedEvent
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
 import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
 import tools.jackson.databind.ObjectMapper
@@ -24,7 +24,7 @@ class AwsLambdaAdapter(
 
     override fun handleRequest(input: InputStream, output: OutputStream?, context: Context?) {
         BufferedReader(InputStreamReader(input, Charsets.US_ASCII)).use {
-            eventBus.post(ImportingStartedEvent(toInputParams(it.readText())))
+            eventBus.post(ImportStartedEvent(toInputParams(it.readText())))
         }
     }
 

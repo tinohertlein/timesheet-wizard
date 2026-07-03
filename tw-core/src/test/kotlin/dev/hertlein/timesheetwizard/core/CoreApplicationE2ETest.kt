@@ -1,7 +1,7 @@
 package dev.hertlein.timesheetwizard.core
 
 import dev.hertlein.timesheetwizard.core.anticorruption.Core
-import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.ImportingStartedEvent
+import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.ImportStartedEvent
 import dev.hertlein.timesheetwizard.core.importing.domain.model.DateRangeType
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
 import dev.hertlein.timesheetwizard.core.util.InMemoryRepository
@@ -30,6 +30,6 @@ class CoreApplicationE2ETest : AbstractApplicationE2ETest() {
     }
 
     private fun run() {
-        eventBus.post(ImportingStartedEvent(ImportParams(listOf("1000"), DateRangeType.CUSTOM_YEAR, "2022")))
+        eventBus.post(ImportStartedEvent(ImportParams(listOf("1000"), DateRangeType.CUSTOM_YEAR, "2022")))
     }
 }

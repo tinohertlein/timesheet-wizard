@@ -5,7 +5,7 @@ import com.google.cloud.functions.HttpRequest
 import com.google.cloud.functions.HttpResponse
 import com.google.common.eventbus.EventBus
 import dev.hertlein.timesheetwizard.core.anticorruption.Core
-import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.ImportingStartedEvent
+import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.ImportStartedEvent
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
@@ -29,6 +29,6 @@ class GcpFunctionAdapter : HttpFunction {
     fun cloudFunctionJsonMapper() = Core.objectMapper
 
     override fun service(request: HttpRequest, response: HttpResponse) {
-        eventBus.post(ImportingStartedEvent(objectMapper.readValue(request.reader, ImportParams::class.java)))
+        eventBus.post(ImportStartedEvent(objectMapper.readValue(request.reader, ImportParams::class.java)))
     }
 }

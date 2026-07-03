@@ -5,7 +5,7 @@ import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.file
 import dev.hertlein.timesheetwizard.core.anticorruption.Core
-import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.ImportingStartedEvent
+import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.ImportStartedEvent
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
 import dev.hertlein.timesheetwizard.spi.cloud.Repository
 import tools.jackson.databind.ObjectMapper
@@ -47,7 +47,7 @@ class LocalCliAdapter(
             )
         )
 
-        eventBus.post(ImportingStartedEvent(toInputParams(eventFile.readText())))
+        eventBus.post(ImportStartedEvent(toInputParams(eventFile.readText())))
     }
 
     private fun toInputParams(input: String) = objectMapper.readValue(input, ImportParams::class.java)
