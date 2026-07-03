@@ -7,8 +7,12 @@ import java.time.format.DateTimeFormatter
 
 internal class RequestBodyFactory {
 
-    fun requestBodyFrom(clockifyId: String, dateRange: ClosedRange<LocalDate>): RequestBody {
-        val clientsFilter = RequestBody.ClientsFilter(clockifyId)
+    fun requestBodyFrom(clockifyId: String, dateRange: ClosedRange<LocalDate>): RequestBody =
+        requestBodyFrom(dateRange, RequestBody.ClientsFilter(clockifyId))
+
+    fun requestBodyFrom(dateRange: ClosedRange<LocalDate>): RequestBody = requestBodyFrom(dateRange, null)
+
+    private fun requestBodyFrom(dateRange: ClosedRange<LocalDate>, clientsFilter: RequestBody.ClientsFilter?): RequestBody {
         val dates = dateRange
             .let { toDateTimeRange(it) }
             .let { toStringRange(it) }

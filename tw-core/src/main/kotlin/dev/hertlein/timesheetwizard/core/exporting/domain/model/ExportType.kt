@@ -6,5 +6,6 @@ internal enum class ExportType(val version: String, val type: String) {
     XLSX_V3("v3", "xlsx"),
     PDF_V1("v1", "pdf"),
     CSV_V1("v1", "csv"),
+    JSON_V0("v0", "json"),
     JSON_V1("v1", "json")
 }

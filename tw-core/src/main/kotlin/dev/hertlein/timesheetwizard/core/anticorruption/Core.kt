@@ -6,6 +6,7 @@ import dev.hertlein.timesheetwizard.core.exporting.adapter.outgoing.repository.R
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.ExportService
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.config.ExportConfigLoader
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.CsvV1
+import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.JsonV0
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.JsonV1
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.PdfV1
 import dev.hertlein.timesheetwizard.core.exporting.domain.service.strategy.XlsxV1
@@ -75,14 +76,17 @@ object Core {
     ): ExportService {
         val repositoryAdapter = RepositoryAdapter(repository, FilePathFactory())
         val exportConfigLoader = ExportConfigLoader(repository, objectMapper)
-        val exportService = ExportService(exportConfigLoader, listOf(
-            CsvV1(repositoryAdapter),
-            PdfV1(repositoryAdapter),
-            XlsxV1(repositoryAdapter),
-            XlsxV2(repositoryAdapter),
-            XlsxV3(repositoryAdapter),
-            JsonV1(repositoryAdapter, objectMapper)
-        ))
+        val exportService = ExportService(
+            exportConfigLoader, listOf(
+                CsvV1(repositoryAdapter),
+                PdfV1(repositoryAdapter),
+                XlsxV1(repositoryAdapter),
+                XlsxV2(repositoryAdapter),
+                XlsxV3(repositoryAdapter),
+                JsonV0(repositoryAdapter, objectMapper),
+                JsonV1(repositoryAdapter, objectMapper)
+            )
+        )
         return exportService
     }
 }

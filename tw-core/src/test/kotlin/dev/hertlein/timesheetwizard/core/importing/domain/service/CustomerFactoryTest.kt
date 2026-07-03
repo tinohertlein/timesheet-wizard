@@ -39,6 +39,13 @@ internal class CustomerFactoryTest {
     inner class CustomersFrom {
 
         @Test
+        fun `should return not-applicable customer if corresponding customerId is given`() {
+            val customers = customerFactory.customersFrom(listOf("N/A"))
+
+            Assertions.assertThat(customers).containsExactly(Customer.NOT_APPLICABLE)
+        }
+        
+        @Test
         fun `should return enabled customer if corresponding customerId is given`() {
             val customers = customerFactory.customersFrom(listOf(CUSTOMER_ID_1))
 

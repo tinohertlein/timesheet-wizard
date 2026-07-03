@@ -8,6 +8,7 @@ import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.con
 import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.HttpReportClient
 import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.RequestBodyFactory
 import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.ResponseBodyMapper
+import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer
 import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer.Id
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportTimesheet
 import dev.hertlein.timesheetwizard.core.util.TestFixture
@@ -15,6 +16,7 @@ import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.SoftAssertions
+import org.assertj.core.api.SoftAssertions.assertSoftly
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeAll
@@ -75,7 +77,7 @@ class ClockifyAdapterTest {
     }
 
     @Test
-    fun `should import a timesheet`() {
+    fun `should import a timesheet for a customer`() {
         prepareClockifyServer(
             "first_clockify_response.json",
             "second_clockify_response.json",
@@ -85,20 +87,47 @@ class ClockifyAdapterTest {
         val timesheet = clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer, TestFixture.Import.aDateRange)
 
         mockServer.verify(HttpRequest.request(), VerificationTimes.exactly(3))
-        SoftAssertions().apply {
-            assertThat(timesheet).isNotNull
-            assertThat(timesheet.customer.id.value).isEqualTo(TestFixture.Import.aCustomer.id.value)
-            assertThat(timesheet.customer.name.value).isEqualTo(TestFixture.Import.aCustomer.name.value)
-            assertThat(timesheet.dateRange.start).isEqualTo(TestFixture.Import.aDateRange.start)
-            assertThat(timesheet.dateRange.endInclusive).isEqualTo(TestFixture.Import.aDateRange.endInclusive)
-            assertThat(timesheet.entries[0].duration).isEqualTo(9.hours)
-            assertThat(timesheet.entries[0].tags).containsExactly(ImportTimesheet.Entry.Tag("Remote"))
-            assertThat(timesheet.entries[0].project.name).isEqualTo("The Box")
-            assertThat(timesheet.entries[0].project.id).isEqualTo("62dd35a6e4797e2d7a9988c6")
-            assertThat(timesheet.entries[1].duration).isEqualTo(9.hours)
-            assertThat(timesheet.entries[1].tags).isEmpty()
-        }.assertAll()
+        assertSoftly { softly ->
+            softly.assertThat(timesheet).isNotNull
+            softly.assertThat(timesheet.customer.id.value).isEqualTo(TestFixture.Import.aCustomer.id.value)
+            softly.assertThat(timesheet.customer.name.value).isEqualTo(TestFixture.Import.aCustomer.name.value)
+            softly.assertThat(timesheet.dateRange.start).isEqualTo(TestFixture.Import.aDateRange.start)
+            softly.assertThat(timesheet.dateRange.endInclusive).isEqualTo(TestFixture.Import.aDateRange.endInclusive)
+            softly.assertThat(timesheet.entries[0].duration).isEqualTo(9.hours)
+            softly.assertThat(timesheet.entries[0].tags).containsExactly(ImportTimesheet.Entry.Tag("Remote"))
+            softly.assertThat(timesheet.entries[0].project.name).isEqualTo("The Box")
+            softly.assertThat(timesheet.entries[0].project.id).isEqualTo("62dd35a6e4797e2d7a9988c6")
+            softly.assertThat(timesheet.entries[1].duration).isEqualTo(9.hours)
+            softly.assertThat(timesheet.entries[1].tags).isEmpty()
+        }
     }
+
+    @Test
+    fun `should import a timesheet for all customers`() {
+        prepareClockifyServer(
+            "first_clockify_response.json",
+            "second_clockify_response.json",
+            "third_clockify_response.json"
+        )
+
+        val timesheet = clockifyAdapter.fetchTimesheet(Customer.NOT_APPLICABLE, TestFixture.Import.aDateRange)
+
+        mockServer.verify(HttpRequest.request(), VerificationTimes.exactly(3))
+        assertSoftly { softly ->
+            softly.assertThat(timesheet).isNotNull
+            softly.assertThat(timesheet.customer.id.value).isEqualTo(Customer.NOT_APPLICABLE.id.value)
+            softly.assertThat(timesheet.customer.name.value).isEqualTo(Customer.NOT_APPLICABLE.name.value)
+            softly.assertThat(timesheet.dateRange.start).isEqualTo(TestFixture.Import.aDateRange.start)
+            softly.assertThat(timesheet.dateRange.endInclusive).isEqualTo(TestFixture.Import.aDateRange.endInclusive)
+            softly.assertThat(timesheet.entries[0].duration).isEqualTo(9.hours)
+            softly.assertThat(timesheet.entries[0].tags).containsExactly(ImportTimesheet.Entry.Tag("Remote"))
+            softly.assertThat(timesheet.entries[0].project.name).isEqualTo("The Box")
+            softly.assertThat(timesheet.entries[0].project.id).isEqualTo("62dd35a6e4797e2d7a9988c6")
+            softly.assertThat(timesheet.entries[1].duration).isEqualTo(9.hours)
+            softly.assertThat(timesheet.entries[1].tags).isEmpty()
+        }
+    }
+
 
     @Test
     fun `should throw Exception if no Clockify id is found for given customer`() {

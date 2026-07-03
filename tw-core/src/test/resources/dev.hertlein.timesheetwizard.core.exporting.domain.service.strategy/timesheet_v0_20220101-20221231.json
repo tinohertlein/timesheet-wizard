@@ -1,0 +1,1 @@
+[{"project":{"id":"a-project-id","name":"a-project-name"},"task":{"id":"a-task-id","name":"a-task-name"},"description":"a-description","tags":["a-tag"],"dateTimeRange":{"start":"2022-01-01T08:00:00+01:00","end":"2022-01-01T10:00:00+01:00"},"billable":true,"duration":14400000000000}]

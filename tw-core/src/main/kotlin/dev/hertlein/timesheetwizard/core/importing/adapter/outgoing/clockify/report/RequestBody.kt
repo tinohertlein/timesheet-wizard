@@ -2,7 +2,7 @@ package dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.re
 
 
 internal data class RequestBody(
-    val clients: ClientsFilter,
+    val clients: ClientsFilter?,
     val dateRangeStart: String,
     val dateRangeEnd: String,
     val detailedFilter: DetailedFilter = DetailedFilter()

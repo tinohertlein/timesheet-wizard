@@ -72,6 +72,18 @@ Resources:
         - Arn: !GetAtt TwFunction.Arn
           Id: tw-monthly
           Input: '{"customerIds": [], "dateRangeType": "LAST_MONTH"}'
+          
+  TwMonthlyBackupEvent:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: tw-backup-monthly
+      ScheduleExpression: cron(0 6 1 * ? *)
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt TwFunction.Arn
+          Id: tw-backup-monthly
+          Input: '{"customerIds": ["N/A"], "dateRangeType": "LAST_MONTH"}'
+
 
   TwPermissionForDailyEvent:
     Type: AWS::Lambda::Permission
@@ -90,6 +102,16 @@ Resources:
       Action: lambda:InvokeFunction
       Principal: events.amazonaws.com
       SourceArn: !GetAtt TwMonthlyEvent.Arn
+      
+  TwPermissionForMonthlyBackupEvent:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Ref: TwFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt TwMonthlyBackupEvent.Arn
+
 
   TwDataBucket:
     Type: AWS::S3::Bucket
