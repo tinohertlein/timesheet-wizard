@@ -127,6 +127,7 @@ testing = ["assertj", "junit-pioneer", "mockk", "mockserver-netty", "mockserver-
 testing-aws = ["testcontainers-localstack"]
 testing-azure = ["testcontainers-azure"]
 testing-gcp = ["quarkus-gcp-functions-test"]
+testing-core = ["logback"]
 cucumber = ["cucumber", "cucumber-junit-platform", "junit-platform-suite"]
 
 [plugins]
