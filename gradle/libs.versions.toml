@@ -35,6 +35,8 @@ archunit = "1.4.2"
 quarkus-plugin = "3.38.0"
 quarkus-platform = "3.37.4"
 clikt = "5.1.0"
+cucumber = "7.34.4"
+junit-platform-suite = "6.1.1"
 
 [libraries]
 ## Base
@@ -106,6 +108,9 @@ spring-starter-test = { module = "org.springframework.boot:spring-boot-starter-t
 archunit = { module = "com.tngtech.archunit:archunit", version.ref = "archunit" }
 quarkus-junit5 = { module = "io.quarkus:quarkus-junit5" }
 quarkus-gcp-functions-test = { module = "io.quarkus:quarkus-test-google-cloud-functions" }
+cucumber = { module = "io.cucumber:cucumber-java8", version.ref = "cucumber" }
+cucumber-junit-platform = { module = "io.cucumber:cucumber-junit-platform-engine", version.ref = "cucumber" }
+junit-platform-suite = { module = "org.junit.platform:junit-platform-suite", version.ref = "junit-platform-suite" }
 
 [bundles]
 export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt"]
@@ -122,6 +127,7 @@ testing = ["assertj", "junit-pioneer", "mockk", "mockserver-netty", "mockserver-
 testing-aws = ["testcontainers-localstack"]
 testing-azure = ["testcontainers-azure"]
 testing-gcp = ["quarkus-gcp-functions-test"]
+cucumber = ["cucumber", "cucumber-junit-platform", "junit-platform-suite"]
 
 [plugins]
 kotlinjvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

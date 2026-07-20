@@ -17,6 +17,7 @@ dependencies {
 
     testJavaagent(libs.byte.buddy.agent)
     testImplementation(libs.bundles.testing)
+    testImplementation(libs.bundles.cucumber)
     testFixturesApi(libs.bundles.testing)
     testFixturesImplementation(project(":tw-spi"))
 }
