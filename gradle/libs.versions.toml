@@ -35,7 +35,7 @@ archunit = "1.4.2"
 quarkus-plugin = "3.38.0"
 quarkus-platform = "3.37.4"
 clikt = "5.1.0"
-cucumber = "7.34.4"
+cucumber = "7.34.6"
 junit-platform-suite = "6.1.1"
 
 [libraries]
