@@ -36,7 +36,7 @@ quarkus-plugin = "3.38.0"
 quarkus-platform = "3.38.0"
 clikt = "5.1.0"
 cucumber = "7.34.4"
-junit-platform-suite = "6.1.1"
+junit-platform-suite = "6.1.2"
 
 [libraries]
 ## Base
