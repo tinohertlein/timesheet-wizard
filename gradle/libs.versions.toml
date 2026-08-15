@@ -123,7 +123,7 @@ quarkus-gcp = ["quarkus-gcp-storage", "quarkus-gcp-functions"]
 cli = ["clikt", "slf4j-api", "logback"]
 
 ## Test
-testing = ["assertj", "junit-pioneer", "mockk", "mockserver-netty", "mockserver-client", "kotlin-junit", "rest-assured", "testcontainers-mockserver", "archunit"]
+testing = ["assertj", "junit-pioneer", "mockk", "mockserver-netty", "mockserver-client", "kotlin-junit", "rest-assured", "testcontainers-mockserver"]
 testing-aws = ["testcontainers-localstack"]
 testing-azure = ["testcontainers-azure"]
 testing-gcp = ["quarkus-gcp-functions-test"]

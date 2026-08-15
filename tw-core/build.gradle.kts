@@ -26,3 +26,29 @@ dependencies {
 tasks.compileJava {
     options.compilerArgs.add("-parameters")
 }
+
+testing {
+    suites {
+        register<JvmTestSuite>("archTest") {
+            useJUnitJupiter()
+
+            dependencies {
+                implementation(project())
+                implementation(libs.archunit)
+                implementation(libs.kotlin.junit)
+            }
+
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(tasks.test)
+                    }
+                }
+            }
+        }
+    }
+}
+
+tasks.check {
+    dependsOn(testing.suites.named("archTest"))
+}

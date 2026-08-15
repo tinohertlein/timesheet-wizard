@@ -40,7 +40,7 @@ jobs:
           cache: 'gradle'
 
       - name: Build & test with Gradle
-        run: ./gradlew test
+        run: ./gradlew check
 
       - name: Generate test report (tw-core)
         uses: dorny/test-reporter@v3
