@@ -85,3 +85,13 @@ rather than reaching across, and run `:tw-core:archTest` after cross-package or 
 
 Full arc42 architecture docs live in `docs/` (`docs/README.md` is the index). `docs/04_solution_strategy.md` and
 `docs/05_building_block_view.md` explain the module-boundary rationale in more depth than this file.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs are tracked as local markdown files under `.scratch/`. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Single-context layout: `CONTEXT.md` + `docs/adr/` at the repo root (created lazily as needed). See `docs/agents/domain.md`.
