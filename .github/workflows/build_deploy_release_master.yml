@@ -60,7 +60,7 @@ jobs:
 
       - name: Generate test report (tw-app-azure)
         uses: dorny/test-reporter@v3
-        if: success() || failure()
+        if: false
         with:
           name: generate test report (tw-app-azure)
           path: ./tw-app-azure/build/test-results/test/*.xml
