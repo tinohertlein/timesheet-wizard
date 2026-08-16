@@ -29,6 +29,7 @@ javaagent = "0.12.2"
 byte-buddy-agent = "1.18.12"
 rest-assured = "6.0.1"
 assertj = "3.27.7"
+junit-platform = "6.1.3"
 junit-pioneer = "2.3.0"
 testcontainers = "2.0.5"
 archunit = "1.5.0"
@@ -36,7 +37,6 @@ quarkus-plugin = "3.38.2"
 quarkus-platform = "3.38.2"
 clikt = "5.1.0"
 cucumber = "7.34.7"
-junit-platform-suite = "6.1.3"
 
 [libraries]
 ## Base
@@ -106,11 +106,12 @@ testcontainers-mockserver = { module = "org.testcontainers:testcontainers-mockse
 byte-buddy-agent = { module = "net.bytebuddy:byte-buddy-agent", version.ref = "byte-buddy-agent" }
 spring-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 archunit = { module = "com.tngtech.archunit:archunit", version.ref = "archunit" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform" }
+junit-platform-suite = { module = "org.junit.platform:junit-platform-suite", version.ref = "junit-platform" }
 quarkus-junit5 = { module = "io.quarkus:quarkus-junit5" }
 quarkus-gcp-functions-test = { module = "io.quarkus:quarkus-test-google-cloud-functions" }
 cucumber = { module = "io.cucumber:cucumber-java8", version.ref = "cucumber" }
 cucumber-junit-platform = { module = "io.cucumber:cucumber-junit-platform-engine", version.ref = "cucumber" }
-junit-platform-suite = { module = "org.junit.platform:junit-platform-suite", version.ref = "junit-platform-suite" }
 
 [bundles]
 export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt"]

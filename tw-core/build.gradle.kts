@@ -36,6 +36,7 @@ testing {
                 implementation(project())
                 implementation(libs.archunit)
                 implementation(libs.kotlin.junit)
+                runtimeOnly(libs.junit.platform.launcher)
             }
 
             targets {
