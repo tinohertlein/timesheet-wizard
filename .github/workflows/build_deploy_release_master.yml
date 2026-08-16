@@ -267,9 +267,6 @@ jobs:
           git push --all
           git push --tags
 
-      - name: Retrieve updated version number
-        run: ./gradlew printVersion
-
       - name: Create GitHub release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
