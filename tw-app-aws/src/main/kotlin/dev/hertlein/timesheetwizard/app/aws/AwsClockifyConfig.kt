@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.app.aws
 
-import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
+import dev.hertlein.timesheetwizard.spi.ClockifyConfig
 import java.util.Properties
 
 data class AwsClockifyConfig(

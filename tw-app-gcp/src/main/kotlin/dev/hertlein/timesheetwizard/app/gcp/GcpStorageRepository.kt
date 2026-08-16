@@ -2,7 +2,7 @@ package dev.hertlein.timesheetwizard.app.gcp
 
 import com.google.cloud.storage.BucketInfo
 import com.google.cloud.storage.Storage
-import dev.hertlein.timesheetwizard.spi.cloud.Repository
+import dev.hertlein.timesheetwizard.spi.Repository
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import mu.KotlinLogging

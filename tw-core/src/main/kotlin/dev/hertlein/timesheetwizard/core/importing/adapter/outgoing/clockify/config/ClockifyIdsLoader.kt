@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.config
 
-import dev.hertlein.timesheetwizard.spi.cloud.Repository
+import dev.hertlein.timesheetwizard.spi.Repository
 import mu.KotlinLogging
 import tools.jackson.core.type.TypeReference
 import tools.jackson.databind.ObjectMapper

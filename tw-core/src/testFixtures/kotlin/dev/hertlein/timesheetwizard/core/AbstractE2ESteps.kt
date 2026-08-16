@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.core
 
-import dev.hertlein.timesheetwizard.spi.cloud.Repository
+import dev.hertlein.timesheetwizard.spi.Repository
 import org.apache.http.HttpHeaders
 import org.apache.http.entity.ContentType
 import org.assertj.core.api.Assertions.assertThat

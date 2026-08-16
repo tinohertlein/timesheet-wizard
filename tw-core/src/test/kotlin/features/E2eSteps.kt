@@ -8,7 +8,7 @@ import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.Imp
 import dev.hertlein.timesheetwizard.core.importing.domain.model.DateRangeType
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
 import dev.hertlein.timesheetwizard.core.util.InMemoryRepository
-import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
+import dev.hertlein.timesheetwizard.spi.ClockifyConfig
 import io.cucumber.java8.En
 
 class E2eSteps : En, AbstractE2ESteps() {

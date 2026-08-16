@@ -12,7 +12,7 @@ import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer
 import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer.Id
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportTimesheet
 import dev.hertlein.timesheetwizard.core.util.TestFixture
-import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
+import dev.hertlein.timesheetwizard.spi.ClockifyConfig
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.SoftAssertions

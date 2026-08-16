@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.app.local
 
-import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
+import dev.hertlein.timesheetwizard.spi.ClockifyConfig
 
 data class LocalClockifyConfig(
     override val reportsUrl: String,

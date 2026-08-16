@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.app.local
 
-import dev.hertlein.timesheetwizard.spi.cloud.Repository
+import dev.hertlein.timesheetwizard.spi.Repository
 import mu.KotlinLogging
 import java.io.File
 import java.nio.file.Path

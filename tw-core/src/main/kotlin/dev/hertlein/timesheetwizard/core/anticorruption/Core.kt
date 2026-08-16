@@ -22,8 +22,8 @@ import dev.hertlein.timesheetwizard.core.importing.domain.service.CustomerFactor
 import dev.hertlein.timesheetwizard.core.importing.domain.service.DateTimeFactory
 import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportConfigLoader
 import dev.hertlein.timesheetwizard.core.importing.domain.service.ImportService
-import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
-import dev.hertlein.timesheetwizard.spi.cloud.Repository
+import dev.hertlein.timesheetwizard.spi.ClockifyConfig
+import dev.hertlein.timesheetwizard.spi.Repository
 import tools.jackson.core.StreamReadFeature
 import tools.jackson.databind.DeserializationFeature
 import tools.jackson.databind.SerializationFeature

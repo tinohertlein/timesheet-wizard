@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.core.exporting.domain.service.config
 
-import dev.hertlein.timesheetwizard.spi.cloud.Repository
+import dev.hertlein.timesheetwizard.spi.Repository
 import mu.KotlinLogging
 import tools.jackson.core.type.TypeReference
 import tools.jackson.databind.ObjectMapper

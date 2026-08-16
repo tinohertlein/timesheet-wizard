@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.spi.app
+package dev.hertlein.timesheetwizard.spi
 
 interface ClockifyConfig {
     val reportsUrl: String

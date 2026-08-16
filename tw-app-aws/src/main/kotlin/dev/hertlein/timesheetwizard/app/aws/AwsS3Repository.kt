@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.app.aws
 
-import dev.hertlein.timesheetwizard.spi.cloud.Repository
+import dev.hertlein.timesheetwizard.spi.Repository
 import mu.KotlinLogging
 import software.amazon.awssdk.core.sync.RequestBody
 import software.amazon.awssdk.regions.Region

@@ -3,7 +3,7 @@ package dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.re
 import com.google.common.base.Joiner
 import com.google.common.net.HttpHeaders
 import com.google.common.net.MediaType
-import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
+import dev.hertlein.timesheetwizard.spi.ClockifyConfig
 import tools.jackson.databind.ObjectMapper
 import java.net.URI
 import java.net.http.HttpClient

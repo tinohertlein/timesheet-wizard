@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.app.gcp
 
-import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
+import dev.hertlein.timesheetwizard.spi.ClockifyConfig
 import jakarta.inject.Singleton
 import org.eclipse.microprofile.config.inject.ConfigProperty
 

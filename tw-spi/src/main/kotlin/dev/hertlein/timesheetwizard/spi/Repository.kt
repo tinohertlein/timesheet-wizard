@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.spi.cloud
+package dev.hertlein.timesheetwizard.spi
 
 interface Repository {
 

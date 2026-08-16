@@ -7,7 +7,7 @@ import com.github.ajalt.clikt.parameters.types.file
 import dev.hertlein.timesheetwizard.core.anticorruption.Core
 import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.ImportStartedEvent
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
-import dev.hertlein.timesheetwizard.spi.cloud.Repository
+import dev.hertlein.timesheetwizard.spi.Repository
 import tools.jackson.databind.ObjectMapper
 import java.io.File
 

@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.core.util
 
-import dev.hertlein.timesheetwizard.spi.cloud.Repository
+import dev.hertlein.timesheetwizard.spi.Repository
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
