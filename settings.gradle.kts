@@ -16,4 +16,4 @@ plugins {
 
 rootProject.name = "timesheet-wizard"
 // Do not include 'tw-app-azure', as spring-boot-thin-launcher Gradle plugin does not work with Gradle > 9.0
-include("tw-app-aws", "tw-app-gcp", "tw-app-local", "tw-spi", "tw-core")
+include("tw-spi", "tw-core", "tw-app-aws", "tw-app-gcp", "tw-app-local")

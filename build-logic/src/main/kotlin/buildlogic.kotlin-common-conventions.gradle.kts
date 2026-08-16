@@ -51,3 +51,27 @@ tasks.test {
         STANDARD_ERROR
     )
 }
+
+testing {
+    suites {
+        register<JvmTestSuite>("archTest") {
+            useJUnitJupiter()
+
+            dependencies {
+                implementation(project())
+            }
+
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(tasks.test)
+                    }
+                }
+            }
+        }
+    }
+}
+
+tasks.check {
+    dependsOn(testing.suites.named("archTest"))
+}

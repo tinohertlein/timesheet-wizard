@@ -21,35 +21,12 @@ dependencies {
     testRuntimeOnly(libs.bundles.testing.core)
     testFixturesApi(libs.bundles.testing)
     testFixturesImplementation(project(":tw-spi"))
+
+    archTestImplementation(libs.archunit)
+    archTestImplementation(libs.kotlin.junit)
+    archTestRuntimeOnly(libs.junit.platform.launcher)
 }
 
 tasks.compileJava {
     options.compilerArgs.add("-parameters")
-}
-
-testing {
-    suites {
-        register<JvmTestSuite>("archTest") {
-            useJUnitJupiter()
-
-            dependencies {
-                implementation(project())
-                implementation(libs.archunit)
-                implementation(libs.kotlin.junit)
-                runtimeOnly(libs.junit.platform.launcher)
-            }
-
-            targets {
-                all {
-                    testTask.configure {
-                        shouldRunAfter(tasks.test)
-                    }
-                }
-            }
-        }
-    }
-}
-
-tasks.check {
-    dependsOn(testing.suites.named("archTest"))
 }
