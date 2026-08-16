@@ -1,6 +1,6 @@
 package dev.hertlein.timesheetwizard.app.azure
 
-import dev.hertlein.timesheetwizard.spi.app.ClockifyConfig
+import dev.hertlein.timesheetwizard.spi.ClockifyConfig
 import org.springframework.boot.context.properties.ConfigurationProperties
 
 @ConfigurationProperties("timesheet-wizard.import.clockify")

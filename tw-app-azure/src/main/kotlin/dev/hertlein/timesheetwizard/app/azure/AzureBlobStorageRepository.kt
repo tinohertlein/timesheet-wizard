@@ -2,7 +2,7 @@ package dev.hertlein.timesheetwizard.app.azure
 
 import com.azure.core.util.BinaryData
 import com.azure.storage.blob.BlobContainerClient
-import dev.hertlein.timesheetwizard.spi.cloud.Repository
+import dev.hertlein.timesheetwizard.spi.Repository
 import mu.KotlinLogging
 import org.springframework.context.annotation.Primary
 
