@@ -31,12 +31,12 @@ class GcpStorageRepository(
 
     override fun upload(key: String, content: ByteArray) {
         storage.get(bucket).create(key, content).also {
-            logger.info { "Downloaded content from ${location(key)} " }
+            logger.info { "Uploaded content to ${location(key)} " }
         }
     }
 
     override fun download(key: String): ByteArray =
         storage.get(bucket).get(key).getContent().also {
-            logger.info { "Uploaded content to ${location(key)} " }
+            logger.info { "Downloaded content from ${location(key)} " }
         }
 }
