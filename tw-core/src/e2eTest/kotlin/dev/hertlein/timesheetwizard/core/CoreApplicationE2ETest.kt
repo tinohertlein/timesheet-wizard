@@ -9,5 +9,5 @@ import org.junit.platform.suite.api.SuiteDisplayName
 @Suite
 @SuiteDisplayName("Core Application")
 @IncludeEngines("cucumber")
-@SelectDirectories("src/test/resources/features")
+@SelectDirectories("src/e2eTest/resources/features")
 class CoreApplicationE2ETest

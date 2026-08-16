@@ -1,5 +1,6 @@
 package dev.hertlein.timesheetwizard.core.util
 
+import dev.hertlein.timesheetwizard.core.InMemoryRepository
 import dev.hertlein.timesheetwizard.core.anticorruption.Core
 import dev.hertlein.timesheetwizard.core.exporting.domain.model.ExportTimesheet
 import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer

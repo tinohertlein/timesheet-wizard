@@ -1,4 +1,4 @@
-package dev.hertlein.timesheetwizard.core.util
+package dev.hertlein.timesheetwizard.core
 
 import dev.hertlein.timesheetwizard.spi.Repository
 import mu.KotlinLogging

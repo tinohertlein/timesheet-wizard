@@ -54,12 +54,20 @@ tasks.test {
 
 testing {
     suites {
-        register<JvmTestSuite>("archTest") {
+        register<JvmTestSuite>("e2eTest") {
             useJUnitJupiter()
 
-            dependencies {
-                implementation(project())
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(tasks.test)
+                    }
+                }
             }
+        }
+
+        register<JvmTestSuite>("archTest") {
+            useJUnitJupiter()
 
             targets {
                 all {
@@ -74,4 +82,5 @@ testing {
 
 tasks.check {
     dependsOn(testing.suites.named("archTest"))
+    dependsOn(testing.suites.named("e2eTest"))
 }
