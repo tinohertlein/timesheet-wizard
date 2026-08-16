@@ -1,5 +1,7 @@
 plugins {
     id("buildlogic.kotlin-library-conventions")
+    id("buildlogic.kotlin-e2e-conventions")
+    id("buildlogic.kotlin-arch-conventions")
     alias(libs.plugins.kotlin.allopen)
     alias(libs.plugins.javaagent.test)
 }
