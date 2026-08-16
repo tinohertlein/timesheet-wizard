@@ -7,7 +7,7 @@
 
 ### Prerequisites
 
-* [Java 21+](https://www.oracle.com/de/java/technologies/downloads/)
+* [Java 25+](https://www.oracle.com/de/java/technologies/downloads/)
 * [Microsoft Azure Account](https://azure.microsoft.com)
 * [Azure CLI](https://github.com/Azure/azure-cli)
 * [Azure Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local)

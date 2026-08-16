@@ -78,7 +78,7 @@ resource functionApp 'Microsoft.Web/sites@2024-04-01' = {
         reserved: false
         serverFarmId: appServicePlan.id
         siteConfig: {
-            javaVersion: '21'
+            javaVersion: '25'
             javaContainer: 'JAVA'
         }
     }

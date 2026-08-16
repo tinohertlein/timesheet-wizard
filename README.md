@@ -90,7 +90,7 @@ and sending application events.
 
 ### Prerequisites
 
-* [Java 21+]
+* [Java 25+]
 * [Gradle]
 * [Docker] - for tests using [Testcontainers]
 
@@ -130,7 +130,7 @@ and sending application events.
 
 [SpringBoot-url]: https://spring.io/projects/spring-boot/
 
-[Java 21+]: https://www.oracle.com/de/java/technologies/downloads/
+[Java 25+]: https://www.oracle.com/de/java/technologies/downloads/
 
 [Gradle]: https://gradle.org/
 

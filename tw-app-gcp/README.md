@@ -7,7 +7,7 @@
 
 ### Prerequisites
 
-* [Java 21+](https://www.oracle.com/de/java/technologies/downloads/)
+* [Java 25+](https://www.oracle.com/de/java/technologies/downloads/)
 * [Google Cloud account](https://cloud.google.com/)
 * [Google Cloud CLI](https://cloud.google.com/cli)
 * [Terraform](https://developer.hashicorp.com/terraform)

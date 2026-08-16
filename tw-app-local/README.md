@@ -7,7 +7,7 @@
 
 ### Prerequisites
 
-* [Java 21+](https://www.oracle.com/de/java/technologies/downloads/)
+* [Java 25+](https://www.oracle.com/de/java/technologies/downloads/)
 * [Docker (for tests using testcontainers)](https://www.docker.com/)
 
 ### Packaging and running the application locally

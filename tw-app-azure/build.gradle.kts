@@ -57,7 +57,7 @@ azurefunctions {
     region = System.getenv("AZURE_LOCATION") ?: "germanywestcentral"
 
     runtime = GradleRuntimeConfig()
-    runtime.javaVersion("21")
+    runtime.javaVersion("25")
     auth = GradleAuthConfig()
     auth.type = "azure_cli"
 

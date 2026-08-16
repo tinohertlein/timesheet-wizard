@@ -19,7 +19,7 @@ repositories {
 
 kotlin {
     compilerOptions {
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_25)
         javaParameters.set(true)
         freeCompilerArgs.addAll("-Xjsr305=strict")
         freeCompilerArgs.add("-Xreturn-value-checker=full")

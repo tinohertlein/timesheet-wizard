@@ -17,7 +17,7 @@ deliberate exercise in keeping business logic decoupled from any specific cloud 
 
 ## Commands
 
-Requires Java 21 (`.sdkmanrc` pins `21.0.10-amzn`) and Docker (Testcontainers-based tests).
+Requires Java 25 (`.sdkmanrc` pins `25.0.4-amzn`) and Docker (Testcontainers-based tests).
 
 - `./gradlew build` — full build (all modules)
 - `./gradlew check` — what CI runs on every push (compile + test + archTest for all modules); use this to verify

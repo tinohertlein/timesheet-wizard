@@ -10,7 +10,7 @@
 
 ### Prerequisites
 
-* [Java 21+](https://www.oracle.com/de/java/technologies/downloads/)
+* [Java 25+](https://www.oracle.com/de/java/technologies/downloads/)
 * [AWS account](https://aws.amazon.com/)
 * [AWS CLI](https://aws.amazon.com/cli/)
 * [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)

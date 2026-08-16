@@ -13,7 +13,7 @@
 |-----|-----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | OC1 | Team                              | It's only me: Tino Hertlein.                                                                                                               |
 | OC2 | Time schedule                     | Start is during my time-off in summer 2022. The Timesheet-Wizard should be usable by autumn 2022 when starting to work for clients.        |
-| OC3 | Technical setup                   | Docker, AWS-SAM, Java 21 are mandatory for local testing.                                                                                  |
+| OC3 | Technical setup                   | Docker, AWS-SAM, Java 25 are mandatory for local testing.                                                                                  |
 | OC4 | Configuration and version control | Store source code in a public Github repo. Follow infrastructure-as-code via e.g. AWS Cloud Formation. Realize CI/CD using Github Actions. |
 | OC5 | Testing                           | Use JUnit, AssertJ, RestAssured, Mockk, Testcontainers, ArchUnit.                                                                          |
 
