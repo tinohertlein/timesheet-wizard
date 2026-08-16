@@ -20,19 +20,22 @@ deliberate exercise in keeping business logic decoupled from any specific cloud 
 Requires Java 25 (`.sdkmanrc` pins `25.0.4-amzn`) and Docker (Testcontainers-based tests).
 
 - `./gradlew build` — full build (all modules)
-- `./gradlew check` — what CI runs on every push (compile + test + archTest for all modules); use this to verify
-  changes before considering a task done
-- `./gradlew :tw-core:test` — unit tests for one module
+- `./gradlew check` — what CI runs on every push (compile + test + archTest + e2eTest for all modules); use this to
+  verify changes before considering a task done
+- `./gradlew :tw-core:test` — unit tests for one module; does not run the Cucumber E2E scenarios (see below)
 - `./gradlew :tw-core:test --tests "dev.hertlein.timesheetwizard.core.importing.SomeClassTest"` — a single test class
 - `./gradlew :tw-core:archTest` — architecture rules only (see below)
+- `./gradlew :tw-core:e2eTest` — Cucumber import→export E2E scenarios only
 - `./gradlew :tw-app-local:shadowJar` then `java -jar tw-app-local/build/libs/*.jar` — run the local CLI variant
 
 Versioning is automatic via `com.github.jmongard.git-semver-plugin` (git tags), not hand-edited.
 
 ## Architecture
 
-Six Gradle subprojects (`settings.gradle.kts`): `tw-spi`, `tw-core`, and four deployable apps —
-`tw-app-aws`, `tw-app-azure`, `tw-app-gcp`, `tw-app-local`.
+Six Gradle subprojects total: `tw-spi`, `tw-core`, and four deployable apps — `tw-app-aws`, `tw-app-azure`,
+`tw-app-gcp`, `tw-app-local`. `tw-app-azure` is currently excluded from `settings.gradle.kts` (the
+spring-boot-thin-launcher Gradle plugin doesn't yet support Gradle >= 9), so only five subprojects are part of the
+active build.
 
 ```
 tw-app-aws / tw-app-azure / tw-app-gcp / tw-app-local   (cloud/framework-specific glue + entry point)
@@ -73,7 +76,8 @@ rather than reaching across, and run `:tw-core:archTest` after cross-package or 
 - `src/testFixtures` holds shared E2E test infrastructure (`AbstractApplicationE2ETest`, `AbstractE2ESteps`,
   fixture JSON under `resources/e2e`) that the app modules' own tests consume via
   `testImplementation(testFixtures(project(":tw-core")))`.
-- `src/test/kotlin/features` contains Cucumber step definitions/features exercising import→export end-to-end.
+- `src/e2eTest/kotlin/features` contains Cucumber step definitions, and `src/e2eTest/resources/features` the
+  `.feature` files, exercising import→export end-to-end.
 - Testcontainers (mockserver, localstack, azure, gcp emulators depending on module) back integration-style tests —
   Docker must be running.
 

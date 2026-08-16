@@ -61,7 +61,8 @@ More verbose documentation of the architecture following [arc42] can be found in
 - **tw-app-aws**: implements the interfaces defined in `tw-spi` with AWS specific code and also bundles the `tw-core`
   with AWS specific things to an AWS Lambda function.
 - **tw-app-azure**: implements the interfaces defined in `tw-spi` with Azure specific code and also bundles the
-  `tw-core` with Azure specific things to a Spring Boot Azure Function.
+  `tw-core` with Azure specific things to a Spring Boot Azure Function. This is currently excluded from the build as the spring-boot-thin-launcher
+ Gradle plugin doesn't yet support Gradle >= 9
 - **tw-app-gcp**: implements the interfaces defined in `tw-spi` with Google Cloud specific code and also bundles the
   `tw-core` with Google Cloud specific things to a Quarkus Google Cloud Function.
 - **tw-app-local**: implements the interfaces defined in `tw-spi` with local file system code and also bundles the
