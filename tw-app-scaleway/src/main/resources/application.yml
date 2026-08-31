@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: Timesheet-Wizard
+  profiles:
+    active:
+      - scaleway
+  main:
+    web-application-type: none
+
+jackson:
+  serialization:
+    writeDatesAsTimestamps: false
+
+timesheet-wizard:
+  scaleway:
+    region: "fr-par"
+    access-key: ${SCW_ACCESS_KEY}
+    secret-key: ${SCW_SECRET_KEY}
+    storage:
+      bucket: "tw-sheets"
+  import:
+    clockify:
+      reports-url: "https://reports.api.clockify.me/"
+      api-key: ${CLOCKIFY_API_KEY}
+      workspace-id: ${CLOCKIFY_WORKSPACE_ID}
+
+logging:
+  level:
+    dev.hertlein.timesheetwizard: DEBUG

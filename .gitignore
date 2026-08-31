@@ -59,3 +59,5 @@ build
 /tw-app-gcp/deployment/prepare-deployment.sh
 /tw-app-local/data/
 /tw-app-local/requests/run-local.sh
+/tw-app-scaleway/requests/confidential/
+/tw-app-scaleway/deployment/.terraform/

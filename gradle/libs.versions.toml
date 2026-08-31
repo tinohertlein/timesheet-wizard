@@ -37,6 +37,7 @@ quarkus-plugin = "3.38.2"
 quarkus-platform = "3.38.2"
 clikt = "5.1.0"
 cucumber = "7.34.7"
+minio-client = "9.0.3"
 
 [libraries]
 ## Base
@@ -92,6 +93,9 @@ quarkus-gcp-functions = { module = "io.quarkus:quarkus-google-cloud-functions" }
 clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
+## Scaleway
+minio-client = { module = "io.minio:minio", version.ref = "minio-client" }
+
 ## Test
 assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 junit-pioneer = { module = "org.junit-pioneer:junit-pioneer", version.ref = "junit-pioneer" }
@@ -115,19 +119,21 @@ cucumber-junit-platform = { module = "io.cucumber:cucumber-junit-platform-engine
 
 [bundles]
 export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt"]
-spring-base = ["spring-boot-dependencies", "spring-boot-starter", "spring-boot-starter-web"]
-spring-cloud = ["spring-cloud-function-context"]
+spring-base = ["spring-boot-dependencies", "spring-boot-starter"]
+spring-cloud = ["spring-cloud-function-context", "spring-boot-starter-web"]
 spring-cloud-azure = ["spring-cloud-function-adapter-azure", "spring-cloud-azure-starter-storage", "logstash-encoder"]
 vanilla-aws = ["log4j-slf4j2-impl", "slf4j-api", "aws-sdk-s3", "aws-lambda-java-core", "aws-lambda-java-events"]
 quarkus-base = ["quarkus-kotlin", "quarkus-kotlin-stdlib-jdk8", "quarkus-arc"]
 quarkus-gcp = ["quarkus-gcp-storage", "quarkus-gcp-functions"]
 cli = ["clikt", "slf4j-api", "logback"]
+scaleway = ["slf4j-api", "minio-client"]
 
 ## Test
 testing = ["assertj", "junit-pioneer", "mockk", "mockserver-netty", "mockserver-client", "kotlin-junit", "rest-assured", "testcontainers-mockserver"]
 testing-aws = ["testcontainers-localstack"]
 testing-azure = ["testcontainers-azure"]
 testing-gcp = ["quarkus-gcp-functions-test"]
+testing-scaleway = ["testcontainers-localstack"]
 testing-core = ["logback"]
 cucumber = ["cucumber", "cucumber-junit-platform", "junit-platform-suite"]
 
