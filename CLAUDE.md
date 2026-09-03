@@ -32,13 +32,13 @@ Versioning is automatic via `com.github.jmongard.git-semver-plugin` (git tags), 
 
 ## Architecture
 
-Six Gradle subprojects total: `tw-spi`, `tw-core`, and four deployable apps — `tw-app-aws`, `tw-app-azure`,
-`tw-app-gcp`, `tw-app-local`. `tw-app-azure` is currently excluded from `settings.gradle.kts` (the
-spring-boot-thin-launcher Gradle plugin doesn't yet support Gradle >= 9), so only five subprojects are part of the
+Seven Gradle subprojects total: `tw-spi`, `tw-core`, and five deployable apps — `tw-app-aws`, `tw-app-azure`,
+`tw-app-gcp`, `tw-app-scaleway`, `tw-app-local`. `tw-app-azure` is currently excluded from `settings.gradle.kts` (the
+spring-boot-thin-launcher Gradle plugin doesn't yet support Gradle >= 9), so only six subprojects are part of the
 active build.
 
 ```
-tw-app-aws / tw-app-azure / tw-app-gcp / tw-app-local   (cloud/framework-specific glue + entry point)
+tw-app-aws / tw-app-azure / tw-app-gcp / tw-app-scaleway / tw-app-local   (cloud/framework-specific glue + entry point)
               ↓ implements                    ↓ depends on
            tw-spi                          tw-core
    (service-provider interfaces,      (all business logic;
@@ -51,6 +51,7 @@ tw-app-aws / tw-app-azure / tw-app-gcp / tw-app-local   (cloud/framework-specifi
 - **tw-app-aws**: AWS Lambda, plain SDK, packaged as a zip (`packageJar` task), provisioned with CloudFormation/SAM.
 - **tw-app-azure**: Spring Boot + Spring Cloud Function on Azure Functions, provisioned with Azure Bicep.
 - **tw-app-gcp**: Quarkus on Google Cloud Functions, provisioned with Terraform.
+- **tw-app-scaleway**: Spring Boot on a Scaleway Serverless Job, provisioned with the Scaleway CLI.
 - **tw-app-local**: no cloud — a Clikt CLI packaged as a shadow jar (`java -jar`), for running everything locally.
 
 ### tw-core package structure (enforced by ArchUnit)

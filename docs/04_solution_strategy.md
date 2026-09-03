@@ -47,7 +47,7 @@ a [Ports & Adapters](https://en.wikipedia.org/wiki/Hexagonal_architecture_(softw
 logic and connecting to surrounding systems. This is enforced automatically
 by [Architecture tests](../tw-core/src/archTest/kotlin/dev/hertlein/timesheetwizard/core/ArchitectureTest.kt). (**-> Quality goals QG3**).
 
-For monitoring, logging, error notification and other shared concepts, AWS, Azure or Scaleway systems
+For monitoring, logging, error notification and other shared concepts, AWS, Azure, GCP or Scaleway systems
 like [AWS CloudWatch](https://aws.amazon.com/cloudwatch/?nc1=h_ls), [AWS Simple Notification Service](https://aws.amazon.com/sns/?nc1=h_ls), ... are used. They are set up following an
 infrastructure-as-code approach
 using [AWS-SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html)
