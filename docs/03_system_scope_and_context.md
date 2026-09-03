@@ -62,3 +62,23 @@ The place where the generated XLSX, PDF, CSV and JSON files as well as any inter
 #### Tino (actor)
 
 The user of the Timesheet-Wizard who downloads the timesheets when he needs them.
+
+
+### Scaleway (not visualized in diagram)
+
+#### Scaleway Serverless Job Cron Schedule
+
+Serves as a scheduler to trigger the workflow at a given point of
+time - e.g. sometimes at night, when a working day is completed.
+
+#### Clockify (external system)
+
+The external system that is providing an API to fetch the timesheets for a given timeframe.
+
+#### Scaleway Object Storage (external system)
+
+The place where the generated XLSX, PDF, CSV and JSON files as well as any intermediate files are stored.
+
+#### Tino (actor)
+
+The user of the Timesheet-Wizard who downloads the timesheets when he needs them.

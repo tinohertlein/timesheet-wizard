@@ -33,7 +33,8 @@ This results in three top-level packages:
 To facilitate communication between `importing` and `exporting` events are used to signal successful
 imports of timesheets.
 
-The Timesheet-Wizard is not accessible outside AWS or Azure (**-> Quality goal #QG1**). Neither the S3 buckets
+The Timesheet-Wizard is not accessible outside AWS, Azure, GCP or Scaleway (**-> Quality goal #QG1**). Neither the S3
+buckets
 containing
 timesheets are visible from the outside, nor the initiation of the workflow can be triggered without proper AWS
 credentials and user access rights.
@@ -46,11 +47,13 @@ a [Ports & Adapters](https://en.wikipedia.org/wiki/Hexagonal_architecture_(softw
 logic and connecting to surrounding systems. This is enforced automatically
 by [Architecture tests](../tw-core/src/archTest/kotlin/dev/hertlein/timesheetwizard/core/ArchitectureTest.kt). (**-> Quality goals QG3**).
 
-For monitoring, logging, error notification and other shared concepts, AWS or Azure systems
+For monitoring, logging, error notification and other shared concepts, AWS, Azure or Scaleway systems
 like [AWS CloudWatch](https://aws.amazon.com/cloudwatch/?nc1=h_ls), [AWS Simple Notification Service](https://aws.amazon.com/sns/?nc1=h_ls), ... are used. They are set up following an
 infrastructure-as-code approach
 using [AWS-SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html)
 and [AWS CloudFormation](https://aws.amazon.com/cloudformation/?nc1=h_ls) in case of AWS
-or [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/) in case of Azure or [Terraform](https://developer.hashicorp.com/terraform) in case of Google Cloud Platform
+or [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/) in case of Azure
+or [Terraform](https://developer.hashicorp.com/terraform) in case of Google Cloud Platform
+or the [Scaleway CLI](https://www.scaleway.com/en/cli/) in case of Scaleway.
 All of these are free of charge up to a certain limit – which won't be reached by a tiny application like the
 Timesheet-Wizard (**-> Quality goal #QG2**). 

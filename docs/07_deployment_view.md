@@ -14,3 +14,9 @@ All other services like Resource Groups, Azure Blob Storage, App Insights ... ar
 
 The Timesheet-Wizard consists of a single Google Cloud Function App which is created via Terraform.
 All other services like Cloud Scheduler Events, Gloud Storage Buckets ... are also created via Terraform.
+
+## Scaleway
+
+The Timesheet-Wizard consists of a single Scaleway Serverless Job which is provisioned via the Scaleway CLI.
+All other services like the cron schedule, the Container Registry namespace and the Object Storage bucket are also
+provisioned via the Scaleway CLI.
