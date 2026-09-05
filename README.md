@@ -45,7 +45,7 @@ More verbose documentation of the architecture following [arc42] can be found in
 | [**tw-app-aws**](./tw-app-aws/README.md)           | Active                           | -                                           | [AWS Lambda]                                | [CloudFormation] |
 | [**tw-app-azure**](./tw-app-azure/README.md)       | Excluded from Build & Deployment | [![SpringBoot][SpringBoot]][SpringBoot-url] | [Azure Functions]                           | [Azure Bicep]    |
 | [**tw-app-gcp**](./tw-app-gcp/README.md)           | Excluded from Deployment         | [![Quarkus][Quarkus]][Quarkus-url]          | [Google Cloud Functions]                    | [Terraform]      |
-| [**tw-app-scaleway**](./tw-app-scaleway/README.md) | Active                           | [![SpringBoot][SpringBoot]][SpringBoot-url] | [Scaleway]                                  | [Scaleway CLI]   |
+| [**tw-app-scaleway**](./tw-app-scaleway/README.md) | Active                           | [![SpringBoot][SpringBoot]][SpringBoot-url] | [Scaleway Serverless Jobs]                  | [Scaleway CLI]   |
 | [**tw-app-local**](./tw-app-local/README.md)       | Active                           | -                                           | No cloud deployment. Just a simple CLI app. | -                |
 
 ![Technical context](docs/assets/readme-context-technical.drawio.png "Technical context")
@@ -149,6 +149,8 @@ and sending application events.
 [Terraform]: https://www.hashicorp.com/en/products/terraform
 
 [Scaleway]: https://www.scaleway.com/
+
+[Scaleway Serverless Jobs]: https://www.scaleway.com/en/serverless-jobs/
 
 [Scaleway CLI]: https://www.scaleway.com/en/cli/
 
