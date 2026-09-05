@@ -15,9 +15,9 @@ FULL_IMAGE="${REGISTRY_ENDPOINT}/${REGISTRY_NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG
 BUCKET_NAME="tw-sheets"
 JOB_NAME="tw-last-month"
 
-: "${PROJECT_ID:?SCW_PROJECT_ID must be set (or a default project configured via 'scw init')}"
 : "${CLOCKIFY_API_KEY:?CLOCKIFY_API_KEY must be set}"
 : "${CLOCKIFY_WORKSPACE_ID:?CLOCKIFY_WORKSPACE_ID must be set}"
+: "${SCW_DEFAULT_ORGANIZATION_ID:?SCW_DEFAULT_ORGANIZATION_ID must be set}"
 : "${SCW_ACCESS_KEY:?SCW_ACCESS_KEY must be set}"
 : "${SCW_SECRET_KEY:?SCW_SECRET_KEY must be set}"
 
