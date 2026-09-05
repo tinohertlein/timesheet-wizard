@@ -6,7 +6,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 REGION="fr-par"
-PROJECT_ID="a2e443b7-71ee-42ff-8d4f-925001a467f0"
 REGISTRY_NAMESPACE="timesheet-wizard-cr"
 REGISTRY_ENDPOINT="rg.${REGION}.scw.cloud"
 IMAGE_NAME="tw-app-scaleway"
@@ -18,6 +17,7 @@ JOB_NAME="tw-last-month"
 : "${CLOCKIFY_API_KEY:?CLOCKIFY_API_KEY must be set}"
 : "${CLOCKIFY_WORKSPACE_ID:?CLOCKIFY_WORKSPACE_ID must be set}"
 : "${SCW_DEFAULT_ORGANIZATION_ID:?SCW_DEFAULT_ORGANIZATION_ID must be set}"
+: "${SCW_DEFAULT_PROJECT_ID:?SCW_DEFAULT_PROJECT_ID must be set}"
 : "${SCW_ACCESS_KEY:?SCW_ACCESS_KEY must be set}"
 : "${SCW_SECRET_KEY:?SCW_SECRET_KEY must be set}"
 
@@ -26,9 +26,9 @@ for bin in scw docker jq; do
 done
 
 echo "==> Checking Container Registry namespace '${REGISTRY_NAMESPACE}'"
-if [[ "$(scw registry namespace list name="${REGISTRY_NAMESPACE}" project-id="${PROJECT_ID}" region="${REGION}" -o json | jq 'length')" == "0" ]]; then
+if [[ "$(scw registry namespace list name="${REGISTRY_NAMESPACE}" region="${REGION}" -o json | jq 'length')" == "0" ]]; then
   echo "Namespace not found, creating..."
-  scw registry namespace create name="${REGISTRY_NAMESPACE}" project-id="${PROJECT_ID}" region="${REGION}" is-public=false
+  scw registry namespace create name="${REGISTRY_NAMESPACE}" region="${REGION}" is-public=false
 else
   echo "Namespace already exists."
 fi
@@ -57,13 +57,12 @@ echo "==> Pushing Docker image"
 docker push "${FULL_IMAGE}"
 
 echo "==> Checking Serverless Job definition '${JOB_NAME}'"
-JOB_ID="$(scw jobs definition list project-id="${PROJECT_ID}" region="${REGION}" -o json | jq -r --arg name "${JOB_NAME}" '[.[] | select(.name == $name)][0].id // empty')"
+JOB_ID="$(scw jobs definition list region="${REGION}" -o json | jq -r --arg name "${JOB_NAME}" '[.[] | select(.name == $name)][0].id // empty')"
 
 if [[ -z "${JOB_ID}" ]]; then
   echo "Job definition not found, creating..."
   JOB_ID="$(scw jobs definition create \
     name="${JOB_NAME}" \
-    project-id="${PROJECT_ID}" \
     region="${REGION}" \
     image-uri="${FULL_IMAGE}" \
     cpu-limit=140 \
