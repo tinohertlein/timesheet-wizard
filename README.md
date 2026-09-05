@@ -2,11 +2,11 @@
 
 [![Master branch](https://github.com/tinohertlein/timesheet-wizard/actions/workflows/build_deploy_release_master.yml/badge.svg)](https://github.com/tinohertlein/timesheet-wizard/actions/workflows/build_deploy_release_master.yml)
 
-The Timesheet-Wizard is a personal pet project to fetch timesheets from [Clockify], transform
-them to various formats and export them again into other tools.
+The Timesheet-Wizard is a personal pet project to fetch timesheets from [Clockify], transform them to various formats
+and export them again into other tools.
 
-As of now, the only target formats that are supported are XLSX, PDF, CSV and JSON, resulting in the
-following main features of Timesheet-Wizard:
+As of now, the only target formats that are supported are XLSX, PDF, CSV and JSON, resulting in the following main
+features of Timesheet-Wizard:
 
 - Fetch timesheets from Clockify
 - Generate XLSX files from imported timesheets & store them
@@ -17,16 +17,15 @@ following main features of Timesheet-Wizard:
 ## Motivation
 
 As a freelance Software-Engineer & -Architect doing mostly time & material contracting, tracking my working hours is
-quite essential. To ease this, I'm using [Clockify]. It's an awesome tool with a nice UI that
-allows me to track and also categorize my working hours. Besides supporting some Excel reports out of the box, it also
-provides an API to export reports in JSON format as well.
+quite essential. To ease this, I'm using [Clockify]. It's an awesome tool with a nice UI that allows me to track and
+also categorize my working hours. Besides supporting some Excel reports out of the box, it also provides an API to
+export reports in JSON format as well.
 
-To have the freedom to customize the reports as much as I like and to transfer these reports automatically to
-other tools, I decided to create my own little application allowing me to do that: the Timesheet-Wizard.
+To have the freedom to customize the reports as much as I like and to transfer these reports automatically to other
+tools, I decided to create my own little application allowing me to do that: the Timesheet-Wizard.
 
 In addition to the business motivation mentioned above, this is also a perfect opportunity to play around with
-[Function as a service]. That's the
-reason why the Timesheet Wizard is bundled and deployed to multiple [Hyperscalers].
+[Function as a service]. That's the reason why the Timesheet Wizard is bundled and deployed to multiple [Hyperscalers].
 
 ## Documentation
 
@@ -41,30 +40,34 @@ More verbose documentation of the architecture following [arc42] can be found in
 - deployed continuously using [GitHub Actions]
 - using [Infrastructure as code] for provisioning cloud resources
 
-| App                                          | Built with                                  | Deployed to                                 | Provisioned with |
-|----------------------------------------------|---------------------------------------------|---------------------------------------------|------------------|
-| [**tw-app-aws**](./tw-app-aws/README.md)     | -                                           | [AWS Lambda]                                | [CloudFormation] |
-| [**tw-app-azure**](./tw-app-azure/README.md) | [![SpringBoot][SpringBoot]][SpringBoot-url] | [Azure Functions]                           | [Azure Bicep]    |
-| [**tw-app-gcp**](./tw-app-gcp/README.md)     | [![Quarkus][Quarkus]][Quarkus-url]          | [Google Cloud Functions]                    | [Terraform]      |
-| [**tw-app-local**](./tw-app-local/README.md) | -                                           | No cloud deployment. Just a simple CLI app. | -                |
+| App                                                | Status                           | Built with                                  | Deployed to                                 | Provisioned with |
+|----------------------------------------------------|----------------------------------|---------------------------------------------|---------------------------------------------|------------------|
+| [**tw-app-aws**](./tw-app-aws/README.md)           | Active                           | -                                           | [AWS Lambda]                                | [CloudFormation] |
+| [**tw-app-azure**](./tw-app-azure/README.md)       | Excluded from Build & Deployment | [![SpringBoot][SpringBoot]][SpringBoot-url] | [Azure Functions]                           | [Azure Bicep]    |
+| [**tw-app-gcp**](./tw-app-gcp/README.md)           | Excluded from Deployment         | [![Quarkus][Quarkus]][Quarkus-url]          | [Google Cloud Functions]                    | [Terraform]      |
+| [**tw-app-scaleway**](./tw-app-scaleway/README.md) | Active                           | [![SpringBoot][SpringBoot]][SpringBoot-url] | [Scaleway]                                  | [Scaleway CLI]   |
+| [**tw-app-local**](./tw-app-local/README.md)       | Active                           | -                                           | No cloud deployment. Just a simple CLI app. | -                |
 
 ![Technical context](docs/assets/readme-context-technical.drawio.png "Technical context")
 *Technical context*
 
-#### The Timesheet-Wizard consists of six Gradle subprojects:
+#### The Timesheet-Wizard consists of seven Gradle subprojects:
 
 - **tw-spi**: the service provider interface to be implemented for any cloud specific things. Like e.g. uploading
   timesheets to some cloud storage.
 - **tw-core**: the code module that contains the business logic. This subproject is cloud-agnostic to switch cloud
-  vendors (e.g. AWS, Azure, GCP, ...) easily. This subproject is also
-  framework-agnostic to switch web frameworks (e.g. Spring Boot, Quarkus,...) easily.
+  vendors (e.g. AWS, Azure, GCP, ...) easily. This subproject is also framework-agnostic to switch web frameworks (e.g.
+  Spring Boot, Quarkus,...) easily.
 - **tw-app-aws**: implements the interfaces defined in `tw-spi` with AWS specific code and also bundles the `tw-core`
   with AWS specific things to an AWS Lambda function.
 - **tw-app-azure**: implements the interfaces defined in `tw-spi` with Azure specific code and also bundles the
-  `tw-core` with Azure specific things to a Spring Boot Azure Function. This is currently excluded from the build as the spring-boot-thin-launcher
- Gradle plugin doesn't yet support Gradle >= 9
+  `tw-core` with Azure specific things to a Spring Boot Azure Function. This is currently excluded from the build as the
+  spring-boot-thin-launcher Gradle plugin doesn't yet support Gradle >= 9
 - **tw-app-gcp**: implements the interfaces defined in `tw-spi` with Google Cloud specific code and also bundles the
   `tw-core` with Google Cloud specific things to a Quarkus Google Cloud Function.
+- **tw-app-scaleway**: implements the interfaces defined in `tw-spi` with Scaleway Cloud specific code and also bundles
+  the
+  `tw-core` with Scaleway Cloud specific things to a Scaleway Serverless Job.
 - **tw-app-local**: implements the interfaces defined in `tw-spi` with local file system code and also bundles the
   `tw-core` to a jar file that can be executed locally with `java -jar`.
 
@@ -144,4 +147,8 @@ and sending application events.
 [Azure Bicep]: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep
 
 [Terraform]: https://www.hashicorp.com/en/products/terraform
+
+[Scaleway]: https://www.scaleway.com/
+
+[Scaleway CLI]: https://www.scaleway.com/en/cli/
 

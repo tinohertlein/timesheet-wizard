@@ -15,4 +15,5 @@ recognized, an email is sent to Tino's email-address. No further error-handling 
 ## Persistence
 
 Cloud storage is used to store data objects – being it 'final' XLSX, PDF, CSV or JSON files or 'intermediate' data objects like
-JSON representations of the imported timesheets. In the case of AWS it's S3, in the case of Azure it's Azure Blob Storage.
+JSON representations of the imported timesheets. In the case of AWS it's S3, in the case of Azure it's Azure Blob
+Storage, in the case of Google Cloud Platform it's Google Cloud Storage, in the case of Scaleway it's Scaleway Object Storage.

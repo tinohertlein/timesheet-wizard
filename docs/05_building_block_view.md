@@ -9,13 +9,15 @@ The Timesheet-Wizard consists of the following Gradle subprojects:
 - **tw-spi**: the service provider interface to be implemented for any cloud specific things. Like e.g. uploading
   timesheets to some cloud storage.
 - **tw-core**: the core module that contains the business logic. This subproject is cloud-agnostic.
-- **tw-app-aws**: implements the interfaces of tw-spi with AWS specific code and also bundles the cloud-agnostic
+- **tw-app-aws**: implements the interfaces of `tw-spi` with AWS specific code and also bundles the cloud-agnostic
   `tw-core` with AWS specific things to an AWS Lambda function.
-- **tw-app-azure**: implements the interfaces of tw-spi with Azure specific code and also bundles the
+- **tw-app-azure**: implements the interfaces of `tw-spi` with Azure specific code and also bundles the
   cloud-agnostic `tw-core` with Azure specific things to an Azure function.
-- **tw-app-gcp**: implements the interfaces of tw-spi with Google Cloud Platform specific code and also bundles the
+- **tw-app-gcp**: implements the interfaces of `tw-spi` with Google Cloud Platform specific code and also bundles the
   cloud-agnostic `tw-core` with Google Cloud Platform specific things to a Google Cloud function.
-- **tw-app-local**: implements the interfaces of tw-spi with local File System specific code and also bundles the
+- **tw-app-scaleway**: implements the interfaces of `tw-spi` with Scaleway specific code and also bundles the
+  cloud-agnostic `tw-core` with Scaleway specific things to a Scaleway Serverless Job.
+- **tw-app-local**: implements the interfaces of `tw-spi` with local File System specific code and also bundles the
   cloud-agnostic `tw-core` to a Java jar file.
 
 ## Level 2
