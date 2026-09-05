@@ -247,6 +247,7 @@ jobs:
 
   deploy-to-scaleway:
     runs-on: ubuntu-24.04
+    if: false
     needs: build
     steps:
       - name: Setup Scaleway CLI
@@ -287,7 +288,7 @@ jobs:
       - test-aws
       #      - test-azure
       #      - deploy-to-gcp
-      - deploy-to-scaleway
+      #      - deploy-to-scaleway
     steps:
       - name: Checkout
         uses: actions/checkout@v7
