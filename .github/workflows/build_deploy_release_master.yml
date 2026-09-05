@@ -263,6 +263,11 @@ jobs:
       - name: Build, package, deploy Scaleway Serverless Job
         working-directory: ./tw-app-scaleway/deployment
         run: ./deploy.sh
+        env: 
+          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
+          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+          CLOCKIFY_API_KEY: ${{ secrets.CLOCKIFY_API_KEY}}
+          CLOCKIFY_WORKSPACE_ID: ${{ secrets.CLOCKIFY_WORKSPACE_ID}}
 
   release:
     runs-on: ubuntu-latest
