@@ -36,7 +36,7 @@ archunit = "1.5.0"
 quarkus-plugin = "3.39.0"
 quarkus-platform = "3.39.2"
 clikt = "5.1.0"
-cucumber = "7.34.7"
+cucumber = "7.34.8"
 minio-client = "9.0.3"
 
 [libraries]
