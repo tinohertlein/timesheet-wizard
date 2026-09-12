@@ -1,22 +1,16 @@
 package dev.hertlein.timesheetwizard.app.azure
 
-import com.azure.storage.blob.BlobContainerClient
-import com.azure.storage.blob.BlobServiceClient
-import com.azure.storage.blob.BlobServiceClientBuilder
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
+import dev.hertlein.timesheetwizard.core.anticorruption.Core
+import io.micronaut.context.annotation.Factory
+import jakarta.inject.Singleton
 
-@Configuration
+@Factory
 class AzureBeansFactory {
 
-    @Bean
-    fun blobServiceClient(blobServiceClientBuilder: BlobServiceClientBuilder): BlobServiceClient = blobServiceClientBuilder.buildClient()
+    @Singleton
+    fun cloudFunctionJsonMapper() = Core.objectMapper
 
-    @Bean
-    fun blobConfigContainerClient(
-        blobServiceClient: BlobServiceClient,
-        @Value("\${timesheet-wizard.azure.blob.container}")
-        container: String
-    ): BlobContainerClient = blobServiceClient.createBlobContainerIfNotExists(container)
+    @Singleton
+    fun eventBus(repository: AzureBlobStorageRepository, clockifyConfig: AzureClockifyConfig) = Core.bootstrap(repository, clockifyConfig)
+
 }

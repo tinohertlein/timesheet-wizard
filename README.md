@@ -40,13 +40,13 @@ More verbose documentation of the architecture following [arc42] can be found in
 - deployed continuously using [GitHub Actions]
 - using [Infrastructure as code] for provisioning cloud resources
 
-| App                                                | Status                           | Built with                                  | Deployed to                                 | Provisioned with |
-|----------------------------------------------------|----------------------------------|---------------------------------------------|---------------------------------------------|------------------|
-| [**tw-app-aws**](./tw-app-aws/README.md)           | Active                           | -                                           | [AWS Lambda]                                | [CloudFormation] |
-| [**tw-app-azure**](./tw-app-azure/README.md)       | Excluded from Build & Deployment | [![SpringBoot][SpringBoot]][SpringBoot-url] | [Azure Functions]                           | [Azure Bicep]    |
-| [**tw-app-gcp**](./tw-app-gcp/README.md)           | Excluded from Deployment         | [![Quarkus][Quarkus]][Quarkus-url]          | [Google Cloud Functions]                    | [Terraform]      |
-| [**tw-app-scaleway**](./tw-app-scaleway/README.md) | Excluded from Deployment         | [![SpringBoot][SpringBoot]][SpringBoot-url] | [Scaleway Serverless Jobs]                  | [Scaleway CLI]   |
-| [**tw-app-local**](./tw-app-local/README.md)       | Active                           | -                                           | No cloud deployment. Just a simple CLI app. | -                |
+| App                                                | Status                   | Built with                                  | Deployed to                                 | Provisioned with |
+|----------------------------------------------------|--------------------------|---------------------------------------------|---------------------------------------------|------------------|
+| [**tw-app-aws**](./tw-app-aws/README.md)           | Active                   | -                                           | [AWS Lambda]                                | [CloudFormation] |
+| [**tw-app-azure**](./tw-app-azure/README.md)       | Excluded from Deployment | [![Micronaut][Micronaut]][Micronaut-url]    | [Azure Functions]                           | [Azure Bicep]    |
+| [**tw-app-gcp**](./tw-app-gcp/README.md)           | Excluded from Deployment | [![Quarkus][Quarkus]][Quarkus-url]          | [Google Cloud Functions]                    | [Terraform]      |
+| [**tw-app-scaleway**](./tw-app-scaleway/README.md) | Excluded from Deployment | [![SpringBoot][SpringBoot]][SpringBoot-url] | [Scaleway Serverless Jobs]                  | [Scaleway CLI]   |
+| [**tw-app-local**](./tw-app-local/README.md)       | Active                   | -                                           | No cloud deployment. Just a simple CLI app. | -                |
 
 ![Technical context](docs/assets/readme-context-technical.drawio.png "Technical context")
 *Technical context*
@@ -61,8 +61,7 @@ More verbose documentation of the architecture following [arc42] can be found in
 - **tw-app-aws**: implements the interfaces defined in `tw-spi` with AWS specific code and also bundles the `tw-core`
   with AWS specific things to an AWS Lambda function.
 - **tw-app-azure**: implements the interfaces defined in `tw-spi` with Azure specific code and also bundles the
-  `tw-core` with Azure specific things to a Spring Boot Azure Function. This is currently excluded from the build as the
-  spring-boot-thin-launcher Gradle plugin doesn't yet support Gradle >= 9
+  `tw-core` with Azure specific things to a Micronaut Azure Function.
 - **tw-app-gcp**: implements the interfaces defined in `tw-spi` with Google Cloud specific code and also bundles the
   `tw-core` with Google Cloud specific things to a Quarkus Google Cloud Function.
 - **tw-app-scaleway**: implements the interfaces defined in `tw-spi` with Scaleway Cloud specific code and also bundles
@@ -132,7 +131,11 @@ and sending application events.
 
 [SpringBoot]: https://img.shields.io/badge/SpringBoot-20232A?style=for-the-badge&logo=springboot
 
+[Micronaut]: https://img.shields.io/badge/Micronaut-3A75B4?style=for-the-badge&logo=micronaut
+
 [SpringBoot-url]: https://spring.io/projects/spring-boot/
+
+[Micronaut-url]: https://micronaut.io/
 
 [Java 25+]: https://www.oracle.com/de/java/technologies/downloads/
 

@@ -8,10 +8,14 @@ jackson:
   serialization:
     writeDatesAsTimestamps: false
 
+micronaut:
+  object-storage:
+    azure:
+      primary:
+        container: tw-sheets
+        endpoint: ${AZURE_STORAGE_BLOB_ENDPOINT}
+
 timesheet-wizard:
-  azure:
-    blob:
-      container: tw-sheets
   import:
     clockify:
       reports-url: "https://reports.api.clockify.me/"

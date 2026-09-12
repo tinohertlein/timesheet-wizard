@@ -33,8 +33,7 @@ Versioning is automatic via `com.github.jmongard.git-semver-plugin` (git tags), 
 ## Architecture
 
 Seven Gradle subprojects total: `tw-spi`, `tw-core`, and five deployable apps — `tw-app-aws`, `tw-app-azure`,
-`tw-app-gcp`, `tw-app-scaleway`, `tw-app-local`. `tw-app-azure` is currently excluded from `settings.gradle.kts` (the
-spring-boot-thin-launcher Gradle plugin doesn't yet support Gradle >= 9), so only six subprojects are part of the
+`tw-app-gcp`, `tw-app-scaleway`, `tw-app-local`. All seven are included in `settings.gradle.kts` and part of the
 active build.
 
 ```
@@ -49,7 +48,7 @@ tw-app-aws / tw-app-azure / tw-app-gcp / tw-app-scaleway / tw-app-local   (cloud
   `ClockifyConfig`). Has no dependency on `tw-core`.
 - **tw-core**: all business logic. Depends only on `tw-spi`. This is where nearly all code changes happen.
 - **tw-app-aws**: AWS Lambda, plain SDK, packaged as a zip (`packageJar` task), provisioned with CloudFormation/SAM.
-- **tw-app-azure**: Spring Boot + Spring Cloud Function on Azure Functions, provisioned with Azure Bicep.
+- **tw-app-azure**: Micronaut on Azure Functions, provisioned with Azure Bicep.
 - **tw-app-gcp**: Quarkus on Google Cloud Functions, provisioned with Terraform.
 - **tw-app-scaleway**: Spring Boot on a Scaleway Serverless Job, provisioned with the Scaleway CLI.
 - **tw-app-local**: no cloud — a Clikt CLI packaged as a shadow jar (`java -jar`), for running everything locally.

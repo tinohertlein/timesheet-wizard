@@ -10,18 +10,22 @@ import com.microsoft.azure.functions.annotation.HttpTrigger
 import com.microsoft.azure.functions.annotation.TimerTrigger
 import dev.hertlein.timesheetwizard.core.importing.adapter.incoming.eventing.ImportStartedEvent
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportParams
+import io.micronaut.azure.function.AzureFunction
+import jakarta.inject.Inject
 import mu.KotlinLogging
-import org.springframework.stereotype.Component
 import tools.jackson.databind.ObjectMapper
 import java.util.Optional
 
 private val logger = KotlinLogging.logger {}
 
-@Component
-class AzureFunctionAdapter(
-    private val objectMapper: ObjectMapper,
-    private val eventBus: EventBus,
-) {
+// Micronaut requires zero-args constructor
+class AzureFunctionAdapter : AzureFunction() {
+
+    @Inject
+    private lateinit var objectMapper: ObjectMapper
+
+    @Inject
+    private lateinit var eventBus: EventBus
 
     @FunctionName("import")
     fun import(

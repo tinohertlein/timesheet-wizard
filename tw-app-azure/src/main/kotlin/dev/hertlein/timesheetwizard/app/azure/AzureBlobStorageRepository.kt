@@ -3,13 +3,12 @@ package dev.hertlein.timesheetwizard.app.azure
 import com.azure.core.util.BinaryData
 import com.azure.storage.blob.BlobContainerClient
 import dev.hertlein.timesheetwizard.spi.Repository
+import jakarta.inject.Singleton
 import mu.KotlinLogging
-import org.springframework.context.annotation.Primary
 
 private val logger = KotlinLogging.logger {}
 
-@org.springframework.stereotype.Repository
-@Primary
+@Singleton
 class AzureBlobStorageRepository(
     private val client: BlobContainerClient
 ) : Repository {

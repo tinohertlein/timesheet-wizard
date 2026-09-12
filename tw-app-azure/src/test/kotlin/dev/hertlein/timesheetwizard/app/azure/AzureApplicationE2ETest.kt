@@ -1,51 +1,50 @@
 package dev.hertlein.timesheetwizard.app.azure
 
+import com.azure.storage.blob.BlobContainerClient
 import com.microsoft.azure.functions.HttpMethod
 import com.microsoft.azure.functions.HttpRequestMessage
 import com.microsoft.azure.functions.HttpResponseMessage
 import com.microsoft.azure.functions.HttpStatus
 import com.microsoft.azure.functions.HttpStatusType
-import dev.hertlein.timesheetwizard.app.azure.util.TestProfiles.TESTCONTAINERS
-import dev.hertlein.timesheetwizard.app.azure.util.TestcontainersConfiguration
 import dev.hertlein.timesheetwizard.core.AbstractApplicationE2ETest
 import dev.hertlein.timesheetwizard.core.MOCK_SERVER_HOST
 import dev.hertlein.timesheetwizard.core.MOCK_SERVER_PORT
+import io.micronaut.core.annotation.NonNull
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest
+import io.micronaut.test.support.TestPropertyProvider
+import jakarta.inject.Inject
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.Import
-import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.DynamicPropertyRegistry
-import org.springframework.test.context.DynamicPropertySource
+import org.junit.jupiter.api.TestInstance
 import java.net.URI
 import java.util.Optional
 
 @DisplayName("Azure Application")
-@SpringBootTest
-@ActiveProfiles(TESTCONTAINERS)
-@Import(TestcontainersConfiguration::class)
-class AzureApplicationE2ETest : AbstractApplicationE2ETest() {
+@MicronautTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class AzureApplicationE2ETest : AbstractApplicationE2ETest(), TestPropertyProvider {
 
-    companion object {
+    override fun getProperties(): @NonNull Map<String, String> {
 
-        @DynamicPropertySource
-        @JvmStatic
-        fun clockifyProperties(registry: DynamicPropertyRegistry) {
-            registry.add("timesheet-wizard.import.clockify.reports-url") { "$MOCK_SERVER_HOST:$MOCK_SERVER_PORT" }
-            registry.add("timesheet-wizard.import.clockify.api-key") { "an-api-key" }
-            registry.add("timesheet-wizard.import.clockify.workspace-id") { "a-workspace-id" }
-        }
+        return mapOf(
+            "timesheet-wizard.import.clockify.reports-url" to "$MOCK_SERVER_HOST:$MOCK_SERVER_PORT",
+            "timesheet-wizard.import.clockify.api-key" to "an-api-key",
+            "timesheet-wizard.import.clockify.workspace-id" to "a-workspace-id"
+        )
     }
 
-    @Autowired
+    @Inject
+    private lateinit var containerClient: BlobContainerClient
+
+    @Inject
     private lateinit var adapter: AzureFunctionAdapter
-    
-    @Autowired
+
+    @Inject
     private lateinit var repository: AzureBlobStorageRepository
 
     @Test
     fun `should import and export timesheets to Azure Blob Storage`() {
+        containerClient.createIfNotExists()
         executeTest(repository, this::run)
     }
 
@@ -80,6 +79,9 @@ class AzureApplicationE2ETest : AbstractApplicationE2ETest() {
                 TODO("Not yet implemented")
             }
         }
+
         adapter.import(message, null)
     }
+
+
 }

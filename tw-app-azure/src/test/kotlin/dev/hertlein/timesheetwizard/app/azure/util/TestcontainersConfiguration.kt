@@ -1,18 +1,18 @@
 package dev.hertlein.timesheetwizard.app.azure.util
 
 import com.azure.storage.blob.BlobServiceClientBuilder
-import dev.hertlein.timesheetwizard.app.azure.util.TestProfiles.TESTCONTAINERS
-import org.springframework.boot.test.context.TestConfiguration
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Profile
+import io.micronaut.context.annotation.Factory
+import io.micronaut.context.annotation.Primary
+import io.micronaut.context.annotation.Value
+import io.micronaut.objectstorage.azure.AzureBlobStorageConfiguration
+import jakarta.inject.Singleton
 import org.testcontainers.azure.AzuriteContainer
 import org.testcontainers.utility.DockerImageName
 
-@TestConfiguration(proxyBeanMethods = false)
+@Factory
 class TestcontainersConfiguration {
 
-    @Bean(initMethod = "start", destroyMethod = "stop")
-    @Profile(TESTCONTAINERS)
+    @Singleton
     fun azureContainer(): AzuriteContainer {
         // Workaround for https://github.com/Azure/Azurite/issues/2623
         return object : AzuriteContainer(DockerImageName.parse("mcr.microsoft.com/azure-storage/azurite:3.35.0")) {
@@ -23,12 +23,18 @@ class TestcontainersConfiguration {
                     .apply { add("--skipApiVersionCheck") }
                     .toTypedArray()
             }
-        }
+        }.also { it.start() }
     }
 
-    @Bean
-    @Profile(TESTCONTAINERS)
+    @Singleton
+    @Primary
     fun blobServiceClientBuilder(azuriteContainer: AzuriteContainer): BlobServiceClientBuilder {
         return BlobServiceClientBuilder().connectionString(azuriteContainer.connectionString)
+    }
+
+    @Singleton
+    @Primary
+    fun blobStorageConfiguration(@Value($$"${micronaut.object-storage.azure.primary.container}") containerName: String): AzureBlobStorageConfiguration {
+        return AzureBlobStorageConfiguration("testcontainers").apply { container = containerName }
     }
 }

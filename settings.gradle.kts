@@ -7,6 +7,9 @@ pluginManagement {
         gradlePluginPortal()
         mavenLocal()
     }
+    plugins {
+        kotlin("kapt") version "2.4.10"
+    }
 }
 
 plugins {
@@ -15,5 +18,4 @@ plugins {
 }
 
 rootProject.name = "timesheet-wizard"
-// Do not include 'tw-app-azure', as spring-boot-thin-launcher Gradle plugin does not work with Gradle > 9.0
-include("tw-spi", "tw-core", "tw-app-aws", "tw-app-gcp", "tw-app-local", "tw-app-scaleway")
+include("tw-spi", "tw-core", "tw-app-aws", "tw-app-azure", "tw-app-gcp", "tw-app-local", "tw-app-scaleway")
