@@ -16,7 +16,7 @@ dependencies {
     implementation(libs.guava)
     
     implementation(platform(libs.aws.sdk.bom))
-    implementation(libs.bundles.vanilla.aws)
+    implementation(libs.bundles.aws)
 
     runtimeOnly(libs.aws.lambda.java.log4j2)
 

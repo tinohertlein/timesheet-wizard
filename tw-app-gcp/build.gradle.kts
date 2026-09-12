@@ -7,8 +7,7 @@ plugins {
 dependencies {
     implementation(enforcedPlatform(libs.quarkus.bom))
     implementation(enforcedPlatform(libs.quarkus.gcp.bom))
-    implementation(libs.bundles.quarkus.base)
-    implementation(libs.bundles.quarkus.gcp)
+    implementation(libs.bundles.gcp)
     implementation(libs.guava)
     implementation(libs.jackson.kotlin)
     implementation(libs.kotlin.logging)

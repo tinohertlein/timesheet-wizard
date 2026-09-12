@@ -21,12 +21,8 @@ aws-lambda-java-core = "1.4.0"
 aws-lambda-java-events = "3.16.1"
 azure = "1.17.0"
 spring-boot = "4.1.1"
-spring-cloud = "2025.1.3"
-spring-cloud-azure = "7.4.0"
 spring-dependency-management = "1.1.7"
-spring-thin = "1.0.31.RELEASE"
 semver = "0.19.5"
-logstash-encoder = "9.0"
 javaagent = "0.12.2"
 byte-buddy-agent = "1.18.13"
 rest-assured = "6.0.1"
@@ -40,6 +36,7 @@ quarkus-platform = "3.39.2"
 clikt = "5.1.0"
 cucumber = "7.34.8"
 minio-client = "9.0.3"
+micronaut-test-junit5 = "1.1.5"
 
 [libraries]
 ## Base
@@ -48,6 +45,7 @@ guava = { module = "com.google.guava:guava", version.ref = "guava" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-logging = { module = "io.github.microutils:kotlin-logging-jvm", version.ref = "kotlin-logging" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
 jackson-kotlin = { module = "tools.jackson.module:jackson-module-kotlin", version.ref = "jackson-kotlin" }
 
 ## Export
@@ -58,12 +56,9 @@ jasperreports = { module = "net.sf.jasperreports:jasperreports", version.ref = "
 jasperreports-pdf = { module = "net.sf.jasperreports:jasperreports-pdf", version.ref = "jasper" }
 jasperreports-jdt = { module = "net.sf.jasperreports:jasperreports-jdt", version.ref = "jasper" }
 
-## Spring
+## Scaleway Spring
 spring-boot-dependencies = { group = "org.springframework.boot", name = "spring-boot-dependencies", version.ref = "spring-boot" }
-spring-cloud = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }
-spring-cloud-function-context = { module = "org.springframework.cloud:spring-cloud-function-context" }
 spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
-spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 
 ## AWS Vanilla
 aws-lambda-java-log4j2 = { module = "com.amazonaws:aws-lambda-java-log4j2", version.ref = "aws-lambda-java-log4j2" }
@@ -74,29 +69,34 @@ aws-sdk-s3 = { module = "software.amazon.awssdk:s3" }
 aws-lambda-java-core = { module = "com.amazonaws:aws-lambda-java-core", version.ref = "aws-lambda-java-core" }
 aws-lambda-java-events = { module = "com.amazonaws:aws-lambda-java-events", version.ref = "aws-lambda-java-events" }
 
-## Azure Spring
-spring-cloud-azure = { module = "com.azure.spring:spring-cloud-azure-dependencies", version.ref = "spring-cloud-azure" }
-spring-cloud-function-adapter-azure = { module = "org.springframework.cloud:spring-cloud-function-adapter-azure" }
-spring-cloud-azure-starter-storage = { module = "com.azure.spring:spring-cloud-azure-starter-storage-blob" }
-logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-encoder" }
+## Azure Micronaut
+azure-functions-java-library = { module = "com.microsoft.azure.functions:azure-functions-java-library" }
+micronaut-azure-sdk = { module = "io.micronaut.azure:micronaut-azure-sdk" }
+micronaut-azure-function = { module = "io.micronaut.azure:micronaut-azure-function" }
+micronaut-object-storage-azure = { module = "io.micronaut.objectstorage:micronaut-object-storage-azure" }
+micronaut-kotlin-runtime = { module = "io.micronaut.kotlin:micronaut-kotlin-runtime" }
+micronaut-serde-jackson = { module = "io.micronaut.serde:micronaut-serde-jackson" }
+micronaut-inject-java = { module = "io.micronaut:micronaut-inject-java" }
+micronaut-http-client = { module = "io.micronaut:micronaut-http-client" }
+micronaut-http-validation = { module = "io.micronaut:micronaut-http-validation" }
+micronaut-serde-processor = { module = "io.micronaut.serde:micronaut-serde-processor" }
+snakeyaml = { module = "org.yaml:snakeyaml" }
 
-## Quarkus
+## GCP Quarkus
 quarkus-bom = { module = "io.quarkus.platform:quarkus-bom", version.ref = "quarkus-platform" }
 quarkus-kotlin = { module = "io.quarkus:quarkus-kotlin" }
 quarkus-kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
 quarkus-arc = { module = "io.quarkus:quarkus-arc" }
-
-## GCP Quarkus
 quarkus-gcp-bom = { module = "io.quarkus.platform:quarkus-google-cloud-services-bom", version.ref = "quarkus-platform" }
 quarkus-gcp-storage = { module = "io.quarkiverse.googlecloudservices:quarkus-google-cloud-storage" }
 quarkus-gcp-functions = { module = "io.quarkus:quarkus-google-cloud-functions" }
 
-## CLI
+## Scaleway Spring
+minio-client = { module = "io.minio:minio", version.ref = "minio-client" }
+
+## Local CLI
 clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
-
-## Scaleway
-minio-client = { module = "io.minio:minio", version.ref = "minio-client" }
 
 ## Test
 assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
@@ -118,22 +118,24 @@ quarkus-junit5 = { module = "io.quarkus:quarkus-junit5" }
 quarkus-gcp-functions-test = { module = "io.quarkus:quarkus-test-google-cloud-functions" }
 cucumber = { module = "io.cucumber:cucumber-java8", version.ref = "cucumber" }
 cucumber-junit-platform = { module = "io.cucumber:cucumber-junit-platform-engine", version.ref = "cucumber" }
+micronaut-test-junit5 = { module = "io.micronaut.test:micronaut-test-junit5", version.ref = "micronaut-test-junit5" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
+
 
 [bundles]
 export = ["opencsv", "poi", "poi-ooxml", "jasperreports", "jasperreports-pdf", "jasperreports-jdt"]
-spring-base = ["spring-boot-dependencies", "spring-boot-starter"]
-vanilla-aws = ["log4j-slf4j2-impl", "slf4j-api", "aws-sdk-s3", "aws-lambda-java-core", "aws-lambda-java-events"]
-quarkus-base = ["quarkus-kotlin", "quarkus-kotlin-stdlib-jdk8", "quarkus-arc"]
-quarkus-gcp = ["quarkus-gcp-storage", "quarkus-gcp-functions"]
+aws = ["log4j-slf4j2-impl", "slf4j-api", "aws-sdk-s3", "aws-lambda-java-core", "aws-lambda-java-events"]
+azure = ["kotlin-reflect", "kotlin-stdlib-jdk8", "jackson-kotlin", "kotlin-logging", "guava", "azure-functions-java-library", "micronaut-azure-sdk", "micronaut-azure-function", "micronaut-object-storage-azure", "micronaut-kotlin-runtime", "micronaut-serde-jackson"]
+gcp = ["quarkus-kotlin", "quarkus-kotlin-stdlib-jdk8", "quarkus-arc", "quarkus-gcp-storage", "quarkus-gcp-functions"]
+scaleway = ["spring-boot-dependencies", "spring-boot-starter", "minio-client", "slf4j-api", "kotlin-reflect", "kotlin-logging", "jackson-kotlin", "guava"]
 cli = ["clikt", "slf4j-api", "logback"]
-scaleway = ["slf4j-api", "minio-client"]
 
 ## Test
 testing = ["assertj", "junit-pioneer", "mockk", "mockserver-netty", "mockserver-client", "kotlin-junit", "rest-assured", "testcontainers-mockserver"]
 testing-aws = ["testcontainers-localstack"]
-testing-azure = ["testcontainers-azure"]
+testing-azure = ["testcontainers-azure", "micronaut-test-junit5", "kotlin-test"]
 testing-gcp = ["quarkus-gcp-functions-test"]
-testing-scaleway = ["testcontainers-localstack"]
+testing-scaleway = ["testcontainers-localstack", "spring-starter-test"]
 testing-core = ["logback"]
 cucumber = ["cucumber", "cucumber-junit-platform", "junit-platform-suite"]
 

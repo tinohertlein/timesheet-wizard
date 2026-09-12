@@ -13,17 +13,11 @@ dependencies {
 
     implementation(project(":tw-spi"))
     implementation(project(":tw-core"))
-    implementation(libs.bundles.spring.base)
     implementation(libs.bundles.scaleway)
-    implementation(libs.kotlin.reflect)
-    implementation(libs.jackson.kotlin)
-    implementation(libs.kotlin.logging)
-    implementation(libs.guava)
 
     testJavaagent(libs.byte.buddy.agent)
     testImplementation(libs.bundles.testing)
     testImplementation(libs.bundles.testing.scaleway)
-    testImplementation(libs.spring.starter.test)
     testImplementation(testFixtures(project(":tw-core")))
 }
 
