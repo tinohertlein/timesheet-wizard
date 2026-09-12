@@ -19,7 +19,7 @@ env:
   AZURE_RESOURCE_GROUP: 'timesheetwizard'
   AZURE_RESOURCES_FILE: './tw-app-azure/deployment/main.bicep'
   AZURE_PACKAGE_DIRECTORY: './tw-app-azure/build/azure-functions'
-  AZURE_STORAGE_BLOB_ENDPOINT: "https://${{AZURE_RESOURCE_GROUP}}.blob.core.windows.net/"
+  AZURE_STORAGE_BLOB_ENDPOINT: "https://timesheetwizard.blob.core.windows.net/"
   CLOCKIFY_API_KEY: ${{ secrets.CLOCKIFY_API_KEY}}
   CLOCKIFY_WORKSPACE_ID: ${{ secrets.CLOCKIFY_WORKSPACE_ID}}
   TF_VAR_CLOCKIFY_API_KEY: ${{ secrets.CLOCKIFY_API_KEY}}
