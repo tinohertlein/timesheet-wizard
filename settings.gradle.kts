@@ -8,7 +8,7 @@ pluginManagement {
         mavenLocal()
     }
     plugins {
-        kotlin("kapt") version "2.4.10"
+        kotlin("kapt") version "2.4.20"
     }
 }
 
