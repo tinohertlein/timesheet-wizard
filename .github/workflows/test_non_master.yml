@@ -25,3 +25,50 @@ jobs:
 
       - name: Build & test with Gradle
         run: ./gradlew check
+
+      - name: Generate test report (tw-core)
+        uses: dorny/test-reporter@v3
+        if: success() || failure()
+        with:
+          name: generate test report (tw-core)
+          path: ./tw-core/build/test-results/test/*.xml
+          reporter: java-junit
+
+      - name: Generate test report (tw-app-aws)
+        uses: dorny/test-reporter@v3
+        if: success() || failure()
+        with:
+          name: generate test report (tw-app-aws)
+          path: ./tw-app-aws/build/test-results/test/*.xml
+          reporter: java-junit
+
+      - name: Generate test report (tw-app-azure)
+        uses: dorny/test-reporter@v3
+        with:
+          name: generate test report (tw-app-azure)
+          path: ./tw-app-azure/build/test-results/test/*.xml
+          reporter: java-junit
+
+      - name: Generate test report (tw-app-gcp)
+        uses: dorny/test-reporter@v3
+        if: success() || failure()
+        with:
+          name: generate test report (tw-app-gcp)
+          path: ./tw-app-gcp/build/test-results/test/*.xml
+          reporter: java-junit
+
+      - name: Generate test report (tw-app-local)
+        uses: dorny/test-reporter@v3
+        if: success() || failure()
+        with:
+          name: generate test report (tw-app-local)
+          path: ./tw-app-local/build/test-results/test/*.xml
+          reporter: java-junit
+
+      - name: Generate test report (tw-app-scaleway)
+        uses: dorny/test-reporter@v3
+        if: success() || failure()
+        with:
+          name: generate test report (tw-app-scaleway)
+          path: ./tw-app-scaleway/build/test-results/test/*.xml
+          reporter: java-junit
