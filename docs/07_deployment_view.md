@@ -20,3 +20,10 @@ All other services like Cloud Scheduler Events, Gloud Storage Buckets ... are al
 The Timesheet-Wizard consists of a single Scaleway Serverless Job which is provisioned via the Scaleway CLI.
 All other services like the cron schedule, the Container Registry namespace and the Object Storage bucket are also
 provisioned via the Scaleway CLI.
+
+## Local
+
+`tw-app-local` is not deployed anywhere. It's packaged as a self-contained shadow jar (`./gradlew
+:tw-app-local:shadowJar`) and run on demand with `java -jar tw-app-local/build/libs/*.jar`. There is no scheduler,
+no IaC, and no cloud storage — files are read from and written to the local filesystem, and the run is triggered
+manually by Tino instead of on a schedule.
