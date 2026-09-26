@@ -29,7 +29,8 @@ class AzureApplicationE2ETest : AbstractApplicationE2ETest(), TestPropertyProvid
         return mapOf(
             "timesheet-wizard.import.clockify.reports-url" to "$MOCK_SERVER_HOST:$MOCK_SERVER_PORT",
             "timesheet-wizard.import.clockify.api-key" to "an-api-key",
-            "timesheet-wizard.import.clockify.workspace-id" to "a-workspace-id"
+            "timesheet-wizard.import.clockify.workspace-id" to "a-workspace-id",
+            "micronaut.object-storage.azure.primary.endpoint" to "an-endpoint"
         )
     }
 
