@@ -3,7 +3,7 @@ plugins {
     id("maven-publish")
     alias(libs.plugins.semver)
     alias(libs.plugins.kotlinjvm) apply false
-    id("com.hello2morrow.sonargraph") version "26.4.1"
+    id("com.hello2morrow.sonargraph") version "26.5.0"
 }
 
 group = "dev.hertlein.timesheet-wizard"
