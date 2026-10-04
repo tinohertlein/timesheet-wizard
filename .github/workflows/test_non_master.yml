@@ -8,9 +8,6 @@ on:
 env:
   JAVA_VERSION: '25'
   LOCALSTACK_AUTH_TOKEN: ${{ secrets.LOCALSTACK_AUTH_TOKEN}}
-  AZURE_STORAGE_BLOB_ENDPOINT: "an-endpoint"
-  CLOCKIFY_API_KEY: "an-api-key"
-  CLOCKIFY_WORKSPACE_ID: "a-workspace-id"
 
 jobs:
   build:

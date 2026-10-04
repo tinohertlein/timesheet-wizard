@@ -13,14 +13,14 @@ micronaut:
     azure:
       primary:
         container: tw-sheets
-        endpoint: ${AZURE_STORAGE_BLOB_ENDPOINT}
+        endpoint: ${AZURE_STORAGE_BLOB_ENDPOINT:no-endpoint}
 
 timesheet-wizard:
   import:
     clockify:
       reports-url: "https://reports.api.clockify.me/"
-      api-key: ${CLOCKIFY_API_KEY}
-      workspace-id: ${CLOCKIFY_WORKSPACE_ID}
+      api-key: ${CLOCKIFY_API_KEY:no-api-key}
+      workspace-id: ${CLOCKIFY_WORKSPACE_ID:no-workspace-id}
 
 logging:
   level:
