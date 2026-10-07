@@ -14,6 +14,14 @@ dependencies {
     implementation(project(":tw-spi"))
     implementation(project(":tw-core"))
 
+    // Quarkus 3.40.1 pins jackson-annotations to 2.21, which results in an error because JsonApplyView.class is needed, but only available from 2.22 upwards.
+    // Let's fix this temporarily:
+    configurations.all {
+        resolutionStrategy {
+            force("com.fasterxml.jackson.core:jackson-annotations:2.22")
+        }
+    }
+
     testImplementation(libs.bundles.testing)
     testImplementation(libs.bundles.testing.gcp)
     testImplementation(libs.quarkus.junit5)
