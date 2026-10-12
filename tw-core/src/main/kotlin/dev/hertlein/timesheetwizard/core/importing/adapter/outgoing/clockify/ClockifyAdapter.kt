@@ -40,7 +40,10 @@ internal class ClockifyAdapter(
 
     private fun fetchTimesheetForCustomer(customer: Customer, dateRange: ClosedRange<LocalDate>): ImportTimesheet {
         val clockifyId = clockifyIds.firstOrNull { customer.id.value == it.customerId }
-        require(clockifyId != null) { "No Clockify id found for customer id ${customer.id.value}." }
+        if (clockifyId == null) {
+            logger.warn { "No Clockify id found for customer id ${customer.id.value}." }
+            return ImportTimesheet(customer, dateRange)
+        }
 
         val requestBody = requestBodyFactory.requestBodyFrom(clockifyId.clockifyId, dateRange)
         val timesheet = ImportTimesheet(customer, dateRange)

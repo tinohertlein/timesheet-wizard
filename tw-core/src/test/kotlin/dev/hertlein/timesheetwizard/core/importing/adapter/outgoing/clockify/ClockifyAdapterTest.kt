@@ -10,6 +10,7 @@ import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.rep
 import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.report.ResponseBodyMapper
 import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer
 import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer.Id
+import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer.Name
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportTimesheet
 import dev.hertlein.timesheetwizard.core.util.TestFixture
 import dev.hertlein.timesheetwizard.spi.ClockifyConfig
@@ -18,7 +19,6 @@ import io.mockk.mockk
 import org.assertj.core.api.SoftAssertions
 import org.assertj.core.api.SoftAssertions.assertSoftly
 import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -128,11 +128,16 @@ class ClockifyAdapterTest {
         }
     }
 
-
     @Test
     fun `should throw Exception if no Clockify id is found for given customer`() {
-        assertThrows(IllegalArgumentException::class.java) {
-            val _ = clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer.copy(id = Id("xxx")), TestFixture.Import.aDateRange)
+        val timesheet = clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer.copy(id = Id("xxx"), name = Name("yyy")), TestFixture.Import.aDateRange)
+        assertSoftly { softly ->
+            softly.assertThat(timesheet).isNotNull
+            softly.assertThat(timesheet.customer.id.value).isEqualTo("xxx")
+            softly.assertThat(timesheet.customer.name.value).isEqualTo("yyy")
+            softly.assertThat(timesheet.dateRange.start).isEqualTo(TestFixture.Import.aDateRange.start)
+            softly.assertThat(timesheet.dateRange.endInclusive).isEqualTo(TestFixture.Import.aDateRange.endInclusive)
+            softly.assertThat(timesheet.entries).isEmpty()
         }
     }
 
