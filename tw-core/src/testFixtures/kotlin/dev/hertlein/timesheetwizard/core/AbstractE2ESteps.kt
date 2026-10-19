@@ -53,6 +53,10 @@ abstract class AbstractE2ESteps {
     }
     
     fun prepareClockifyServer() {
+        // The import spans a full year (2022), which ClockifyAdapter now fetches one calendar month at a time.
+        // clockify_request.json matches only the January request (the one month with entries); every other
+        // month's request, and the page-2 request that terminates January's pagination, falls through to the
+        // catch-all below, which must therefore respond an unbounded number of times.
         val requestBody = ResourcesReader.stringFromResourceFile("e2e/clockify_request.json")
         val responseBody = ResourcesReader.stringFromResourceFile("e2e/clockify_response.json")
         val emptyResponseBody = ResourcesReader.stringFromResourceFile("e2e/empty_clockify_response.json")
@@ -78,7 +82,7 @@ abstract class AbstractE2ESteps {
                 )
         )
         mockServer.`when`(
-            HttpRequest.request(), Times.exactly(1)
+            HttpRequest.request(), Times.unlimited()
         ).respond(
             HttpResponse.response()
                 .withStatusCode(200)

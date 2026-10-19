@@ -137,4 +137,55 @@ class DateTimeFactoryTest {
             }
         }
     }
+
+    @Nested
+    inner class SplitIntoMonths {
+
+        @Test
+        fun `should return single range if range is shorter than one month`() {
+            val dateRange = LocalDate.of(2022, 7, 1)..LocalDate.of(2022, 7, 10)
+
+            assertThat(dateTimeFactory.splitIntoMonths(dateRange)).containsExactly(dateRange)
+        }
+
+        @Test
+        fun `should return single range if range is exactly one calendar month`() {
+            val dateRange = LocalDate.of(2022, 7, 1)..LocalDate.of(2022, 7, 31)
+
+            assertThat(dateTimeFactory.splitIntoMonths(dateRange)).containsExactly(dateRange)
+        }
+
+        @Test
+        fun `should split range spanning multiple calendar months at month boundaries`() {
+            val dateRange = LocalDate.of(2022, 7, 15)..LocalDate.of(2022, 9, 20)
+
+            assertThat(dateTimeFactory.splitIntoMonths(dateRange)).containsExactly(
+                LocalDate.of(2022, 7, 15)..LocalDate.of(2022, 7, 31),
+                LocalDate.of(2022, 8, 1)..LocalDate.of(2022, 8, 31),
+                LocalDate.of(2022, 9, 1)..LocalDate.of(2022, 9, 20)
+            )
+        }
+
+        @Test
+        fun `should split a whole year into twelve ranges`() {
+            val dateRange = LocalDate.of(2022, 1, 1)..LocalDate.of(2022, 12, 31)
+
+            assertThat(dateTimeFactory.splitIntoMonths(dateRange)).hasSize(12)
+                .first().isEqualTo(LocalDate.of(2022, 1, 1)..LocalDate.of(2022, 1, 31))
+        }
+
+        @Test
+        fun `should return single range if start and end are equal`() {
+            val dateRange = LocalDate.of(2022, 7, 10)..LocalDate.of(2022, 7, 10)
+
+            assertThat(dateTimeFactory.splitIntoMonths(dateRange)).containsExactly(dateRange)
+        }
+
+        @Test
+        fun `should return empty list for an empty range`() {
+            val dateRange = LocalDate.of(2022, 7, 10)..LocalDate.of(2022, 7, 9)
+
+            assertThat(dateTimeFactory.splitIntoMonths(dateRange)).isEmpty()
+        }
+    }
 }

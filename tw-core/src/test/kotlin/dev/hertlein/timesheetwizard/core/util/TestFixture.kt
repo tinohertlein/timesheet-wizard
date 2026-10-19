@@ -17,7 +17,7 @@ internal object TestFixture {
     }
 
     object Import {
-        val aDateRange = LocalDate.of(2022, 1, 1)..LocalDate.of(2022, 12, 31)
+        val aDateRange = LocalDate.of(2022, 1, 1)..LocalDate.of(2022, 1, 31)
 
         val aCustomer = Customer.of("a-customer-id", "a-customer-name", true)
     }

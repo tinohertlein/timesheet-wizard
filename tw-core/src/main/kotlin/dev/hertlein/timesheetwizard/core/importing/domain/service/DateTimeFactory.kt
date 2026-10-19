@@ -38,6 +38,25 @@ internal class DateTimeFactory(private val clock: Clock = Clock.system(ZoneId.of
             LAST_WEEK -> lastWeek()
         }
 
+    /**
+     * Splits the given date range into consecutive chunks aligned to calendar month boundaries.
+     * A range within a single calendar month is returned unchanged as a single element.
+     */
+    fun splitIntoMonths(dateRange: ClosedRange<LocalDate>): List<ClosedRange<LocalDate>> {
+        if (dateRange.isEmpty()) return emptyList()
+
+        val chunks = mutableListOf<ClosedRange<LocalDate>>()
+        var start = dateRange.start
+
+        while (start <= dateRange.endInclusive) {
+            val end = minOf(start.with(lastDayOfMonth()), dateRange.endInclusive)
+            chunks.add(start..end)
+            start = end.plusDays(1)
+        }
+
+        return chunks
+    }
+
     private fun today(): LocalDate = LocalDate.now(clock)
 
     private fun thisYear() = customYear(Year.from(today()))

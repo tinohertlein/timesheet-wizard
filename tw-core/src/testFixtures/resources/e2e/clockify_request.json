@@ -5,7 +5,7 @@
     ]
   },
   "dateRangeStart": "2022-01-01T00:00:00",
-  "dateRangeEnd": "2022-12-31T23:59:59.999999999",
+  "dateRangeEnd": "2022-01-31T23:59:59.999999999",
   "detailedFilter": {
     "options": {
       "totals": "EXCLUDE"

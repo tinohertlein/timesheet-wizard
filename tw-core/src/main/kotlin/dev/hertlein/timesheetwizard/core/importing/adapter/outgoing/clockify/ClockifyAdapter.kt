@@ -9,6 +9,7 @@ import dev.hertlein.timesheetwizard.core.importing.adapter.outgoing.clockify.rep
 import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportTimesheet
 import dev.hertlein.timesheetwizard.core.importing.domain.port.TimesheetSourcePort
+import dev.hertlein.timesheetwizard.core.importing.domain.service.DateTimeFactory
 import mu.KotlinLogging
 import java.time.LocalDate
 
@@ -18,7 +19,8 @@ internal class ClockifyAdapter(
     private val clockifyIdsLoader: ClockifyIdsLoader,
     private val reportClient: HttpReportClient,
     private val requestBodyFactory: RequestBodyFactory,
-    private val entityMapper: ResponseBodyMapper
+    private val entityMapper: ResponseBodyMapper,
+    private val dateTimeFactory: DateTimeFactory
 ) : TimesheetSourcePort {
 
     private val clockifyIds: List<ClockifyId> by lazy { clockifyIdsLoader.loadClockifyIds() }
@@ -31,12 +33,10 @@ internal class ClockifyAdapter(
         }
     }
 
-    private fun fetchTimesheetForAllCustomers(dateRange: ClosedRange<LocalDate>): ImportTimesheet {
-        val requestBody = requestBodyFactory.requestBodyFrom(dateRange)
-        val timesheet = ImportTimesheet(Customer.NOT_APPLICABLE, dateRange)
-
-        return populateTimesheet(timesheet, requestBody)
-    }
+    private fun fetchTimesheetForAllCustomers(dateRange: ClosedRange<LocalDate>): ImportTimesheet =
+        fetchTimesheetPerMonth(ImportTimesheet(Customer.NOT_APPLICABLE, dateRange)) { monthRange ->
+            requestBodyFactory.requestBodyFrom(monthRange)
+        }
 
     private fun fetchTimesheetForCustomer(customer: Customer, dateRange: ClosedRange<LocalDate>): ImportTimesheet {
         val clockifyId = clockifyIds.firstOrNull { customer.id.value == it.customerId }
@@ -45,11 +45,19 @@ internal class ClockifyAdapter(
             return ImportTimesheet(customer, dateRange)
         }
 
-        val requestBody = requestBodyFactory.requestBodyFrom(clockifyId.clockifyId, dateRange)
-        val timesheet = ImportTimesheet(customer, dateRange)
-
-        return populateTimesheet(timesheet, requestBody)
+        return fetchTimesheetPerMonth(ImportTimesheet(customer, dateRange)) { monthRange ->
+            requestBodyFactory.requestBodyFrom(clockifyId.clockifyId, monthRange)
+        }
     }
+
+    private fun fetchTimesheetPerMonth(
+        timesheet: ImportTimesheet,
+        requestBodyForMonth: (ClosedRange<LocalDate>) -> RequestBody
+    ): ImportTimesheet =
+        dateTimeFactory.splitIntoMonths(timesheet.dateRange).fold(timesheet) { timesheetSoFar, monthRange ->
+            logger.debug { "Fetching report for month range $monthRange..." }
+            populateTimesheet(timesheetSoFar, requestBodyForMonth(monthRange))
+        }
 
     private tailrec fun populateTimesheet(timesheet: ImportTimesheet, requestBody: RequestBody): ImportTimesheet {
         logger.debug { "Fetching report page ${requestBody.page()} from Clockify..." }

@@ -12,6 +12,7 @@ import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer
 import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer.Id
 import dev.hertlein.timesheetwizard.core.importing.domain.model.Customer.Name
 import dev.hertlein.timesheetwizard.core.importing.domain.model.ImportTimesheet
+import dev.hertlein.timesheetwizard.core.importing.domain.service.DateTimeFactory
 import dev.hertlein.timesheetwizard.core.util.TestFixture
 import dev.hertlein.timesheetwizard.spi.ClockifyConfig
 import io.mockk.every
@@ -33,6 +34,7 @@ import org.mockserver.model.HttpRequest
 import org.mockserver.model.HttpResponse
 import org.mockserver.verify.VerificationTimes
 import java.net.http.HttpClient
+import java.time.LocalDate
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.hours
 
@@ -73,7 +75,8 @@ class ClockifyAdapterTest {
             clockifyIdsLoader,
             HttpReportClient(clockifyConfig, HttpClient.newHttpClient(), TestFixture.App.objectMapper),
             RequestBodyFactory(),
-            ResponseBodyMapper()
+            ResponseBodyMapper(),
+            DateTimeFactory()
         )
     }
 
@@ -101,6 +104,27 @@ class ClockifyAdapterTest {
             softly.assertThat(timesheet.entries[0].project.id).isEqualTo("62dd35a6e4797e2d7a9988c6")
             softly.assertThat(timesheet.entries[1].duration).isEqualTo(9.hours)
             softly.assertThat(timesheet.entries[1].tags).isEmpty()
+        }
+    }
+
+    @Test
+    fun `should fetch Clockify report once per calendar month for a date range spanning multiple months`() {
+        val aTwoMonthDateRange = LocalDate.of(2022, 1, 15)..LocalDate.of(2022, 2, 10)
+        prepareClockifyServer(
+            200,
+            "first_clockify_response.json",
+            "empty_clockify_response.json",
+            "second_clockify_response.json",
+            "empty_clockify_response.json"
+        )
+
+        val timesheet = clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer, aTwoMonthDateRange)
+
+        mockServer.verify(HttpRequest.request(), VerificationTimes.exactly(4))
+        assertSoftly { softly ->
+            softly.assertThat(timesheet.dateRange.start).isEqualTo(aTwoMonthDateRange.start)
+            softly.assertThat(timesheet.dateRange.endInclusive).isEqualTo(aTwoMonthDateRange.endInclusive)
+            softly.assertThat(timesheet.entries).hasSize(2)
         }
     }
 

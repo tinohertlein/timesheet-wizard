@@ -63,11 +63,13 @@ object Core {
     ): ImportService {
         val httpReportClient = HttpReportClient(clockifyConfig, HttpClient.newHttpClient(), objectMapper)
         val clockifyIdsLoader = ClockifyIdsLoader(repository, objectMapper)
-        val clockifyAdapter = ClockifyAdapter(clockifyIdsLoader, httpReportClient, RequestBodyFactory(), ResponseBodyMapper())
+        val dateTimeFactory = DateTimeFactory()
+        val clockifyAdapter =
+            ClockifyAdapter(clockifyIdsLoader, httpReportClient, RequestBodyFactory(), ResponseBodyMapper(), dateTimeFactory)
         val importConfigLoader = ImportConfigLoader(repository, objectMapper)
         val customerFactory = CustomerFactory(importConfigLoader)
         val eventPublishAdapter = EventPublishAdapter(eventBus)
-        val importService = ImportService(customerFactory, DateTimeFactory(), clockifyAdapter, eventPublishAdapter)
+        val importService = ImportService(customerFactory, dateTimeFactory, clockifyAdapter, eventPublishAdapter)
         return importService
     }
 
