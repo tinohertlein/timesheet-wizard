@@ -19,6 +19,7 @@ import io.mockk.mockk
 import org.assertj.core.api.SoftAssertions
 import org.assertj.core.api.SoftAssertions.assertSoftly
 import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -79,6 +80,7 @@ class ClockifyAdapterTest {
     @Test
     fun `should import a timesheet for a customer`() {
         prepareClockifyServer(
+            200,
             "first_clockify_response.json",
             "second_clockify_response.json",
             "third_clockify_response.json"
@@ -105,6 +107,7 @@ class ClockifyAdapterTest {
     @Test
     fun `should import a timesheet for all customers`() {
         prepareClockifyServer(
+            200,
             "first_clockify_response.json",
             "second_clockify_response.json",
             "third_clockify_response.json"
@@ -130,7 +133,8 @@ class ClockifyAdapterTest {
 
     @Test
     fun `should throw Exception if no Clockify id is found for given customer`() {
-        val timesheet = clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer.copy(id = Id("xxx"), name = Name("yyy")), TestFixture.Import.aDateRange)
+        val timesheet =
+            clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer.copy(id = Id("xxx"), name = Name("yyy")), TestFixture.Import.aDateRange)
         assertSoftly { softly ->
             softly.assertThat(timesheet).isNotNull
             softly.assertThat(timesheet.customer.id.value).isEqualTo("xxx")
@@ -143,7 +147,7 @@ class ClockifyAdapterTest {
 
     @Test
     fun `should import an empty timesheet`() {
-        prepareClockifyServer("empty_clockify_response.json")
+        prepareClockifyServer(200, "empty_clockify_response.json")
 
         val timesheet = clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer, TestFixture.Import.aDateRange)
 
@@ -158,7 +162,16 @@ class ClockifyAdapterTest {
         }.assertAll()
     }
 
-    private fun prepareClockifyServer(vararg responseFiles: String) {
+    @Test
+    fun `should throw exception if server response is not 200`() {
+        prepareClockifyServer(400, "empty_clockify_response.json")
+
+        assertThrows(IllegalStateException::class.java) {
+            val _ = clockifyAdapter.fetchTimesheet(TestFixture.Import.aCustomer, TestFixture.Import.aDateRange)
+        }
+    }
+
+    private fun prepareClockifyServer(statusCode: Int, vararg responseFiles: String) {
         val request = HttpRequest.request()
             .withMethod("POST")
             .withPath("/workspaces/$A_WORKSPACE_ID/reports/detailed")
@@ -169,7 +182,7 @@ class ClockifyAdapterTest {
             mockServer.`when`(request, Times.exactly(1))
                 .respond(
                     HttpResponse.response()
-                        .withStatusCode(200)
+                        .withStatusCode(statusCode)
                         .withBody(ResourcesReader.stringFromResourceFile("${this.javaClass.packageName}/$it"))
                         .withDelay(TimeUnit.MILLISECONDS, 500)
                         .withHeaders(

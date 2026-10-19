@@ -28,6 +28,9 @@ internal class HttpReportClient(
             .build()
 
         val response = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
+        if (response.statusCode() != 200) {
+            throw IllegalStateException("Unexpected status code ${response.statusCode()}: ${response.body()}")
+        }
         return objectMapper.readValue(response.body(), ResponseBody::class.java)
     }
 }
