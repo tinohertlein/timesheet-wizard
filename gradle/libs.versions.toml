@@ -35,7 +35,7 @@ quarkus-plugin = "3.40.1.1"
 quarkus-platform = "3.40.1.1"
 clikt = "5.1.0"
 cucumber = "8.0.4"
-minio-client = "9.0.3"
+minio-client = "9.0.4"
 micronaut-test-junit5 = "5.2.0"
 
 [libraries]
