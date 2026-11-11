@@ -18,7 +18,7 @@ dependencies {
     // Let's fix this temporarily:
     configurations.all {
         resolutionStrategy {
-            force("com.fasterxml.jackson.core:jackson-annotations:2.22")
+            force("com.fasterxml.jackson.core:jackson-annotations:2.23")
         }
     }
 
